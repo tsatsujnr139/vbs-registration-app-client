@@ -18,7 +18,7 @@ const Navbar = () => {
 
     // </div>
     <Fragment>
-      <Header style={{ backgroundColor: "white" }}>
+      <Header style={{ backgroundColor: "white", marginBottom: "7px" }}>
         <a href="/">
           <img
             src={LogoTitle}
