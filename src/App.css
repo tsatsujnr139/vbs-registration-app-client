@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+@import "~antd/dist/antd.css";
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+
+/* Homepage*/
+.homepage-hero {
+  background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 680px;
+  margin-top: 7px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hero-logo {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  overflow: hidden;
+}
+.hero-logo img {
+  width: 580px;
+}
+
+.register-invite {
+  margin-top: 230px;
+  display: inline-block;
+}
+
+.hero-motto {
+  font-family: "Luckiest Guy", cursive;
+  font-size-adjust: 1.2;
+}
+
+.hero-motto h1 {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.hero-tagline h4 {
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero-tagline {
+  font-family: "Raleway", sans-serif;
+}
+
+.btn-block {
+  display: block;
+  width: 65%;
 }
