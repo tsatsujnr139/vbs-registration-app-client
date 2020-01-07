@@ -48,3 +48,29 @@
   display: block;
   width: 65%;
 }
+
+/* Registration Form */
+.section-title {
+  padding: 30px 30px 10px 30px;
+  position: relative;
+  text-align: center;
+  color: #333;
+  font-size: 30px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  width: 150px;
+  height: 1px;
+  background-color: #129cf3;
+  margin-left: -70px;
+}
+
+.registration-progress-bar {
+  padding: 10px 80px 10px 80px;
+}

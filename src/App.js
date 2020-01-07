@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
-import RegisterParticipant from "./components/participants/RegisterParticipant";
+import RegisterParticipant from "./components/participants/RegisterParticipantForm";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 

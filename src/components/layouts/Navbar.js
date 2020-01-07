@@ -21,6 +21,16 @@ const Navbar = () => {
       <Header style={{ backgroundColor: "white", marginBottom: "7px" }}>
         <a href="/">
           <img
+            src={process.env.PUBLIC_URL + "/liclogo.png"}
+            alt="LIC Logo"
+            height="65"
+            width="70"
+            style={{ float: "left" }}
+          />{" "}
+        </a>
+
+        <a href="/">
+          <img
             src={LogoTitle}
             alt="Logo"
             height="65"
