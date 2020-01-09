@@ -9,11 +9,11 @@ const RegisterParticipantForm = () => {
       <RegistrationProgressBar />
       <div className="form-wrapper">
         <Row>
-          <Col span={4}></Col>
-          <Col span={16} style={{ display: "block" }}>
+          <Col span={8}></Col>
+          <Col span={8} style={{ display: "block" }}>
             <FormParticipantDetails />
           </Col>
-          <Col span={4}></Col>
+          <Col span={8}></Col>
         </Row>
       </div>
     </Fragment>

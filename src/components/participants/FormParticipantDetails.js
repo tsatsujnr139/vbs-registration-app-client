@@ -1,9 +1,30 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
 import { Form, Input, Select, DatePicker, Button } from "antd";
+import setStep from "../../reducers/formReducer";
+import PropTypes from "prop-types";
 
-const FormParticipantDetails = () => {
+const FormParticipantDetails = ({ form: { step, loading }, setStep }) => {
   const { Option } = Select;
   const { TextArea } = Input;
+
+  const handleNextClick = e => {
+    e.preventDefault();
+  };
+
+  // Proceed to next step
+  const nextStep = () => {
+    setStep(step + 1);
+  };
+
+  // Back to previous step
+  const prevStep = () => {
+    setStep(step - 1);
+  };
+
+  // Handle field change
+  const handleChange = input => e => {};
+
   return (
     <Fragment>
       <Form layout="horizontal">
@@ -26,27 +47,12 @@ const FormParticipantDetails = () => {
         >
           <Input placeholder="First Name" />
         </Form.Item>
-        <Form.Item
-          label="Gender"
-          style={{ display: "inline-block", width: "calc(30%)" }}
-        >
-          <Select defaultValue="male">
-            <Option value="male">Male</Option>
-            <Option value="female">Female</Option>
-          </Select>
-        </Form.Item>
-        <span
-          style={{
-            display: "inline-block",
-            width: "75px",
-            textAlign: "center"
-          }}
-        ></span>
+
         <Form.Item
           label="Date of Birth"
           style={{
             display: "inline-block",
-            width: "calc(30%)"
+            width: "calc(50% - 12px)"
           }}
         >
           <DatePicker />
@@ -54,18 +60,29 @@ const FormParticipantDetails = () => {
         <span
           style={{
             display: "inline-block",
+            width: "24px",
             textAlign: "center"
           }}
         ></span>
         <Form.Item
           label="Age"
-          style={{ display: "inline-block", width: "calc(30%)" }}
+          style={{ display: "inline-block", width: "calc(50% - 12px)" }}
         >
           <Input placeholder="Age" />
         </Form.Item>
         <Form.Item
+          label="Gender"
+          style={{ display: "inline-block", width: "calc(100%)" }}
+        >
+          <Select defaultValue="male">
+            <Option value="male">Male</Option>
+            <Option value="female">Female</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
           label="Class"
-          style={{ display: "inline-block", width: "calc(45%)" }}
+          style={{ display: "inline-block", width: "calc(100%)" }}
         >
           <Select defaultValue="Class Completed this past academic year">
             <Option value="Class 1">Class 1</Option>
@@ -75,7 +92,7 @@ const FormParticipantDetails = () => {
         <br />
         <Form.Item
           label="Home Church"
-          style={{ display: "inline-block", width: "calc(50% - 12px)" }}
+          style={{ display: "inline-block", width: "calc(100%)" }}
         >
           <Input placeholder="The church the child attends" />
         </Form.Item>
@@ -97,4 +114,13 @@ const FormParticipantDetails = () => {
   );
 };
 
-export default FormParticipantDetails;
+FormParticipantDetails.propTypes = {
+  form: PropTypes.object.isRequired,
+  setStep: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  form: state.form
+});
+
+export default connect(mapStateToProps, { setStep })(FormParticipantDetails);
