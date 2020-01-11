@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Steps, Icon, Typography } from "antd";
 import PropTypes from "prop-types";
 
-const RegistrationProgressBar = ({ step }) => {
+const RegistrationProgressBar = ({ step, title }) => {
   const { Content } = Layout;
   const { Step } = Steps;
   const { Title } = Typography;
@@ -10,7 +10,7 @@ const RegistrationProgressBar = ({ step }) => {
   return (
     <Content>
       <div className="section-title">
-        <Title level={3}>Let's get you registered</Title>
+        <Title level={3}>{title}</Title>
       </div>
       <Steps current={step} className="registration-progress-bar">
         <Step title="Participant Details" icon={<Icon type="user" />}></Step>

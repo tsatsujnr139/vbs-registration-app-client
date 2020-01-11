@@ -48,7 +48,10 @@ const FormParticipantDetails = ({
 
   return (
     <Fragment>
-      <RegistrationProgressBar step={step - 1} />
+      <RegistrationProgressBar
+        step={step - 1}
+        title="Let's get you registered"
+      />
       <div className="form-wrapper">
         <Row>
           <Col span={8}></Col>

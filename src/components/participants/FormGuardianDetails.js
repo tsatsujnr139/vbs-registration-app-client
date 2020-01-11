@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col, InputNumber } from "antd";
+import { Form, Input, Button, Row, Col } from "antd";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./RegistrationProgressBar";
 import PropTypes from "prop-types";
@@ -50,12 +50,15 @@ const FormGuardianDetails = ({
 
   return (
     <Fragment>
-      <RegistrationProgressBar step={step - 1} />
+      <RegistrationProgressBar
+        step={step - 1}
+        title="Let's get you registered"
+      />
       <div className="form-wrapper">
         <Row>
           <Col span={8}></Col>
           <Col span={8} style={{ display: "block" }}>
-            <Form layout="horizontal" onSubmit={validateInputAndSubmit}>
+            <Form onSubmit={validateInputAndSubmit}>
               <Form.Item
                 label="Parent/Guardian Full Name"
                 validateStatus={fullNameError ? "error" : ""}
@@ -141,13 +144,16 @@ const FormGuardianDetails = ({
                   initialValue: guardianDetails.pickupPersonPhone
                 })(<Input placeholder="Pickup Person's Contact Number" />)}
               </Form.Item>
-              <Button
-                type="default"
-                onClick={prevStep}
-                disabled={hasErrors(getFieldsError())}
-              >
+              <Button type="default" onClick={prevStep}>
                 Back
               </Button>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: "24px",
+                  textAlign: "center"
+                }}
+              ></span>
               <Button
                 type="primary"
                 htmlType="submit"
@@ -167,7 +173,8 @@ const FormGuardianDetails = ({
 FormGuardianDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setGuardianDetails: PropTypes.func.isRequired,
-  nextStep: PropTypes.func.isRequired
+  nextStep: PropTypes.func.isRequired,
+  prevStep: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

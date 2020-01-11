@@ -3,6 +3,7 @@ import Navbar from "./components/layouts/Navbar";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
 import RegisterParticipant from "./components/participants/RegisterParticipantForm";
+import ConfirmDetails from "./components/participants/ConfirmDetails";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -17,6 +18,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={RegisterParticipant} />
+            <Route exact path="/confirm" component={ConfirmDetails} />
             <Route component={NotFound} />
           </Switch>
         </Fragment>
