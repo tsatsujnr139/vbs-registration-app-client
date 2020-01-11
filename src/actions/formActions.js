@@ -23,7 +23,7 @@ export const setParticipantDetails = values => {
   };
 };
 
-export const setguardianDetails = values => {
+export const setGuardianDetails = values => {
   return {
     type: SET_GUARDIAN_DETAILS,
     payload: values

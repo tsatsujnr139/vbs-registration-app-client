@@ -6,7 +6,6 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  participant: null,
   loading: false,
   step: 1,
   error: null,
@@ -20,15 +19,15 @@ const initialState = {
     medicalInfo: ""
   },
   guardianDetails: {
-    surname: "",
-    firstName: "",
+    fullName: "",
     phone: "",
+    alternatePhone: "",
     email: ""
   }
 };
 
 export default (state = initialState, action) => {
-  switch (action) {
+  switch (action.type) {
     case SET_LOADING:
       return {
         ...state,

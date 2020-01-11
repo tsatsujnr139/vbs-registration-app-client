@@ -2,12 +2,12 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { Form, Input, Select, DatePicker, Button, Row, Col } from "antd";
 import RegistrationProgressBar from "./RegistrationProgressBar";
-import setParticipantDetails from "../../reducers/formReducer";
+import { setParticipantDetails } from "../../actions/formActions";
 import PropTypes from "prop-types";
 
 const FormParticipantDetails = ({
   nextStep,
-  formDetails: { participantDetails },
+  formDetails: { participantDetails, step },
   setParticipantDetails,
   form
 }) => {
@@ -36,16 +36,24 @@ const FormParticipantDetails = ({
     return Object.keys(fieldsError).some(field => fieldsError[field]);
   };
 
-  const handleNext = () => {};
+  const validateInputAndSubmit = e => {
+    e.preventDefault();
+    validateFields((err, values) => {
+      if (!err) {
+        setParticipantDetails(values);
+        nextStep();
+      }
+    });
+  };
 
   return (
     <Fragment>
-      <RegistrationProgressBar />
+      <RegistrationProgressBar step={step - 1} />
       <div className="form-wrapper">
         <Row>
           <Col span={8}></Col>
           <Col span={8} style={{ display: "block" }}>
-            <Form layout="horizontal" onSubmit={handleNext}>
+            <Form layout="horizontal" onSubmit={validateInputAndSubmit}>
               <Form.Item
                 label="Surname"
                 validateStatus={surnameError ? "error" : ""}
@@ -93,7 +101,7 @@ const FormParticipantDetails = ({
                   width: "calc(50% - 12px)"
                 }}
               >
-                <DatePicker />
+                <DatePicker style={{ width: "100%" }} />
               </Form.Item>
               <span
                 style={{
@@ -174,7 +182,8 @@ const FormParticipantDetails = ({
 
 FormParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
-  setParticipantDetails: PropTypes.func.isRequired
+  setParticipantDetails: PropTypes.func.isRequired,
+  nextStep: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

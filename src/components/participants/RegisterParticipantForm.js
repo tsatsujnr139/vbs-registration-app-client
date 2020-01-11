@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import setStep from "../../reducers/formReducer";
+import { setStep } from "../../actions/formActions";
 import FormParticipantDetails from "./FormParticipantDetails";
 import FormGuardianDetails from "./FormGuardianDetails";
 import PropTypes from "prop-types";
@@ -21,20 +21,9 @@ const RegisterParticipantForm = ({
 
   switch (step) {
     case 1:
-      return (
-        <FormParticipantDetails
-          nextStep={nextStep}
-          participantDetails={participantDetails}
-        />
-      );
+      return <FormParticipantDetails nextStep={nextStep} />;
     case 2:
-      return (
-        <FormGuardianDetails
-          nextStep={nextStep}
-          prevStep={prevStep}
-          guardianDetails={guardianDetails}
-        />
-      );
+      return <FormGuardianDetails nextStep={nextStep} prevStep={prevStep} />;
 
     default:
       break;
