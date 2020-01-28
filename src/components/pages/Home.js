@@ -37,15 +37,24 @@ const Home = () => {
                 <div className="hero-tagline">
                   <Title level={4}>Show kids the foundation that lasts!</Title>
                 </div>
-                <Button
-                  // block
-                  type="danger"
-                  size="large"
-                  className="btn-block"
-                  href="/register"
-                >
-                  REGISTER
-                </Button>
+                <Button.Group size="large">
+                  <Button
+                    type="danger"
+                    size="large"
+                    // className="btn-block"
+                    href="participant/register"
+                  >
+                    REGISTER PARTICIPANT
+                  </Button>
+                  {/* <br />
+                  <h2 style={{ color: "white", paddingLeft: "150px" }}>OR</h2>
+                  <br /> */}
+                  <span style={{ color: "white" }}> OR </span>
+
+                  <Button type="danger" size="large" href="volunteer/register">
+                    SIGN UP AS A VOLUNTEER
+                  </Button>
+                </Button.Group>
               </div>
             </Col>
           </Row>
@@ -54,5 +63,4 @@ const Home = () => {
     );
   }
 };
-
 export default Home;

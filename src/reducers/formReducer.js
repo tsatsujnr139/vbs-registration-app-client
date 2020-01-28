@@ -14,6 +14,7 @@ const initialState = {
     firstName: "",
     dateOfBirth: "",
     age: "",
+    grade: "",
     gender: "",
     church: "",
     medicalInfo: ""
@@ -22,8 +23,11 @@ const initialState = {
     fullName: "",
     phone: "",
     alternatePhone: "",
-    email: ""
-  }
+    email: "",
+    pickupPersonName: "",
+    pickupPersonPhone: ""
+  },
+  volunteerDetails: {}
 };
 
 export default (state = initialState, action) => {
@@ -39,13 +43,13 @@ export default (state = initialState, action) => {
         step: action.payload
       };
     case SET_PARTICIPANT_DETAILS:
-      console.log(`Participant Details ${action.payload}`);
+      console.log(`Participant Details: ${action.payload}`);
       return {
         ...state,
         participantDetails: action.payload
       };
     case SET_GUARDIAN_DETAILS:
-      console.log(`Guardian Details ${action.payload}`);
+      console.log(`Guardian Details: ${action.payload}`);
       return {
         ...state,
         guardianDetails: action.payload

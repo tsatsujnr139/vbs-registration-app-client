@@ -1,14 +1,15 @@
 @import "~antd/dist/antd.css";
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400&display=swap");
 
 /* Homepage*/
 .homepage-hero {
   background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
-  height: 680px;
+  background-attachment: fixed;
+  background-position: center center;
   /* margin-top: 7px; */
 }
 
@@ -71,6 +72,33 @@
   margin-left: -70px;
 }
 
+.form-wrapper {
+  padding: 20px 0px 20px 0px;
+  background-color: #f3f5f7;
+}
+
+.form-wrapper img {
+  padding-top: 100px;
+  width: 400px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.confirm-details-wrapper img {
+  padding-top: 100px;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
 .registration-progress-bar {
   padding: 10px 80px 10px 80px;
+}
+
+.confirm-buttons-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f5f7;
+  padding: 30px;
 }
