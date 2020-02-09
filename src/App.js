@@ -3,6 +3,7 @@ import Navbar from "./components/layouts/Navbar";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
 import RegisterParticipant from "./components/participants/RegisterParticipantForm";
+import RegisterVolunteerForm from "./components/volunteers/RegisterVolunteerForm";
 import ConfirmParticipantDetails from "./components/participants/ConfirmParticipantDetails";
 import RegistrationSuccess from "./components/participants/ParticipantRegistrationSuccess";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -21,13 +22,13 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route
               exact
-              path="/participant/register"
+              path="/participants/register"
               component={RegisterParticipant}
             />
             <Route
               exact
-              path="/confirm"
-              component={ConfirmParticipantDetails}
+              path="/volunteers/register"
+              component={RegisterVolunteerForm}
             />
             <Route exact path="/guardian" component={FormGuardianDetails} />
             <Route exact path="/success" component={RegistrationSuccess} />

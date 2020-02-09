@@ -27,7 +27,19 @@ const initialState = {
     pickupPersonName: "",
     pickupPersonPhone: ""
   },
-  volunteerDetails: {}
+  volunteerDetails: {
+    surname: "",
+    firstName: "",
+    role: "",
+    phoneNumber: "",
+    whatsappNumber: "",
+    email: "",
+    sex: "",
+    preferredGrade: "",
+    church: "",
+    previousVolunteer: "",
+    volunteerSite: ""
+  }
 };
 
 export default (state = initialState, action) => {

@@ -15,11 +15,14 @@ const RegistrationSuccess = () => {
       </h1>
       <br />
       <h3>
-        You have successfully registered your ward for VBS 2020 - Concrete &
-        Cranes.
+        You have successfully signed up as a volunteer for VBS! Kindly note that
+        training for volunteers will take place on *Date* at LIC. Futher
+        communication will be sent to you in due course.
       </h3>
       <br />
-      <h3>We're looking foward to seeing them there!</h3>
+      <h3>The VBS Planning team is looking foward to working with you.</h3>
+      <br />
+      <h3>God Bless!</h3>
     </div>
   );
 };

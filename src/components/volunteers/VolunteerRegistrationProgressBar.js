@@ -2,7 +2,7 @@ import React from "react";
 import { Layout, Steps, Icon, Typography } from "antd";
 import PropTypes from "prop-types";
 
-const RegistrationProgressBar = ({ step, title }) => {
+const VolunteerRegistrationProgressBar = ({ step, title }) => {
   const { Content } = Layout;
   const { Step } = Steps;
   const { Title } = Typography;
@@ -25,8 +25,8 @@ const RegistrationProgressBar = ({ step, title }) => {
   );
 };
 
-RegistrationProgressBar.propTypes = {
+VolunteerRegistrationProgressBar.propTypes = {
   step: PropTypes.number.isRequired
 };
 
-export default RegistrationProgressBar;
+export default VolunteerRegistrationProgressBar;

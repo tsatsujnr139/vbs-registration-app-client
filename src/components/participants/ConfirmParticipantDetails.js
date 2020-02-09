@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Row, Col, Card, Icon } from "antd";
-import RegistrationProgressBar from "./RegistrationProgressBar";
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 

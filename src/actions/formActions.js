@@ -2,7 +2,8 @@ import {
   SET_LOADING,
   SET_STEP,
   SET_PARTICIPANT_DETAILS,
-  SET_GUARDIAN_DETAILS
+  SET_GUARDIAN_DETAILS,
+  SET_VOLUNTEER_DETAILS
 } from "./types";
 
 export const setLoading = () => {
@@ -26,6 +27,13 @@ export const setParticipantDetails = values => {
 export const setGuardianDetails = values => {
   return {
     type: SET_GUARDIAN_DETAILS,
+    payload: values
+  };
+};
+
+export const setVolunteerDetails = values => {
+  return {
+    type: SET_VOLUNTEER_DETAILS,
     payload: values
   };
 };

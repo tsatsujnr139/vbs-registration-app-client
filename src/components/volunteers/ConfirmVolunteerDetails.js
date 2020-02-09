@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Row, Col, Card, Icon } from "antd";
-import RegistrationProgressBar from "./RegistrationProgressBar";
+import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 
@@ -47,7 +47,7 @@ const ConfirmVolunteerDetails = ({
           </Col>
           <Col span={12}>
             <Card
-              title="PARTICIPANT DETAILS"
+              title="VOLUNTEER DETAILS"
               extra={<Icon type="user" />}
               hoverable={true}
               headStyle={headStyle}

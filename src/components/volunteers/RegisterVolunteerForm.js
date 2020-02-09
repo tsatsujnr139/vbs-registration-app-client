@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setStep } from "../../actions/formActions";
-import FormParticipantDetails from "./FormParticipantDetails";
+import FormVolunteerDetails from "./FormVolunteerDetails";
 import ConfirmVolunteerDetails from "./ConfirmVolunteerDetails";
-import RegistrationSuccess from "./RegistrationSuccess";
+import VolunteerRegistrationSuccess from "./VolunteerRegistrationSuccess";
 import PropTypes from "prop-types";
 
 const RegisterParticipantForm = ({
@@ -22,13 +22,13 @@ const RegisterParticipantForm = ({
 
   switch (step) {
     case 1:
-      return <FormParticipantDetails nextStep={nextStep} />;
+      return <FormVolunteerDetails nextStep={nextStep} />;
     case 2:
       return (
         <ConfirmVolunteerDetails nextStep={nextStep} prevStep={prevStep} />
       );
     case 3:
-      return <RegistrationSuccess />;
+      return <VolunteerRegistrationSuccess />;
     default:
       break;
   }

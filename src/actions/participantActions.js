@@ -46,7 +46,7 @@ export const getGrades = () => async dispatch => {
   } catch (error) {
     dispatch({
       type: GRADES_ERROR,
-      payload: error.response.data.msg
+      payload: error.message
     });
   }
 };

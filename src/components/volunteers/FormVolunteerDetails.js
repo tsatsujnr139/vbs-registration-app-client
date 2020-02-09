@@ -2,36 +2,23 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { Spin } from "antd";
 
-import {
-  Form,
-  Input,
-  Select,
-  DatePicker,
-  Button,
-  Row,
-  Col,
-  Radio,
-  Card
-} from "antd";
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
-import { setParticipantDetails } from "../../actions/formActions";
+import { Form, Input, Select, Button, Row, Col, Radio, Card } from "antd";
+import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
+import { setVolunteerDetails } from "../../actions/formActions";
 import { getGrades } from "../../actions/participantActions";
 import PropTypes from "prop-types";
 import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
-import moment from "moment";
 
-const FormParticipantDetails = ({
+const FormVolunteerDetails = ({
   nextStep,
-  formDetails: { participantDetails, step },
-  participant: { loading },
-  setParticipantDetails,
+  formDetails: { volunteerDetails, step },
+  participant: { grades, loading },
+  setVolunteerDetails,
   getGrades,
-  grades,
   form
 }) => {
   const { Option } = Select;
-  const { TextArea } = Input;
 
   const {
     getFieldDecorator,
@@ -42,62 +29,34 @@ const FormParticipantDetails = ({
   } = form;
 
   useEffect(() => {
-    getGrades();
     validateFields();
+    getGrades();
     //eslint-disable-next-line
   }, []);
-
-  const calculateCurrentAge = date => {
-    const now = moment();
-    return now.diff(date, "years");
-  };
-
-  const isEligibleAge = (rule, value, callback) => {
-    if (Math.sign(value) === -1 || (value && Math.sign(value) === 0)) {
-      callback("Please select a birth date in the past");
-    }
-    if (value && value < 3) {
-      callback(
-        "Only Children older that 3 years are eligible for registration"
-      );
-    }
-    callback();
-  };
 
   const surnameError = isFieldTouched("surname") && getFieldError("surname");
   const firstNameError =
     isFieldTouched("firstName") && getFieldError("firstName");
   const churchError = isFieldTouched("church") && getFieldError("church");
   const genderError = isFieldTouched("gender") && getFieldError("gender");
-  const gradeError = isFieldTouched("grade") && getFieldError("grade");
-
-  const ageError = getFieldError("age");
+  const phoneError = isFieldTouched("phone") && getFieldError("phone");
+  const emailError = isFieldTouched("email") && getFieldError("email");
 
   const hasErrors = fieldsError => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
-  };
-
-  const onChange = date => {
-    const age = calculateCurrentAge(date);
-    form.setFields({
-      age: {
-        value: age
-      }
-    });
-    validateFields(["age"]);
   };
 
   const validateInputAndSubmit = e => {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        setParticipantDetails(values);
+        setVolunteerDetails(values);
         nextStep();
       }
     });
   };
 
-  if (loading) {
+  if (loading || grades === null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
     );
@@ -130,7 +89,7 @@ const FormParticipantDetails = ({
                         message: "Please enter the child's surname"
                       }
                     ],
-                    initialValue: participantDetails.surname
+                    initialValue: volunteerDetails.surname
                   })(<Input placeholder="Surname" />)}
                 </Form.Item>
                 <span
@@ -153,46 +112,10 @@ const FormParticipantDetails = ({
                         message: "Please enter the child's first name"
                       }
                     ],
-                    initialValue: participantDetails.firstName
+                    initialValue: volunteerDetails.firstName
                   })(<Input placeholder="First Name" />)}
                 </Form.Item>
 
-                <Form.Item
-                  label="Date of Birth"
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 12px)"
-                  }}
-                >
-                  <DatePicker onChange={onChange} style={{ width: "100%" }} />
-                </Form.Item>
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "24px",
-                    textAlign: "center"
-                  }}
-                ></span>
-                <Form.Item
-                  label="Age"
-                  help={ageError || ""}
-                  hasFeedback
-                  validateStatus={ageError ? "error" : ""}
-                  style={{ display: "inline-block", width: "calc(50% - 12px)" }}
-                >
-                  {getFieldDecorator("age", {
-                    rules: [
-                      // {
-                      //   message:
-                      //     "Only children older than 3 years are eligible to register"
-                      // },
-                      {
-                        validator: isEligibleAge
-                      }
-                    ],
-                    initialValue: participantDetails.age
-                  })(<Input disabled={true} placeholder="Age" />)}
-                </Form.Item>
                 <Form.Item
                   label="Gender"
                   help={genderError || ""}
@@ -215,9 +138,59 @@ const FormParticipantDetails = ({
                 </Form.Item>
 
                 <Form.Item
-                  label="Class Completed this Past Academic Year"
-                  validateStatus={gradeError ? "error" : ""}
-                  help={surnameError || ""}
+                  label="Phone Number eg. 024XXXXXXX"
+                  validateStatus={phoneError ? "error" : ""}
+                  help={phoneError || ""}
+                  style={{ display: "inline-block", width: "100%" }}
+                >
+                  {getFieldDecorator("phone", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please enter your primary contact number"
+                      }
+                    ],
+                    initialValue: volunteerDetails.phone
+                  })(<Input maxLength="10" placeholder="Phone Number" />)}
+                </Form.Item>
+                <Form.Item
+                  label="WhatsApp Number"
+                  validateStatus={phoneError ? "error" : ""}
+                  help={phoneError || ""}
+                  style={{ display: "inline-block", width: "100%" }}
+                >
+                  {getFieldDecorator("whatsAppPhone", {
+                    rules: [],
+                    initialValue: volunteerDetails.phone
+                  })(
+                    <Input
+                      maxLength="10"
+                      placeholder="Your whatsapp number if any"
+                    />
+                  )}
+                </Form.Item>
+                <Form.Item
+                  label="Your Email Address"
+                  validateStatus={emailError ? "error" : ""}
+                  help={emailError || ""}
+                  style={{ display: "inline-block", width: "100%" }}
+                >
+                  {getFieldDecorator("email", {
+                    rules: [
+                      {
+                        required: true,
+                        message: "Please enter a valid email address "
+                      },
+                      {
+                        type: "email",
+                        message: "Please enter a valid email address"
+                      }
+                    ],
+                    initialValue: volunteerDetails.email
+                  })(<Input placeholder="Email Address" />)}
+                </Form.Item>
+                <Form.Item
+                  label="Preferred Class (Preferred class not guaranteed)"
                   style={{ display: "inline-block", width: "calc(100%)" }}
                 >
                   {getFieldDecorator("grade", {
@@ -227,9 +200,9 @@ const FormParticipantDetails = ({
                         message: "Please select a class/grade"
                       }
                     ],
-                    initialValue: participantDetails.grade
+                    initialValue: volunteerDetails.grade
                   })(
-                    <Select defaultValue="Class Completed this past academic year">
+                    <Select defaultValue="Which class would you like to serve in">
                       {grades.map(grade => (
                         <Option key={grade.name} value={grade.name}>
                           {grade.name}
@@ -250,21 +223,11 @@ const FormParticipantDetails = ({
                     rules: [
                       {
                         required: true,
-                        message: "Please enter the child's home church"
+                        message: "Please enter your home church"
                       }
                     ],
-                    initialValue: participantDetails.church
-                  })(<Input placeholder="The church the child attends" />)}
-                </Form.Item>
-                <br />
-                <Form.Item
-                  label="Medical Information (Allergies etc.)"
-                  style={{ display: "inline-block", width: "calc(100%)" }}
-                >
-                  <TextArea
-                    placeholder="Any relevant medical information"
-                    autoSize={{ minRows: 5, maxRows: 6 }}
-                  />
+                    initialValue: volunteerDetails.church
+                  })(<Input placeholder="Your home church" />)}
                 </Form.Item>
                 <Form.Item>
                   <Button
@@ -286,11 +249,10 @@ const FormParticipantDetails = ({
   );
 };
 
-FormParticipantDetails.propTypes = {
+FormVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
-  participant: PropTypes.object.isRequired,
-  setParticipantDetails: PropTypes.func.isRequired,
-  grades: PropTypes.object.isRequired,
+  setVolunteerDetails: PropTypes.func.isRequired,
+  getGrades: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired
 };
 
@@ -299,6 +261,6 @@ const mapStateToProps = state => ({
   participant: state.participant
 });
 
-export default connect(mapStateToProps, { setParticipantDetails, getGrades })(
-  Form.create()(FormParticipantDetails)
+export default connect(mapStateToProps, { setVolunteerDetails, getGrades })(
+  Form.create()(FormVolunteerDetails)
 );

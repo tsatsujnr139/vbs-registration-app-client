@@ -42,7 +42,7 @@ const Home = () => {
                     type="danger"
                     size="large"
                     // className="btn-block"
-                    href="participant/register"
+                    href="participants/register"
                   >
                     REGISTER PARTICIPANT
                   </Button>
@@ -51,7 +51,7 @@ const Home = () => {
                   <br /> */}
                   <span style={{ color: "white" }}> OR </span>
 
-                  <Button type="danger" size="large" href="volunteer/register">
+                  <Button type="danger" size="large" href="volunteers/register">
                     SIGN UP AS A VOLUNTEER
                   </Button>
                 </Button.Group>
