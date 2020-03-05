@@ -2,7 +2,8 @@ import {
   SET_LOADING,
   SET_STEP,
   SET_PARTICIPANT_DETAILS,
-  SET_GUARDIAN_DETAILS
+  SET_GUARDIAN_DETAILS,
+  SET_VOLUNTEER_DETAILS
 } from "../actions/types";
 
 const initialState = {
@@ -34,7 +35,7 @@ const initialState = {
     phoneNumber: "",
     whatsappNumber: "",
     email: "",
-    sex: "",
+    gender: "",
     preferredGrade: "",
     church: "",
     previousVolunteer: "",
@@ -65,6 +66,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         guardianDetails: action.payload
+      };
+    case SET_VOLUNTEER_DETAILS:
+      console.log(`Volunteer Details: ${action.payload}`);
+      return {
+        ...state,
+        volunteerDetails: action.payload
       };
     default:
       return state;

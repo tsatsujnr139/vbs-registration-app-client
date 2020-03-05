@@ -10,23 +10,18 @@ const ConfirmVolunteerDetails = ({
   nextStep,
   prevStep,
   formDetails: {
-    participantDetails: {
+    volunteerDetails: {
       surname,
       firstName,
-      dateOfBirth,
-      age,
-      grade,
-      gender,
-      church,
-      medicalInfo
-    },
-    guardianDetails: {
-      fullName,
-      phone,
-      alternatePhone,
+      role,
+      phoneNumber,
+      whatsappNumber,
       email,
-      pickupPersonName,
-      pickupPersonPhone
+      gender,
+      preferredGrade,
+      church,
+      previousVolunteer,
+      volunteerSite
     },
     step
   }
@@ -62,83 +57,28 @@ const ConfirmVolunteerDetails = ({
                 {firstName}
               </p>
               <p>
-                <strong>Age: </strong>
-                {age}
-              </p>
-              <p>
                 <strong>Gender: </strong>
                 {gender}
               </p>
               <p>
-                <strong>Class: </strong>
-                {grade}
+                <strong>Preferred Class: </strong>
+                {preferredGrade}
               </p>
               <p>
                 <strong>Church : </strong>
                 {church}
               </p>
-              <p>
-                <strong>Medical Information: </strong>
-                {medicalInfo || "N/A"}
-              </p>
             </Card>
           </Col>
           <Col span={6}></Col>
         </Row>
-        <span
+        {/* <span
           style={{
             display: "inline-block",
             width: "24px",
             textAlign: "center"
           }}
-        ></span>
-        <Row>
-          <Col span={6}></Col>
-          <Col span={12}>
-            <Card
-              title="PARENT/GUARDIAN DETAILS"
-              extra={<Icon type="team" />}
-              hoverable={true}
-              headStyle={headStyle}
-              style={{ borderRadius: "12px" }}
-            >
-              <p>
-                <strong>Full Name: </strong>
-                {fullName}
-              </p>
-              <p>
-                <strong>Primary Phone Number: </strong>
-                {phone}
-              </p>
-              <p>
-                <strong>Alternate Phone Number: </strong>
-                {alternatePhone}
-              </p>
-              <p>
-                <strong>Email: </strong>
-                {email}
-              </p>
-              <p>
-                <strong>Pickup Person Name: </strong>
-                {pickupPersonName}
-              </p>
-              <p>
-                <strong>Pickup Person Number: </strong>
-                {pickupPersonPhone}
-              </p>
-            </Card>
-          </Col>
-          <Col span={6}>
-            <img src={Bulldozer} alt="crane" />
-          </Col>
-        </Row>
-        <span
-          style={{
-            display: "inline-block",
-            width: "24px",
-            textAlign: "center"
-          }}
-        ></span>
+        ></span> */}
         <div className="confirm-buttons-wrapper">
           <Button size="large" type="default" onClick={prevStep}>
             Back
@@ -154,6 +94,20 @@ const ConfirmVolunteerDetails = ({
             Confirm
           </Button>
         </div>
+        <Row>
+          <Col span={6}></Col>
+          <Col span={12}></Col>
+          <Col span={6}>
+            <img src={Bulldozer} alt="crane" />
+          </Col>
+        </Row>
+        <span
+          style={{
+            display: "inline-block",
+            width: "24px",
+            textAlign: "center"
+          }}
+        ></span>
       </div>
     </Fragment>
   );

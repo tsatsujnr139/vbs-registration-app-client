@@ -14,11 +14,12 @@ const RegistrationSuccess = () => {
         <strong>Awesome!</strong>
       </h1>
       <br />
+      <h3>You have successfully signed up as a volunteer for VBS!</h3>
       <h3>
-        You have successfully signed up as a volunteer for VBS! Kindly note that
-        training for volunteers will take place on *Date* at LIC. Futher
-        communication will be sent to you in due course.
+        Kindly note that training for volunteers will take place on *Date* at
+        LIC.
       </h3>
+      <h3>Futher communication will be sent to you in due course.</h3>
       <br />
       <h3>The VBS Planning team is looking foward to working with you.</h3>
       <br />

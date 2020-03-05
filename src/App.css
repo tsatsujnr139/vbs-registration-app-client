@@ -5,7 +5,8 @@
 
 /* Homepage*/
 .homepage-hero {
-  background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg");
+  background-image: url("../src/static/images/hero-background.jpg");
+  /* background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

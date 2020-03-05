@@ -15,7 +15,6 @@ import {
 } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import { setParticipantDetails } from "../../actions/formActions";
-import { getGrades } from "../../actions/participantActions";
 import PropTypes from "prop-types";
 import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
@@ -26,7 +25,6 @@ const FormParticipantDetails = ({
   formDetails: { participantDetails, step },
   participant: { loading },
   setParticipantDetails,
-  getGrades,
   grades,
   form
 }) => {
@@ -42,7 +40,6 @@ const FormParticipantDetails = ({
   } = form;
 
   useEffect(() => {
-    getGrades();
     validateFields();
     //eslint-disable-next-line
   }, []);
@@ -299,6 +296,6 @@ const mapStateToProps = state => ({
   participant: state.participant
 });
 
-export default connect(mapStateToProps, { setParticipantDetails, getGrades })(
+export default connect(mapStateToProps, { setParticipantDetails })(
   Form.create()(FormParticipantDetails)
 );

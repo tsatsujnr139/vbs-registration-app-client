@@ -5,7 +5,6 @@ import { Spin } from "antd";
 import { Form, Input, Select, Button, Row, Col, Radio, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import { setVolunteerDetails } from "../../actions/formActions";
-import { getGrades } from "../../actions/participantActions";
 import PropTypes from "prop-types";
 import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
@@ -13,9 +12,9 @@ import JackHammer from "../../static/images/jackhammer.png";
 const FormVolunteerDetails = ({
   nextStep,
   formDetails: { volunteerDetails, step },
-  participant: { grades, loading },
+  participant: { loading },
   setVolunteerDetails,
-  getGrades,
+  grades,
   form
 }) => {
   const { Option } = Select;
@@ -30,7 +29,6 @@ const FormVolunteerDetails = ({
 
   useEffect(() => {
     validateFields();
-    getGrades();
     //eslint-disable-next-line
   }, []);
 
@@ -41,6 +39,8 @@ const FormVolunteerDetails = ({
   const genderError = isFieldTouched("gender") && getFieldError("gender");
   const phoneError = isFieldTouched("phone") && getFieldError("phone");
   const emailError = isFieldTouched("email") && getFieldError("email");
+  const gradeError =
+    isFieldTouched("preferredGrade") && getFieldError("preferredGrade");
 
   const hasErrors = fieldsError => {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -56,7 +56,7 @@ const FormVolunteerDetails = ({
     });
   };
 
-  if (loading || grades === null) {
+  if (loading) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
     );
@@ -191,16 +191,18 @@ const FormVolunteerDetails = ({
                 </Form.Item>
                 <Form.Item
                   label="Preferred Class (Preferred class not guaranteed)"
+                  validateStatus={gradeError ? "error" : ""}
+                  help={gradeError || ""}
                   style={{ display: "inline-block", width: "calc(100%)" }}
                 >
-                  {getFieldDecorator("grade", {
+                  {getFieldDecorator("preferredGrade", {
                     rules: [
                       {
                         required: true,
                         message: "Please select a class/grade"
                       }
                     ],
-                    initialValue: volunteerDetails.grade
+                    initialValue: volunteerDetails.preferredGrade
                   })(
                     <Select defaultValue="Which class would you like to serve in">
                       {grades.map(grade => (
@@ -252,7 +254,7 @@ const FormVolunteerDetails = ({
 FormVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setVolunteerDetails: PropTypes.func.isRequired,
-  getGrades: PropTypes.func.isRequired,
+  grades: PropTypes.object.isRequired,
   nextStep: PropTypes.func.isRequired
 };
 
@@ -261,6 +263,6 @@ const mapStateToProps = state => ({
   participant: state.participant
 });
 
-export default connect(mapStateToProps, { setVolunteerDetails, getGrades })(
+export default connect(mapStateToProps, { setVolunteerDetails })(
   Form.create()(FormVolunteerDetails)
 );
