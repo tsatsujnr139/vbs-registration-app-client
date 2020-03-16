@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { Spin } from "antd";
+import Navbar from "../layouts/Navbar";
 
 import {
   Form,
@@ -102,6 +103,7 @@ const FormParticipantDetails = ({
 
   return (
     <Fragment>
+      <Navbar />
       <RegistrationProgressBar
         step={step - 1}
         title="Let's get you registered"
@@ -297,5 +299,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { setParticipantDetails })(
-  Form.create()(FormParticipantDetails)
+  FormParticipantDetails
 );

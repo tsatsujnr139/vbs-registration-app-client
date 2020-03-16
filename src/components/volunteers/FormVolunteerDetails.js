@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Spin } from "antd";
+import { Spin } from "antd/lib";
 
 import { Form, Input, Select, Button, Row, Col, Radio, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
@@ -8,6 +8,7 @@ import { setVolunteerDetails } from "../../actions/formActions";
 import PropTypes from "prop-types";
 import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
+import Navbar from "../layouts/Navbar";
 
 const FormVolunteerDetails = ({
   nextStep,
@@ -64,6 +65,7 @@ const FormVolunteerDetails = ({
 
   return (
     <Fragment>
+      <Navbar />
       <RegistrationProgressBar
         step={step - 1}
         title="Let's get you registered"
@@ -264,5 +266,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { setVolunteerDetails })(
-  Form.create()(FormVolunteerDetails)
+  FormVolunteerDetails
 );

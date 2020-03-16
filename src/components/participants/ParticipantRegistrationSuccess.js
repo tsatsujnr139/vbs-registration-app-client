@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "../layouts/Navbar";
 
 const RegistrationSuccess = () => {
   return (
@@ -10,6 +11,7 @@ const RegistrationSuccess = () => {
         fontSizeAdjust: "1.0"
       }}
     >
+      <Navbar />
       <h1>
         <strong>Awesome!</strong>
       </h1>

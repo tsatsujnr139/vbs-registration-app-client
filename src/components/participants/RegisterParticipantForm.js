@@ -8,7 +8,7 @@ import RegistrationSuccess from "./ParticipantRegistrationSuccess";
 import PropTypes from "prop-types";
 
 import { getGrades } from "../../actions/participantActions";
-import { Spin } from "antd";
+import { Spin } from "antd/lib";
 
 const RegisterParticipantForm = ({
   formDetails: { step },

@@ -5,7 +5,7 @@ import FormVolunteerDetails from "./FormVolunteerDetails";
 import ConfirmVolunteerDetails from "./ConfirmVolunteerDetails";
 import VolunteerRegistrationSuccess from "./VolunteerRegistrationSuccess";
 import PropTypes from "prop-types";
-import { Spin } from "antd";
+import { Spin } from "antd/lib";
 
 import { getGrades } from "../../actions/participantActions";
 
@@ -35,7 +35,6 @@ const RegisterParticipantForm = ({
       <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
     );
   }
-
   switch (step) {
     case 1:
       return <FormVolunteerDetails nextStep={nextStep} grades={grades} />;

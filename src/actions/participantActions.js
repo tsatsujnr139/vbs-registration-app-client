@@ -5,7 +5,6 @@ import axios from "axios";
 export const getGrades = () => async dispatch => {
   try {
     setLoading();
-
     // const res = await axios.get("/grades");
     const res = {
       data: [

@@ -1,11 +1,12 @@
 import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col, Card } from "antd";
+import { Form, Input, Button, Row, Col, Card } from "antd/lib";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import PropTypes from "prop-types";
 import FoodTruck from "../../static/images/foodtruck.png";
 import MottoSign from "../../static/images/mottosign.png";
+import Navbar from "../layouts/Navbar";
 
 const FormGuardianDetails = ({
   nextStep,
@@ -53,6 +54,7 @@ const FormGuardianDetails = ({
 
   return (
     <Fragment>
+      <Navbar />
       <RegistrationProgressBar
         step={step - 1}
         title="Let's get you registered"
@@ -226,5 +228,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { setGuardianDetails })(
-  Form.create()(FormGuardianDetails)
+  FormGuardianDetails
 );

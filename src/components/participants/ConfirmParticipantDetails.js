@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Card, Icon } from "antd";
+import { Button, Row, Col, Card, Icon } from "antd/lib";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
+import Navbar from "../layouts/Navbar";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -33,6 +34,7 @@ const ConfirmParticipantDetails = ({
 }) => {
   return (
     <Fragment>
+      <Navbar />
       <RegistrationProgressBar
         step={step - 1}
         title="Please Confirm Your Details"

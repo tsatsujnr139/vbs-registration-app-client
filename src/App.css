@@ -20,6 +20,7 @@
   align-items: center;
   overflow: hidden;
 }
+
 .hero-logo img {
   width: 580px;
 }
@@ -102,4 +103,22 @@
   justify-content: center;
   background: #f3f5f7;
   padding: 30px;
+}
+
+/* Dashboard */
+.site-page-header {
+  border: 1px solid rgb(235, 237, 240);
+}
+
+.site-layout-background {
+  background: #fff;
+}
+
+.dashboard-overview-card-title{
+  padding:0px 0px 20px 5px;
+}
+
+.dashboard-overview-card-value{
+  color: #35A1E8;
+  font-size-adjust: 1.2;
 }

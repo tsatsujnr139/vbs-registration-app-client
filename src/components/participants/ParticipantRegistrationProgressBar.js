@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Steps, Icon, Typography } from "antd";
+import { Layout, Steps, Icon, Typography } from "antd/lib";
 import PropTypes from "prop-types";
 
 const ParticipantRegistrationProgressBar = ({ step, title }) => {
