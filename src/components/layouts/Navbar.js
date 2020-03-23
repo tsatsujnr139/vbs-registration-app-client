@@ -13,7 +13,6 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const { Header } = Layout;
 
   const onClick = e => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
 
@@ -64,7 +63,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
             height="65"
             width="70"
             style={{ float: "left" }}
-          />{" "}
+          />
         </a>
 
         <a href="/">
@@ -74,7 +73,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
             height="65"
             width="100"
             style={{ float: "left" }}
-          />{" "}
+          />
         </a>
 
         <Menu

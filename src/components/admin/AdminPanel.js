@@ -1,15 +1,19 @@
 import React, { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Layout, Menu, PageHeader } from "antd";
+import { Layout, Menu } from "antd";
 import Dashboard from "./Dashboard";
+import LogoTitle from "../../static/images/logo-2.png";
 import VolunteerDashboard from "./VolunteerDashboard";
 import ParticipantDashboard from "./ParticipantDashboard";
 import {
   UserOutlined,
   DashboardOutlined,
-  UsergroupAddOutlined
+  TeamOutlined,
+  SettingOutlined
 } from "@ant-design/icons";
+import Navbar from "../layouts/AdminNavbar";
+import Footer from "../layouts/Footer";
 
 const AdminPanel = props => {
   const {
@@ -17,14 +21,14 @@ const AdminPanel = props => {
     history
   } = props;
 
-  const { Sider, Content, Header, Footer } = Layout;
+  const { Sider, Content } = Layout;
   const [render, updateRender] = useState(1);
 
   useEffect(() => {
     // if (!isAuthenticated) {
     //   history.push("/admin/login");
     // }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, history]);
 
   const handleMenuClick = menu => {
     updateRender(menu.key);
@@ -37,42 +41,60 @@ const AdminPanel = props => {
   };
 
   return (
-      <Fragment>
-        <Header style={{backgroundColor:"white"}}>{/* <Navbar /> */}</Header>
+    <Fragment>
+      <Layout>
+        <Sider collapsible breakpoint="md" theme="light">
+          <a href="/admin/dashboard">
+            <img
+              src={LogoTitle}
+              alt="Logo"
+              height="60"
+              // width="120"
+              style={{ paddingLeft: "30px" }}
+            />
+          </a>
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            style={{ height: "100%" }}
+            onClick={handleMenuClick}
+          >
+            <Menu.Item key="1">
+              <DashboardOutlined />
+              Dashboard
+            </Menu.Item>
+            <Menu.Item key="2">
+              <UserOutlined />
+              Participants
+            </Menu.Item>
+            <Menu.Item key="3">
+              <TeamOutlined />
+              Volunteers
+            </Menu.Item>
+            <Menu.Item key="4">
+              <SettingOutlined />
+              Admins
+            </Menu.Item>
+          </Menu>
+        </Sider>
         <Layout>
-          <Sider width={200} className="site-layout-background">
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={["1"]}
-              style={{ height: "100%" }}
-              onClick={handleMenuClick}
-            >
-              <Menu.Item key="1">
-                <DashboardOutlined />
-                Dashboard
-              </Menu.Item>
-              <Menu.Item key="2">
-                <UserOutlined />
-                Participants
-              </Menu.Item>
-              <Menu.Item key="3">
-                <UsergroupAddOutlined />
-                Volunteers
-              </Menu.Item>
-            </Menu>
-          </Sider>
           <Layout>
+            <Navbar />
             <Content
-              style={{ padding: "5px 24px", minHeight: 800, height: "100%" }}
+              style={{
+                minHeight: 800,
+                height: "calc(100% - 100px)"
+              }}
             >
               <div style={{ padding: "0px 24px 0px 24px", minHeight: 380 }}>
                 {components[render]}
               </div>
             </Content>
-            <Footer style={{ textAlign: "center" }}>©2020 LIC</Footer>
           </Layout>
+          <Footer />
         </Layout>
-      </Fragment>
+      </Layout>
+    </Fragment>
   );
 };
 

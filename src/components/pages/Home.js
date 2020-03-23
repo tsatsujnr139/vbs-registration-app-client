@@ -3,6 +3,7 @@ import { Row, Col, Button, Typography } from "antd";
 import { Layout, Spin } from "antd";
 import Logo from "../../static/images/logo-main.png";
 import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 
 const Home = () => {
   const { Content } = Layout;
@@ -64,6 +65,7 @@ const Home = () => {
             </Row>
           </div>
         </Content>
+        <Footer />
       </Fragment>
     );
   }

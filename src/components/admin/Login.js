@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Spin, Card, Form, Input, Button, Row, Col, Alert } from "antd";
+import { Spin, Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
 import { login } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 
 const Login = props => {
   const {
@@ -13,6 +14,8 @@ const Login = props => {
     login,
     history
   } = props;
+
+  const { Content } = Layout;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -39,10 +42,23 @@ const Login = props => {
   return (
     <Fragment>
       <Navbar />
-      <div style={{ marginTop: "100px" }}>
+      <Content
+        style={{
+          minHeight: 800,
+          height: "calc(100% - 100px)",
+          paddingTop: "100px",
+          background: "#f3f5f7"
+        }}
+      >
         <Row>
-          <Col span={9}></Col>
-          <Col span={6}>
+          <Col span={2}></Col>
+          <Col
+            span={20}
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
             {error && (
               <Alert
                 message="Error"
@@ -51,7 +67,7 @@ const Login = props => {
                 showIcon
               />
             )}
-            <Card hoverable="true">
+            <Card hoverable="true" style={cardStyle}>
               <Form
                 layout="vertical"
                 name="basic"
@@ -106,15 +122,23 @@ const Login = props => {
               </Form>
             </Card>
           </Col>
-          <Col span={9}></Col>
+          <Col span={2}></Col>
         </Row>
-      </div>
+      </Content>
+      <Footer />
     </Fragment>
   );
 };
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired
+};
+
+const cardStyle = {
+  minWidth: 350,
+  height: 300,
+  marginTop: 16,
+  borderRadius: "2px"
 };
 
 const mapStateToProps = state => ({

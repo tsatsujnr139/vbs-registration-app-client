@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
+import { PageHeader } from "antd";
 
 const ParticipantDashboard = () => {
-  return <div>This is the participant dashboard</div>;
+  return (
+    <Fragment>
+      <PageHeader title="Participants"></PageHeader>
+    </Fragment>
+  );
 };
 
 export default ParticipantDashboard;

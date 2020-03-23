@@ -107,18 +107,17 @@
 
 /* Dashboard */
 .site-page-header {
-  border: 1px solid rgb(235, 237, 240);
+  /* border: 1px solid rgb(235, 237, 240); */
 }
 
-.site-layout-background {
-  background: #fff;
+.dashboard-overview-card-title {
+  font-size-adjust: 0.9;
+  padding: 0px 0px 10px 5px;
 }
 
-.dashboard-overview-card-title{
-  padding:0px 0px 20px 5px;
-}
-
-.dashboard-overview-card-value{
-  color: #35A1E8;
-  font-size-adjust: 1.2;
+.dashboard-overview-card-value {
+  padding-top: 50px;
+  color: #35a1e8;
+  font-size-adjust: 1.6;
+  text-align: right;
 }
