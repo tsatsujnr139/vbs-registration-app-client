@@ -27,16 +27,15 @@ const Home = () => {
         <Content>
           <div className="homepage-hero">
             <Row>
-              <Col span={14}>
+              <Col span={14} xl={14} lg={14} md={14} sm={24} xs={24}>
                 <div className="hero-logo">
                   <img src={Logo} alt="logo" />
                 </div>
               </Col>
-              <Col span={10}>
+              <Col span={10} xl={10} lg={10} md={10} sm={24} xs={24}>
                 <div className="register-invite">
                   <div className="hero-motto">
-                    <Title>BUILDING ON THE</Title>
-                    <Title>LOVE OF JESUS</Title>
+                    <Title>BUILDING ON THE LOVE OF JESUS</Title>
                   </div>
                   <div className="hero-tagline">
                     <Title level={4}>
@@ -44,16 +43,9 @@ const Home = () => {
                     </Title>
                   </div>
                   <Button.Group size="large">
-                    <Button
-                      type="danger"
-                      // size="large"
-                      href="participants/register"
-                    >
+                    <Button type="danger" href="participants/register">
                       REGISTER PARTICIPANT
                     </Button>
-                    {/* <br />
-                  <h2 style={{ color: "white", paddingLeft: "150px" }}>OR</h2>
-                  <br /> */}
                     <span style={{ color: "white" }}> OR </span>
 
                     <Button type="danger" href="volunteers/register">

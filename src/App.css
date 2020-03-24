@@ -33,6 +33,7 @@
 .hero-motto {
   font-family: "Luckiest Guy", cursive;
   font-size-adjust: 1.2;
+  line-height: 50px;
 }
 
 .hero-motto h1 {

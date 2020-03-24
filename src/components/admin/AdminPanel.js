@@ -49,7 +49,7 @@ const AdminPanel = props => {
               src={LogoTitle}
               alt="Logo"
               height="60"
-              // width="120"
+              border
               style={{ paddingLeft: "30px" }}
             />
           </a>

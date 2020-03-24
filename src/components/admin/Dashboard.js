@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getRegistrationStats } from "../../actions/adminActions";
 import Overview from "./Overview";
 import Distributions from "./Distributions";
-import { Row, Col, Divider } from "antd";
+import { Divider } from "antd";
 
 const Dashboard = ({ admin: { loading, stats }, getRegistrationStats }) => {
   useEffect(() => {

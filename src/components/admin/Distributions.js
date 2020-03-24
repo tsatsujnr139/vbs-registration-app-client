@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Card } from "antd";
 import { Pie, ChartCard } from "ant-design-pro/lib/Charts";
 import "ant-design-pro/dist/ant-design-pro.css";
 
@@ -49,9 +49,9 @@ const salesPieData = [
 const Distributions = () => {
   return (
     <Fragment>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col span={12}>
-          <ChartCard
+      <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
+        <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
+          <Card
             title="Participant Class Distribution"
             loading={false}
             contentHeight={350}
@@ -73,11 +73,12 @@ const Distributions = () => {
                 <span dangerouslySetInnerHTML={{ __html: val }} />
               )}
               height={350}
+              lineWidth={4}
             />
-          </ChartCard>
+          </Card>
         </Col>
-        <Col span={12}>
-          <ChartCard
+        <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
+          <Card
             title="Volunteer Class Distribution"
             loading={false}
             contentHeight={350}
@@ -99,7 +100,7 @@ const Distributions = () => {
               )}
               height={350}
             />
-          </ChartCard>
+          </Card>
         </Col>
       </Row>
     </Fragment>
