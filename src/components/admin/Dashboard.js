@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getRegistrationStats } from "../../actions/adminActions";
 import Overview from "./Overview";
 import Distributions from "./Distributions";
-import { Divider } from "antd";
 
 const Dashboard = ({ admin: { loading, stats }, getRegistrationStats }) => {
   useEffect(() => {
@@ -15,10 +14,6 @@ const Dashboard = ({ admin: { loading, stats }, getRegistrationStats }) => {
   return (
     <Fragment>
       <Overview />
-      <Divider
-        orientation="left"
-        style={{ color: "#333", fontWeight: "normal" }}
-      ></Divider>
       <Distributions />
     </Fragment>
   );

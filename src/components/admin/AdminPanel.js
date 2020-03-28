@@ -49,7 +49,6 @@ const AdminPanel = props => {
               src={LogoTitle}
               alt="Logo"
               height="60"
-              border
               style={{ paddingLeft: "30px" }}
             />
           </a>
@@ -82,11 +81,11 @@ const AdminPanel = props => {
             <Navbar />
             <Content
               style={{
-                minHeight: 800,
-                height: "calc(100% - 100px)"
+                minHeight: 600,
+                height: "calc(100%)"
               }}
             >
-              <div style={{ padding: "0px 24px 0px 24px", minHeight: 380 }}>
+              <div style={{ padding: "0px 24px 0px 24px", minHeight: 600 }}>
                 {components[render]}
               </div>
             </Content>

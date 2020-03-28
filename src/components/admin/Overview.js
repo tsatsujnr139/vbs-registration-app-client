@@ -1,12 +1,9 @@
 import React, { Fragment, useEffect } from "react";
-import { Card, Spin, Row, Col, Tooltip } from "antd";
+import { Spin, Row, Col, Tooltip } from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getRegistrationStats } from "../../actions/adminActions";
-import { ReactComponent as Volunteers } from "../../static/images/volunteers.svg";
-import { ReactComponent as Kids } from "../../static/images/kidsPlaying.svg";
-import { ReactComponent as Church } from "../../static/images/church.svg";
 import CountUp from "react-countup";
 import { ChartCard, Field } from "ant-design-pro/lib/Charts";
 
@@ -60,10 +57,10 @@ const Dashboard = ({ admin: { loading, stats }, getRegistrationStats }) => {
         <Col span={8} xl={8} lg={8} md={24} sm={24} xs={24}>
           <ChartCard
             bordered={false}
-            title="Volunteers"
+            title="Churches Represented"
             hoverable={true}
             action={
-              <Tooltip title="Total Number of volunteers registered so far">
+              <Tooltip title="Total Number of churches represented">
                 <InfoCircleOutlined />
               </Tooltip>
             }

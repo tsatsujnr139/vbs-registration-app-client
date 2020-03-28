@@ -54,7 +54,7 @@ const Distributions = () => {
           <Card
             title="Participant Class Distribution"
             loading={false}
-            contentHeight={350}
+            // contentHeight={350}
             bordered={false}
           >
             <Pie
@@ -81,7 +81,7 @@ const Distributions = () => {
           <Card
             title="Volunteer Class Distribution"
             loading={false}
-            contentHeight={350}
+            // contentHeight={350}
           >
             <Pie
               hasLegend

@@ -10,9 +10,9 @@ export const getRegistrationStats = () => async dispatch => {
     // const res = await axios.get("/stats");
     const res = {
       data: {
-        participantCount: "1008",
-        volunteerCount: "108",
-        churchCount: "20"
+        participantCount: 1008,
+        volunteerCount: 108,
+        churchCount: 20
       }
     };
     dispatch({
