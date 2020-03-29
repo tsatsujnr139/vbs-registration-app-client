@@ -1,6 +1,12 @@
 import React from "react";
-import { Layout, Steps, Icon, Typography } from "antd/lib";
+import { Layout, Steps, Typography } from "antd";
 import PropTypes from "prop-types";
+import {
+  TeamOutlined,
+  SmileOutlined,
+  UserOutlined,
+  SolutionOutlined
+} from "@ant-design/icons";
 
 const ParticipantRegistrationProgressBar = ({ step, title }) => {
   const { Content } = Layout;
@@ -13,13 +19,10 @@ const ParticipantRegistrationProgressBar = ({ step, title }) => {
         <Title level={3}>{title}</Title>
       </div>
       <Steps current={step} className="registration-progress-bar">
-        <Step title="Participant Details" icon={<Icon type="user" />}></Step>
-        <Step
-          title="Parent/Guardian Details"
-          icon={<Icon type="team" />}
-        ></Step>
-        <Step title="Confirm Details" icon={<Icon type="solution" />}></Step>
-        <Step title="Done" icon={<Icon type="smile-o" />} />
+        <Step title="Participant Details" icon={<UserOutlined />}></Step>
+        <Step title="Parent/Guardian Details" icon={<TeamOutlined />}></Step>
+        <Step title="Confirm Details" icon={<SolutionOutlined />}></Step>
+        <Step title="Done" icon={<SmileOutlined />} />
       </Steps>
     </Content>
   );

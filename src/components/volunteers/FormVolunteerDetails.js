@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Spin } from "antd/lib";
-
 import { Form, Input, Select, Button, Row, Col, Radio, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import { setVolunteerDetails } from "../../actions/formActions";
@@ -15,46 +14,26 @@ const FormVolunteerDetails = ({
   formDetails: { volunteerDetails, step },
   participant: { loading },
   setVolunteerDetails,
-  grades,
-  form
+  grades
 }) => {
   const { Option } = Select;
 
-  const {
-    getFieldDecorator,
-    validateFields,
-    getFieldsError,
-    getFieldError,
-    isFieldTouched
-  } = form;
+  const [form] = Form.useForm();
+  const [, forceUpdate] = useState();
 
   useEffect(() => {
-    validateFields();
+    forceUpdate({});
     //eslint-disable-next-line
   }, []);
 
-  const surnameError = isFieldTouched("surname") && getFieldError("surname");
-  const firstNameError =
-    isFieldTouched("firstName") && getFieldError("firstName");
-  const churchError = isFieldTouched("church") && getFieldError("church");
-  const genderError = isFieldTouched("gender") && getFieldError("gender");
-  const phoneError = isFieldTouched("phone") && getFieldError("phone");
-  const emailError = isFieldTouched("email") && getFieldError("email");
-  const gradeError =
-    isFieldTouched("preferredGrade") && getFieldError("preferredGrade");
-
-  const hasErrors = fieldsError => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  const onFinish = values => {
+    console.log("Success:", values);
+    setVolunteerDetails(values);
+    nextStep();
   };
 
-  const validateInputAndSubmit = e => {
-    e.preventDefault();
-    validateFields((err, values) => {
-      if (!err) {
-        setVolunteerDetails(values);
-        nextStep();
-      }
-    });
+  const onFinishFailed = errorInfo => {
+    console.log("Failed:", errorInfo);
   };
 
   if (loading) {
@@ -66,33 +45,46 @@ const FormVolunteerDetails = ({
   return (
     <Fragment>
       <Navbar />
-      <RegistrationProgressBar
-        step={step - 1}
-        title="Let's get you registered"
-      />
+      <RegistrationProgressBar step={step - 1} title="Volunteer Registration" />
       <div className="form-wrapper">
         <Row>
-          <Col span={7}>
+          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
             <img src={JackHammer} alt="jackhammer" />
           </Col>
-          <Col span={10} style={{ display: "block" }}>
-            <Card>
-              <Form layout="horizontal" onSubmit={validateInputAndSubmit}>
+          <Col
+            span={14}
+            xl={14}
+            lg={14}
+            md={14}
+            sm={20}
+            xs={20}
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <Card hoverable="true" style={cardStyle}>
+              <Form
+                form={form}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+              >
                 <Form.Item
                   label="Surname"
-                  validateStatus={surnameError ? "error" : ""}
-                  help={surnameError || ""}
-                  style={{ display: "inline-block", width: "calc(50% - 12px)" }}
+                  name="surname"
+                  defaultValue={volunteerDetails.surname}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your surname"
+                    }
+                  ]}
+                  style={{
+                    display: "inline-block",
+                    width: "calc(50% - 12px)"
+                  }}
                 >
-                  {getFieldDecorator("surname", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter the child's surname"
-                      }
-                    ],
-                    initialValue: volunteerDetails.surname
-                  })(<Input placeholder="Surname" />)}
+                  <Input placeholder="Surname" />
                 </Form.Item>
                 <span
                   style={{
@@ -103,154 +95,152 @@ const FormVolunteerDetails = ({
                 ></span>
                 <Form.Item
                   label="First Name"
-                  validateStatus={firstNameError ? "error" : ""}
-                  help={firstNameError || ""}
-                  style={{ display: "inline-block", width: "calc(50% - 12px)" }}
+                  name="firstName"
+                  defaultValue={volunteerDetails.firstName}
+                  style={{
+                    display: "inline-block",
+                    width: "calc(50% - 12px)"
+                  }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the your first name"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("firstName", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter the child's first name"
-                      }
-                    ],
-                    initialValue: volunteerDetails.firstName
-                  })(<Input placeholder="First Name" />)}
+                  <Input placeholder="First Name" />
                 </Form.Item>
 
                 <Form.Item
                   label="Gender"
-                  help={genderError || ""}
-                  validateStatus={genderError ? "error" : ""}
+                  name="gender"
                   style={{ display: "inline-block", width: "calc(100%)" }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select a gender "
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("gender", {
-                    rules: [
-                      {
-                        required: true,
-                        message: " "
-                      }
-                    ]
-                  })(
-                    <Radio.Group size="medium">
-                      <Radio.Button value="Male">Male</Radio.Button>
-                      <Radio.Button value="Female">Female</Radio.Button>
-                    </Radio.Group>
-                  )}
+                  <Radio.Group size="medium">
+                    <Radio.Button value="Male">Male</Radio.Button>
+                    <Radio.Button value="Female">Female</Radio.Button>
+                  </Radio.Group>
                 </Form.Item>
 
                 <Form.Item
                   label="Phone Number eg. 024XXXXXXX"
-                  validateStatus={phoneError ? "error" : ""}
-                  help={phoneError || ""}
+                  name="phone"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={volunteerDetails.phone}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your phone number"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("phone", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your primary contact number"
-                      }
-                    ],
-                    initialValue: volunteerDetails.phone
-                  })(<Input maxLength="10" placeholder="Phone Number" />)}
+                  <Input maxLength="10" placeholder="Phone Number" />
                 </Form.Item>
                 <Form.Item
-                  label="WhatsApp Number"
-                  validateStatus={phoneError ? "error" : ""}
-                  help={phoneError || ""}
+                  label="WhatsApp Phone Number eg. 024XXXXXXX"
+                  name="whatsAppPhone"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={volunteerDetails.whatsAppPhone}
+                  rules={[
+                    {
+                      required: false
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("whatsAppPhone", {
-                    rules: [],
-                    initialValue: volunteerDetails.phone
-                  })(
-                    <Input
-                      maxLength="10"
-                      placeholder="Your whatsapp number if any"
-                    />
-                  )}
+                  <Input maxLength="10" placeholder="WhatsApp Number If Any" />
                 </Form.Item>
                 <Form.Item
-                  label="Your Email Address"
-                  validateStatus={emailError ? "error" : ""}
-                  help={emailError || ""}
+                  label="Email Address"
+                  name="email"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={volunteerDetails.email}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter a valid email address "
+                    },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email address"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("email", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter a valid email address "
-                      },
-                      {
-                        type: "email",
-                        message: "Please enter a valid email address"
-                      }
-                    ],
-                    initialValue: volunteerDetails.email
-                  })(<Input placeholder="Email Address" />)}
+                  <Input placeholder="Email Address" />
                 </Form.Item>
                 <Form.Item
                   label="Preferred Class (Preferred class not guaranteed)"
-                  validateStatus={gradeError ? "error" : ""}
-                  help={gradeError || ""}
+                  name="grade"
                   style={{ display: "inline-block", width: "calc(100%)" }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select a class/grade"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("preferredGrade", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please select a class/grade"
-                      }
-                    ],
-                    initialValue: volunteerDetails.preferredGrade
-                  })(
-                    <Select defaultValue="Which class would you like to serve in">
-                      {grades.map(grade => (
-                        <Option key={grade.name} value={grade.name}>
-                          {grade.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  )}
+                  <Select defaultValue="Class">
+                    {grades.map(grade => (
+                      <Option key={grade.name} value={grade.name}>
+                        {grade.name}
+                      </Option>
+                    ))}
+                  </Select>
                 </Form.Item>
 
                 <br />
                 <Form.Item
                   label="Home Church"
-                  validateStatus={churchError ? "error" : ""}
-                  help={churchError || ""}
+                  name="church"
                   style={{ display: "inline-block", width: "calc(100%)" }}
+                  defaultValue={volunteerDetails.church}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select/enter home church"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("church", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your home church"
-                      }
-                    ],
-                    initialValue: volunteerDetails.church
-                  })(<Input placeholder="Your home church" />)}
+                  <Input placeholder="Your home church" />
                 </Form.Item>
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    disabled={hasErrors(getFieldsError())}
-                  >
-                    Next
-                  </Button>
+                <Form.Item shouldUpdate>
+                  {() => (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      disabled={
+                        !form.isFieldsTouched(true) ||
+                        form
+                          .getFieldsError()
+                          .filter(({ errors }) => errors.length).length
+                      }
+                    >
+                      Next
+                    </Button>
+                  )}
                 </Form.Item>
               </Form>
             </Card>
           </Col>
-          <Col span={7}></Col>
-          <img src={Crane} alt="crane" />
+          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+            <img src={Crane} alt="crane" />
+          </Col>
         </Row>
       </div>
     </Fragment>
   );
+};
+
+const cardStyle = {
+  minWidth: 400,
+  maxWidth: 650,
+  height: 700,
+  borderRadius: "2px"
 };
 
 FormVolunteerDetails.propTypes = {

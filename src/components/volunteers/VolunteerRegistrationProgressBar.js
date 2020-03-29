@@ -1,7 +1,11 @@
 import React, { Fragment } from "react";
-import { Layout, Steps, Icon, Typography } from "antd/lib";
+import { Layout, Steps, Typography } from "antd";
 import PropTypes from "prop-types";
-import Navbar from "../layouts/Navbar";
+import {
+  SmileOutlined,
+  UserOutlined,
+  SolutionOutlined
+} from "@ant-design/icons";
 
 const VolunteerRegistrationProgressBar = ({ step, title }) => {
   const { Content } = Layout;
@@ -10,15 +14,14 @@ const VolunteerRegistrationProgressBar = ({ step, title }) => {
 
   return (
     <Fragment>
-      <Navbar />
       <Content>
         <div className="section-title">
           <Title level={3}>{title}</Title>
         </div>
         <Steps current={step} className="registration-progress-bar">
-          <Step title="Volunteer Details" icon={<Icon type="user" />}></Step>
-          <Step title="Confirm Details" icon={<Icon type="solution" />}></Step>
-          <Step title="Done" icon={<Icon type="smile-o" />} />
+          <Step title="Volunteer Details" icon={<UserOutlined />} />
+          <Step title="Confirm Details" icon={<SolutionOutlined />} />
+          <Step title="Done" icon={<SmileOutlined />} />
         </Steps>
       </Content>
     </Fragment>

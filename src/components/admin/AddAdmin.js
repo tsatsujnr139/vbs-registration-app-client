@@ -1,47 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Spin, Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
+import React, { Fragment } from "react";
+import { Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Fragment, useEffect } from "react";
-import { login } from "../../actions/authActions";
-import PropTypes from "prop-types";
-import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
 
-const Login = props => {
-  const {
-    auth: { loading, isAuthenticated, error },
-    login,
-    history
-  } = props;
-
+const AddAdmin = () => {
   const { Content } = Layout;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      history.push("/admin/dashboard");
-    }
-    // eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
 
   const onFinish = values => {
     console.log("Success:", values);
-    login({ ...values });
   };
 
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
-  if (loading) {
-    return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
-    );
-  }
-
   return (
     <Fragment>
-      <Navbar />
       <Content
         style={{
           minHeight: 800,
@@ -59,14 +32,14 @@ const Login = props => {
               justifyContent: "center"
             }}
           >
-            {error && (
+            {/* {error && (
               <Alert
                 message="Error"
-                description={error}
+                description="Error"
                 type="error"
                 showIcon
               />
-            )}
+            )} */}
             <Card hoverable="true" style={cardStyle}>
               <Form
                 layout="vertical"
@@ -77,6 +50,32 @@ const Login = props => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
               >
+                <Form.Item
+                  type="text"
+                  label="First Name"
+                  name="firstName"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your first name"
+                    }
+                  ]}
+                >
+                  <Input placeholder="First Name" />
+                </Form.Item>
+                <Form.Item
+                  type="text"
+                  label="Last Name"
+                  name="lastName"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your last name"
+                    }
+                  ]}
+                >
+                  <Input placeholder="Last Name" />
+                </Form.Item>
                 <Form.Item
                   type="email"
                   label="Email"
@@ -116,7 +115,7 @@ const Login = props => {
                     htmlType="submit"
                     style={{ width: "100%" }}
                   >
-                    Login
+                    Add User
                   </Button>
                 </Form.Item>
               </Form>
@@ -125,23 +124,14 @@ const Login = props => {
           <Col span={2}></Col>
         </Row>
       </Content>
-      <Footer />
     </Fragment>
   );
 };
 
-Login.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
 const cardStyle = {
-  minWidth: 350,
-  height: 300,
+  minWidth: 450,
+  height: 500,
   borderRadius: "2px"
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, { login })(Login);
+export default AddAdmin;

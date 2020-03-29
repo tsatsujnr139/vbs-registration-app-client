@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Card, Icon } from "antd/lib";
+import { Button, Row, Col, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
+import { UserOutlined } from "@ant-design/icons";
 
 const ConfirmVolunteerDetails = ({
   nextStep,
@@ -45,7 +46,7 @@ const ConfirmVolunteerDetails = ({
           <Col span={12}>
             <Card
               title="VOLUNTEER DETAILS"
-              extra={<Icon type="user" />}
+              extra={<UserOutlined />}
               hoverable={true}
               headStyle={headStyle}
               style={{ borderRadius: "12px" }}

@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard";
 import LogoTitle from "../../static/images/logo-2.png";
 import VolunteerDashboard from "./VolunteerDashboard";
 import ParticipantDashboard from "./ParticipantDashboard";
+import AddAdmin from "./AddAdmin";
 import {
   UserOutlined,
   DashboardOutlined,
@@ -22,6 +23,7 @@ const AdminPanel = props => {
   } = props;
 
   const { Sider, Content } = Layout;
+  const { SubMenu } = Menu;
   const [render, updateRender] = useState(1);
 
   useEffect(() => {
@@ -37,7 +39,8 @@ const AdminPanel = props => {
   const components = {
     1: <Dashboard />,
     2: <ParticipantDashboard />,
-    3: <VolunteerDashboard />
+    3: <VolunteerDashboard />,
+    4: <AddAdmin />
   };
 
   return (
@@ -55,6 +58,7 @@ const AdminPanel = props => {
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
             style={{ height: "100%" }}
             onClick={handleMenuClick}
           >
@@ -70,10 +74,17 @@ const AdminPanel = props => {
               <TeamOutlined />
               Volunteers
             </Menu.Item>
-            <Menu.Item key="4">
-              <SettingOutlined />
-              Admins
-            </Menu.Item>
+            <SubMenu
+              key="sub1"
+              title={
+                <span>
+                  <SettingOutlined />
+                  Admins
+                </span>
+              }
+            >
+              <Menu.Item key="4">Add Admin</Menu.Item>
+            </SubMenu>
           </Menu>
         </Sider>
         <Layout>

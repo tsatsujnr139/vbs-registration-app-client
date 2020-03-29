@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Form, Input, Button, Row, Col, Card } from "antd/lib";
 import { setGuardianDetails } from "../../actions/formActions";
@@ -12,203 +12,183 @@ const FormGuardianDetails = ({
   nextStep,
   prevStep,
   formDetails: { guardianDetails, step },
-  setGuardianDetails,
-  form
+  setGuardianDetails
 }) => {
-  const {
-    getFieldDecorator,
-    validateFields,
-    getFieldsError,
-    getFieldError,
-    isFieldTouched
-  } = form;
+  const [form] = Form.useForm();
+  const [, forceUpdate] = useState();
 
   useEffect(() => {
-    validateFields();
+    forceUpdate({});
     //eslint-disable-next-line
   }, []);
 
-  const fullNameError = isFieldTouched("fullName") && getFieldError("fullName");
-  const phoneError = isFieldTouched("phone") && getFieldError("phone");
-  const alternatePhoneError =
-    isFieldTouched("alternatePhone") && getFieldError("alternatePhone");
-  const emailError = isFieldTouched("email") && getFieldError("email");
-  const pickUpPersonNameError =
-    isFieldTouched("pickUpPersonName") && getFieldError("pickUpPersonName");
-  const pickUpPersonPhoneError =
-    isFieldTouched("pickUpPersonPhone") && getFieldError("pickUpPersonPhone");
-
-  const hasErrors = fieldsError => {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  const onFinish = values => {
+    console.log("Success:", values);
+    setGuardianDetails(values);
+    nextStep();
   };
 
-  const validateInputAndSubmit = e => {
-    e.preventDefault();
-    validateFields((err, values) => {
-      if (!err) {
-        setGuardianDetails(values);
-        nextStep();
-      }
-    });
+  const onFinishFailed = errorInfo => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
     <Fragment>
       <Navbar />
-      <RegistrationProgressBar
-        step={step - 1}
-        title="Let's get you registered"
-      />
+      <RegistrationProgressBar step={step - 1} title="Guardian Details" />
       <div className="form-wrapper">
         <Row>
-          <Col span={7}>
-            <Col span={7}>
-              <img src={FoodTruck} alt="food-truck" />
-            </Col>
+          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+            <img src={FoodTruck} alt="food-truck" />
           </Col>
-          <Col span={10} style={{ display: "block" }}>
+          <Col
+            span={14}
+            xl={14}
+            lg={14}
+            md={14}
+            sm={20}
+            xs={20}
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
             <Card>
-              <Form onSubmit={validateInputAndSubmit}>
+              <Form
+                form={form}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+              >
                 <Form.Item
                   label="Parent/Guardian Full Name"
-                  validateStatus={fullNameError ? "error" : ""}
-                  help={fullNameError || ""}
+                  name="fullName"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.fullName}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the parent/guardians full name"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("fullName", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter the parent/guardians full name"
-                      }
-                    ],
-                    initialValue: guardianDetails.fullName
-                  })(<Input placeholder="Full Name" />)}
+                  <Input placeholder="Full Name" />
                 </Form.Item>
-
                 <Form.Item
                   label="Parent/Guardian Primary Phone Number eg. 024XXXXXXX"
-                  validateStatus={phoneError ? "error" : ""}
-                  help={phoneError || ""}
+                  name="phone"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.phone}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your primary contact number"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("phone", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter your primary contact number"
-                      }
-                    ],
-                    initialValue: guardianDetails.phone
-                  })(<Input maxLength="10" placeholder="Phone Number" />)}
+                  <Input maxLength="10" placeholder="Phone Number" />
                 </Form.Item>
 
                 <Form.Item
                   label="Parent/Guardian Alternate Phone Number eg. 024XXXXXXX"
-                  validateStatus={alternatePhoneError ? "error" : ""}
-                  help={alternatePhoneError || ""}
+                  name="alternatePhone"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.alternatePhone}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter an alternate contact number "
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("alternatePhone", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter an alternate contact number "
-                      }
-                    ],
-                    initialValue: guardianDetails.alternatePhone
-                  })(
-                    <Input
-                      maxLength="10"
-                      placeholder="Another number we can reach you on"
-                    />
-                  )}
+                  <Input
+                    maxLength="10"
+                    placeholder="Another number we can reach you on"
+                  />
                 </Form.Item>
 
                 <Form.Item
                   label="Parent/Guardian Email"
-                  validateStatus={emailError ? "error" : ""}
-                  help={emailError || ""}
+                  name="email"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.email}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter a valid email address "
+                    },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email address"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("email", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter a valid email address "
-                      },
-                      {
-                        type: "email",
-                        message: "Please enter a valid email address"
-                      }
-                    ],
-                    initialValue: guardianDetails.email
-                  })(<Input placeholder="Email Address" />)}
+                  <Input placeholder="Email Address" />
                 </Form.Item>
 
                 <Form.Item
                   label="Pickup Person's Name"
-                  validateStatus={pickUpPersonNameError ? "error" : ""}
-                  help={pickUpPersonNameError || ""}
+                  name="pickupPersonName"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.pickupPersonName}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the pickup person's full name"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("pickupPersonName", {
-                    rules: [
-                      {
-                        required: true,
-                        message: "Please enter the pickup person's full name"
-                      }
-                    ],
-                    initialValue: guardianDetails.pickupPersonName
-                  })(<Input placeholder="Who will be picking the child up?" />)}
+                  <Input placeholder="Who will be picking the child up?" />
                 </Form.Item>
 
                 <Form.Item
                   label="Pickup Person's Phone Number eg. 024XXXXXXX"
-                  validateStatus={pickUpPersonPhoneError ? "error" : ""}
-                  help={pickUpPersonPhoneError || ""}
+                  name="pickupPersonPhone"
                   style={{ display: "inline-block", width: "100%" }}
+                  defaultValue={guardianDetails.pickupPersonPhone}
+                  rules={[
+                    {
+                      required: true,
+                      message:
+                        "Please enter the phone number of the pickup person"
+                    }
+                  ]}
                 >
-                  {getFieldDecorator("pickupPersonPhone", {
-                    rules: [
-                      {
-                        required: true,
-                        message:
-                          "Please enter the phone number of the pickup person"
+                  <Input
+                    maxLength="10"
+                    placeholder="Pickup Person's Contact Number"
+                  />
+                </Form.Item>
+                <Form.Item shouldUpdate>
+                  <Button type="default" onClick={prevStep}>
+                    Back
+                  </Button>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "24px",
+                      textAlign: "center"
+                    }}
+                  ></span>
+                  {() => (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      disabled={
+                        !form.isFieldsTouched(true) ||
+                        form
+                          .getFieldsError()
+                          .filter(({ errors }) => errors.length).length
                       }
-                    ],
-                    initialValue: guardianDetails.pickupPersonPhone
-                  })(
-                    <Input
-                      maxLength="10"
-                      placeholder="Pickup Person's Contact Number"
-                    />
+                    >
+                      Next
+                    </Button>
                   )}
                 </Form.Item>
-                <Button type="default" onClick={prevStep}>
-                  Back
-                </Button>
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "24px",
-                    textAlign: "center"
-                  }}
-                ></span>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  disabled={hasErrors(getFieldsError())}
-                >
-                  Next
-                </Button>
               </Form>
             </Card>
           </Col>
-          <Col span={7}>
-            <Col span={7}>
-              <img src={MottoSign} alt="sign" />
-            </Col>
+          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+            <img src={MottoSign} alt="sign" />
           </Col>
         </Row>
       </div>

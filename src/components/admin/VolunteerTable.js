@@ -17,11 +17,6 @@ const ParticipantTable = () => {
       fixed: "left"
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age"
-    },
-    {
       title: "Gender",
       dataIndex: "gender",
       key: "gender",
@@ -59,11 +54,6 @@ const ParticipantTable = () => {
       key: "church"
     },
     {
-      title: "Medical Information",
-      dataIndex: "medicalInfo",
-      key: "medicalInfo"
-    },
-    {
       title: "Action",
       key: "action",
       render: () => (
@@ -78,23 +68,19 @@ const ParticipantTable = () => {
   const dataSource = [
     {
       key: "1",
-      firstName: "Aba",
-      lastName: "Asomaning",
-      class: "JHS 1",
+      firstName: "Tsatsu",
+      lastName: "Adogla-Bessa",
+      class: "Pre-school",
       church: "Legon Interdenominational Church",
-      age: 13,
-      gender: "Female",
-      medicalInfo: "Allergic to pineapple"
+      gender: "Male"
     },
     {
       key: "2",
-      firstName: "Adoma",
-      lastName: "Asomaning",
-      class: "Class 3",
+      firstName: "Sena",
+      lastName: "Adogla-Bessa",
+      class: "Class 1",
       church: "Legon Interdenominational Church",
-      age: 9,
-      gender: "Female",
-      medicalInfo: "N/A"
+      gender: "Female"
     }
   ];
 
@@ -114,7 +100,7 @@ const ParticipantTable = () => {
               >
                 <Input
                   prefix={<SearchOutlined />}
-                  placeholder="Enter participant last name"
+                  placeholder="Enter volunteer last name"
                   allowClear
                 />
               </Form.Item>

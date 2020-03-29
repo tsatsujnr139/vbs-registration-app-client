@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Row, Col, Card } from "antd";
-import { Pie, ChartCard } from "ant-design-pro/lib/Charts";
+import { Pie } from "ant-design-pro/lib/Charts";
 import "ant-design-pro/dist/ant-design-pro.css";
 
 const salesPieData = [
@@ -54,7 +54,6 @@ const Distributions = () => {
           <Card
             title="Participant Class Distribution"
             loading={false}
-            // contentHeight={350}
             bordered={false}
           >
             <Pie
