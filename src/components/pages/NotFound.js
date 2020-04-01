@@ -1,26 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Result, Button } from "antd";
 
 const NotFound = () => {
   return (
-    <div>
-      <div
-        style={{
-          textAlign: "center",
-          paddingTop: "50px",
-          fontFamily: "QuickSand",
-          fontSizeAdjust: "1.0"
-        }}
-      >
-        <h1>
-          <strong>404</strong>
-        </h1>
-        <br />
-        <h3>
-          Oops! Looks like this page is still under construction. Click{" "}
-          <a href="/">here</a> to be redirected to the home page
-        </h3>
-      </div>
-    </div>
+    <Fragment>
+      <Result
+        status="404"
+        title="Oops looks like you took a wrong turn"
+        subTitle="Click the button below to go back to the home page"
+        extra={
+          <Button type="primary" href="/">
+            Back Home
+          </Button>
+        }
+      />
+      ,
+    </Fragment>
   );
 };
 

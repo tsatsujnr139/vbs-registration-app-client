@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Card, Icon } from "antd/lib";
+import { Button, Row, Col, Descriptions } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -45,93 +46,38 @@ const ConfirmParticipantDetails = ({
       >
         <Row>
           <Col span={6}>
-            <img src={Excavator} alt="bulldozer" />
+            <Bulldozer />
           </Col>
           <Col span={12}>
-            <Card
-              title="PARTICIPANT DETAILS"
-              extra={<Icon type="user" />}
-              hoverable={true}
-              headStyle={headStyle}
-              style={{ borderRadius: "12px" }}
+            <Descriptions
+              title="Participant Details"
+              layout="vertical"
+              size="default"
+              column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+              bordered
             >
-              <p>
-                <strong>Surname: </strong>
+              <Descriptions.Item label="Surname" span={2}>
                 {surname}
-              </p>
-              <p>
-                <strong>First Name: </strong>
+              </Descriptions.Item>
+              <Descriptions.Item label="First Name">
                 {firstName}
-              </p>
-              <p>
-                <strong>Age: </strong>
-                {age}
-              </p>
-              <p>
-                <strong>Gender: </strong>
-                {gender}
-              </p>
-              <p>
-                <strong>Class: </strong>
-                {grade}
-              </p>
-              <p>
-                <strong>Church : </strong>
+              </Descriptions.Item>
+              <Descriptions.Item label="Date of Birth">
+                {dateOfBirth}
+              </Descriptions.Item>
+              <Descriptions.Item label="Age">{age}</Descriptions.Item>
+              <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
+              <Descriptions.Item label="Class">{grade}</Descriptions.Item>
+              <Descriptions.Item label="Church" span={3}>
                 {church}
-              </p>
-              <p>
-                <strong>Medical Information: </strong>
-                {medicalInfo || "N/A"}
-              </p>
-            </Card>
-          </Col>
-          <Col span={6}></Col>
-        </Row>
-        <span
-          style={{
-            display: "inline-block",
-            width: "24px",
-            textAlign: "center"
-          }}
-        ></span>
-        <Row>
-          <Col span={6}></Col>
-          <Col span={12}>
-            <Card
-              title="PARENT/GUARDIAN DETAILS"
-              extra={<Icon type="team" />}
-              hoverable={true}
-              headStyle={headStyle}
-              style={{ borderRadius: "12px" }}
-            >
-              <p>
-                <strong>Full Name: </strong>
-                {fullName}
-              </p>
-              <p>
-                <strong>Primary Phone Number: </strong>
-                {phone}
-              </p>
-              <p>
-                <strong>Alternate Phone Number: </strong>
-                {alternatePhone}
-              </p>
-              <p>
-                <strong>Email: </strong>
-                {email}
-              </p>
-              <p>
-                <strong>Pickup Person Name: </strong>
-                {pickupPersonName}
-              </p>
-              <p>
-                <strong>Pickup Person Number: </strong>
-                {pickupPersonPhone}
-              </p>
-            </Card>
+              </Descriptions.Item>
+              <Descriptions.Item label="Medical Information" span={3}>
+                {medicalInfo === "" ? medicalInfo : "N/A"}
+              </Descriptions.Item>
+            </Descriptions>
           </Col>
           <Col span={6}>
-            <img src={Bulldozer} alt="crane" />
+            <Excavator />
           </Col>
         </Row>
         <span
@@ -157,13 +103,9 @@ const ConfirmParticipantDetails = ({
           </Button>
         </div>
       </div>
+      <Footer />
     </Fragment>
   );
-};
-
-const headStyle = {
-  fontFamily: "QuickSand",
-  fontSizeAdjust: "1.0"
 };
 
 const mapStateToProps = state => ({

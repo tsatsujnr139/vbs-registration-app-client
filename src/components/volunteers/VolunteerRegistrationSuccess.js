@@ -1,32 +1,43 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Navbar from "../layouts/Navbar";
+import { Result, Button, Typography } from "antd";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const RegistrationSuccess = () => {
+  const { Paragraph, Text } = Typography;
+
   return (
-    <div
-      style={{
-        textAlign: "center",
-        paddingTop: "50px",
-        fontFamily: "QuickSand",
-        fontSizeAdjust: "1.0"
-      }}
-    >
+    <Fragment>
       <Navbar />
-      <h1>
-        <strong>Awesome!</strong>
-      </h1>
-      <br />
-      <h3>You have successfully signed up as a volunteer for VBS!</h3>
-      <h3>
-        Kindly note that training for volunteers will take place on *Date* at
-        LIC.
-      </h3>
-      <h3>Futher communication will be sent to you in due course.</h3>
-      <br />
-      <h3>The VBS Planning team is looking foward to working with you.</h3>
-      <br />
-      <h3>God Bless!</h3>
-    </div>
+      <Result
+        status="success"
+        title="You have successfully signed up as a volunteer for VBS 2020! "
+        subTitle="The VBS Planning team is looking foward to working with you."
+        extra={[
+          <Button type="primary" key="participant" href="participants/register">
+            Click here to register a participant
+          </Button>
+        ]}
+      >
+        <div style={{ textAlign: "center" }}>
+          <Paragraph>
+            <Text
+              strong
+              style={{
+                fontSize: 18
+              }}
+            >
+              Please take note the the following information
+            </Text>
+          </Paragraph>
+          <Paragraph>
+            <InfoCircleOutlined style={{ color: "blue" }} /> Training for ALL
+            volunteers will take place on *Date* at LIC. Futher communication
+            will be sent to you in due course.
+          </Paragraph>
+        </div>
+      </Result>
+    </Fragment>
   );
 };
 

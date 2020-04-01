@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import "./App.css";
 import Dashboard from "./components/admin/AdminPanel";
+import ConfirmParticipantDetails from "./components/participants/ConfirmParticipantDetails";
+import VolunteerRegistrationSuccess from "./components/volunteers/VolunteerRegistrationSuccess";
 
 const App = () => {
   return (
@@ -29,6 +31,16 @@ const App = () => {
               component={RegisterVolunteerForm}
             />
             <Route exact path="/admin/login" component={Login} />
+            <Route
+              exact
+              path="/confirm"
+              component={ConfirmParticipantDetails}
+            />
+            <Route
+              exact
+              path="/success"
+              component={VolunteerRegistrationSuccess}
+            />
             <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route component={NotFound} />
           </Switch>

@@ -1,12 +1,14 @@
 import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col, Card } from "antd/lib";
+import { Form, Input, InputNumber, Button, Row, Col, Card } from "antd/lib";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import PropTypes from "prop-types";
 import FoodTruck from "../../static/images/foodtruck.png";
 import MottoSign from "../../static/images/mottosign.png";
 import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
+import ButtonGroup from "antd/lib/button/button-group";
 
 const FormGuardianDetails = ({
   nextStep,
@@ -53,7 +55,7 @@ const FormGuardianDetails = ({
               justifyContent: "center"
             }}
           >
-            <Card>
+            <Card hoverable="true" style={cardStyle}>
               <Form
                 form={form}
                 onFinish={onFinish}
@@ -85,7 +87,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <Input maxLength="10" placeholder="Phone Number" />
+                  <InputNumber maxLength="10" placeholder="Phone Number" />
                 </Form.Item>
 
                 <Form.Item
@@ -100,7 +102,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <Input
+                  <InputNumber
                     maxLength="10"
                     placeholder="Another number we can reach you on"
                   />
@@ -137,7 +139,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <Input placeholder="Who will be picking the child up?" />
+                  <InputNumber placeholder="Who will be picking the child up?" />
                 </Form.Item>
 
                 <Form.Item
@@ -153,35 +155,37 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <Input
+                  <InputNumber
                     maxLength="10"
                     placeholder="Pickup Person's Contact Number"
                   />
                 </Form.Item>
                 <Form.Item shouldUpdate>
-                  <Button type="default" onClick={prevStep}>
-                    Back
-                  </Button>
-                  <span
-                    style={{
-                      display: "inline-block",
-                      width: "24px",
-                      textAlign: "center"
-                    }}
-                  ></span>
                   {() => (
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      disabled={
-                        !form.isFieldsTouched(true) ||
-                        form
-                          .getFieldsError()
-                          .filter(({ errors }) => errors.length).length
-                      }
-                    >
-                      Next
-                    </Button>
+                    <ButtonGroup>
+                      <Button type="default" onClick={prevStep}>
+                        Back
+                      </Button>
+                      <span
+                        style={{
+                          display: "inline-block",
+                          width: "24px",
+                          textAlign: "center"
+                        }}
+                      ></span>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        disabled={
+                          !form.isFieldsTouched(true) ||
+                          form
+                            .getFieldsError()
+                            .filter(({ errors }) => errors.length).length
+                        }
+                      >
+                        Next
+                      </Button>
+                    </ButtonGroup>
                   )}
                 </Form.Item>
               </Form>
@@ -192,8 +196,16 @@ const FormGuardianDetails = ({
           </Col>
         </Row>
       </div>
+      <Footer />
     </Fragment>
   );
+};
+
+const cardStyle = {
+  minWidth: 400,
+  maxWidth: 650,
+  height: 700,
+  borderRadius: "2px"
 };
 
 FormGuardianDetails.propTypes = {

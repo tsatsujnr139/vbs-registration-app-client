@@ -50,7 +50,7 @@ const FormParticipantDetails = ({
     if (Math.sign(value) === -1 || (value && Math.sign(value) === 0)) {
       return Promise.reject("Please select a birth date in the past");
     }
-    if (value && value < 3) {
+    if (value < 3) {
       return Promise.reject(
         "Only Children older that 3 years are eligible for registration"
       );
@@ -156,12 +156,14 @@ const FormParticipantDetails = ({
 
                   <Form.Item
                     label="Date of Birth"
+                    name="dateOfBirth"
                     style={{
                       display: "inline-block",
                       width: "calc(50% - 12px)"
                     }}
                   >
                     <DatePicker
+                      placeholder="Date of Birth"
                       allowClear={false}
                       onChange={onDateOfBirthChange}
                       style={{ width: "100%" }}
@@ -183,10 +185,6 @@ const FormParticipantDetails = ({
                       width: "calc(50% - 12px)"
                     }}
                     rules={[
-                      // {
-                      //   message:
-                      //     "Only children older than 3 years are eligible to register"
-                      // },
                       {
                         validator: isEligibleAge
                       }
