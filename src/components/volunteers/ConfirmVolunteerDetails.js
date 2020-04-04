@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Card } from "antd";
+import { Button, Row, Col, Descriptions } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
-import { UserOutlined } from "@ant-design/icons";
+import Footer from "../layouts/Footer";
 
 const ConfirmVolunteerDetails = ({
   nextStep,
@@ -17,7 +17,7 @@ const ConfirmVolunteerDetails = ({
       firstName,
       role,
       phoneNumber,
-      whatsappNumber,
+      whatsAppNumber,
       email,
       gender,
       preferredGrade,
@@ -41,47 +41,58 @@ const ConfirmVolunteerDetails = ({
       >
         <Row>
           <Col span={6}>
-            <img src={Excavator} alt="bulldozer" />
+            <Bulldozer />
           </Col>
           <Col span={12}>
-            <Card
-              title="VOLUNTEER DETAILS"
-              extra={<UserOutlined />}
-              hoverable={true}
-              headStyle={headStyle}
-              style={{ borderRadius: "12px" }}
+            <Descriptions
+              title="Participant Details"
+              layout="vertical"
+              size="default"
+              column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+              bordered
             >
-              <p>
-                <strong>Surname: </strong>
+              <Descriptions.Item label="Surname" span={2}>
                 {surname}
-              </p>
-              <p>
-                <strong>First Name: </strong>
+              </Descriptions.Item>
+              <Descriptions.Item label="First Name">
                 {firstName}
-              </p>
-              <p>
-                <strong>Gender: </strong>
-                {gender}
-              </p>
-              <p>
-                <strong>Preferred Class: </strong>
+              </Descriptions.Item>
+              <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
+              <Descriptions.Item label="Preferred Role">
+                {role}
+              </Descriptions.Item>
+              <Descriptions.Item label="Phone Number">
+                {phoneNumber}
+              </Descriptions.Item>
+              <Descriptions.Item label="WhatsApp Number">
+                {whatsAppNumber}
+              </Descriptions.Item>
+              <Descriptions.Item label="Email">{email}</Descriptions.Item>
+              <Descriptions.Item label="Preferred Class">
                 {preferredGrade}
-              </p>
-              <p>
-                <strong>Church : </strong>
+              </Descriptions.Item>
+              <Descriptions.Item label="Church" span={3}>
                 {church}
-              </p>
-            </Card>
+              </Descriptions.Item>
+              <Descriptions.Item label="Previous Volunteer">
+                {previousVolunteer}
+              </Descriptions.Item>
+              <Descriptions.Item label="Previous Volunteer Site">
+                {volunteerSite}
+              </Descriptions.Item>
+            </Descriptions>
           </Col>
-          <Col span={6}></Col>
+          <Col span={6}>
+            <Excavator />
+          </Col>
         </Row>
-        {/* <span
+        <span
           style={{
             display: "inline-block",
             width: "24px",
             textAlign: "center"
           }}
-        ></span> */}
+        ></span>
         <div className="confirm-buttons-wrapper">
           <Button size="large" type="default" onClick={prevStep}>
             Back
@@ -97,21 +108,8 @@ const ConfirmVolunteerDetails = ({
             Confirm
           </Button>
         </div>
-        <Row>
-          <Col span={6}></Col>
-          <Col span={12}></Col>
-          <Col span={6}>
-            <img src={Bulldozer} alt="crane" />
-          </Col>
-        </Row>
-        <span
-          style={{
-            display: "inline-block",
-            width: "24px",
-            textAlign: "center"
-          }}
-        ></span>
       </div>
+      <Footer />
     </Fragment>
   );
 };

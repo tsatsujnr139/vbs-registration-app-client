@@ -10,7 +10,7 @@ import store from "./store";
 import "./App.css";
 import Dashboard from "./components/admin/AdminPanel";
 import ConfirmParticipantDetails from "./components/participants/ConfirmParticipantDetails";
-import VolunteerRegistrationSuccess from "./components/volunteers/VolunteerRegistrationSuccess";
+import ParticipantRegistrationSuccess from "./components/participants/ParticipantRegistrationSuccess";
 
 const App = () => {
   return (
@@ -39,7 +39,7 @@ const App = () => {
             <Route
               exact
               path="/success"
-              component={VolunteerRegistrationSuccess}
+              component={ParticipantRegistrationSuccess}
             />
             <Route exact path="/admin/dashboard" component={Dashboard} />
             <Route component={NotFound} />

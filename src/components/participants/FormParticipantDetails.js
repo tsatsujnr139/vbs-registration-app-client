@@ -67,8 +67,14 @@ const FormParticipantDetails = ({
     form.validateFields(["age"]);
   };
 
-  const onFinish = values => {
-    console.log("Success:", values);
+  const onFinish = fieldsValue => {
+    console.log("Success:", fieldsValue);
+    const dob = fieldsValue["dateOfBirth"];
+    const values = {
+      ...fieldsValue,
+      dateOfBirth: dob.format("YYYY-MM-DD")
+    };
+    console.log("Final Values:", values);
     setParticipantDetails(values);
     nextStep();
   };
@@ -91,14 +97,13 @@ const FormParticipantDetails = ({
       <Content>
         <div className="form-wrapper">
           <Row>
-            <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+            <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
               <img src={JackHammer} alt="jackhammer" />
             </Col>
             <Col
-              span={14}
-              xl={14}
-              lg={14}
-              md={14}
+              span={10}
+              xl={10}
+              lg={10}
               sm={20}
               xs={20}
               style={{
@@ -220,7 +225,7 @@ const FormParticipantDetails = ({
                       }
                     ]}
                   >
-                    <Select defaultValue="Class Completed this past academic year">
+                    <Select defaultValue="Class Completed this Past Academic Year">
                       {grades.map(grade => (
                         <Option key={grade.name} value={grade.name}>
                           {grade.name}
@@ -272,7 +277,7 @@ const FormParticipantDetails = ({
                 </Form>
               </Card>
             </Col>
-            <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+            <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
               <img src={Crane} alt="crane" />
             </Col>
           </Row>

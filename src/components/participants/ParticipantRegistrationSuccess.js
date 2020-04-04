@@ -12,7 +12,7 @@ const RegistrationSuccess = () => {
         Cranes."
         subTitle="We're looking foward to seeing them there as we explore the love of Jesus!"
         extra={[
-          <Button type="primary" key="volunteer" href="volunteers/register">
+          <Button type="primary" key="volunteer" href="/volunteers/register">
             Click here to sign up as a volunteer. We'd be happy to have you
           </Button>
         ]}

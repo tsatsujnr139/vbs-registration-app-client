@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
 import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 
 const FormVolunteerDetails = ({
   nextStep,
@@ -48,14 +49,14 @@ const FormVolunteerDetails = ({
       <RegistrationProgressBar step={step - 1} title="Volunteer Registration" />
       <div className="form-wrapper">
         <Row>
-          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
             <img src={JackHammer} alt="jackhammer" />
           </Col>
           <Col
-            span={14}
-            xl={14}
-            lg={14}
-            md={14}
+            span={10}
+            xl={10}
+            lg={10}
+            md={10}
             sm={20}
             xs={20}
             style={{
@@ -227,11 +228,12 @@ const FormVolunteerDetails = ({
               </Form>
             </Card>
           </Col>
-          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
             <img src={Crane} alt="crane" />
           </Col>
         </Row>
       </div>
+      <Footer />
     </Fragment>
   );
 };
@@ -246,7 +248,7 @@ const cardStyle = {
 FormVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setVolunteerDetails: PropTypes.func.isRequired,
-  grades: PropTypes.object.isRequired,
+  grades: PropTypes.array.isRequired,
   nextStep: PropTypes.func.isRequired
 };
 

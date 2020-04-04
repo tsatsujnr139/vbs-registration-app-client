@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions } from "antd";
+import { Button, Row, Col, Descriptions, Card } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
@@ -46,39 +46,78 @@ const ConfirmParticipantDetails = ({
       >
         <Row>
           <Col span={6}>
-            <Bulldozer />
+            <img src={Bulldozer} alt="" />
           </Col>
           <Col span={12}>
-            <Descriptions
-              title="Participant Details"
-              layout="vertical"
-              size="default"
-              column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
-              bordered
-            >
-              <Descriptions.Item label="Surname" span={2}>
-                {surname}
-              </Descriptions.Item>
-              <Descriptions.Item label="First Name">
-                {firstName}
-              </Descriptions.Item>
-              <Descriptions.Item label="Date of Birth">
-                {dateOfBirth}
-              </Descriptions.Item>
-              <Descriptions.Item label="Age">{age}</Descriptions.Item>
-              <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
-              <Descriptions.Item label="Class">{grade}</Descriptions.Item>
-              <Descriptions.Item label="Church" span={3}>
-                {church}
-              </Descriptions.Item>
-              <Descriptions.Item label="Medical Information" span={3}>
-                {medicalInfo === "" ? medicalInfo : "N/A"}
-              </Descriptions.Item>
-            </Descriptions>
+            <Card hoverable="true">
+              <Descriptions
+                title="Participant Details"
+                layout="vertical"
+                size="default"
+                column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                bordered
+              >
+                <Descriptions.Item label="Surname" span={2}>
+                  {surname}
+                </Descriptions.Item>
+                <Descriptions.Item label="First Name" span={1}>
+                  {firstName}
+                </Descriptions.Item>
+                <Descriptions.Item label="Date of Birth">
+                  {dateOfBirth}
+                </Descriptions.Item>
+                <Descriptions.Item label="Age">{age}</Descriptions.Item>
+                <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
+                <Descriptions.Item label="Class">{grade}</Descriptions.Item>
+                <Descriptions.Item label="Church" span={3}>
+                  {church}
+                </Descriptions.Item>
+                <Descriptions.Item label="Medical Information" span={3}>
+                  {medicalInfo === "" ? medicalInfo : "N/A"}
+                </Descriptions.Item>
+              </Descriptions>
+            </Card>
           </Col>
           <Col span={6}>
-            <Excavator />
+            <img src={Excavator} alt="" />
           </Col>
+        </Row>
+        <span
+          style={{
+            display: "inline-block"
+          }}
+        ></span>
+        <Row>
+          <Col span={6}></Col>
+          <Col span={12}>
+            <Card hoverable="true">
+              <Descriptions
+                title="Guardian Details"
+                layout="vertical"
+                size="default"
+                column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
+                bordered
+              >
+                <Descriptions.Item label="Full Name" span={2}>
+                  {fullName}
+                </Descriptions.Item>
+                <Descriptions.Item label="Email">{email}</Descriptions.Item>
+                <Descriptions.Item label="Phone Number" span={2}>
+                  {phone}
+                </Descriptions.Item>
+                <Descriptions.Item label="Alternate Contact Number">
+                  {alternatePhone}
+                </Descriptions.Item>
+                <Descriptions.Item label="Pick Up Person Name" span={2}>
+                  {pickupPersonName}
+                </Descriptions.Item>
+                <Descriptions.Item label="Pick up Person Phone">
+                  {pickupPersonPhone}
+                </Descriptions.Item>
+              </Descriptions>
+            </Card>
+          </Col>
+          <Col span={6}></Col>
         </Row>
         <span
           style={{

@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Form, Input, InputNumber, Button, Row, Col, Card } from "antd/lib";
+import { Form, Input, Button, Row, Col, Card } from "antd/lib";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import PropTypes from "prop-types";
@@ -40,14 +40,14 @@ const FormGuardianDetails = ({
       <RegistrationProgressBar step={step - 1} title="Guardian Details" />
       <div className="form-wrapper">
         <Row>
-          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
             <img src={FoodTruck} alt="food-truck" />
           </Col>
           <Col
-            span={14}
-            xl={14}
-            lg={14}
-            md={14}
+            span={10}
+            xl={10}
+            lg={10}
+            md={10}
             sm={20}
             xs={20}
             style={{
@@ -87,7 +87,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <InputNumber maxLength="10" placeholder="Phone Number" />
+                  <Input maxLength="10" placeholder="Phone Number" />
                 </Form.Item>
 
                 <Form.Item
@@ -102,7 +102,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <InputNumber
+                  <Input
                     maxLength="10"
                     placeholder="Another number we can reach you on"
                   />
@@ -139,7 +139,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <InputNumber placeholder="Who will be picking the child up?" />
+                  <Input placeholder="Who will be picking the child up?" />
                 </Form.Item>
 
                 <Form.Item
@@ -155,7 +155,7 @@ const FormGuardianDetails = ({
                     }
                   ]}
                 >
-                  <InputNumber
+                  <Input
                     maxLength="10"
                     placeholder="Pickup Person's Contact Number"
                   />
@@ -191,7 +191,7 @@ const FormGuardianDetails = ({
               </Form>
             </Card>
           </Col>
-          <Col span={5} xl={5} lg={5} md={5} sm={2} xs={2}>
+          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
             <img src={MottoSign} alt="sign" />
           </Col>
         </Row>
