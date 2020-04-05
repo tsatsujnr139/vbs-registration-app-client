@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
     case REGISTER_PARTICIPANT:
       return {
         ...state,
-        grades: action.payload,
         loading: false
       };
     case REGISTRATION_ERROR:

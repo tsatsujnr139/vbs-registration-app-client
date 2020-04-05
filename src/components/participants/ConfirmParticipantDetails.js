@@ -12,6 +12,7 @@ import { registerParticipant } from "../../actions/participantActions";
 const ConfirmParticipantDetails = ({
   nextStep,
   prevStep,
+  formDetails: { participantDetails, guardianDetails },
   formDetails: {
     participantDetails: {
       surname,
@@ -38,11 +39,14 @@ const ConfirmParticipantDetails = ({
 }) => {
   useEffect(() => {}, [error]);
 
-  const onConfirm = participantDetails => {
+  const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
-    registerParticipant(participantDetails);
+    registerParticipant({
+      ...participantDetails,
+      ...guardianDetails
+    });
     // if successful show successful page
-    // else show failure page and ask customer to try again later;
+    // else show failure page and ask user to try again later;
     error ? errorAlert() : nextStep();
   };
 
@@ -69,7 +73,7 @@ const ConfirmParticipantDetails = ({
           <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
             <img src={Bulldozer} alt="" />
           </Col>
-          <Col span={12}>
+          <Col span={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Card hoverable="true">
               <Descriptions
                 title="Participant Details"
@@ -158,7 +162,11 @@ const ConfirmParticipantDetails = ({
               textAlign: "center"
             }}
           ></span>
-          <Button size="large" type="primary" onClick={onConfirm}>
+          <Button
+            size="large"
+            type="primary"
+            onClick={onConfirm(participantDetails, guardianDetails)}
+          >
             Confirm
           </Button>
         </div>

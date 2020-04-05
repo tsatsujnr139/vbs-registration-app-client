@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Row, Col, Descriptions } from "antd";
@@ -7,10 +7,12 @@ import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
+import { registerVolunteer } from "../../actions/volunteerActions";
 
 const ConfirmVolunteerDetails = ({
   nextStep,
   prevStep,
+  formDetails: { volunteerDetails },
   formDetails: {
     volunteerDetails: {
       surname,
@@ -26,8 +28,28 @@ const ConfirmVolunteerDetails = ({
       volunteerSite
     },
     step
-  }
+  },
+  volunteer: { error },
+  registerVolunteer
 }) => {
+  useEffect(() => {}, [error]);
+
+  const onConfirm = volunteerDetails => {
+    // register the volunteer
+    registerVolunteer(volunteerDetails);
+    // if successful show successful page
+    // else show failure page and ask user to try again later;
+    error ? errorAlert() : nextStep();
+  };
+
+  const errorAlert = () => {
+    Modal.error({
+      title: "Error Completing Registration",
+      content:
+        "There was an completing your registration at this time. Please try again later"
+    });
+  };
+
   return (
     <Fragment>
       <Navbar />
@@ -40,10 +62,10 @@ const ConfirmVolunteerDetails = ({
         style={{ background: "#f3f5f7", padding: "30px" }}
       >
         <Row>
-          <Col span={6}>
+          <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
             <Bulldozer />
           </Col>
-          <Col span={12}>
+          <Col span={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Descriptions
               title="Participant Details"
               layout="vertical"
@@ -82,7 +104,7 @@ const ConfirmVolunteerDetails = ({
               </Descriptions.Item>
             </Descriptions>
           </Col>
-          <Col span={6}>
+          <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
             <Excavator />
           </Col>
         </Row>
@@ -104,7 +126,11 @@ const ConfirmVolunteerDetails = ({
               textAlign: "center"
             }}
           ></span>
-          <Button size="large" type="primary" onClick={nextStep}>
+          <Button
+            size="large"
+            type="primary"
+            onClick={onConfirm(volunteerDetails)}
+          >
             Confirm
           </Button>
         </div>
@@ -114,19 +140,18 @@ const ConfirmVolunteerDetails = ({
   );
 };
 
-const headStyle = {
-  fontFamily: "QuickSand",
-  fontSizeAdjust: "1.0"
-};
-
 const mapStateToProps = state => ({
-  formDetails: state.formDetails
+  formDetails: state.formDetails,
+  volunteer: state.volunteer
 });
 
 ConfirmVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired
+  prevStep: PropTypes.func.isRequired,
+  registerVolunteer: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(ConfirmVolunteerDetails);
+export default connect(mapStateToProps, { registerVolunteer })(
+  ConfirmVolunteerDetails
+);

@@ -1,4 +1,8 @@
-import { SET_LOADING } from "../actions/types";
+import {
+  SET_LOADING,
+  REGISTER_VOLUNTEER,
+  REGISTRATION_ERROR
+} from "../actions/types";
 
 const initialState = {
   loading: false,
@@ -12,6 +16,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      };
+    case REGISTER_VOLUNTEER:
+      return {
+        ...state,
+        loading: false
+      };
+    case REGISTRATION_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
       };
     default:
       return state;
