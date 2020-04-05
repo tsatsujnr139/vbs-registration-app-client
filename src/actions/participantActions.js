@@ -1,5 +1,18 @@
-import { SET_LOADING, GET_GRADES, GRADES_ERROR } from "./types";
+import {
+  SET_LOADING,
+  GET_GRADES,
+  GRADES_ERROR,
+  REGISTRATION_ERROR
+} from "./types";
 import axios from "axios";
+
+let apiBaseUrl;
+
+if (process.env.NODE_ENV !== "production") {
+  apiBaseUrl = process.env.REACT_APP_VBS_API_BASE_URL;
+} else {
+  apiBaseUrl = process.env.VBS_API_BASE_URL;
+}
 
 // Get Grades
 export const getGrades = () => async dispatch => {
@@ -45,6 +58,28 @@ export const getGrades = () => async dispatch => {
   } catch (error) {
     dispatch({
       type: GRADES_ERROR,
+      payload: error.message
+    });
+  }
+};
+
+export const registerParticipant = formData => async dispatch => {
+  console.log(`Participant Registration Details:: ${formData}`);
+  try {
+    setLoading();
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // };
+    // const res = await axios.post(
+    //   `${apiBaseUrl}/participants`,
+    //   formData,
+    //   config
+    // );
+  } catch (error) {
+    dispatch({
+      type: REGISTRATION_ERROR,
       payload: error.message
     });
   }

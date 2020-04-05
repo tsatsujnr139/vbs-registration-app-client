@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col, Card } from "antd/lib";
+import { Form, Input, Button, Row, Col, Card, Layout } from "antd";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import PropTypes from "prop-types";
@@ -16,6 +16,7 @@ const FormGuardianDetails = ({
   formDetails: { guardianDetails, step },
   setGuardianDetails
 }) => {
+  const { Content } = Layout;
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
 
@@ -38,164 +39,166 @@ const FormGuardianDetails = ({
     <Fragment>
       <Navbar />
       <RegistrationProgressBar step={step - 1} title="Guardian Details" />
-      <div className="form-wrapper">
-        <Row>
-          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
-            <img src={FoodTruck} alt="food-truck" />
-          </Col>
-          <Col
-            span={10}
-            xl={10}
-            lg={10}
-            md={10}
-            sm={20}
-            xs={20}
-            style={{
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
-            <Card hoverable="true" style={cardStyle}>
-              <Form
-                form={form}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-              >
-                <Form.Item
-                  label="Parent/Guardian Full Name"
-                  name="fullName"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.fullName}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter the parent/guardians full name"
-                    }
-                  ]}
+      <Content>
+        <div className="form-wrapper">
+          <Row>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
+              <img src={FoodTruck} alt="food-truck" />
+            </Col>
+            <Col
+              span={10}
+              xl={10}
+              lg={10}
+              md={10}
+              sm={24}
+              xs={24}
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Card hoverable="true" style={cardStyle}>
+                <Form
+                  form={form}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
                 >
-                  <Input placeholder="Full Name" />
-                </Form.Item>
-                <Form.Item
-                  label="Parent/Guardian Primary Phone Number eg. 024XXXXXXX"
-                  name="phone"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.phone}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your primary contact number"
-                    }
-                  ]}
-                >
-                  <Input maxLength="10" placeholder="Phone Number" />
-                </Form.Item>
+                  <Form.Item
+                    label="Parent/Guardian Full Name"
+                    name="fullName"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.fullName}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter the parent/guardians full name"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="Full Name" />
+                  </Form.Item>
+                  <Form.Item
+                    label="Parent/Guardian Primary Phone Number eg. 024XXXXXXX"
+                    name="phone"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.phone}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your primary contact number"
+                      }
+                    ]}
+                  >
+                    <Input maxLength="10" placeholder="Phone Number" />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Parent/Guardian Alternate Phone Number eg. 024XXXXXXX"
-                  name="alternatePhone"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.alternatePhone}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter an alternate contact number "
-                    }
-                  ]}
-                >
-                  <Input
-                    maxLength="10"
-                    placeholder="Another number we can reach you on"
-                  />
-                </Form.Item>
+                  <Form.Item
+                    label="Parent/Guardian Alternate Phone Number eg. 024XXXXXXX"
+                    name="alternatePhone"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.alternatePhone}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter an alternate contact number "
+                      }
+                    ]}
+                  >
+                    <Input
+                      maxLength="10"
+                      placeholder="Another number we can reach you on"
+                    />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Parent/Guardian Email"
-                  name="email"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.email}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter a valid email address "
-                    },
-                    {
-                      type: "email",
-                      message: "Please enter a valid email address"
-                    }
-                  ]}
-                >
-                  <Input placeholder="Email Address" />
-                </Form.Item>
+                  <Form.Item
+                    label="Parent/Guardian Email"
+                    name="email"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.email}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter a valid email address "
+                      },
+                      {
+                        type: "email",
+                        message: "Please enter a valid email address"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="Email Address" />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Pickup Person's Name"
-                  name="pickupPersonName"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.pickupPersonName}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter the pickup person's full name"
-                    }
-                  ]}
-                >
-                  <Input placeholder="Who will be picking the child up?" />
-                </Form.Item>
+                  <Form.Item
+                    label="Pickup Person's Name"
+                    name="pickupPersonName"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.pickupPersonName}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter the pickup person's full name"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="Who will be picking the child up?" />
+                  </Form.Item>
 
-                <Form.Item
-                  label="Pickup Person's Phone Number eg. 024XXXXXXX"
-                  name="pickupPersonPhone"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={guardianDetails.pickupPersonPhone}
-                  rules={[
-                    {
-                      required: true,
-                      message:
-                        "Please enter the phone number of the pickup person"
-                    }
-                  ]}
-                >
-                  <Input
-                    maxLength="10"
-                    placeholder="Pickup Person's Contact Number"
-                  />
-                </Form.Item>
-                <Form.Item shouldUpdate>
-                  {() => (
-                    <ButtonGroup>
-                      <Button type="default" onClick={prevStep}>
-                        Back
-                      </Button>
-                      <span
-                        style={{
-                          display: "inline-block",
-                          width: "24px",
-                          textAlign: "center"
-                        }}
-                      ></span>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        disabled={
-                          !form.isFieldsTouched(true) ||
-                          form
-                            .getFieldsError()
-                            .filter(({ errors }) => errors.length).length
-                        }
-                      >
-                        Next
-                      </Button>
-                    </ButtonGroup>
-                  )}
-                </Form.Item>
-              </Form>
-            </Card>
-          </Col>
-          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
-            <img src={MottoSign} alt="sign" />
-          </Col>
-        </Row>
-      </div>
+                  <Form.Item
+                    label="Pickup Person's Phone Number eg. 024XXXXXXX"
+                    name="pickupPersonPhone"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.pickupPersonPhone}
+                    rules={[
+                      {
+                        required: true,
+                        message:
+                          "Please enter the phone number of the pickup person"
+                      }
+                    ]}
+                  >
+                    <Input
+                      maxLength="10"
+                      placeholder="Pickup Person's Contact Number"
+                    />
+                  </Form.Item>
+                  <Form.Item shouldUpdate>
+                    {() => (
+                      <ButtonGroup>
+                        <Button type="default" onClick={prevStep}>
+                          Back
+                        </Button>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            width: "24px",
+                            textAlign: "center"
+                          }}
+                        ></span>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          disabled={
+                            !form.isFieldsTouched(true) ||
+                            form
+                              .getFieldsError()
+                              .filter(({ errors }) => errors.length).length
+                          }
+                        >
+                          Next
+                        </Button>
+                      </ButtonGroup>
+                    )}
+                  </Form.Item>
+                </Form>
+              </Card>
+            </Col>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
+              <img src={MottoSign} alt="sign" />
+            </Col>
+          </Row>
+        </div>
+      </Content>
       <Footer />
     </Fragment>
   );

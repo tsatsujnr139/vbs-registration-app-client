@@ -1,4 +1,10 @@
-import { SET_LOADING, GET_GRADES, GRADES_ERROR } from "../actions/types";
+import {
+  SET_LOADING,
+  GET_GRADES,
+  GRADES_ERROR,
+  REGISTER_PARTICIPANT,
+  REGISTRATION_ERROR
+} from "../actions/types";
 
 const initialState = {
   loading: false,
@@ -14,11 +20,24 @@ export default (state = initialState, action) => {
         grades: action.payload,
         loading: false
       };
+    case REGISTER_PARTICIPANT:
+      return {
+        ...state,
+        grades: action.payload,
+        loading: false
+      };
+    case REGISTRATION_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
+      };
     case GRADES_ERROR:
       console.error(action.payload);
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        loading: false
       };
     case SET_LOADING:
       return {

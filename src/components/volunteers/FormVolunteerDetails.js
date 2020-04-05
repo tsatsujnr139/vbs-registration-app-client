@@ -1,7 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Spin } from "antd/lib";
-import { Form, Input, Select, Button, Row, Col, Radio, Card } from "antd";
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  Row,
+  Col,
+  Radio,
+  Card,
+  Layout,
+  Spin
+} from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import { setVolunteerDetails } from "../../actions/formActions";
 import PropTypes from "prop-types";
@@ -18,7 +28,7 @@ const FormVolunteerDetails = ({
   grades
 }) => {
   const { Option } = Select;
-
+  const { Content } = Layout;
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
 
@@ -47,192 +57,197 @@ const FormVolunteerDetails = ({
     <Fragment>
       <Navbar />
       <RegistrationProgressBar step={step - 1} title="Volunteer Registration" />
-      <div className="form-wrapper">
-        <Row>
-          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
-            <img src={JackHammer} alt="jackhammer" />
-          </Col>
-          <Col
-            span={10}
-            xl={10}
-            lg={10}
-            md={10}
-            sm={20}
-            xs={20}
-            style={{
-              display: "flex",
-              justifyContent: "center"
-            }}
-          >
-            <Card hoverable="true" style={cardStyle}>
-              <Form
-                form={form}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
-              >
-                <Form.Item
-                  label="Surname"
-                  name="surname"
-                  defaultValue={volunteerDetails.surname}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your surname"
-                    }
-                  ]}
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 12px)"
-                  }}
+      <Col>
+        <div className="form-wrapper">
+          <Row>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
+              <img src={JackHammer} alt="jackhammer" />
+            </Col>
+            <Col
+              span={10}
+              xl={10}
+              lg={10}
+              md={10}
+              sm={24}
+              xs={24}
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Card hoverable="true" style={cardStyle}>
+                <Form
+                  form={form}
+                  onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
                 >
-                  <Input placeholder="Surname" />
-                </Form.Item>
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "24px",
-                    textAlign: "center"
-                  }}
-                ></span>
-                <Form.Item
-                  label="First Name"
-                  name="firstName"
-                  defaultValue={volunteerDetails.firstName}
-                  style={{
-                    display: "inline-block",
-                    width: "calc(50% - 12px)"
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter the your first name"
-                    }
-                  ]}
-                >
-                  <Input placeholder="First Name" />
-                </Form.Item>
-
-                <Form.Item
-                  label="Gender"
-                  name="gender"
-                  style={{ display: "inline-block", width: "calc(100%)" }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select a gender "
-                    }
-                  ]}
-                >
-                  <Radio.Group size="medium">
-                    <Radio.Button value="Male">Male</Radio.Button>
-                    <Radio.Button value="Female">Female</Radio.Button>
-                  </Radio.Group>
-                </Form.Item>
-
-                <Form.Item
-                  label="Phone Number eg. 024XXXXXXX"
-                  name="phone"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={volunteerDetails.phone}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your phone number"
-                    }
-                  ]}
-                >
-                  <Input maxLength="10" placeholder="Phone Number" />
-                </Form.Item>
-                <Form.Item
-                  label="WhatsApp Phone Number eg. 024XXXXXXX"
-                  name="whatsAppPhone"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={volunteerDetails.whatsAppPhone}
-                  rules={[
-                    {
-                      required: false
-                    }
-                  ]}
-                >
-                  <Input maxLength="10" placeholder="WhatsApp Number If Any" />
-                </Form.Item>
-                <Form.Item
-                  label="Email Address"
-                  name="email"
-                  style={{ display: "inline-block", width: "100%" }}
-                  defaultValue={volunteerDetails.email}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter a valid email address "
-                    },
-                    {
-                      type: "email",
-                      message: "Please enter a valid email address"
-                    }
-                  ]}
-                >
-                  <Input placeholder="Email Address" />
-                </Form.Item>
-                <Form.Item
-                  label="Preferred Class (Preferred class not guaranteed)"
-                  name="grade"
-                  style={{ display: "inline-block", width: "calc(100%)" }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select a class/grade"
-                    }
-                  ]}
-                >
-                  <Select defaultValue="Class">
-                    {grades.map(grade => (
-                      <Option key={grade.name} value={grade.name}>
-                        {grade.name}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-
-                <br />
-                <Form.Item
-                  label="Home Church"
-                  name="church"
-                  style={{ display: "inline-block", width: "calc(100%)" }}
-                  defaultValue={volunteerDetails.church}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select/enter home church"
-                    }
-                  ]}
-                >
-                  <Input placeholder="Your home church" />
-                </Form.Item>
-                <Form.Item shouldUpdate>
-                  {() => (
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      disabled={
-                        !form.isFieldsTouched(true) ||
-                        form
-                          .getFieldsError()
-                          .filter(({ errors }) => errors.length).length
+                  <Form.Item
+                    label="Surname"
+                    name="surname"
+                    defaultValue={volunteerDetails.surname}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your surname"
                       }
-                    >
-                      Next
-                    </Button>
-                  )}
-                </Form.Item>
-              </Form>
-            </Card>
-          </Col>
-          <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
-            <img src={Crane} alt="crane" />
-          </Col>
-        </Row>
-      </div>
+                    ]}
+                    style={{
+                      display: "inline-block",
+                      width: "calc(50% - 12px)"
+                    }}
+                  >
+                    <Input placeholder="Surname" />
+                  </Form.Item>
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "24px",
+                      textAlign: "center"
+                    }}
+                  ></span>
+                  <Form.Item
+                    label="First Name"
+                    name="firstName"
+                    defaultValue={volunteerDetails.firstName}
+                    style={{
+                      display: "inline-block",
+                      width: "calc(50% - 12px)"
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter the your first name"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="First Name" />
+                  </Form.Item>
+
+                  <Form.Item
+                    label="Gender"
+                    name="gender"
+                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please select a gender "
+                      }
+                    ]}
+                  >
+                    <Radio.Group size="medium">
+                      <Radio.Button value="Male">Male</Radio.Button>
+                      <Radio.Button value="Female">Female</Radio.Button>
+                    </Radio.Group>
+                  </Form.Item>
+
+                  <Form.Item
+                    label="Phone Number eg. 024XXXXXXX"
+                    name="phone"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={volunteerDetails.phone}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your phone number"
+                      }
+                    ]}
+                  >
+                    <Input maxLength="10" placeholder="Phone Number" />
+                  </Form.Item>
+                  <Form.Item
+                    label="WhatsApp Phone Number eg. 024XXXXXXX"
+                    name="whatsAppPhone"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={volunteerDetails.whatsAppPhone}
+                    rules={[
+                      {
+                        required: false
+                      }
+                    ]}
+                  >
+                    <Input
+                      maxLength="10"
+                      placeholder="WhatsApp Number If Any"
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label="Email Address"
+                    name="email"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={volunteerDetails.email}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter a valid email address "
+                      },
+                      {
+                        type: "email",
+                        message: "Please enter a valid email address"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="Email Address" />
+                  </Form.Item>
+                  <Form.Item
+                    label="Preferred Class (Preferred class not guaranteed)"
+                    name="grade"
+                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please select a class/grade"
+                      }
+                    ]}
+                  >
+                    <Select defaultValue="Class">
+                      {grades.map(grade => (
+                        <Option key={grade.name} value={grade.name}>
+                          {grade.name}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+
+                  <br />
+                  <Form.Item
+                    label="Home Church"
+                    name="church"
+                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    defaultValue={volunteerDetails.church}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please select/enter home church"
+                      }
+                    ]}
+                  >
+                    <Input placeholder="Your home church" />
+                  </Form.Item>
+                  <Form.Item shouldUpdate>
+                    {() => (
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        disabled={
+                          !form.isFieldsTouched(true) ||
+                          form
+                            .getFieldsError()
+                            .filter(({ errors }) => errors.length).length
+                        }
+                      >
+                        Next
+                      </Button>
+                    )}
+                  </Form.Item>
+                </Form>
+              </Card>
+            </Col>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
+              <img src={Crane} alt="crane" />
+            </Col>
+          </Row>
+        </div>
+      </Col>
       <Footer />
     </Fragment>
   );
@@ -241,7 +256,7 @@ const FormVolunteerDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 700,
+  height: 750,
   borderRadius: "2px"
 };
 

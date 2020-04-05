@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { Spin, Layout } from "antd";
 import Navbar from "../layouts/Navbar";
 
 import {
@@ -12,7 +11,9 @@ import {
   Row,
   Col,
   Radio,
-  Card
+  Card,
+  Spin,
+  Layout
 } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import { setParticipantDetails } from "../../actions/formActions";
@@ -97,15 +98,16 @@ const FormParticipantDetails = ({
       <Content>
         <div className="form-wrapper">
           <Row>
-            <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
               <img src={JackHammer} alt="jackhammer" />
             </Col>
             <Col
               span={10}
               xl={10}
               lg={10}
-              sm={20}
-              xs={20}
+              md={10}
+              sm={24}
+              xs={24}
               style={{
                 display: "flex",
                 justifyContent: "center"
@@ -277,7 +279,7 @@ const FormParticipantDetails = ({
                 </Form>
               </Card>
             </Col>
-            <Col span={7} xl={7} lg={7} md={7} sm={2} xs={2}>
+            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
               <img src={Crane} alt="crane" />
             </Col>
           </Row>

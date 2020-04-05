@@ -1,12 +1,13 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions, Card } from "antd";
+import { Button, Row, Col, Descriptions, Card, Modal } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
+import { registerParticipant } from "../../actions/participantActions";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -31,8 +32,28 @@ const ConfirmParticipantDetails = ({
       pickupPersonPhone
     },
     step
-  }
+  },
+  registerParticipant,
+  participant: { error }
 }) => {
+  useEffect(() => {}, [error]);
+
+  const onConfirm = participantDetails => {
+    // register the participant
+    registerParticipant(participantDetails);
+    // if successful show successful page
+    // else show failure page and ask customer to try again later;
+    error ? errorAlert() : nextStep();
+  };
+
+  const errorAlert = () => {
+    Modal.error({
+      title: "Error Completing Registration",
+      content:
+        "There was an completing your registration at this time. Please try again later"
+    });
+  };
+
   return (
     <Fragment>
       <Navbar />
@@ -45,7 +66,7 @@ const ConfirmParticipantDetails = ({
         style={{ background: "#f3f5f7", padding: "30px" }}
       >
         <Row>
-          <Col span={6}>
+          <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
             <img src={Bulldozer} alt="" />
           </Col>
           <Col span={12}>
@@ -89,7 +110,7 @@ const ConfirmParticipantDetails = ({
         ></span>
         <Row>
           <Col span={6}></Col>
-          <Col span={12}>
+          <Col span={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Card hoverable="true">
               <Descriptions
                 title="Guardian Details"
@@ -117,7 +138,7 @@ const ConfirmParticipantDetails = ({
               </Descriptions>
             </Card>
           </Col>
-          <Col span={6}></Col>
+          <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}></Col>
         </Row>
         <span
           style={{
@@ -137,7 +158,7 @@ const ConfirmParticipantDetails = ({
               textAlign: "center"
             }}
           ></span>
-          <Button size="large" type="primary" onClick={nextStep}>
+          <Button size="large" type="primary" onClick={onConfirm}>
             Confirm
           </Button>
         </div>
@@ -148,13 +169,18 @@ const ConfirmParticipantDetails = ({
 };
 
 const mapStateToProps = state => ({
-  formDetails: state.formDetails
+  formDetails: state.formDetails,
+  participant: state.participant
 });
 
 ConfirmParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
+  participant: PropTypes.object.isRequired,
   nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired
+  prevStep: PropTypes.func.isRequired,
+  registerParticipant: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(ConfirmParticipantDetails);
+export default connect(mapStateToProps, { registerParticipant })(
+  ConfirmParticipantDetails
+);
