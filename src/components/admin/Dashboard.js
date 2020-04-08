@@ -1,31 +1,31 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getRegistrationStats } from "../../actions/adminActions";
+import { getDashboardData } from "../../actions/adminActions";
 import Overview from "./Overview";
 import Distributions from "./Distributions";
 
-const Dashboard = ({ admin: { loading, stats }, getRegistrationStats }) => {
+const Dashboard = ({ admin: { dashboardData }, getDashboardData }) => {
   useEffect(() => {
-    getRegistrationStats();
+    getDashboardData();
     // eslint-disable-next-line
   }, []);
 
   return (
     <Fragment>
-      <Overview />
-      <Distributions />
+      <Overview dashboardData={dashboardData} />
+      <Distributions dashboardData={dashboardData} />
     </Fragment>
   );
 };
 
 Dashboard.proptTypes = {
   admin: PropTypes.object.isRequired,
-  getRegistrationStats: PropTypes.func.isRequired
+  getDashboardData: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  admin: state.admin
+const mapStateToProps = (state) => ({
+  admin: state.admin,
 });
 
-export default connect(mapStateToProps, { getRegistrationStats })(Dashboard);
+export default connect(mapStateToProps, { getDashboardData })(Dashboard);

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions, Card, Modal } from "antd";
+import { Button, Row, Col, Descriptions, Card, Modal, Spin } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
@@ -35,7 +35,7 @@ const ConfirmParticipantDetails = ({
     step
   },
   registerParticipant,
-  participant: { error }
+  participant: { error, loading }
 }) => {
   useEffect(() => {}, [error]);
 
@@ -57,6 +57,10 @@ const ConfirmParticipantDetails = ({
         "There was an completing your registration at this time. Please try again later"
     });
   };
+
+  if (loading) {
+    return <Spin size="large" />;
+  }
 
   return (
     <Fragment>
@@ -165,7 +169,7 @@ const ConfirmParticipantDetails = ({
           <Button
             size="large"
             type="primary"
-            onClick={onConfirm(participantDetails, guardianDetails)}
+            onClick={() => onConfirm(participantDetails, guardianDetails)}
           >
             Confirm
           </Button>

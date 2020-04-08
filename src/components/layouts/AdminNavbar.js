@@ -10,11 +10,11 @@ const Navbar = ({ auth: { user }, logout }) => {
 
   const { Header } = Layout;
 
-  const onClick = e => {
+  const onClick = (e) => {
     setCurrent(e.key);
   };
 
-  const onLogout = e => {
+  const onLogout = (e) => {
     logout();
   };
 
@@ -34,7 +34,7 @@ const Navbar = ({ auth: { user }, logout }) => {
             style={{ textAlign: "end", lineHeight: "63px" }}
           >
             <Menu.Item key="greeting" disabled="true">
-              Hello {user && user.name}
+              Hi {user && user.firstName}
             </Menu.Item>
             <Menu.Item key="admin-logout" onClick={onLogout}>
               <LogoutOutlined />
@@ -48,11 +48,11 @@ const Navbar = ({ auth: { user }, logout }) => {
 };
 
 Navbar.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

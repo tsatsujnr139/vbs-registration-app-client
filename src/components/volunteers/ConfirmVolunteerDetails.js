@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions } from "antd";
+import { Button, Row, Col, Descriptions, Modal } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
@@ -129,7 +129,7 @@ const ConfirmVolunteerDetails = ({
           <Button
             size="large"
             type="primary"
-            onClick={onConfirm(volunteerDetails)}
+            onClick={() => onConfirm(volunteerDetails)}
           >
             Confirm
           </Button>

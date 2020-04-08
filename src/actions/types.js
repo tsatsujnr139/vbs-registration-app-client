@@ -22,4 +22,4 @@ export const AUTH_ERROR = "AUTH_ERROR";
 export const GENERAL_ERROR = "GENERAL_ERROR";
 
 // Admin
-export const GET_STATS = "GET_STATS";
+export const GET_DASHBOARD_DATA = "GET_DASHBOARD_DATA";

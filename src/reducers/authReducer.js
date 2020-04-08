@@ -4,7 +4,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   USER_LOADED,
-  SET_LOADING
+  SET_LOADING,
 } from "../actions/types";
 
 const initialState = {
@@ -12,7 +12,7 @@ const initialState = {
   isAuthenticated: null,
   loading: false,
   user: null,
-  error: null
+  error: null,
 };
 
 export default (state = initialState, action) => {
@@ -20,14 +20,14 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload
+        user: action.payload,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
@@ -35,11 +35,12 @@ export default (state = initialState, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
-        loading: false
+        loading: false,
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
+      console.log(`Auth Error: ${action.payload}`);
       localStorage.removeItem("token");
       return {
         ...state,
@@ -47,7 +48,7 @@ export default (state = initialState, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
-        error: action.payload
+        error: action.payload,
       };
     default:
       return state;

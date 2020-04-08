@@ -1,9 +1,13 @@
-import { GENERAL_ERROR, SET_LOADING, GET_STATS } from "../actions/types";
+import {
+  GENERAL_ERROR,
+  SET_LOADING,
+  GET_DASHBOARD_DATA,
+} from "../actions/types";
 
 const initialState = {
   loading: false,
-  stats: null,
-  error: null
+  dashboardData: null,
+  error: null,
 };
 
 export default (state = initialState, action) => {
@@ -11,19 +15,19 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
-    case GET_STATS:
+    case GET_DASHBOARD_DATA:
       return {
         ...state,
-        stats: action.payload,
-        loading: false
+        dashboardData: action.payload,
+        loading: false,
       };
     case GENERAL_ERROR:
       return {
         ...state,
         loading: false,
-        error: "Error retrieving the requested resource"
+        error: "Error retrieving the requested resource",
       };
     default:
       return state;

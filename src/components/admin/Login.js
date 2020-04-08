@@ -3,33 +3,35 @@ import { connect } from "react-redux";
 import { Spin, Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
-import { login } from "../../actions/authActions";
+import { login, loadUser } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 
-const Login = props => {
+const Login = (props) => {
   const {
     auth: { loading, isAuthenticated, error },
     login,
-    history
+    loadUser,
+    history,
   } = props;
 
   const { Content } = Layout;
 
   useEffect(() => {
     if (isAuthenticated) {
+      loadUser();
       history.push("/admin/dashboard");
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, history]);
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log("Success:", values);
     login({ ...values });
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -47,7 +49,7 @@ const Login = props => {
           minHeight: 800,
           height: "calc(100% - 100px)",
           paddingTop: "100px",
-          background: "#f3f5f7"
+          background: "#f3f5f7",
         }}
       >
         <Row>
@@ -56,7 +58,7 @@ const Login = props => {
             span={20}
             style={{
               display: "flex",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             {error && (
@@ -72,7 +74,7 @@ const Login = props => {
                 layout="vertical"
                 name="basic"
                 initialValues={{
-                  remember: true
+                  remember: true,
                 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -84,8 +86,8 @@ const Login = props => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your email!"
-                    }
+                      message: "Please enter your email!",
+                    },
                   ]}
                 >
                   <Input
@@ -100,8 +102,8 @@ const Login = props => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password!"
-                    }
+                      message: "Please enter your password!",
+                    },
                   ]}
                 >
                   <Input.Password
@@ -131,17 +133,17 @@ const Login = props => {
 };
 
 Login.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const cardStyle = {
   minWidth: 350,
   height: 300,
-  borderRadius: "2px"
+  borderRadius: "2px",
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, loadUser })(Login);

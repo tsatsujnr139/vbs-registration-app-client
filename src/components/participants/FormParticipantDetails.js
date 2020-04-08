@@ -61,7 +61,6 @@ const FormParticipantDetails = ({
 
   const onDateOfBirthChange = date => {
     const age = calculateCurrentAge(date);
-    console.log("Age::" + age);
     form.setFieldsValue({
       age: age
     });
@@ -75,7 +74,6 @@ const FormParticipantDetails = ({
       ...fieldsValue,
       dateOfBirth: dob.format("YYYY-MM-DD")
     };
-    console.log("Final Values:", values);
     setParticipantDetails(values);
     nextStep();
   };
