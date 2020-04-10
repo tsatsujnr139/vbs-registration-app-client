@@ -1,25 +1,40 @@
-import React, { Fragment } from "react";
-import { Row, Col, Card, Input, Form, Button, Table } from "antd";
+import React, { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import { Row, Col, Card, Input, Form, Button, Table, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import {
+  getParticipants,
+  searchParticipant,
+} from "../../actions/participantActions";
+import PropTypes from "prop-types";
 
-const ParticipantTable = () => {
+const ParticipantTable = ({
+  participant: { participants, loading },
+  getParticipants,
+  searchParticipant,
+}) => {
+  useEffect(() => {
+    getParticipants();
+    // eslint-disable-next-line
+  }, []);
+
   const columns = [
     {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
-      fixed: "left"
+      fixed: "left",
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
-      fixed: "left"
+      fixed: "left",
     },
     {
       title: "Age",
       dataIndex: "age",
-      key: "age"
+      key: "age",
     },
     {
       title: "Gender",
@@ -28,40 +43,72 @@ const ParticipantTable = () => {
       filters: [
         {
           text: "Male",
-          value: "Male"
+          value: "Male",
         },
         {
           text: "Female",
-          value: "Female"
-        }
+          value: "Female",
+        },
       ],
-      onFilter: (value, record) => record.gender.indexOf(value) === 0
+      onFilter: (value, record) => record.gender.indexOf(value) === 0,
     },
     {
       title: "Class",
       dataIndex: "class",
-      key: "class",
+      key: "grade",
       filters: [
         {
-          text: "Male",
-          value: "Male"
+          text: "Preschool",
+          value: "Preschool 1",
         },
         {
-          text: "Female",
-          value: "Female"
-        }
+          text: "Class 1",
+          value: "Class 1",
+        },
+        {
+          text: "Class 2",
+          value: "Class 2",
+        },
+        {
+          text: "Class 3",
+          value: "Class 3",
+        },
+        {
+          text: "Class 4",
+          value: "Class 4",
+        },
+        {
+          text: "Class 5",
+          value: "Class 5",
+        },
+        {
+          text: "Class 6",
+          value: "Class 6",
+        },
+        {
+          text: "JHS 1",
+          value: "JHS 1",
+        },
+        {
+          text: "JHS 2",
+          value: "JHS 2",
+        },
+        {
+          text: "JHS 3",
+          value: "JHS 3",
+        },
       ],
-      onFilter: (value, record) => record.gender.indexOf(value) === 0
+      onFilter: (value, record) => record.class.indexOf(value) === 0,
     },
     {
       title: "Church",
       dataIndex: "church",
-      key: "church"
+      key: "church",
     },
     {
       title: "Medical Information",
       dataIndex: "medicalInfo",
-      key: "medicalInfo"
+      key: "medicalInfo",
     },
     {
       title: "Action",
@@ -71,35 +118,13 @@ const ParticipantTable = () => {
           <Button type="link">Edit</Button>
         </span>
       ),
-      fixed: "right"
-    }
-  ];
-
-  const dataSource = [
-    {
-      key: "1",
-      firstName: "Aba",
-      lastName: "Asomaning",
-      class: "JHS 1",
-      church: "Legon Interdenominational Church",
-      age: 13,
-      gender: "Female",
-      medicalInfo: "Allergic to pineapple"
+      fixed: "right",
     },
-    {
-      key: "2",
-      firstName: "Adoma",
-      lastName: "Asomaning",
-      class: "Class 3",
-      church: "Legon Interdenominational Church",
-      age: 9,
-      gender: "Female",
-      medicalInfo: "N/A"
-    }
   ];
 
-  const onSearchFinished = value => {
-    console.log("Searching for:", value);
+  const onSearchFinished = (value) => {
+    console.log("Searching for participant: ", value);
+    searchParticipant(value);
   };
 
   return (
@@ -130,9 +155,9 @@ const ParticipantTable = () => {
             </Form>
             <Table
               columns={columns}
-              dataSource={dataSource}
+              dataSource={participants}
               pagination={true}
-              loading={false}
+              loading={loading}
               scroll={{ x: 1000 }}
             />
           </Card>
@@ -142,4 +167,16 @@ const ParticipantTable = () => {
   );
 };
 
-export default ParticipantTable;
+ParticipantTable.propTypes = {
+  participant: PropTypes.object.isRequired,
+  getParticipants: PropTypes.func.isRequired,
+  searchParticipant: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  participant: state.participant,
+});
+
+export default connect(mapStateToProps, { getParticipants, searchParticipant })(
+  ParticipantTable
+);

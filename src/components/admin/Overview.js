@@ -5,9 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import CountUp from "react-countup";
 import { ChartCard, Field } from "ant-design-pro/lib/Charts";
-import NumberInfo from "ant-design-pro/lib/NumberInfo";
 
-const Dashboard = ({ admin: { loading, dashboardData } }) => {
+const Dashboard = ({ admin: { loading }, dashboardData }) => {
   return (
     <Fragment>
       <Row align="top" gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>

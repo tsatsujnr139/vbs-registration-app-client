@@ -23,7 +23,6 @@ const Login = (props) => {
       loadUser();
       history.push("/admin/dashboard");
     }
-    // eslint-disable-next-line
   }, [error, isAuthenticated, history]);
 
   const onFinish = (values) => {

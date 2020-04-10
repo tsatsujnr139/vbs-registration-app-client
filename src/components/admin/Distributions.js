@@ -48,13 +48,14 @@ const salesPieData = [
   },
 ];
 
-const Distributions = ({ admin: { loading, dashboardData } }) => {
+const Distributions = ({ admin: { loading }, dashboardData }) => {
   return (
     <Fragment>
       <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
         <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
           <Card
             title="Participant Class Distribution"
+            hoverable={true}
             loading={loading || dashboardData == null}
           >
             <Pie
@@ -68,7 +69,10 @@ const Distributions = ({ admin: { loading, dashboardData } }) => {
                   }}
                 />
               )}
-              data={salesPieData}
+              data={
+                dashboardData != null &&
+                dashboardData.distributions.participantClassDistribution
+              }
               valueFormat={(val) => (
                 <span dangerouslySetInnerHTML={{ __html: val }} />
               )}
@@ -80,6 +84,7 @@ const Distributions = ({ admin: { loading, dashboardData } }) => {
         <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
           <Card
             title="Volunteer Class Distribution"
+            hoverable={true}
             loading={loading || dashboardData == null}
           >
             <Pie
@@ -93,7 +98,10 @@ const Distributions = ({ admin: { loading, dashboardData } }) => {
                   }}
                 />
               )}
-              data={salesPieData}
+              data={
+                dashboardData != null &&
+                dashboardData.distributions.volunteerClassDistribution
+              }
               valueFormat={(val) => (
                 <span dangerouslySetInnerHTML={{ __html: val }} />
               )}
