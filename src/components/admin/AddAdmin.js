@@ -1,17 +1,27 @@
-import React, { Fragment } from "react";
-import { Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
+import React, { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
+import { Card, Form, Input, Button, Row, Col, Alert, Layout, Spin } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { addAdmin } from "../../actions/adminActions";
+import PropTypes from "prop-types";
 
-const AddAdmin = () => {
+const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
+  useEffect(() => {}, [error]);
+
   const { Content } = Layout;
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log("Success:", values);
+    addAdmin(values);
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  if (loading) {
+    return <Spin size="large" />;
+  }
 
   return (
     <Fragment>
@@ -20,7 +30,7 @@ const AddAdmin = () => {
           minHeight: 800,
           height: "calc(100% - 100px)",
           paddingTop: "100px",
-          background: "#f3f5f7"
+          background: "#f3f5f7",
         }}
       >
         <Row>
@@ -29,23 +39,23 @@ const AddAdmin = () => {
             span={20}
             style={{
               display: "flex",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
-            {/* {error && (
+            {error && (
               <Alert
                 message="Error"
                 description="Error"
                 type="error"
                 showIcon
               />
-            )} */}
+            )}
             <Card hoverable="true" style={cardStyle}>
               <Form
                 layout="vertical"
                 name="basic"
                 initialValues={{
-                  remember: true
+                  remember: true,
                 }}
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -57,8 +67,8 @@ const AddAdmin = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your first name"
-                    }
+                      message: "Please enter your first name",
+                    },
                   ]}
                 >
                   <Input placeholder="First Name" />
@@ -70,8 +80,8 @@ const AddAdmin = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your last name"
-                    }
+                      message: "Please enter your last name",
+                    },
                   ]}
                 >
                   <Input placeholder="Last Name" />
@@ -83,8 +93,8 @@ const AddAdmin = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your email!"
-                    }
+                      message: "Please enter your email!",
+                    },
                   ]}
                 >
                   <Input
@@ -99,8 +109,8 @@ const AddAdmin = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password!"
-                    }
+                      message: "Please enter your password!",
+                    },
                   ]}
                 >
                   <Input.Password
@@ -131,7 +141,16 @@ const AddAdmin = () => {
 const cardStyle = {
   minWidth: 450,
   height: 500,
-  borderRadius: "2px"
+  borderRadius: "2px",
 };
 
-export default AddAdmin;
+AddAdmin.propTypes = {
+  admin: PropTypes.object.isRequired,
+  addAdmin: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  admin: state.admin,
+});
+
+export default connect(mapStateToProps, { addAdmin })(AddAdmin);

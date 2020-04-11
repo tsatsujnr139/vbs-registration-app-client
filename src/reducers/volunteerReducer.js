@@ -1,13 +1,15 @@
 import {
   SET_LOADING,
   REGISTER_VOLUNTEER,
-  REGISTRATION_ERROR
+  REGISTRATION_ERROR,
+  GET_VOLUNTEERS,
+  SEARCH_VOLUNTEER,
 } from "../actions/types";
 
 const initialState = {
   loading: false,
   error: null,
-  grades: null
+  volunteers: null,
 };
 
 export default (state = initialState, action) => {
@@ -15,18 +17,30 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
+      };
+    case GET_VOLUNTEERS:
+      return {
+        ...state,
+        loading: false,
+        volunteers: action.payload,
       };
     case REGISTER_VOLUNTEER:
       return {
         ...state,
-        loading: false
+        loading: false,
+      };
+    case SEARCH_VOLUNTEER:
+      return {
+        ...state,
+        loading: false,
+        volunteers: action.payload,
       };
     case REGISTRATION_ERROR:
       return {
         ...state,
         error: action.payload,
-        loading: false
+        loading: false,
       };
     default:
       return state;

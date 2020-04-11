@@ -1,20 +1,32 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { connect } from "react-redux";
 import { Row, Col, Card, Input, Form, Button, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import PropTypes from "prop-types";
+import { getVolunteers, searchVolunteer } from "../../actions/volunteerActions";
 
-const ParticipantTable = () => {
+const VolunteerTable = ({
+  volunteer: { volunteers, loading },
+  searchVolunteer,
+  getVolunteers,
+}) => {
+  useEffect(() => {
+    getVolunteers();
+    // eslint-disable-next-line
+  }, []);
+
   const columns = [
     {
       title: "Last Name",
       dataIndex: "lastName",
       key: "lastName",
-      fixed: "left"
+      fixed: "left",
     },
     {
       title: "First Name",
       dataIndex: "firstName",
       key: "firstName",
-      fixed: "left"
+      fixed: "left",
     },
     {
       title: "Gender",
@@ -23,35 +35,67 @@ const ParticipantTable = () => {
       filters: [
         {
           text: "Male",
-          value: "Male"
+          value: "Male",
         },
         {
           text: "Female",
-          value: "Female"
-        }
+          value: "Female",
+        },
       ],
-      onFilter: (value, record) => record.gender.indexOf(value) === 0
+      onFilter: (value, record) => record.gender.indexOf(value) === 0,
     },
     {
       title: "Class",
       dataIndex: "class",
-      key: "class",
+      key: "grade",
       filters: [
         {
-          text: "Male",
-          value: "Male"
+          text: "Preschool",
+          value: "Preschool 1",
         },
         {
-          text: "Female",
-          value: "Female"
-        }
+          text: "Class 1",
+          value: "Class 1",
+        },
+        {
+          text: "Class 2",
+          value: "Class 2",
+        },
+        {
+          text: "Class 3",
+          value: "Class 3",
+        },
+        {
+          text: "Class 4",
+          value: "Class 4",
+        },
+        {
+          text: "Class 5",
+          value: "Class 5",
+        },
+        {
+          text: "Class 6",
+          value: "Class 6",
+        },
+        {
+          text: "JHS 1",
+          value: "JHS 1",
+        },
+        {
+          text: "JHS 2",
+          value: "JHS 2",
+        },
+        {
+          text: "JHS 3",
+          value: "JHS 3",
+        },
       ],
-      onFilter: (value, record) => record.gender.indexOf(value) === 0
+      onFilter: (value, record) => record.class.indexOf(value) === 0,
     },
     {
       title: "Church",
       dataIndex: "church",
-      key: "church"
+      key: "church",
     },
     {
       title: "Action",
@@ -61,31 +105,13 @@ const ParticipantTable = () => {
           <Button type="link">Edit</Button>
         </span>
       ),
-      fixed: "right"
-    }
-  ];
-
-  const dataSource = [
-    {
-      key: "1",
-      firstName: "Tsatsu",
-      lastName: "Adogla-Bessa",
-      class: "Pre-school",
-      church: "Legon Interdenominational Church",
-      gender: "Male"
+      fixed: "right",
     },
-    {
-      key: "2",
-      firstName: "Sena",
-      lastName: "Adogla-Bessa",
-      class: "Class 1",
-      church: "Legon Interdenominational Church",
-      gender: "Female"
-    }
   ];
 
-  const onSearchFinished = value => {
-    console.log("Searching for:", value);
+  const onSearchFinished = (value) => {
+    console.log("Searching for: ", value);
+    searchVolunteer(value);
   };
 
   return (
@@ -116,9 +142,9 @@ const ParticipantTable = () => {
             </Form>
             <Table
               columns={columns}
-              dataSource={dataSource}
+              dataSource={volunteers}
               pagination={true}
-              loading={false}
+              loading={loading}
               scroll={{ x: 1000 }}
             />
           </Card>
@@ -128,4 +154,14 @@ const ParticipantTable = () => {
   );
 };
 
-export default ParticipantTable;
+VolunteerTable.propTypes = {
+  searchVolunteer: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  volunteer: state.volunteer,
+});
+
+export default connect(mapStateToProps, { getVolunteers, searchVolunteer })(
+  VolunteerTable
+);
