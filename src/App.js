@@ -9,9 +9,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import "./App.css";
 import Dashboard from "./components/admin/AdminPanel";
-import ConfirmParticipantDetails from "./components/participants/ConfirmParticipantDetails";
-import ConfirmVolunteerDetails from "./components/volunteers/ConfirmVolunteerDetails";
-import ParticipantRegistrationSuccess from "./components/participants/ParticipantRegistrationSuccess";
+import PrivateRoute from "./routing/PrivateRoute";
 
 const App = () => {
   return (
@@ -32,13 +30,7 @@ const App = () => {
               component={RegisterVolunteerForm}
             />
             <Route exact path="/admin/login" component={Login} />
-            <Route exact path="/confirm" component={ConfirmVolunteerDetails} />
-            <Route
-              exact
-              path="/success"
-              component={ParticipantRegistrationSuccess}
-            />
-            <Route exact path="/admin/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/admin/dashboard" component={Dashboard} />
             <Route component={NotFound} />
           </Switch>
         </Fragment>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Spin, Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
-import { login, loadUser } from "../../actions/authActions";
+import { login } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
@@ -12,7 +12,6 @@ const Login = (props) => {
   const {
     auth: { loading, isAuthenticated, error },
     login,
-    loadUser,
     history,
   } = props;
 
@@ -20,7 +19,6 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser();
       history.push("/admin/dashboard");
     }
     // eslint-disable-next-line
@@ -53,12 +51,18 @@ const Login = (props) => {
         }}
       >
         <Row>
-          <Col span={2}></Col>
+          <Col span={9} xl={9} lg={9} md={7} sm={7} xs={2}></Col>
           <Col
-            span={20}
+            span={6}
+            xl={6}
+            lg={6}
+            md={10}
+            sm={10}
+            xs={20}
             style={{
               display: "flex",
               justifyContent: "center",
+              flexDirection: "column",
             }}
           >
             {error && (
@@ -124,7 +128,7 @@ const Login = (props) => {
               </Form>
             </Card>
           </Col>
-          <Col span={2}></Col>
+          <Col span={9} xl={9} lg={9} md={7} sm={7} xs={2}></Col>
         </Row>
       </Content>
       <Footer />
@@ -134,6 +138,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const cardStyle = {
@@ -146,4 +151,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login, loadUser })(Login);
+export default connect(mapStateToProps, { login })(Login);

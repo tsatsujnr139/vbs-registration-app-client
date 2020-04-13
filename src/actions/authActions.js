@@ -22,52 +22,50 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    const res = await axios.get(`${apiBaseUrl}/user/self`);
-    // const res = {
-    //   data: {
-    //     last_name: "Asomaning",
-    //     first_name: "Aforo",
-    //     email: "aforo@email.com",
-    //     password: "password",
-    //   },
-    // };
+    const res = await axios.get(`${apiBaseUrl}/user/self/`);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
     });
   } catch (error) {
+    console.error("Error Loading User::: " + error);
     dispatch({
       type: AUTH_ERROR,
-      payload: error.message,
+      payload: `Please login again.`,
     });
   }
 };
 
 // Login
 export const login = (formData) => async (dispatch) => {
-  setLoading();
   try {
+    setLoading();
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const res = axios.post(`${apiBaseUrl}/api/user/token`, formData, config);
-    // const res = {
-    //   data: {
-    //     token: "token",
-    //   },
-    // };
-    loadUser();
+    const res = await axios.post(`${apiBaseUrl}/user/token/`, formData, config);
+    console.log("res::" + res);
+    // loadUser();
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: res.data.token,
     });
   } catch (error) {
-    dispatch({
-      type: LOGIN_FAIL,
-      payload: error.message,
-    });
+    console.error("Error Logging in User::: " + error);
+    let statusCode = error.response.status;
+    if (statusCode === 400) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: error.response.data.non_field_errors,
+      });
+    } else {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: "Unable to login at this time. Please try again later.",
+      });
+    }
   }
 };
 

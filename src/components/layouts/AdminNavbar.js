@@ -14,7 +14,7 @@ const Navbar = ({ auth: { user }, logout }) => {
     setCurrent(e.key);
   };
 
-  const onLogout = (e) => {
+  const onLogout = () => {
     logout();
   };
 
@@ -34,7 +34,7 @@ const Navbar = ({ auth: { user }, logout }) => {
             style={{ textAlign: "end", lineHeight: "63px" }}
           >
             <Menu.Item key="greeting" disabled="true">
-              Hi {user && user.firstName}
+              Hi {user && user.first_name}
             </Menu.Item>
             <Menu.Item key="admin-logout" onClick={onLogout}>
               <LogoutOutlined />
@@ -49,6 +49,7 @@ const Navbar = ({ auth: { user }, logout }) => {
 
 Navbar.propTypes = {
   auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

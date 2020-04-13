@@ -4,7 +4,6 @@ import {
   ADD_ADMIN,
   GENERAL_ERROR,
   ADD_ADMIN_ERROR,
-  AUTH_ERROR,
 } from "./types";
 import axios from "axios";
 
