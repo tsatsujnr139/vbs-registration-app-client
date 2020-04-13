@@ -5,15 +5,15 @@ import FormVolunteerDetails from "./FormVolunteerDetails";
 import ConfirmVolunteerDetails from "./ConfirmVolunteerDetails";
 import VolunteerRegistrationSuccess from "./VolunteerRegistrationSuccess";
 import PropTypes from "prop-types";
-import { Spin } from "antd/lib";
+import { Spin, Result, Button } from "antd/lib";
 
 import { getGrades } from "../../actions/participantActions";
 
 const RegisterParticipantForm = ({
   formDetails: { step },
-  participant: { grades, loading },
+  participant: { grades, loading, error },
   getGrades,
-  setStep
+  setStep,
 }) => {
   useEffect(() => {
     getGrades();
@@ -30,9 +30,24 @@ const RegisterParticipantForm = ({
     setStep(step - 1);
   };
 
+  if (error) {
+    return (
+      <Result
+        status="500"
+        title="500"
+        subTitle="Oops! Something went wrong. Please try again later"
+        extra={
+          <Button type="primary" href="/">
+            Back Home
+          </Button>
+        }
+      />
+    );
+  }
+
   if (loading || grades === null) {
     return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
+      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
   }
   switch (step) {
@@ -52,12 +67,12 @@ const RegisterParticipantForm = ({
 RegisterParticipantForm.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setStep: PropTypes.func.isRequired,
-  participant: PropTypes.object.isRequired
+  participant: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
-  participant: state.participant
+  participant: state.participant,
 });
 
 export default connect(mapStateToProps, { setStep, getGrades })(

@@ -2,7 +2,7 @@ import {
   SET_LOADING,
   GET_GRADES,
   GRADES_ERROR,
-  REGISTER_PARTICIPANT,
+  REGISTRATION_SUCCESS,
   REGISTRATION_ERROR,
   GET_PARTICIPANTS,
   SEARCH_PARTICIPANT,
@@ -13,6 +13,7 @@ const initialState = {
   error: null,
   grades: null,
   participants: null,
+  success: null,
 };
 
 export default (state = initialState, action) => {
@@ -23,9 +24,10 @@ export default (state = initialState, action) => {
         grades: action.payload,
         loading: false,
       };
-    case REGISTER_PARTICIPANT:
+    case REGISTRATION_SUCCESS:
       return {
         ...state,
+        success: true,
         loading: false,
       };
     case REGISTRATION_ERROR:
@@ -35,7 +37,6 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case GRADES_ERROR:
-      console.error(action.payload);
       return {
         ...state,
         error: action.payload,

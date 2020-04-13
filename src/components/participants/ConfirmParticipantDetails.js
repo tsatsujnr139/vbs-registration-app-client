@@ -15,48 +15,53 @@ const ConfirmParticipantDetails = ({
   formDetails: { participantDetails, guardianDetails },
   formDetails: {
     participantDetails: {
-      surname,
-      firstName,
-      dateOfBirth,
+      last_name,
+      first_name,
+      date_of_birth,
       age,
       grade,
       gender,
       church,
-      medicalInfo
+      medical_info,
     },
     guardianDetails: {
-      fullName,
-      phone,
-      alternatePhone,
+      parent_name,
+      primary_contact_no,
+      alternate_contact_no,
       email,
-      pickupPersonName,
-      pickupPersonPhone
+      pickup_person_name,
+      pickup_person_contact_no,
     },
-    step
+    step,
   },
   registerParticipant,
-  participant: { error, loading }
+  participant: { error, loading, success },
 }) => {
-  useEffect(() => {}, [error]);
+  useEffect(() => {}, []);
 
   const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
     registerParticipant({
       ...participantDetails,
-      ...guardianDetails
+      ...guardianDetails,
     });
-    // if successful show successful page
-    // else show failure page and ask user to try again later;
-    error ? errorAlert() : nextStep();
   };
+
+  if (success) {
+    nextStep();
+  }
 
   const errorAlert = () => {
     Modal.error({
       title: "Error Completing Registration",
       content:
-        "There was an completing your registration at this time. Please try again later"
+        "There was an completing your registration at this time. Please try again later",
     });
   };
+
+  if (error) {
+    return errorAlert();
+  }
 
   if (loading) {
     return <Spin size="large" />;
@@ -87,13 +92,13 @@ const ConfirmParticipantDetails = ({
                 bordered
               >
                 <Descriptions.Item label="Surname" span={2}>
-                  {surname}
+                  {last_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="First Name" span={1}>
-                  {firstName}
+                  {first_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Date of Birth">
-                  {dateOfBirth}
+                  {date_of_birth}
                 </Descriptions.Item>
                 <Descriptions.Item label="Age">{age}</Descriptions.Item>
                 <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
@@ -102,7 +107,7 @@ const ConfirmParticipantDetails = ({
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item label="Medical Information" span={3}>
-                  {medicalInfo === "" ? medicalInfo : "N/A"}
+                  {medical_info === "" ? medical_info : "N/A"}
                 </Descriptions.Item>
               </Descriptions>
             </Card>
@@ -113,7 +118,7 @@ const ConfirmParticipantDetails = ({
         </Row>
         <span
           style={{
-            display: "inline-block"
+            display: "inline-block",
           }}
         ></span>
         <Row>
@@ -128,20 +133,20 @@ const ConfirmParticipantDetails = ({
                 bordered
               >
                 <Descriptions.Item label="Full Name" span={2}>
-                  {fullName}
+                  {parent_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Email">{email}</Descriptions.Item>
-                <Descriptions.Item label="Phone Number" span={2}>
-                  {phone}
+                <Descriptions.Item label="Primary Contact Number" span={2}>
+                  {primary_contact_no}
                 </Descriptions.Item>
                 <Descriptions.Item label="Alternate Contact Number">
-                  {alternatePhone}
+                  {alternate_contact_no}
                 </Descriptions.Item>
                 <Descriptions.Item label="Pick Up Person Name" span={2}>
-                  {pickupPersonName}
+                  {pickup_person_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Pick up Person Phone">
-                  {pickupPersonPhone}
+                  {pickup_person_contact_no}
                 </Descriptions.Item>
               </Descriptions>
             </Card>
@@ -152,7 +157,7 @@ const ConfirmParticipantDetails = ({
           style={{
             display: "inline-block",
             width: "24px",
-            textAlign: "center"
+            textAlign: "center",
           }}
         ></span>
         <div className="confirm-buttons-wrapper">
@@ -163,7 +168,7 @@ const ConfirmParticipantDetails = ({
             style={{
               display: "inline-block",
               width: "24px",
-              textAlign: "center"
+              textAlign: "center",
             }}
           ></span>
           <Button
@@ -180,9 +185,9 @@ const ConfirmParticipantDetails = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
-  participant: state.participant
+  participant: state.participant,
 });
 
 ConfirmParticipantDetails.propTypes = {
@@ -190,7 +195,7 @@ ConfirmParticipantDetails.propTypes = {
   participant: PropTypes.object.isRequired,
   nextStep: PropTypes.func.isRequired,
   prevStep: PropTypes.func.isRequired,
-  registerParticipant: PropTypes.func.isRequired
+  registerParticipant: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, { registerParticipant })(

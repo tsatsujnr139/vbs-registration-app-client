@@ -7,17 +7,8 @@ import ConfirmParticipantDetails from "./ConfirmParticipantDetails";
 import RegistrationSuccess from "./ParticipantRegistrationSuccess";
 import PropTypes from "prop-types";
 
-import { getGrades } from "../../actions/participantActions";
-import { Spin } from "antd/lib";
-
-const RegisterParticipantForm = ({
-  formDetails: { step },
-  setStep,
-  participant: { grades, loading },
-  getGrades
-}) => {
+const RegisterParticipantForm = ({ formDetails: { step }, setStep }) => {
   useEffect(() => {
-    getGrades();
     //eslint-disable-next-line
   }, []);
 
@@ -31,15 +22,9 @@ const RegisterParticipantForm = ({
     setStep(step - 1);
   };
 
-  if (loading || grades === null) {
-    return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
-    );
-  }
-
   switch (step) {
     case 1:
-      return <FormParticipantDetails nextStep={nextStep} grades={grades} />;
+      return <FormParticipantDetails nextStep={nextStep} />;
     case 2:
       return <FormGuardianDetails nextStep={nextStep} prevStep={prevStep} />;
     case 3:
@@ -56,14 +41,12 @@ const RegisterParticipantForm = ({
 RegisterParticipantForm.propTypes = {
   formDetails: PropTypes.object.isRequired,
   participant: PropTypes.object.isRequired,
-  setStep: PropTypes.func.isRequired
+  setStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
-  participant: state.participant
+  participant: state.participant,
 });
 
-export default connect(mapStateToProps, { setStep, getGrades })(
-  RegisterParticipantForm
-);
+export default connect(mapStateToProps, { setStep })(RegisterParticipantForm);

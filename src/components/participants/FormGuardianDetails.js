@@ -14,7 +14,7 @@ const FormGuardianDetails = ({
   nextStep,
   prevStep,
   formDetails: { guardianDetails, step },
-  setGuardianDetails
+  setGuardianDetails,
 }) => {
   const { Content } = Layout;
   const [form] = Form.useForm();
@@ -25,13 +25,13 @@ const FormGuardianDetails = ({
     //eslint-disable-next-line
   }, []);
 
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log("Success:", values);
     setGuardianDetails(values);
     nextStep();
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -54,7 +54,7 @@ const FormGuardianDetails = ({
               xs={24}
               style={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
               }}
             >
               <Card hoverable="true" style={cardStyle}>
@@ -65,28 +65,28 @@ const FormGuardianDetails = ({
                 >
                   <Form.Item
                     label="Parent/Guardian Full Name"
-                    name="fullName"
+                    name="parent_name"
                     style={{ display: "inline-block", width: "100%" }}
                     defaultValue={guardianDetails.fullName}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the parent/guardians full name"
-                      }
+                        message: "Please enter the parent/guardians full name",
+                      },
                     ]}
                   >
                     <Input placeholder="Full Name" />
                   </Form.Item>
                   <Form.Item
                     label="Parent/Guardian Primary Phone Number eg. 024XXXXXXX"
-                    name="phone"
+                    name="primary_contact_no"
                     style={{ display: "inline-block", width: "100%" }}
-                    defaultValue={guardianDetails.phone}
+                    defaultValue={guardianDetails.contact_no}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter your primary contact number"
-                      }
+                        message: "Please enter your primary contact number",
+                      },
                     ]}
                   >
                     <Input maxLength="10" placeholder="Phone Number" />
@@ -94,14 +94,14 @@ const FormGuardianDetails = ({
 
                   <Form.Item
                     label="Parent/Guardian Alternate Phone Number eg. 024XXXXXXX"
-                    name="alternatePhone"
+                    name="alternate_contact_no"
                     style={{ display: "inline-block", width: "100%" }}
-                    defaultValue={guardianDetails.alternatePhone}
+                    defaultValue={guardianDetails.alternate_contact_no}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter an alternate contact number "
-                      }
+                        message: "Please enter an alternate contact number ",
+                      },
                     ]}
                   >
                     <Input
@@ -118,12 +118,12 @@ const FormGuardianDetails = ({
                     rules={[
                       {
                         required: true,
-                        message: "Please enter a valid email address "
+                        message: "Please enter a valid email address ",
                       },
                       {
                         type: "email",
-                        message: "Please enter a valid email address"
-                      }
+                        message: "Please enter a valid email address",
+                      },
                     ]}
                   >
                     <Input placeholder="Email Address" />
@@ -131,14 +131,14 @@ const FormGuardianDetails = ({
 
                   <Form.Item
                     label="Pickup Person's Name"
-                    name="pickupPersonName"
+                    name="pickup_person_name"
                     style={{ display: "inline-block", width: "100%" }}
-                    defaultValue={guardianDetails.pickupPersonName}
+                    defaultValue={guardianDetails.pickup_person_name}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the pickup person's full name"
-                      }
+                        message: "Please enter the pickup person's full name",
+                      },
                     ]}
                   >
                     <Input placeholder="Who will be picking the child up?" />
@@ -146,15 +146,15 @@ const FormGuardianDetails = ({
 
                   <Form.Item
                     label="Pickup Person's Phone Number eg. 024XXXXXXX"
-                    name="pickupPersonPhone"
+                    name="pickup_person_contact_no"
                     style={{ display: "inline-block", width: "100%" }}
-                    defaultValue={guardianDetails.pickupPersonPhone}
+                    defaultValue={guardianDetails.pickup_person_contact_no}
                     rules={[
                       {
                         required: true,
                         message:
-                          "Please enter the phone number of the pickup person"
-                      }
+                          "Please enter the phone number of the pickup person",
+                      },
                     ]}
                   >
                     <Input
@@ -172,7 +172,7 @@ const FormGuardianDetails = ({
                           style={{
                             display: "inline-block",
                             width: "24px",
-                            textAlign: "center"
+                            textAlign: "center",
                           }}
                         ></span>
                         <Button
@@ -208,18 +208,18 @@ const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
   height: 700,
-  borderRadius: "2px"
+  borderRadius: "2px",
 };
 
 FormGuardianDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setGuardianDetails: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
-  prevStep: PropTypes.func.isRequired
+  prevStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  formDetails: state.formDetails
+const mapStateToProps = (state) => ({
+  formDetails: state.formDetails,
 });
 
 export default connect(mapStateToProps, { setGuardianDetails })(

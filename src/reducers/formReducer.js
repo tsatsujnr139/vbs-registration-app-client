@@ -3,7 +3,7 @@ import {
   SET_STEP,
   SET_PARTICIPANT_DETAILS,
   SET_GUARDIAN_DETAILS,
-  SET_VOLUNTEER_DETAILS
+  SET_VOLUNTEER_DETAILS,
 } from "../actions/types";
 
 const initialState = {
@@ -11,36 +11,36 @@ const initialState = {
   step: 1,
   error: null,
   participantDetails: {
-    surname: "",
-    firstName: "",
-    dateOfBirth: "",
+    last_name: "",
+    first_name: "",
+    date_of_birth: "",
     age: "",
     grade: "",
     gender: "",
     church: "",
-    medicalInfo: ""
+    medical_info: "",
   },
   guardianDetails: {
-    fullName: "",
-    phone: "",
-    alternatePhone: "",
+    parent_name: "",
+    primary_contact_no: "",
+    alternate_contact_no: "",
     email: "",
-    pickupPersonName: "",
-    pickupPersonPhone: ""
+    pickup_person_name: "",
+    pickup_person_contact_no: "",
   },
   volunteerDetails: {
-    surname: "",
-    firstName: "",
+    last_name: "",
+    first_name: "",
     role: "",
-    phoneNumber: "",
-    whatsappNumber: "",
+    contact_no: "",
+    whatsApp_no: "",
     email: "",
     gender: "",
-    preferredGrade: "",
+    preferred_class: "",
     church: "",
-    previousVolunteer: "",
-    volunteerSite: ""
-  }
+    previous_volunteer: "",
+    previous_site: "",
+  },
 };
 
 export default (state = initialState, action) => {
@@ -48,30 +48,30 @@ export default (state = initialState, action) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case SET_STEP:
       return {
         ...state,
-        step: action.payload
+        step: action.payload,
       };
     case SET_PARTICIPANT_DETAILS:
       console.log(`Participant Details: ${action.payload}`);
       return {
         ...state,
-        participantDetails: action.payload
+        participantDetails: action.payload,
       };
     case SET_GUARDIAN_DETAILS:
       console.log(`Guardian Details: ${action.payload}`);
       return {
         ...state,
-        guardianDetails: action.payload
+        guardianDetails: action.payload,
       };
     case SET_VOLUNTEER_DETAILS:
       console.log(`Volunteer Details: ${action.payload}`);
       return {
         ...state,
-        volunteerDetails: action.payload
+        volunteerDetails: action.payload,
       };
     default:
       return state;

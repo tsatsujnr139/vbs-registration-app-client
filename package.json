@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/primefaces.primereact.chart": "^3.1.8",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^10.0.0",
@@ -15,12 +14,14 @@
     "eslint-plugin-flowtype": "^4.6.0",
     "moment": "^2.24.0",
     "react": "^16.13.0",
+    "react-confetti": "^5.0.1",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.0",
     "react-moment": "^0.9.7",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "react-use": "^14.1.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"

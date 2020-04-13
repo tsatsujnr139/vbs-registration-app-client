@@ -2,64 +2,34 @@ import {
   SET_LOADING,
   GET_GRADES,
   GRADES_ERROR,
+  REGISTRATION_SUCCESS,
   REGISTRATION_ERROR,
   GET_PARTICIPANTS,
   GENERAL_ERROR,
   SEARCH_PARTICIPANT,
 } from "./types";
 import axios from "axios";
-// import axios from "axios";
 
-// let apiBaseUrl;
-
-// if (process.env.NODE_ENV !== "production") {
-//   apiBaseUrl = process.env.REACT_APP_VBS_API_BASE_URL;
-// } else {
-//   apiBaseUrl = process.env.VBS_API_BASE_URL;
-// }
+let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Get Grades
 export const getGrades = () => async (dispatch) => {
   try {
     setLoading();
-    // const res = await axios.get("/grades");
     const res = {
       data: [
         {
-          name: "Class 1",
-        },
-        {
-          name: "Class 2",
-        },
-        {
-          name: "Class 3",
-        },
-        {
-          name: "Class 4",
-        },
-        {
-          name: "Class 5",
-        },
-        {
-          name: "Class 6",
-        },
-        {
-          name: "JHS 1",
-        },
-        {
-          name: "JHS 2",
-        },
-        {
-          name: "JHS 3",
+          name: "class 1",
         },
       ],
     };
-
+    // const res = await axios.get(`${apiBaseUrl}/grades`);
     dispatch({
       type: GET_GRADES,
       payload: res.data,
     });
   } catch (error) {
+    console.error("Error retrieving grades:::" + error);
     dispatch({
       type: GRADES_ERROR,
       payload: error.message,
@@ -69,20 +39,25 @@ export const getGrades = () => async (dispatch) => {
 
 // Register a participant
 export const registerParticipant = (formData) => async (dispatch) => {
-  console.log(`Participant Registration Details:: ${{ ...formData }}`);
+  console.log(`Participant Registration Details:: ${JSON.stringify(formData)}`);
   try {
     setLoading();
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // };
-    // const res = await axios.post(
-    //   `${apiBaseUrl}/participants`,
-    //   formData,
-    //   config
-    // );
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const res = await axios.post(
+      `${apiBaseUrl}/participants/`,
+      formData,
+      config
+    );
+    dispatch({
+      type: REGISTRATION_SUCCESS,
+      payload: res.data,
+    });
   } catch (error) {
+    console.error("Error registering participant:::" + error);
     dispatch({
       type: REGISTRATION_ERROR,
       payload: error.message,
@@ -152,6 +127,7 @@ export const searchParticipant = (formData) => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
+    console.error("Error searching for participant:::" + error);
     dispatch({
       type: GENERAL_ERROR,
       payload: error.message,

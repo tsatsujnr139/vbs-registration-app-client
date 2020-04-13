@@ -127,6 +127,10 @@ const ParticipantTable = ({
     searchParticipant(value);
   };
 
+  if (loading) {
+    return <Spin size="large" />;
+  }
+
   return (
     <Fragment>
       <Row>

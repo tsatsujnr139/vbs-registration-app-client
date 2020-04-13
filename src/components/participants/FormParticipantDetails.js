@@ -13,7 +13,8 @@ import {
   Radio,
   Card,
   Spin,
-  Layout
+  Layout,
+  Result,
 } from "antd";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import { setParticipantDetails } from "../../actions/formActions";
@@ -22,13 +23,14 @@ import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
 import Footer from "../layouts/Footer";
 import moment from "moment";
+import { getGrades } from "../../actions/participantActions";
 
 const FormParticipantDetails = ({
   nextStep,
   formDetails: { participantDetails, step },
-  participant: { loading },
+  participant: { loading, grades, error },
   setParticipantDetails,
-  grades
+  getGrades,
 }) => {
   const { Option } = Select;
   const { TextArea } = Input;
@@ -38,11 +40,12 @@ const FormParticipantDetails = ({
   const [, forceUpdate] = useState();
 
   useEffect(() => {
+    getGrades();
     forceUpdate({});
     //eslint-disable-next-line
   }, []);
 
-  const calculateCurrentAge = date => {
+  const calculateCurrentAge = (date) => {
     const now = moment();
     return now.diff(date, "years");
   };
@@ -59,31 +62,48 @@ const FormParticipantDetails = ({
     return Promise.resolve();
   };
 
-  const onDateOfBirthChange = date => {
+  const onDateOfBirthChange = (date) => {
     const age = calculateCurrentAge(date);
     form.setFieldsValue({
-      age: age
+      age: age,
     });
     form.validateFields(["age"]);
   };
 
-  const onFinish = fieldsValue => {
+  const onFinish = (fieldsValue) => {
     console.log("Success:", fieldsValue);
-    const dob = fieldsValue["dateOfBirth"];
+    const dob = fieldsValue["date_of_birth"];
     const values = {
       ...fieldsValue,
-      dateOfBirth: dob.format("YYYY-MM-DD")
+      date_of_birth: dob.format("YYYY-MM-DD"),
     };
     setParticipantDetails(values);
     nextStep();
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
-  if (loading) {
-    return <Spin size="large" />;
+  if (error) {
+    return (
+      <Result
+        status="500"
+        title="500"
+        subTitle="Oops! Something went wrong. Please try again later"
+        extra={
+          <Button type="primary" href="/">
+            Back Home
+          </Button>
+        }
+      />
+    );
+  }
+
+  if (loading || grades === null) {
+    return (
+      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
+    );
   }
 
   return (
@@ -108,7 +128,7 @@ const FormParticipantDetails = ({
               xs={24}
               style={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
               }}
             >
               <Card hoverable="true" style={cardStyle}>
@@ -119,17 +139,17 @@ const FormParticipantDetails = ({
                 >
                   <Form.Item
                     label="Surname"
-                    name="surname"
-                    defaultValue={participantDetails.surname}
+                    name="last_name"
+                    defaultValue={participantDetails.last_name}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the child's surname"
-                      }
+                        message: "Please enter the child's surname",
+                      },
                     ]}
                     style={{
                       display: "inline-block",
-                      width: "calc(50% - 12px)"
+                      width: "calc(50% - 12px)",
                     }}
                   >
                     <Input placeholder="Surname" />
@@ -138,22 +158,22 @@ const FormParticipantDetails = ({
                     style={{
                       display: "inline-block",
                       width: "24px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   ></span>
                   <Form.Item
                     label="First Name"
-                    name="firstName"
-                    defaultValue={participantDetails.firstName}
+                    name="first_name"
+                    defaultValue={participantDetails.first_name}
                     style={{
                       display: "inline-block",
-                      width: "calc(50% - 12px)"
+                      width: "calc(50% - 12px)",
                     }}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the child's first name"
-                      }
+                        message: "Please enter the child's first name",
+                      },
                     ]}
                   >
                     <Input placeholder="First Name" />
@@ -161,10 +181,10 @@ const FormParticipantDetails = ({
 
                   <Form.Item
                     label="Date of Birth"
-                    name="dateOfBirth"
+                    name="date_of_birth"
                     style={{
                       display: "inline-block",
-                      width: "calc(50% - 12px)"
+                      width: "calc(50% - 12px)",
                     }}
                   >
                     <DatePicker
@@ -178,7 +198,7 @@ const FormParticipantDetails = ({
                     style={{
                       display: "inline-block",
                       width: "24px",
-                      textAlign: "center"
+                      textAlign: "center",
                     }}
                   ></span>
                   <Form.Item
@@ -187,12 +207,12 @@ const FormParticipantDetails = ({
                     defaultValue={participantDetails.age}
                     style={{
                       display: "inline-block",
-                      width: "calc(50% - 12px)"
+                      width: "calc(50% - 12px)",
                     }}
                     rules={[
                       {
-                        validator: isEligibleAge
-                      }
+                        validator: isEligibleAge,
+                      },
                     ]}
                   >
                     <Input disabled={true} placeholder="Age" />
@@ -204,8 +224,8 @@ const FormParticipantDetails = ({
                     rules={[
                       {
                         required: true,
-                        message: "Please select a gender "
-                      }
+                        message: "Please select a gender ",
+                      },
                     ]}
                   >
                     <Radio.Group size="medium">
@@ -221,12 +241,12 @@ const FormParticipantDetails = ({
                     rules={[
                       {
                         required: true,
-                        message: "Please select a class/grade"
-                      }
+                        message: "Please select a class/grade",
+                      },
                     ]}
                   >
                     <Select defaultValue="Class Completed this Past Academic Year">
-                      {grades.map(grade => (
+                      {grades.map((grade) => (
                         <Option key={grade.name} value={grade.name}>
                           {grade.name}
                         </Option>
@@ -242,8 +262,8 @@ const FormParticipantDetails = ({
                     rules={[
                       {
                         required: true,
-                        message: "Please select/enter the child's home church"
-                      }
+                        message: "Please select/enter the child's home church",
+                      },
                     ]}
                   >
                     <Input placeholder="The church the child attends" />
@@ -251,7 +271,13 @@ const FormParticipantDetails = ({
                   <br />
                   <Form.Item
                     label="Medical Information (Allergies etc.)"
+                    name="medical_info"
                     style={{ display: "inline-block", width: "calc(100%)" }}
+                    rules={[
+                      {
+                        required: false,
+                      },
+                    ]}
                   >
                     <TextArea
                       placeholder="Any relevant medical information"
@@ -264,7 +290,6 @@ const FormParticipantDetails = ({
                         type="primary"
                         htmlType="submit"
                         disabled={
-                          !form.isFieldsTouched(true) ||
                           form
                             .getFieldsError()
                             .filter(({ errors }) => errors.length).length
@@ -277,7 +302,15 @@ const FormParticipantDetails = ({
                 </Form>
               </Card>
             </Col>
-            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
+            <Col
+              style={{ overflow: "hidden" }}
+              span={7}
+              xl={7}
+              lg={7}
+              md={7}
+              sm={0}
+              xs={0}
+            >
               <img src={Crane} alt="crane" />
             </Col>
           </Row>
@@ -292,22 +325,22 @@ const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
   height: 700,
-  borderRadius: "2px"
+  borderRadius: "2px",
 };
 
 FormParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   participant: PropTypes.object.isRequired,
   setParticipantDetails: PropTypes.func.isRequired,
-  grades: PropTypes.array.isRequired,
-  nextStep: PropTypes.func.isRequired
+  getGrades: PropTypes.func.isRequired,
+  nextStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
-  participant: state.participant
+  participant: state.participant,
 });
 
-export default connect(mapStateToProps, { setParticipantDetails })(
+export default connect(mapStateToProps, { setParticipantDetails, getGrades })(
   FormParticipantDetails
 );
