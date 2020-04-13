@@ -31,11 +31,11 @@ const initialState = {
   volunteerDetails: {
     last_name: "",
     first_name: "",
-    role: "",
     contact_no: "",
     whatsApp_no: "",
     email: "",
     gender: "",
+    preferred_role: "",
     preferred_class: "",
     church: "",
     previous_volunteer: "",

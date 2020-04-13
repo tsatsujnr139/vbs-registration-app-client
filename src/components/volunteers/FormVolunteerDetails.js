@@ -19,13 +19,17 @@ import Crane from "../../static/images/crane.png";
 import JackHammer from "../../static/images/jackhammer.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
+import { getGrades } from "../../actions/participantActions";
+import { getRoles } from "../../actions/volunteerActions";
 
 const FormVolunteerDetails = ({
   nextStep,
   formDetails: { volunteerDetails, step },
-  participant: { loading },
+  participant: { loading, grades },
+  volunteer: { roles },
   setVolunteerDetails,
-  grades,
+  getGrades,
+  getRoles,
 }) => {
   const { Option } = Select;
   const { Content } = Layout;
@@ -34,11 +38,12 @@ const FormVolunteerDetails = ({
 
   useEffect(() => {
     forceUpdate({});
+    getGrades();
+    getRoles();
     //eslint-disable-next-line
   }, []);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
     setVolunteerDetails(values);
     nextStep();
   };
@@ -47,9 +52,17 @@ const FormVolunteerDetails = ({
     console.log("Failed:", errorInfo);
   };
 
-  if (loading) {
+  const onPreviousVolunteerChange = (e) => {
+    console.log("radio checked", e.target.value);
+    const values = {
+      previous_volunteer: e.target.value,
+    };
+    setVolunteerDetails(values);
+  };
+
+  if (loading || grades == null || roles == null) {
     return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
+      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
   }
 
@@ -138,7 +151,7 @@ const FormVolunteerDetails = ({
                         },
                       ]}
                     >
-                      <Radio.Group size="medium">
+                      <Radio.Group size="medium" buttonStyle="solid">
                         <Radio.Button value="Male">Male</Radio.Button>
                         <Radio.Button value="Female">Female</Radio.Button>
                       </Radio.Group>
@@ -193,6 +206,25 @@ const FormVolunteerDetails = ({
                       <Input placeholder="Email Address" />
                     </Form.Item>
                     <Form.Item
+                      label="Preferred Role"
+                      name="preferred_role"
+                      style={{ display: "inline-block", width: "calc(100%)" }}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select a preferred role",
+                        },
+                      ]}
+                    >
+                      <Select defaultValue="Preferred Role">
+                        {roles.map((role) => (
+                          <Option key={role.name} value={role.name}>
+                            {role.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                    <Form.Item
                       label="Preferred Class (Preferred class not guaranteed)"
                       name="preferred_class"
                       style={{ display: "inline-block", width: "calc(100%)" }}
@@ -203,7 +235,7 @@ const FormVolunteerDetails = ({
                         },
                       ]}
                     >
-                      <Select defaultValue="Class">
+                      <Select defaultValue="Preferred Class">
                         {grades.map((grade) => (
                           <Option key={grade.name} value={grade.name}>
                             {grade.name}
@@ -227,6 +259,47 @@ const FormVolunteerDetails = ({
                     >
                       <Input placeholder="Your home church" />
                     </Form.Item>
+                    <Form.Item
+                      label="Have you volunteered for VBS before"
+                      name="previous_volunteer"
+                      style={{ display: "inline-block", width: "calc(100%)" }}
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please select an option",
+                        },
+                      ]}
+                    >
+                      <Radio.Group
+                        size="medium"
+                        onChange={onPreviousVolunteerChange}
+                        buttonStyle="solid"
+                      >
+                        <Radio.Button value="True">Yes</Radio.Button>
+                        <Radio.Button value="False">No</Radio.Button>
+                      </Radio.Group>
+                    </Form.Item>
+
+                    {volunteerDetails.previous_volunteer === "True" && (
+                      <Form.Item
+                        label="Which role/site/class did you volunteer with"
+                        name="previous_site"
+                        defaultValue={volunteerDetails.previous_site}
+                        style={{
+                          display: "inline-block",
+                          width: "calc(100%)",
+                        }}
+                        rules={[
+                          {
+                            required: true,
+                            message:
+                              "Please enter the site you volunteered with",
+                          },
+                        ]}
+                      >
+                        <Input placeholder="Which site/role did you volunteer with" />
+                      </Form.Item>
+                    )}
                     <Form.Item shouldUpdate>
                       {() => (
                         <Button
@@ -269,22 +342,26 @@ const FormVolunteerDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 750,
+  height: 950,
   borderRadius: "2px",
 };
 
 FormVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   setVolunteerDetails: PropTypes.func.isRequired,
-  grades: PropTypes.array.isRequired,
+  getGrades: PropTypes.func.isRequired,
+  getRoles: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
   participant: state.participant,
+  volunteer: state.volunteer,
 });
 
-export default connect(mapStateToProps, { setVolunteerDetails })(
-  FormVolunteerDetails
-);
+export default connect(mapStateToProps, {
+  setVolunteerDetails,
+  getGrades,
+  getRoles,
+})(FormVolunteerDetails);

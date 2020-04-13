@@ -1,15 +1,18 @@
 import {
   SET_LOADING,
-  REGISTER_VOLUNTEER,
   REGISTRATION_ERROR,
   GET_VOLUNTEERS,
+  GET_ROLES,
   SEARCH_VOLUNTEER,
+  REGISTRATION_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
   loading: false,
   error: null,
   volunteers: null,
+  roles: null,
+  success: null,
 };
 
 export default (state = initialState, action) => {
@@ -25,10 +28,17 @@ export default (state = initialState, action) => {
         loading: false,
         volunteers: action.payload,
       };
-    case REGISTER_VOLUNTEER:
+    case GET_ROLES:
       return {
         ...state,
         loading: false,
+        roles: action.payload,
+      };
+    case REGISTRATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
       };
     case SEARCH_VOLUNTEER:
       return {

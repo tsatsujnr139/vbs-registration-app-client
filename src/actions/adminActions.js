@@ -4,6 +4,7 @@ import {
   ADD_ADMIN,
   GENERAL_ERROR,
   ADD_ADMIN_ERROR,
+  AUTH_ERROR,
 } from "./types";
 import axios from "axios";
 
@@ -136,8 +137,8 @@ export const getDashboardData = () => async (dispatch) => {
 
 // Add New Admin
 export const addAdmin = (formData) => async (dispatch) => {
-  setLoading();
   try {
+    setLoading();
     // const config = {
     //   headers: {
     //     "Content-Type": "application/json",

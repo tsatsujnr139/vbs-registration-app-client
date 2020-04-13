@@ -9,13 +9,7 @@ import {
 import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
 
-// let apiBaseUrl;
-
-// if (process.env.NODE_ENV !== "production") {
-//   apiBaseUrl = process.env.REACT_APP_VBS_API_BASE_URL;
-// } else {
-//   apiBaseUrl = process.env.VBS_API_BASE_URL;
-// }
+let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Set Loading
 export const setLoading = () => {
@@ -28,15 +22,15 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    // const res = await axios.get(`${apiBaseUrl}/api/auth`);
-    const res = {
-      data: {
-        surname: "Asomaning",
-        firstName: "Aforo",
-        email: "aforo@email.com",
-        password: "password",
-      },
-    };
+    const res = await axios.get(`${apiBaseUrl}/user/self`);
+    // const res = {
+    //   data: {
+    //     last_name: "Asomaning",
+    //     first_name: "Aforo",
+    //     email: "aforo@email.com",
+    //     password: "password",
+    //   },
+    // };
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -53,17 +47,17 @@ export const loadUser = () => async (dispatch) => {
 export const login = (formData) => async (dispatch) => {
   setLoading();
   try {
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // };
-    // const res = axios.post(`${apiBaseUrl}/api/auth`,formData,config);
-    const res = {
-      data: {
-        token: "token",
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
       },
     };
+    const res = axios.post(`${apiBaseUrl}/api/user/token`, formData, config);
+    // const res = {
+    //   data: {
+    //     token: "token",
+    //   },
+    // };
     loadUser();
     dispatch({
       type: LOGIN_SUCCESS,

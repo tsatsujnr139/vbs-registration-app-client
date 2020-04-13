@@ -37,8 +37,14 @@ const ConfirmParticipantDetails = ({
   registerParticipant,
   participant: { error, loading, success },
 }) => {
-  useEffect(() => {}, []);
-
+  useEffect(() => {
+    if (error) {
+      errorAlert();
+    }
+    if (success) {
+      nextStep();
+    }
+  });
   const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
     registerParticipant({
@@ -47,24 +53,18 @@ const ConfirmParticipantDetails = ({
     });
   };
 
-  if (success) {
-    nextStep();
-  }
-
   const errorAlert = () => {
     Modal.error({
       title: "Error Completing Registration",
       content:
-        "There was an completing your registration at this time. Please try again later",
+        "There was an error completing your registration at this time. Please try again later",
     });
   };
 
-  if (error) {
-    return errorAlert();
-  }
-
   if (loading) {
-    return <Spin size="large" />;
+    return (
+      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
+    );
   }
 
   return (
@@ -112,7 +112,7 @@ const ConfirmParticipantDetails = ({
               </Descriptions>
             </Card>
           </Col>
-          <Col span={6}>
+          <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
             <img src={Excavator} alt="" />
           </Col>
         </Row>

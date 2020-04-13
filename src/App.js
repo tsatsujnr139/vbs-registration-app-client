@@ -10,6 +10,7 @@ import store from "./store";
 import "./App.css";
 import Dashboard from "./components/admin/AdminPanel";
 import ConfirmParticipantDetails from "./components/participants/ConfirmParticipantDetails";
+import ConfirmVolunteerDetails from "./components/volunteers/ConfirmVolunteerDetails";
 import ParticipantRegistrationSuccess from "./components/participants/ParticipantRegistrationSuccess";
 
 const App = () => {
@@ -31,11 +32,7 @@ const App = () => {
               component={RegisterVolunteerForm}
             />
             <Route exact path="/admin/login" component={Login} />
-            <Route
-              exact
-              path="/confirm"
-              component={ConfirmParticipantDetails}
-            />
+            <Route exact path="/confirm" component={ConfirmVolunteerDetails} />
             <Route
               exact
               path="/success"

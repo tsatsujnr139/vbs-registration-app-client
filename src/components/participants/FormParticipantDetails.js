@@ -228,7 +228,7 @@ const FormParticipantDetails = ({
                       },
                     ]}
                   >
-                    <Radio.Group size="medium">
+                    <Radio.Group size="medium" buttonStyle="solid">
                       <Radio.Button value="Male">Male</Radio.Button>
                       <Radio.Button value="Female">Female</Radio.Button>
                     </Radio.Group>
