@@ -12,7 +12,7 @@ const initialState = {
   loading: false,
   error: null,
   grades: null,
-  participants: null,
+  participantData: null,
   success: null,
 };
 
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
     case GET_PARTICIPANTS:
       return {
         ...state,
-        participants: action.payload,
+        participantData: action.payload,
         loading: false,
       };
     case SEARCH_PARTICIPANT:

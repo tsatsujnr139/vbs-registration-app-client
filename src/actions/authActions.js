@@ -47,11 +47,11 @@ export const login = (formData) => async (dispatch) => {
     };
     const res = await axios.post(`${apiBaseUrl}/user/token/`, formData, config);
     console.log("res::" + res);
-    // loadUser();
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.token,
     });
+    loadUser();
   } catch (error) {
     console.error("Error Logging in User::: " + error);
     let statusCode = error.response.status;

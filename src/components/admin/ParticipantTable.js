@@ -9,26 +9,28 @@ import {
 import PropTypes from "prop-types";
 
 const ParticipantTable = ({
-  participant: { participants, loading },
+  participant: { participantData, loading },
   getParticipants,
   searchParticipant,
 }) => {
   useEffect(() => {
-    getParticipants();
+    if (participantData == null) {
+      getParticipants();
+    }
     // eslint-disable-next-line
   }, []);
 
   const columns = [
     {
       title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
+      dataIndex: "last_name",
+      key: "last_name",
       fixed: "left",
     },
     {
       title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      dataIndex: "first_name",
+      key: "first_name",
       fixed: "left",
     },
     {
@@ -54,12 +56,12 @@ const ParticipantTable = ({
     },
     {
       title: "Class",
-      dataIndex: "class",
+      dataIndex: "grade",
       key: "grade",
       filters: [
         {
-          text: "Preschool",
-          value: "Preschool 1",
+          text: "Pre-school",
+          value: "Pre-school",
         },
         {
           text: "Class 1",
@@ -98,17 +100,12 @@ const ParticipantTable = ({
           value: "JHS 3",
         },
       ],
-      onFilter: (value, record) => record.class.indexOf(value) === 0,
+      onFilter: (value, record) => record.grade.indexOf(value) === 0,
     },
     {
       title: "Church",
       dataIndex: "church",
       key: "church",
-    },
-    {
-      title: "Medical Information",
-      dataIndex: "medicalInfo",
-      key: "medicalInfo",
     },
     {
       title: "Action",
@@ -127,8 +124,10 @@ const ParticipantTable = ({
     searchParticipant(value);
   };
 
-  if (loading) {
-    return <Spin size="large" />;
+  if (loading || participantData == null) {
+    return (
+      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
+    );
   }
 
   return (
@@ -159,9 +158,9 @@ const ParticipantTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={participants}
+              dataSource={participantData.results}
               pagination={true}
-              loading={loading}
+              loading={loading || participantData == null}
               scroll={{ x: 1000 }}
             />
           </Card>

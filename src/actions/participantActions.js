@@ -9,6 +9,7 @@ import {
   SEARCH_PARTICIPANT,
 } from "./types";
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -67,42 +68,28 @@ export const registerParticipant = (formData) => async (dispatch) => {
 
 // Retrieve Most Recent Registered Participants
 export const getParticipants = () => async (dispatch) => {
-  setLoading();
-  // const config = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // };
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    setLoading();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-  // const res = await axios.get(`${apiBaseUrl}/participants`,config)
-  const res = {
-    data: [
-      {
-        key: "1",
-        firstName: "Aba",
-        lastName: "Asomaning",
-        class: "JHS 1",
-        church: "Legon Interdenominational Church",
-        age: 13,
-        gender: "Female",
-        medicalInfo: "Allergic to pineapple",
-      },
-      {
-        key: "2",
-        firstName: "Adoma",
-        lastName: "Asomaning",
-        class: "Class 3",
-        church: "Legon Interdenominational Church",
-        age: 9,
-        gender: "Female",
-        medicalInfo: "N/A",
-      },
-    ],
-  };
-  dispatch({
-    type: GET_PARTICIPANTS,
-    payload: res.data,
-  });
+    const res = await axios.get(`${apiBaseUrl}/participants/`, config);
+    dispatch({
+      type: GET_PARTICIPANTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GENERAL_ERROR,
+      payload: error.message,
+    });
+  }
 };
 
 // Search for a participant by last name

@@ -31,7 +31,7 @@ const AdminPanel = (props) => {
   useEffect(() => {
     loadUser();
     // eslint-disable-next-line
-  }, [isAuthenticated, history]);
+  }, []);
 
   const handleMenuClick = (menu) => {
     updateRender(menu.key);
