@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Input, Form, Button, Table } from "antd";
+import { Row, Col, Card, Input, Form, Button, Table, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
 import { getVolunteers, searchVolunteer } from "../../actions/volunteerActions";
 
 const VolunteerTable = ({
-  volunteer: { volunteers, loading },
+  volunteer: { volunteerData, loading },
   searchVolunteer,
   getVolunteers,
 }) => {
@@ -114,6 +114,12 @@ const VolunteerTable = ({
     searchVolunteer(value);
   };
 
+  if (loading || volunteerData == null) {
+    return (
+      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
+    );
+  }
+
   return (
     <Fragment>
       <Row>
@@ -142,7 +148,7 @@ const VolunteerTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={volunteers}
+              dataSource={volunteerData}
               pagination={true}
               loading={loading}
               scroll={{ x: 1000 }}

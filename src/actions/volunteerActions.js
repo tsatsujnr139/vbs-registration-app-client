@@ -8,6 +8,7 @@ import {
   REGISTRATION_SUCCESS,
 } from "./types";
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -31,38 +32,28 @@ export const getRoles = () => async (dispatch) => {
 
 // Retrieve Most Recent Registered Volunteers
 export const getVolunteers = () => async (dispatch) => {
-  setLoading();
-  // const config = {
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  // };
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    setLoading();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-  // const res = await axios.get(`${apiBaseUrl}/participants`,config)
-  const res = {
-    data: [
-      {
-        key: "1",
-        firstName: "Tsatsu",
-        lastName: "Adogla-Bessa",
-        class: "Pre-school",
-        church: "Legon Interdenominational Church",
-        gender: "Male",
-      },
-      {
-        key: "2",
-        firstName: "Sena",
-        lastName: "Adogla-Bessa",
-        class: "Class 1",
-        church: "Legon Interdenominational Church",
-        gender: "Female",
-      },
-    ],
-  };
-  dispatch({
-    type: GET_VOLUNTEERS,
-    payload: res.data,
-  });
+    const res = await axios.get(`${apiBaseUrl}/volunteers/`, config);
+    dispatch({
+      type: GET_VOLUNTEERS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GENERAL_ERROR,
+      payload: error.message,
+    });
+  }
 };
 
 // Register a volunteer

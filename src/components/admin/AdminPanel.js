@@ -19,8 +19,7 @@ import { loadUser } from "../../actions/authActions";
 
 const AdminPanel = (props) => {
   const {
-    auth: { isAuthenticated, loading },
-    history,
+    auth: { loading },
     loadUser,
   } = props;
 

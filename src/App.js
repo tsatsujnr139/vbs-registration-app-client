@@ -6,35 +6,48 @@ import Login from "./components/admin/Login";
 import RegisterVolunteerForm from "./components/volunteers/RegisterVolunteerForm";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import storeConfig from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 import "./App.css";
 import Dashboard from "./components/admin/AdminPanel";
 import PrivateRoute from "./routing/PrivateRoute";
+import { Spin } from "antd";
 
 const App = () => {
+  const { store, persistor } = storeConfig;
+
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          {/* <Navbar /> */}
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/participants/register"
-              component={RegisterParticipant}
-            />
-            <Route
-              exact
-              path="/volunteers/register"
-              component={RegisterVolunteerForm}
-            />
-            <Route exact path="/admin/login" component={Login} />
-            <PrivateRoute exact path="/admin/dashboard" component={Dashboard} />
-            <Route component={NotFound} />
-          </Switch>
-        </Fragment>
-      </Router>
+      <PersistGate
+        loading={<Spin size="large" style={{ marginTop: "200px" }} />}
+        persistor={persistor}
+      >
+        <Router>
+          <Fragment>
+            {/* <Navbar /> */}
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/participants/register"
+                component={RegisterParticipant}
+              />
+              <Route
+                exact
+                path="/volunteers/register"
+                component={RegisterVolunteerForm}
+              />
+              <Route exact path="/admin/login" component={Login} />
+              <PrivateRoute
+                exact
+                path="/admin/dashboard"
+                component={Dashboard}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Fragment>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };

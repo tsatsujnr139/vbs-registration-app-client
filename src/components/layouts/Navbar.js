@@ -1,43 +1,19 @@
 import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Menu, Layout } from "antd";
-import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
+import { LoginOutlined } from "@ant-design/icons";
 import LogoTitle from "../../static/images/logo-title.png";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { logout } from "../../actions/authActions";
 
-const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
+const Navbar = ({ logout }) => {
   const [current, setCurrent] = useState("");
 
   const { Header } = Layout;
 
-  const onClick = e => {
+  const onClick = (e) => {
     setCurrent(e.key);
   };
-
-  const onLogout = e => {
-    logout();
-  };
-
-  const authLinks = (
-    <Fragment>
-      <Menu
-        onClick={onClick}
-        selectedKeys={current}
-        mode="horizontal"
-        style={{ textAlign: "end", lineHeight: "70px" }}
-      >
-        <Menu.Item key="greeting" disabled="true">
-          Hello {user && user.name}
-        </Menu.Item>
-        <Menu.Item key="admin-logout" onClick={onLogout}>
-          <LogoutOutlined />
-          Logout
-        </Menu.Item>
-      </Menu>
-    </Fragment>
-  );
 
   const guestLinks = (
     <Menu
@@ -82,19 +58,11 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
           mode="horizontal"
           style={{ textAlign: "end", lineHeight: "70px" }}
         >
-          {isAuthenticated ? authLinks : guestLinks}
+          {guestLinks}
         </Menu>
       </Header>
     </Fragment>
   );
 };
 
-Navbar.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(null, { logout })(Navbar);

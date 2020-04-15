@@ -10,7 +10,7 @@ import {
 const initialState = {
   loading: false,
   error: null,
-  volunteers: null,
+  volunteerData: null,
   roles: null,
   success: null,
 };
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        volunteers: action.payload,
+        volunteerData: action.payload,
       };
     case GET_ROLES:
       return {
