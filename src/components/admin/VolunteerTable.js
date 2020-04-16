@@ -18,14 +18,14 @@ const VolunteerTable = ({
   const columns = [
     {
       title: "Last Name",
-      dataIndex: "lastName",
-      key: "lastName",
+      dataIndex: "last_name",
+      key: "last_name",
       fixed: "left",
     },
     {
       title: "First Name",
-      dataIndex: "firstName",
-      key: "firstName",
+      dataIndex: "first_name",
+      key: "first_name",
       fixed: "left",
     },
     {
@@ -46,8 +46,8 @@ const VolunteerTable = ({
     },
     {
       title: "Class",
-      dataIndex: "class",
-      key: "grade",
+      dataIndex: "preferred_class",
+      key: "preferred_class",
       filters: [
         {
           text: "Preschool",
@@ -90,7 +90,7 @@ const VolunteerTable = ({
           value: "JHS 3",
         },
       ],
-      onFilter: (value, record) => record.class.indexOf(value) === 0,
+      onFilter: (value, record) => record.preferred_class.indexOf(value) === 0,
     },
     {
       title: "Church",
@@ -148,9 +148,9 @@ const VolunteerTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={volunteerData}
+              dataSource={volunteerData.results}
               pagination={true}
-              loading={loading}
+              loading={loading || volunteerData == null}
               scroll={{ x: 1000 }}
             />
           </Card>
