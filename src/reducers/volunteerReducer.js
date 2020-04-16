@@ -5,6 +5,8 @@ import {
   GET_ROLES,
   SEARCH_VOLUNTEER,
   REGISTRATION_SUCCESS,
+  GENERAL_ERROR,
+  CLEAR_ERRORS,
 } from "../actions/types";
 
 const initialState = {
@@ -44,13 +46,25 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        volunteers: action.payload,
+        volunteerData: action.payload,
       };
     case REGISTRATION_ERROR:
       return {
         ...state,
         error: action.payload,
         loading: false,
+      };
+    case GENERAL_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: "Error retrieving the requested resource",
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     default:
       return state;

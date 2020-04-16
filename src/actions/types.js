@@ -20,6 +20,7 @@ export const AUTH_ERROR = "AUTH_ERROR";
 
 // General
 export const GENERAL_ERROR = "GENERAL_ERROR";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 // Admin
 export const GET_DASHBOARD_DATA = "GET_DASHBOARD_DATA";

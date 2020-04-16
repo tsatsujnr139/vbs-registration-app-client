@@ -6,6 +6,7 @@ import {
   GET_VOLUNTEERS,
   GET_ROLES,
   REGISTRATION_SUCCESS,
+  CLEAR_ERRORS,
 } from "./types";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
@@ -81,22 +82,13 @@ export const registerVolunteer = (formData) => async (dispatch) => {
 };
 
 // Search for a volunteer by last name
-export const searchVolunteer = (formData) => async (dispatch) => {
+export const searchVolunteer = (value) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
     setLoading();
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // };
-    // const res = await axios.post(
-    //   `${apiBaseUrl}/participants`,
-    //   formData,
-    //   config
-    // );
-    const res = {
-      data: null,
-    };
+    const res = await axios.get(`${apiBaseUrl}/volunteers/?last_name=${value}`);
     dispatch({
       type: SEARCH_VOLUNTEER,
       payload: res.data,
@@ -111,4 +103,8 @@ export const searchVolunteer = (formData) => async (dispatch) => {
 
 export const setLoading = () => {
   return { type: SET_LOADING };
+};
+
+export const clearErrors = () => {
+  return { type: CLEAR_ERRORS };
 };

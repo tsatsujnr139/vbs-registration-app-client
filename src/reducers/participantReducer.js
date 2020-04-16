@@ -6,6 +6,8 @@ import {
   REGISTRATION_ERROR,
   GET_PARTICIPANTS,
   SEARCH_PARTICIPANT,
+  GENERAL_ERROR,
+  CLEAR_ERRORS,
 } from "../actions/types";
 
 const initialState = {
@@ -51,13 +53,25 @@ export default (state = initialState, action) => {
     case SEARCH_PARTICIPANT:
       return {
         ...state,
-        participants: action.payload,
+        participantData: action.payload,
         loading: false,
       };
     case SET_LOADING:
       return {
         ...state,
         loading: true,
+      };
+    case GENERAL_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: "Error retrieving the requested resource",
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     default:
       return state;

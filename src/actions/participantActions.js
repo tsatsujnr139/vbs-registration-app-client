@@ -7,6 +7,7 @@ import {
   GET_PARTICIPANTS,
   GENERAL_ERROR,
   SEARCH_PARTICIPANT,
+  CLEAR_ERRORS,
 } from "./types";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
@@ -17,14 +18,7 @@ let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 export const getGrades = () => async (dispatch) => {
   try {
     setLoading();
-    const res = {
-      data: [
-        {
-          name: "class 1",
-        },
-      ],
-    };
-    // const res = await axios.get(`${apiBaseUrl}/grades`);
+    const res = await axios.get(`${apiBaseUrl}/grades`);
     dispatch({
       type: GET_GRADES,
       payload: res.data,
@@ -93,22 +87,16 @@ export const getParticipants = () => async (dispatch) => {
 };
 
 // Search for a participant by last name
-export const searchParticipant = (formData) => async (dispatch) => {
+export const searchParticipant = (value) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
     setLoading();
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // };
-    // const res = await axios.post(
-    //   `${apiBaseUrl}/participants`,
-    //   formData,
-    //   config
-    // );
-    const res = {
-      data: null,
-    };
+
+    const res = await axios.get(
+      `${apiBaseUrl}/participants/?last_name=${value}`
+    );
     dispatch({
       type: SEARCH_PARTICIPANT,
       payload: res.data,
@@ -124,4 +112,8 @@ export const searchParticipant = (formData) => async (dispatch) => {
 
 export const setLoading = () => {
   return { type: SET_LOADING };
+};
+
+export const clearErrors = () => {
+  return { type: CLEAR_ERRORS };
 };

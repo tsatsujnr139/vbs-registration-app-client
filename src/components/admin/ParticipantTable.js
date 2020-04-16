@@ -1,17 +1,29 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Input, Form, Button, Table, Spin } from "antd";
+import {
+  Row,
+  Col,
+  Card,
+  Input,
+  Form,
+  Button,
+  Table,
+  Spin,
+  notification,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import {
   getParticipants,
   searchParticipant,
+  clearErrors,
 } from "../../actions/participantActions";
 import PropTypes from "prop-types";
 
 const ParticipantTable = ({
-  participant: { participantData, loading },
+  participant: { participantData, loading, error },
   getParticipants,
   searchParticipant,
+  clearErrors,
 }) => {
   useEffect(() => {
     if (participantData == null) {
@@ -120,14 +132,27 @@ const ParticipantTable = ({
   ];
 
   const onSearchFinished = (value) => {
-    console.log("Searching for participant: ", value);
-    searchParticipant(value);
+    console.log("Searching for participant: ", value.search);
+    searchParticipant(value.search);
+  };
+
+  const errorNotification = () => {
+    notification.error({
+      message: "Oops",
+      description:
+        "There was an unexpected error completing this request. Please try again later.",
+    });
   };
 
   if (loading || participantData == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
+  }
+
+  if (error) {
+    errorNotification();
+    clearErrors();
   }
 
   return (
@@ -158,7 +183,10 @@ const ParticipantTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={participantData.results}
+              dataSource={participantData.results.map((record) => ({
+                ...record,
+                key: record.id,
+              }))}
               pagination={true}
               loading={loading || participantData == null}
               scroll={{ x: 1000 }}
@@ -172,14 +200,19 @@ const ParticipantTable = ({
 
 ParticipantTable.propTypes = {
   participant: PropTypes.object.isRequired,
+  admin: PropTypes.object.isRequired,
   getParticipants: PropTypes.func.isRequired,
   searchParticipant: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   participant: state.participant,
+  admin: state.admin,
 });
 
-export default connect(mapStateToProps, { getParticipants, searchParticipant })(
-  ParticipantTable
-);
+export default connect(mapStateToProps, {
+  getParticipants,
+  searchParticipant,
+  clearErrors,
+})(ParticipantTable);

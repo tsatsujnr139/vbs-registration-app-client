@@ -1,14 +1,29 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card, Input, Form, Button, Table, Spin } from "antd";
+import {
+  Row,
+  Col,
+  Card,
+  Input,
+  Form,
+  Button,
+  Table,
+  Spin,
+  notification,
+} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
-import { getVolunteers, searchVolunteer } from "../../actions/volunteerActions";
+import {
+  getVolunteers,
+  searchVolunteer,
+  clearErrors,
+} from "../../actions/volunteerActions";
 
 const VolunteerTable = ({
-  volunteer: { volunteerData, loading },
+  volunteer: { volunteerData, loading, error },
   searchVolunteer,
   getVolunteers,
+  clearErrors,
 }) => {
   useEffect(() => {
     getVolunteers();
@@ -109,15 +124,28 @@ const VolunteerTable = ({
     },
   ];
 
+  const errorNotification = () => {
+    notification.error({
+      message: "Oops",
+      description:
+        "There was an unexpected error completing this request. Please try again later.",
+    });
+  };
+
   const onSearchFinished = (value) => {
-    console.log("Searching for: ", value);
-    searchVolunteer(value);
+    console.log("Searching for volunteer : ", value.search);
+    searchVolunteer(value.search);
   };
 
   if (loading || volunteerData == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
+  }
+
+  if (error) {
+    errorNotification();
+    clearErrors();
   }
 
   return (
@@ -148,7 +176,10 @@ const VolunteerTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={volunteerData.results}
+              dataSource={volunteerData.results.map((record) => ({
+                ...record,
+                key: record.id,
+              }))}
               pagination={true}
               loading={loading || volunteerData == null}
               scroll={{ x: 1000 }}
@@ -162,12 +193,16 @@ const VolunteerTable = ({
 
 VolunteerTable.propTypes = {
   searchVolunteer: PropTypes.func.isRequired,
+  getVolunteers: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   volunteer: state.volunteer,
 });
 
-export default connect(mapStateToProps, { getVolunteers, searchVolunteer })(
-  VolunteerTable
-);
+export default connect(mapStateToProps, {
+  getVolunteers,
+  searchVolunteer,
+  clearErrors,
+})(VolunteerTable);
