@@ -8,6 +8,9 @@ import {
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
+import storeConfig from "../store";
+
+const { persistor } = storeConfig;
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -71,5 +74,6 @@ export const login = (formData) => async (dispatch) => {
 
 // Logout
 export const logout = () => {
+  persistor.purge();
   return { type: LOGOUT };
 };

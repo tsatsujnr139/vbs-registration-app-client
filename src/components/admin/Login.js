@@ -25,7 +25,6 @@ const Login = (props) => {
   }, [error, isAuthenticated, history]);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
     login({ ...values });
   };
 
@@ -91,6 +90,10 @@ const Login = (props) => {
                     {
                       required: true,
                       message: "Please enter your email!",
+                    },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email address",
                     },
                   ]}
                 >

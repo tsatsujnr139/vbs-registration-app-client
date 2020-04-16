@@ -19,7 +19,12 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate
-        loading={<Spin size="large" style={{ marginTop: "200px" }} />}
+        loading={
+          <Spin
+            size="large"
+            style={{ marginLeft: "calc(50%)", marginTop: "200px" }}
+          />
+        }
         persistor={persistor}
       >
         <Router>
