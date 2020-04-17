@@ -34,7 +34,7 @@ export const loadUser = () => async (dispatch) => {
     console.error("Error Loading User::: " + error);
     dispatch({
       type: AUTH_ERROR,
-      payload: `Please login again.`,
+      payload: `Session has expired. Please login again.`,
     });
   }
 };
@@ -57,12 +57,19 @@ export const login = (formData) => async (dispatch) => {
     loadUser();
   } catch (error) {
     console.error("Error Logging in User::: " + error);
-    let statusCode = error.response.status;
-    if (statusCode === 400) {
-      dispatch({
-        type: LOGIN_FAIL,
-        payload: error.response.data.non_field_errors,
-      });
+    if (error.response) {
+      let statusCode = error.response.status;
+      if (statusCode === 400) {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: error.response.data.non_field_errors,
+        });
+      } else {
+        dispatch({
+          type: LOGIN_FAIL,
+          payload: "Unable to login at this time. Please try again later.",
+        });
+      }
     } else {
       dispatch({
         type: LOGIN_FAIL,

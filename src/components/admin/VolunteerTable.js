@@ -180,7 +180,13 @@ const VolunteerTable = ({
                 ...record,
                 key: record.id,
               }))}
-              pagination={true}
+              pagination={{
+                total: volunteerData.count,
+                showTotal: (total, range) =>
+                  `${range[0]}-${range[1]} of ${total} volunteers`,
+                pageSize: 50,
+                defaultCurrent: 1,
+              }}
               loading={loading || volunteerData == null}
               scroll={{ x: 1000 }}
             />
