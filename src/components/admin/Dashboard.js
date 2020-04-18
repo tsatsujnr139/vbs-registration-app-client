@@ -1,15 +1,28 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboardData } from "../../actions/adminActions";
+import { getDashboardData, clearErrors } from "../../actions/adminActions";
+import { notification } from "antd";
 import Overview from "./Overview";
 import Distributions from "./Distributions";
 
-const Dashboard = ({ admin: { dashboardData }, getDashboardData }) => {
+const Dashboard = ({ admin: { dashboardData, error }, getDashboardData }) => {
   useEffect(() => {
     getDashboardData();
     // eslint-disable-next-line
   }, []);
+
+  const errorNotification = () => {
+    notification.error({
+      message: "Sorry",
+      description: error,
+    });
+  };
+
+  if (error) {
+    errorNotification();
+    clearErrors();
+  }
 
   return (
     <Fragment>
@@ -22,10 +35,13 @@ const Dashboard = ({ admin: { dashboardData }, getDashboardData }) => {
 Dashboard.proptTypes = {
   admin: PropTypes.object.isRequired,
   getDashboardData: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-export default connect(mapStateToProps, { getDashboardData })(Dashboard);
+export default connect(mapStateToProps, { getDashboardData, clearErrors })(
+  Dashboard
+);

@@ -22,8 +22,8 @@ const Distributions = ({ admin: { loading }, dashboardData }) => {
               total={() => (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: dashboardData.distributions.participantClassDistribution.reduce(
-                      (pre, now) => now.y + pre,
+                    __html: dashboardData.distributions.participant_class_distribution.reduce(
+                      (pre, now) => now.count + pre,
                       0
                     ),
                   }}
@@ -31,7 +31,9 @@ const Distributions = ({ admin: { loading }, dashboardData }) => {
               )}
               data={
                 dashboardData != null &&
-                dashboardData.distributions.participantClassDistribution
+                dashboardData.distributions.participant_class_distribution.map(
+                  (record) => ({ x: record.grade, y: record.count })
+                )
               }
               valueFormat={(val) => (
                 <span dangerouslySetInnerHTML={{ __html: val }} />
@@ -54,8 +56,8 @@ const Distributions = ({ admin: { loading }, dashboardData }) => {
               total={() => (
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: dashboardData.distributions.volunteerClassDistribution.reduce(
-                      (pre, now) => now.y + pre,
+                    __html: dashboardData.distributions.volunteer_class_distribution.reduce(
+                      (pre, now) => now.count + pre,
                       0
                     ),
                   }}
@@ -63,7 +65,9 @@ const Distributions = ({ admin: { loading }, dashboardData }) => {
               )}
               data={
                 dashboardData != null &&
-                dashboardData.distributions.volunteerClassDistribution
+                dashboardData.distributions.volunteer_class_distribution.map(
+                  (record) => ({ x: record.preferred_class, y: record.count })
+                )
               }
               valueFormat={(val) => (
                 <span dangerouslySetInnerHTML={{ __html: val }} />

@@ -4,6 +4,8 @@ import {
   ADD_ADMIN,
   SET_LOADING,
   GET_DASHBOARD_DATA,
+  DASHB0ARD_DATA_ERROR,
+  CLEAR_ERRORS,
 } from "../actions/types";
 
 const initialState = {
@@ -36,11 +38,24 @@ export default (state = initialState, action) => {
         loading: false,
         error: "Error retrieving the requested resource",
       };
+    case DASHB0ARD_DATA_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error:
+          "There was an error retrieving the dashboard data. Please reload the page to try again.",
+      };
     case ADD_ADMIN_ERROR:
       return {
         ...state,
         loading: false,
         error: "Unable to add new admin at this time. Please try again later",
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     default:
       return state;

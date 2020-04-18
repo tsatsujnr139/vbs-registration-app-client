@@ -2,18 +2,14 @@ import {
   SET_LOADING,
   GET_DASHBOARD_DATA,
   ADD_ADMIN,
-  GENERAL_ERROR,
+  DASHB0ARD_DATA_ERROR,
   ADD_ADMIN_ERROR,
+  CLEAR_ERRORS,
 } from "./types";
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 
-// let apiBaseUrl;
-
-// if (process.env.NODE_ENV !== "production") {
-//   apiBaseUrl = process.env.REACT_APP_VBS_API_BASE_URL;
-// } else {
-//   apiBaseUrl = process.env.VBS_API_BASE_URL;
-// }
+let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 export const setLoading = () => {
   return { type: SET_LOADING };
@@ -21,114 +17,120 @@ export const setLoading = () => {
 
 // Get Dashboard Data
 export const getDashboardData = () => async (dispatch) => {
-  setLoading();
   try {
-    // const res = await axios.get("/stats");
-    const res = {
-      data: {
-        overview: {
-          participantCount: 1008,
-          volunteerCount: 108,
-          churchCount: 20,
-          participantsThisWeek: 20,
-          volunteersThisWeek: 6,
-          churchesThisWeek: 2,
-        },
-        distributions: {
-          participantClassDistribution: [
-            {
-              x: "Pre-school",
-              y: 100,
-            },
-            {
-              x: "Class 1",
-              y: 42,
-            },
-            {
-              x: "Class 2",
-              y: 36,
-            },
-            {
-              x: "Class 3",
-              y: 37,
-            },
-            {
-              x: "Class 4",
-              y: 39,
-            },
-            {
-              x: "Class 5",
-              y: 36,
-            },
-            {
-              x: "Class 6",
-              y: 30,
-            },
-            {
-              x: "JHS 1",
-              y: 40,
-            },
-            {
-              x: "JHS 2",
-              y: 45,
-            },
-            {
-              x: "JHS 3",
-              y: 24,
-            },
-          ],
-          volunteerClassDistribution: [
-            {
-              x: "Pre-school",
-              y: 100,
-            },
-            {
-              x: "Class 1",
-              y: 42,
-            },
-            {
-              x: "Class 2",
-              y: 36,
-            },
-            {
-              x: "Class 3",
-              y: 37,
-            },
-            {
-              x: "Class 4",
-              y: 39,
-            },
-            {
-              x: "Class 5",
-              y: 36,
-            },
-            {
-              x: "Class 6",
-              y: 30,
-            },
-            {
-              x: "JHS 1",
-              y: 40,
-            },
-            {
-              x: "JHS 2",
-              y: 45,
-            },
-            {
-              x: "JHS 3",
-              y: 24,
-            },
-          ],
-        },
-      },
-    };
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    setLoading();
+    const res = await axios.get(`${apiBaseUrl}/dashboard-data/`);
+    // const res = {
+    //   data: {
+    //     overview: {
+    //       participants: 1008,
+    //       volunteers: 108,
+    //       participant_churches: 20,
+    //       volunteer_churches: 20,
+    //       participants_this_week: 20,
+    //       volunteers_this_week: 6,
+    //       participant_churches_this_week: 2,
+    //       volunteer_churches_this_week: 2,
+    //     },
+    //     distributions: {
+    //       participant_class_distribution: [
+    //         {
+    //           x: "Pre-school",
+    //           y: 100,
+    //         },
+    //         {
+    //           x: "Class 1",
+    //           y: 42,
+    //         },
+    //         {
+    //           x: "Class 2",
+    //           y: 36,
+    //         },
+    //         {
+    //           x: "Class 3",
+    //           y: 37,
+    //         },
+    //         {
+    //           x: "Class 4",
+    //           y: 39,
+    //         },
+    //         {
+    //           x: "Class 5",
+    //           y: 36,
+    //         },
+    //         {
+    //           x: "Class 6",
+    //           y: 30,
+    //         },
+    //         {
+    //           x: "JHS 1",
+    //           y: 40,
+    //         },
+    //         {
+    //           x: "JHS 2",
+    //           y: 45,
+    //         },
+    //         {
+    //           x: "JHS 3",
+    //           y: 24,
+    //         },
+    //       ],
+    //       volunteer_class_distribution: [
+    //         {
+    //           x: "Pre-school",
+    //           y: 100,
+    //         },
+    //         {
+    //           x: "Class 1",
+    //           y: 42,
+    //         },
+    //         {
+    //           x: "Class 2",
+    //           y: 36,
+    //         },
+    //         {
+    //           x: "Class 3",
+    //           y: 37,
+    //         },
+    //         {
+    //           x: "Class 4",
+    //           y: 39,
+    //         },
+    //         {
+    //           x: "Class 5",
+    //           y: 36,
+    //         },
+    //         {
+    //           x: "Class 6",
+    //           y: 30,
+    //         },
+    //         {
+    //           x: "JHS 1",
+    //           y: 40,
+    //         },
+    //         {
+    //           x: "JHS 2",
+    //           y: 45,
+    //         },
+    //         {
+    //           x: "JHS 3",
+    //           y: 24,
+    //         },
+    //       ],
+    //     },
+    //   },
+    // };
     dispatch({
       type: GET_DASHBOARD_DATA,
       payload: res.data,
     });
   } catch (error) {
+    console.error("Error Retreiving Dashboard Data:::" + error.message);
     dispatch({
-      type: GENERAL_ERROR,
+      type: DASHB0ARD_DATA_ERROR,
       payload: error.message,
     });
   }
@@ -136,6 +138,9 @@ export const getDashboardData = () => async (dispatch) => {
 
 // Add New Admin
 export const addAdmin = (formData) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
   try {
     setLoading();
     // const config = {
@@ -154,4 +159,8 @@ export const addAdmin = (formData) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const clearErrors = () => {
+  return { type: CLEAR_ERRORS };
 };

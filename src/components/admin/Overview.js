@@ -10,7 +10,7 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
   return (
     <Fragment>
       <Row align="top" gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
-        <Col span={8} xl={8} lg={8} md={24} sm={24} xs={24}>
+        <Col span={6} xl={6} lg={6} md={24} sm={24} xs={24}>
           <ChartCard
             bordered={false}
             hoverable={true}
@@ -25,7 +25,7 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
               <CountUp
                 delay={0.5}
                 duration={2}
-                end={dashboardData.overview.participantCount}
+                end={dashboardData.overview.participants}
               />
             )}
             footer={
@@ -33,13 +33,13 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
                 label="This Week"
                 value={
                   dashboardData != null &&
-                  dashboardData.overview.participantsThisWeek
+                  dashboardData.overview.participants_this_week
                 }
               />
             }
           ></ChartCard>
         </Col>
-        <Col span={8} xl={8} lg={8} md={24} sm={24} xs={24}>
+        <Col span={6} xl={6} lg={6} md={24} sm={24} xs={24}>
           <ChartCard
             bordered={false}
             hoverable={true}
@@ -54,7 +54,7 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
               <CountUp
                 delay={0.5}
                 duration={2}
-                end={dashboardData.overview.volunteerCount}
+                end={dashboardData.overview.volunteers}
               />
             )}
             footer={
@@ -62,20 +62,20 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
                 label="This Week"
                 value={
                   dashboardData != null &&
-                  dashboardData.overview.volunteersThisWeek
+                  dashboardData.overview.volunteers_this_week
                 }
               />
             }
           ></ChartCard>
         </Col>
-        <Col span={8} xl={8} lg={8} md={24} sm={24} xs={24}>
+        <Col span={6} xl={6} lg={6} md={24} sm={24} xs={24}>
           <ChartCard
             bordered={false}
             hoverable={true}
             loading={loading || dashboardData == null}
-            title="Churches Represented"
+            title="Participant Churches"
             action={
-              <Tooltip title="Total Number of churches represented">
+              <Tooltip title="Total Number of Churches Represented by Participants">
                 <InfoCircleOutlined />
               </Tooltip>
             }
@@ -83,7 +83,7 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
               <CountUp
                 delay={0.5}
                 duration={2}
-                end={dashboardData.overview.churchCount}
+                end={dashboardData.overview.participant_churches}
               />
             )}
             footer={
@@ -91,7 +91,36 @@ const Dashboard = ({ admin: { loading }, dashboardData }) => {
                 label="This week"
                 value={
                   dashboardData != null &&
-                  dashboardData.overview.churchesThisWeek
+                  dashboardData.overview.participant_churches_this_week
+                }
+              />
+            }
+          ></ChartCard>
+        </Col>
+        <Col span={6} xl={6} lg={6} md={24} sm={24} xs={24}>
+          <ChartCard
+            bordered={false}
+            hoverable={true}
+            loading={loading || dashboardData == null}
+            title="Volunteer Churches"
+            action={
+              <Tooltip title="Total Number of Churches Represented by Volunteers">
+                <InfoCircleOutlined />
+              </Tooltip>
+            }
+            total={() => (
+              <CountUp
+                delay={0.5}
+                duration={2}
+                end={dashboardData.overview.volunteer_churches}
+              />
+            )}
+            footer={
+              <Field
+                label="This week"
+                value={
+                  dashboardData != null &&
+                  dashboardData.overview.volunteer_churches_this_week
                 }
               />
             }
