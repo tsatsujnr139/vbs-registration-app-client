@@ -14,11 +14,6 @@ const { persistor } = storeConfig;
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
-// Set Loading
-export const setLoading = () => {
-  return { type: SET_LOADING };
-};
-
 // Load User
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -42,14 +37,13 @@ export const loadUser = () => async (dispatch) => {
 // Login
 export const login = (formData) => async (dispatch) => {
   try {
-    setLoading();
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
+
     const res = await axios.post(`${apiBaseUrl}/user/token/`, formData, config);
-    console.log("res::" + res);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.token,
@@ -67,13 +61,13 @@ export const login = (formData) => async (dispatch) => {
       } else {
         dispatch({
           type: LOGIN_FAIL,
-          payload: "Unable to login at this time. Please try again later.",
+          payload: "Unable to login at this time. Please try again.",
         });
       }
     } else {
       dispatch({
         type: LOGIN_FAIL,
-        payload: "Unable to login at this time. Please try again later.",
+        payload: "Unable to login at this time. Please try again.",
       });
     }
   }
@@ -83,4 +77,9 @@ export const login = (formData) => async (dispatch) => {
 export const logout = () => {
   persistor.purge();
   return { type: LOGOUT };
+};
+
+// Set Loading
+export const setLoading = () => {
+  return { type: SET_LOADING };
 };

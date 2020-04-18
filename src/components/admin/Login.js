@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Spin, Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
+import { Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
-import { login } from "../../actions/authActions";
+import { login, setLoading } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
@@ -12,6 +12,7 @@ const Login = (props) => {
   const {
     auth: { loading, isAuthenticated, error },
     login,
+    setLoading,
     history,
   } = props;
 
@@ -25,18 +26,13 @@ const Login = (props) => {
   }, [error, isAuthenticated, history]);
 
   const onFinish = (values) => {
+    setLoading();
     login({ ...values });
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
-  if (loading) {
-    return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
-    );
-  }
 
   return (
     <Fragment>
@@ -124,6 +120,7 @@ const Login = (props) => {
                     type="primary"
                     htmlType="submit"
                     style={{ width: "100%" }}
+                    loading={loading}
                   >
                     Login
                   </Button>
@@ -142,6 +139,7 @@ const Login = (props) => {
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
 };
 
 const cardStyle = {
@@ -154,4 +152,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { login, setLoading })(Login);

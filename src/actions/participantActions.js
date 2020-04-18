@@ -21,7 +21,7 @@ export const getGrades = () => async (dispatch) => {
     const res = await axios.get(`${apiBaseUrl}/grades`);
     dispatch({
       type: GET_GRADES,
-      payload: res.data,
+      payload: res.data.results,
     });
   } catch (error) {
     console.error("Error retrieving grades:::" + error);
