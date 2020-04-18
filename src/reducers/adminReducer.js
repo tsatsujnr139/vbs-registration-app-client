@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   dashboardData: null,
   error: null,
+  success: null,
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        success: true,
       };
     case GENERAL_ERROR:
       return {
@@ -49,7 +51,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: "Unable to add new admin at this time. Please try again later",
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

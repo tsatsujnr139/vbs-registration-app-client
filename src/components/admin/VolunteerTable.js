@@ -160,7 +160,7 @@ const VolunteerTable = ({
               >
                 <Input
                   prefix={<SearchOutlined />}
-                  placeholder="Enter volunteer last name"
+                  placeholder="Search by volunteer last name"
                   allowClear
                 />
               </Form.Item>

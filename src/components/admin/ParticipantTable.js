@@ -167,7 +167,7 @@ const ParticipantTable = ({
               >
                 <Input
                   prefix={<SearchOutlined />}
-                  placeholder="Enter participant last name"
+                  placeholder="Search by participant last name..."
                   allowClear
                 />
               </Form.Item>

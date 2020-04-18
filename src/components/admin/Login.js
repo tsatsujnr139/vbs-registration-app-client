@@ -23,7 +23,7 @@ const Login = (props) => {
       history.push("/admin/dashboard");
     }
     // eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
+  }, [isAuthenticated, history]);
 
   const onFinish = (values) => {
     setLoading();
@@ -40,7 +40,7 @@ const Login = (props) => {
       <Content
         style={{
           minHeight: 800,
-          height: "calc(100% - 100px)",
+          height: "calc(100%)",
           paddingTop: "100px",
           background: "#f3f5f7",
         }}

@@ -11,7 +11,6 @@
   background-size: cover;
   background-attachment: fixed;
   background-position: center center;
-  /* margin-top: 7px; */
 }
 
 .hero-logo {
@@ -22,7 +21,7 @@
 }
 
 .hero-logo img {
-  width: 580px;
+  width: 620px;
 }
 
 .register-invite {
@@ -31,9 +30,9 @@
 }
 
 .hero-motto {
-  font-family: "Luckiest Guy", cursive;
+  font-family: "Luckiest Guy", sans-serif;
   font-size-adjust: 1.2;
-  line-height: 50px;
+  line-height: 80px;
 }
 
 .hero-motto h1 {

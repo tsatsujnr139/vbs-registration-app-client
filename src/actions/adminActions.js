@@ -23,106 +23,6 @@ export const getDashboardData = () => async (dispatch) => {
     }
     setLoading();
     const res = await axios.get(`${apiBaseUrl}/dashboard-data/`);
-    // const res = {
-    //   data: {
-    //     overview: {
-    //       participants: 1008,
-    //       volunteers: 108,
-    //       participant_churches: 20,
-    //       volunteer_churches: 20,
-    //       participants_this_week: 20,
-    //       volunteers_this_week: 6,
-    //       participant_churches_this_week: 2,
-    //       volunteer_churches_this_week: 2,
-    //     },
-    //     distributions: {
-    //       participant_class_distribution: [
-    //         {
-    //           x: "Pre-school",
-    //           y: 100,
-    //         },
-    //         {
-    //           x: "Class 1",
-    //           y: 42,
-    //         },
-    //         {
-    //           x: "Class 2",
-    //           y: 36,
-    //         },
-    //         {
-    //           x: "Class 3",
-    //           y: 37,
-    //         },
-    //         {
-    //           x: "Class 4",
-    //           y: 39,
-    //         },
-    //         {
-    //           x: "Class 5",
-    //           y: 36,
-    //         },
-    //         {
-    //           x: "Class 6",
-    //           y: 30,
-    //         },
-    //         {
-    //           x: "JHS 1",
-    //           y: 40,
-    //         },
-    //         {
-    //           x: "JHS 2",
-    //           y: 45,
-    //         },
-    //         {
-    //           x: "JHS 3",
-    //           y: 24,
-    //         },
-    //       ],
-    //       volunteer_class_distribution: [
-    //         {
-    //           x: "Pre-school",
-    //           y: 100,
-    //         },
-    //         {
-    //           x: "Class 1",
-    //           y: 42,
-    //         },
-    //         {
-    //           x: "Class 2",
-    //           y: 36,
-    //         },
-    //         {
-    //           x: "Class 3",
-    //           y: 37,
-    //         },
-    //         {
-    //           x: "Class 4",
-    //           y: 39,
-    //         },
-    //         {
-    //           x: "Class 5",
-    //           y: 36,
-    //         },
-    //         {
-    //           x: "Class 6",
-    //           y: 30,
-    //         },
-    //         {
-    //           x: "JHS 1",
-    //           y: 40,
-    //         },
-    //         {
-    //           x: "JHS 2",
-    //           y: 45,
-    //         },
-    //         {
-    //           x: "JHS 3",
-    //           y: 24,
-    //         },
-    //       ],
-    //     },
-    //   },
-    // };
     dispatch({
       type: GET_DASHBOARD_DATA,
       payload: res.data,
@@ -143,21 +43,37 @@ export const addAdmin = (formData) => async (dispatch) => {
   }
   try {
     setLoading();
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-    // const res = await axios.post(`${apiBaseUrl}/admin`, formData, config);
-
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios.post(`${apiBaseUrl}/user/create/`, formData, config);
     dispatch({
       type: ADD_ADMIN,
     });
   } catch (error) {
-    dispatch({
-      type: ADD_ADMIN_ERROR,
-      payload: error.message,
-    });
+    console.error("Error Adding Admin " + error);
+    if (error) {
+      let statusCode = error.response.status;
+      if (statusCode === 400) {
+        dispatch({
+          type: ADD_ADMIN_ERROR,
+          payload: JSON.stringify(error.response.data),
+        });
+      } else {
+        dispatch({
+          type: ADD_ADMIN_ERROR,
+          payload:
+            "Unable to add new admin at this time. Please try again later",
+        });
+      }
+    } else {
+      dispatch({
+        type: ADD_ADMIN_ERROR,
+        payload: "Unable to add new admin at this time. Please try again later",
+      });
+    }
   }
 };
 

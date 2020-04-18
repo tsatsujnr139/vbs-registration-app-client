@@ -1,26 +1,49 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { Card, Form, Input, Button, Row, Col, Alert, Layout, Spin } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Alert,
+  Layout,
+  Spin,
+  notification,
+} from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { addAdmin } from "../../actions/adminActions";
+import { addAdmin, setLoading } from "../../actions/adminActions";
 import PropTypes from "prop-types";
 
-const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
-  useEffect(() => {}, [error]);
+const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
+  useEffect(() => {}, []);
 
   const { Content } = Layout;
 
   const onFinish = (values) => {
-    console.log("Success:", values);
-    addAdmin(values);
+    setLoading();
+    addAdmin({ ...values });
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
 
+  const successNotification = () => {
+    notification.success({
+      message: "Great!",
+      description:
+        "You have successfully added a new admin. The user can proceed to login to the dashboard",
+    });
+  };
+
   if (loading) {
     return <Spin size="large" />;
+  }
+
+  if (success) {
+    successNotification();
   }
 
   return (
@@ -28,24 +51,30 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
       <Content
         style={{
           minHeight: 800,
-          height: "calc(100% - 100px)",
+          height: "calc(100%)",
           paddingTop: "100px",
           background: "#f3f5f7",
         }}
       >
         <Row>
-          <Col span={2}></Col>
+          <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}></Col>
           <Col
-            span={20}
+            span={10}
+            xl={10}
+            lg={10}
+            md={10}
+            sm={24}
+            xs={24}
             style={{
               display: "flex",
               justifyContent: "center",
+              flexDirection: "column",
             }}
           >
             {error && (
               <Alert
                 message="Error"
-                description="Error"
+                description={error}
                 type="error"
                 showIcon
               />
@@ -63,11 +92,11 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
                 <Form.Item
                   type="text"
                   label="First Name"
-                  name="firstName"
+                  name="first_name"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your first name",
+                      message: "Please enter a first name",
                     },
                   ]}
                 >
@@ -76,11 +105,11 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
                 <Form.Item
                   type="text"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your last name",
+                      message: "Please enter a last name",
                     },
                   ]}
                 >
@@ -93,7 +122,11 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your email!",
+                      message: "Please enter an email",
+                    },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email",
                     },
                   ]}
                 >
@@ -109,7 +142,12 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password!",
+                      message: "Please enter a password",
+                    },
+                    {
+                      min: 5,
+                      message:
+                        "The password should have a minimum of 5 characters",
                     },
                   ]}
                 >
@@ -124,14 +162,15 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
                     type="primary"
                     htmlType="submit"
                     style={{ width: "100%" }}
+                    loading={loading}
                   >
-                    Add User
+                    Add New Admin
                   </Button>
                 </Form.Item>
               </Form>
             </Card>
           </Col>
-          <Col span={2}></Col>
+          <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}></Col>
         </Row>
       </Content>
     </Fragment>
@@ -139,7 +178,7 @@ const AddAdmin = ({ admin: { loading, error }, addAdmin }) => {
 };
 
 const cardStyle = {
-  minWidth: 450,
+  // width: 500,
   height: 500,
   borderRadius: "2px",
 };
@@ -147,10 +186,11 @@ const cardStyle = {
 AddAdmin.propTypes = {
   admin: PropTypes.object.isRequired,
   addAdmin: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-export default connect(mapStateToProps, { addAdmin })(AddAdmin);
+export default connect(mapStateToProps, { addAdmin, setLoading })(AddAdmin);
