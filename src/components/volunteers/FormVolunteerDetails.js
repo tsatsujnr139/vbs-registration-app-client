@@ -94,6 +94,9 @@ const FormVolunteerDetails = ({
               >
                 <Card hoverable="true" style={cardStyle}>
                   <Form
+                    initialValues={{
+                      remember: true,
+                    }}
                     form={form}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}

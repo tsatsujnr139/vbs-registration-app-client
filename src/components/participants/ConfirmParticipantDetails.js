@@ -37,14 +37,7 @@ const ConfirmParticipantDetails = ({
   registerParticipant,
   participant: { error, loading, success },
 }) => {
-  useEffect(() => {
-    if (error) {
-      errorAlert();
-    }
-    if (success) {
-      nextStep();
-    }
-  });
+  useEffect(() => {});
   const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
     registerParticipant({
@@ -65,6 +58,13 @@ const ConfirmParticipantDetails = ({
     return (
       <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
     );
+  }
+
+  if (error) {
+    errorAlert();
+  }
+  if (success) {
+    nextStep();
   }
 
   return (
@@ -107,7 +107,7 @@ const ConfirmParticipantDetails = ({
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item label="Medical Information" span={3}>
-                  {medical_info === "" ? medical_info : "N/A"}
+                  {medical_info ? medical_info : "N/A"}
                 </Descriptions.Item>
               </Descriptions>
             </Card>

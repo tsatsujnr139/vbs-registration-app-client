@@ -8,6 +8,7 @@ import Distributions from "./Distributions";
 
 const Dashboard = ({ admin: { dashboardData, error }, getDashboardData }) => {
   useEffect(() => {
+    clearErrors();
     getDashboardData();
     // eslint-disable-next-line
   }, []);
