@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
-import { login, setLoading } from "../../actions/authActions";
+import { login, setLoading, clearErrors } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
@@ -13,12 +13,14 @@ const Login = (props) => {
     auth: { loading, isAuthenticated, error },
     login,
     setLoading,
+    clearErrors,
     history,
   } = props;
 
   const { Content } = Layout;
 
   useEffect(() => {
+    clearErrors();
     if (isAuthenticated) {
       history.push("/admin/dashboard");
     }
@@ -39,8 +41,7 @@ const Login = (props) => {
       <Navbar />
       <Content
         style={{
-          minHeight: 800,
-          height: "calc(100%)",
+          minHeight: 900,
           paddingTop: "100px",
           background: "#f3f5f7",
         }}
@@ -140,11 +141,12 @@ Login.propTypes = {
   auth: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
   setLoading: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const cardStyle = {
   minWidth: 350,
-  height: 300,
+  height: 350,
   borderRadius: "2px",
 };
 
@@ -152,4 +154,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login, setLoading })(Login);
+export default connect(mapStateToProps, { login, setLoading, clearErrors })(
+  Login
+);

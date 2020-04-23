@@ -12,6 +12,7 @@ const EditParticipant = ({
   participant: { grades },
 }) => {
   useEffect(() => {
+    form.resetFields();
     getGrades();
     //eslint-disable-next-line
   }, []);

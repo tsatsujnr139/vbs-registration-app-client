@@ -14,6 +14,7 @@ const EditVolunteer = ({
   volunteer: { roles },
 }) => {
   useEffect(() => {
+    form.resetFields();
     getRoles();
     getGrades();
     //eslint-disable-next-line

@@ -43,10 +43,8 @@ const ConfirmVolunteerDetails = ({
 
   const onConfirm = (volunteerDetails) => {
     // register the volunteer
-    const previous_volunteer = volunteerDetails.previous_volunteer;
     const values = {
       ...volunteerDetails,
-      previous_volunteer: previous_volunteer === "true" ? true : false,
     };
     registerVolunteer({ ...values });
   };

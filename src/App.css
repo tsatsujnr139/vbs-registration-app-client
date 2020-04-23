@@ -3,6 +3,9 @@
 @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Quicksand:300,400&display=swap");
 
+[data-reactroot] {
+  height: 100% !important;
+}
 /* Homepage*/
 .homepage-hero {
   background-image: url("../src/static/images/hero-background.jpg");
@@ -21,7 +24,7 @@
 }
 
 .hero-logo img {
-  width: 620px;
+  width: 700px;
 }
 
 .register-invite {

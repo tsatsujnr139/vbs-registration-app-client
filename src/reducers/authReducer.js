@@ -5,6 +5,7 @@ import {
   LOGOUT,
   USER_LOADED,
   SET_LOADING,
+  CLEAR_ERRORS,
 } from "../actions/types";
 
 const initialState = {
@@ -48,6 +49,12 @@ export default (state = initialState, action) => {
         loading: false,
         user: null,
         error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
       };
     default:
       return state;

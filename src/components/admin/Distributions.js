@@ -8,7 +8,10 @@ import "ant-design-pro/dist/ant-design-pro.css";
 const Distributions = ({ admin: { loading }, dashboardData }) => {
   return (
     <Fragment>
-      <Row gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}>
+      <Row
+        gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}
+        style={{ minHeight: "600px" }}
+      >
         <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
           <Card
             title="Participant Class Distribution"

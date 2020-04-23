@@ -5,6 +5,7 @@ import {
   LOGOUT,
   USER_LOADED,
   SET_LOADING,
+  CLEAR_ERRORS,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import axios from "axios";
@@ -82,4 +83,9 @@ export const logout = () => {
 // Set Loading
 export const setLoading = () => {
   return { type: SET_LOADING };
+};
+
+// Set Loading
+export const clearErrors = () => {
+  return { type: CLEAR_ERRORS };
 };

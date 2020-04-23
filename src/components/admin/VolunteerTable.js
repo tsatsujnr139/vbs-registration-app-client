@@ -44,6 +44,7 @@ const VolunteerTable = ({
   }, [error, success]);
   const [form] = Form.useForm();
   const { store } = storeConfig;
+  const { Search } = Input;
 
   const columns = [
     {
@@ -211,16 +212,17 @@ const VolunteerTable = ({
     <Fragment>
       <Row>
         <Col span={24}>
-          <Card>
+          <Card style={{ marginBottom: "200px" }}>
             <Form onFinish={onSearchFinished}>
               <Form.Item
                 name="search"
                 rules={[{ required: true, message: "Please enter something" }]}
               >
-                <Input
-                  prefix={<SearchOutlined />}
+                <Search
+                  // prefix={<SearchOutlined />}
                   placeholder="Search by volunteer last name"
                   allowClear
+                  loading={loading}
                 />
               </Form.Item>
               <Form.Item>
