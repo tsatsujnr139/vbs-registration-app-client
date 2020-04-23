@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import {
   Row,
   Col,
@@ -17,20 +17,33 @@ import PropTypes from "prop-types";
 import {
   getVolunteers,
   searchVolunteer,
+  updateVolunteer,
   clearErrors,
 } from "../../actions/volunteerActions";
 import VolunteerDescription from "./VolunteerDescription";
+import EditVolunteer from "./EditVolunteer";
+import storeConfig from "../../store";
 
 const VolunteerTable = ({
-  volunteer: { volunteerData, loading, error },
+  volunteer: { volunteerData, loading, error, success },
   searchVolunteer,
   getVolunteers,
+  updateVolunteer,
   clearErrors,
 }) => {
   useEffect(() => {
     getVolunteers();
+    if (error) {
+      errorNotification();
+      clearErrors();
+    }
+    if (success) {
+      successNotification();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [error, success]);
+  const [form] = Form.useForm();
+  const { store } = storeConfig;
 
   const columns = [
     {
@@ -122,18 +135,49 @@ const VolunteerTable = ({
           <Button type="link" onClick={() => showViewModal(record)}>
             View
           </Button>
-          <Button type="link">Edit</Button>
+          <Button type="link" onClick={() => showEditModal(record)}>
+            Edit
+          </Button>
         </span>
       ),
       fixed: "right",
     },
   ];
 
-  const showViewModal = (data) => {
+  const showViewModal = (record) => {
     Modal.info({
       title: "Volunteer Details",
       width: 700,
-      content: <VolunteerDescription data={data} />,
+      content: <VolunteerDescription record={record} />,
+    });
+  };
+
+  const showEditModal = (record) => {
+    Modal.confirm({
+      destroyOnClose: true,
+      title: "Edit Volunteer Details",
+      width: 700,
+      content: (
+        <Provider store={store}>
+          <EditVolunteer record={record} form={form} />
+        </Provider>
+      ),
+      okText: "Update",
+      onOk() {
+        form
+          .validateFields()
+          .then((fieldsValue) => {
+            const previous_volunteer = fieldsValue["previous_volunteer"];
+            const values = {
+              ...fieldsValue,
+              previous_volunteer: previous_volunteer === "true" ? true : false,
+            };
+            updateVolunteer(record.id, values);
+          })
+          .catch((info) => {
+            console.log("Validate Failed:", info);
+          });
+      },
     });
   };
 
@@ -142,6 +186,13 @@ const VolunteerTable = ({
       message: "Oops",
       description:
         "There was an unexpected error completing this request. Please try again later.",
+    });
+  };
+
+  const successNotification = () => {
+    notification.success({
+      message: "Awesome!",
+      description: "Successfully updated volunteer details",
     });
   };
 
@@ -154,11 +205,6 @@ const VolunteerTable = ({
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
-  }
-
-  if (error) {
-    errorNotification();
-    clearErrors();
   }
 
   return (
@@ -213,6 +259,7 @@ const VolunteerTable = ({
 VolunteerTable.propTypes = {
   searchVolunteer: PropTypes.func.isRequired,
   getVolunteers: PropTypes.func.isRequired,
+  updateVolunteer: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
 };
 
@@ -223,5 +270,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getVolunteers,
   searchVolunteer,
+  updateVolunteer,
   clearErrors,
 })(VolunteerTable);

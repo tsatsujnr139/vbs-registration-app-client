@@ -43,7 +43,12 @@ const ConfirmVolunteerDetails = ({
 
   const onConfirm = (volunteerDetails) => {
     // register the volunteer
-    registerVolunteer({ ...volunteerDetails });
+    const previous_volunteer = volunteerDetails.previous_volunteer;
+    const values = {
+      ...volunteerDetails,
+      previous_volunteer: previous_volunteer === "true" ? true : false,
+    };
+    registerVolunteer({ ...values });
   };
 
   const errorAlert = () => {
@@ -108,9 +113,9 @@ const ConfirmVolunteerDetails = ({
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item label="Previous Volunteer" span={1}>
-                  {previous_volunteer === "True" ? "Yes" : "No"}
+                  {previous_volunteer ? "Yes" : "No"}
                 </Descriptions.Item>
-                {previous_volunteer === "True" && (
+                {previous_volunteer && (
                   <Descriptions.Item label="Previous Volunteer Site" span={2}>
                     {previous_site}
                   </Descriptions.Item>

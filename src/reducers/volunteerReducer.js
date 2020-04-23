@@ -5,6 +5,7 @@ import {
   GET_ROLES,
   SEARCH_VOLUNTEER,
   REGISTRATION_SUCCESS,
+  UPDATE_VOLUNTEER_SUCCESS,
   GENERAL_ERROR,
   CLEAR_ERRORS,
 } from "../actions/types";
@@ -41,6 +42,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         success: true,
+      };
+    case UPDATE_VOLUNTEER_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
       };
     case SEARCH_VOLUNTEER:
       return {

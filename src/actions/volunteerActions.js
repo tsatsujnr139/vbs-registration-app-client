@@ -6,6 +6,7 @@ import {
   GET_VOLUNTEERS,
   GET_ROLES,
   REGISTRATION_SUCCESS,
+  UPDATE_VOLUNTEER_SUCCESS,
   CLEAR_ERRORS,
 } from "./types";
 import axios from "axios";
@@ -24,7 +25,6 @@ export const getRoles = () => async (dispatch) => {
       name: "Non-Teaching",
     },
   ];
-
   dispatch({
     type: GET_ROLES,
     payload: data,
@@ -71,6 +71,29 @@ export const registerVolunteer = (formData) => async (dispatch) => {
     dispatch({
       type: REGISTRATION_SUCCESS,
       payload: res.data,
+    });
+  } catch (error) {
+    console.error("Error registering volunteer:::" + error);
+    dispatch({
+      type: REGISTRATION_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+// Update volunteer
+export const updateVolunteer = (id, formData) => async (dispatch) => {
+  console.log(`Volunteer Update Details:: ${JSON.stringify(formData)}`);
+  try {
+    setLoading();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios.put(`${apiBaseUrl}/volunteers/${id}/`, formData, config);
+    dispatch({
+      type: UPDATE_VOLUNTEER_SUCCESS,
     });
   } catch (error) {
     console.error("Error registering volunteer:::" + error);

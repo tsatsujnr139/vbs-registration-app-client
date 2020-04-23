@@ -43,7 +43,12 @@ const FormVolunteerDetails = ({
     //eslint-disable-next-line
   }, []);
 
-  const onFinish = (values) => {
+  const onFinish = (fieldsValue) => {
+    const values = {
+      ...fieldsValue,
+      previous_volunteer:
+        fieldsValue.previous_volunteer === "true" ? true : false,
+    };
     setVolunteerDetails(values);
     nextStep();
   };
@@ -278,12 +283,12 @@ const FormVolunteerDetails = ({
                         onChange={onPreviousVolunteerChange}
                         buttonStyle="solid"
                       >
-                        <Radio.Button value="True">Yes</Radio.Button>
-                        <Radio.Button value="False">No</Radio.Button>
+                        <Radio.Button value="true">Yes</Radio.Button>
+                        <Radio.Button value="false">No</Radio.Button>
                       </Radio.Group>
                     </Form.Item>
 
-                    {volunteerDetails.previous_volunteer === "True" && (
+                    {volunteerDetails.previous_volunteer === "true" && (
                       <Form.Item
                         label="Which role/site/class did you volunteer with"
                         name="previous_site"

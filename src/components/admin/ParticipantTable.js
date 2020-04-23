@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, Provider } from "react-redux";
 import {
   Row,
   Col,
@@ -17,22 +17,35 @@ import {
   getParticipants,
   searchParticipant,
   clearErrors,
+  updateParticipant,
 } from "../../actions/participantActions";
 import PropTypes from "prop-types";
 import ParticipantDescription from "./ParticipantDescription";
+import EditParticipant from "./EditParticipant";
+import storeConfig from "../../store";
 
 const ParticipantTable = ({
-  participant: { participantData, loading, error },
+  participant: { participantData, loading, error, success },
   getParticipants,
   searchParticipant,
+  updateParticipant,
   clearErrors,
 }) => {
   useEffect(() => {
     if (participantData == null) {
       getParticipants();
     }
+    if (error) {
+      errorNotification();
+      clearErrors();
+    }
+    if (success) {
+      successNotification();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [error, success]);
+  const [form] = Form.useForm();
+  const { store } = storeConfig;
 
   const columns = [
     {
@@ -129,18 +142,49 @@ const ParticipantTable = ({
           <Button type="link" onClick={() => showViewModal(record)}>
             View
           </Button>
-          <Button type="link">Edit</Button>
+          <Button type="link" onClick={() => showEditModal(record)}>
+            Edit
+          </Button>
         </span>
       ),
       fixed: "right",
     },
   ];
 
-  const showViewModal = (data) => {
+  const showViewModal = (record) => {
     Modal.info({
       title: "Participant Details",
       width: 700,
-      content: <ParticipantDescription data={data} />,
+      content: <ParticipantDescription record={record} />,
+    });
+  };
+
+  const showEditModal = (record) => {
+    Modal.confirm({
+      title: "Edit Participant Details",
+      width: 700,
+      content: (
+        <Provider store={store}>
+          <EditParticipant record={record} form={form} />
+        </Provider>
+      ),
+      okText: "Update",
+      onOk() {
+        form
+          .validateFields()
+          .then((fieldsValue) => {
+            const dob = fieldsValue["date_of_birth"];
+            const values = {
+              ...fieldsValue,
+              date_of_birth: dob.format("YYYY-MM-DD"),
+            };
+            updateParticipant(record.id, values);
+          })
+          .catch((info) => {
+            console.log("Validate Failed:", info);
+          });
+      },
+      destroyOnClose: true,
     });
   };
 
@@ -157,15 +201,17 @@ const ParticipantTable = ({
     });
   };
 
+  const successNotification = () => {
+    notification.success({
+      message: "Awesome!",
+      description: "Successfully updated participant details",
+    });
+  };
+
   if (loading || participantData == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
-  }
-
-  if (error) {
-    errorNotification();
-    clearErrors();
   }
 
   return (
@@ -233,5 +279,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getParticipants,
   searchParticipant,
+  updateParticipant,
   clearErrors,
 })(ParticipantTable);

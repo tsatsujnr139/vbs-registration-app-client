@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Descriptions } from "antd";
+import PropTypes from "prop-types";
 
-const VolunteerDescription = (data) => {
+const VolunteerDescription = ({ record }) => {
   return (
     <Fragment>
       <Descriptions
@@ -11,39 +12,43 @@ const VolunteerDescription = (data) => {
         bordered
       >
         <Descriptions.Item label="Surname" span={2}>
-          {data.last_name}
+          {record.last_name}
         </Descriptions.Item>
         <Descriptions.Item label="First Name">
-          {data.first_name}
+          {record.first_name}
         </Descriptions.Item>
-        <Descriptions.Item label="Gender">{data.gender}</Descriptions.Item>
+        <Descriptions.Item label="Gender">{record.gender}</Descriptions.Item>
         <Descriptions.Item label="Phone Number">
-          {data.contact_no}
+          {record.contact_no}
         </Descriptions.Item>
         <Descriptions.Item label="WhatsApp Number">
-          {data.whatsApp_no}
+          {record.whatsApp_no}
         </Descriptions.Item>
-        <Descriptions.Item label="Email">{data.email}</Descriptions.Item>
+        <Descriptions.Item label="Email">{record.email}</Descriptions.Item>
         <Descriptions.Item label="Role">
-          {data.preferred_role}
+          {record.preferred_role}
         </Descriptions.Item>
         <Descriptions.Item label="Preferred Class">
-          {data.preferred_class}
+          {record.preferred_class}
         </Descriptions.Item>
         <Descriptions.Item label="Church" span={3}>
-          {data.church}
+          {record.church}
         </Descriptions.Item>
         <Descriptions.Item label="Previous Volunteer" span={1}>
-          {data.previous_volunteer === "True" ? "Yes" : "No"}
+          {record.previous_volunteer === "True" ? "Yes" : "No"}
         </Descriptions.Item>
-        {data.previous_volunteer === "True" && (
+        {record.previous_volunteer === "True" && (
           <Descriptions.Item label="Previous Volunteer Site" span={2}>
-            {data.previous_site}
+            {record.previous_site}
           </Descriptions.Item>
         )}
       </Descriptions>
     </Fragment>
   );
+};
+
+VolunteerDescription.propTypes = {
+  record: PropTypes.object.isRequired,
 };
 
 export default VolunteerDescription;

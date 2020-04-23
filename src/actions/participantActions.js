@@ -3,6 +3,7 @@ import {
   GET_GRADES,
   GRADES_ERROR,
   REGISTRATION_SUCCESS,
+  UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
   GET_PARTICIPANTS,
   GENERAL_ERROR,
@@ -18,7 +19,7 @@ let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 export const getGrades = () => async (dispatch) => {
   try {
     setLoading();
-    const res = await axios.get(`${apiBaseUrl}/grades`);
+    const res = await axios.get(`${apiBaseUrl}/grades/`);
     dispatch({
       type: GET_GRADES,
       payload: res.data.results,
@@ -53,6 +54,29 @@ export const registerParticipant = (formData) => async (dispatch) => {
     });
   } catch (error) {
     console.error("Error registering participant:::" + error);
+    dispatch({
+      type: REGISTRATION_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+// Register a participant
+export const updateParticipant = (id, formData) => async (dispatch) => {
+  console.log(`Participant Update Details:: ${JSON.stringify(formData)}`);
+  try {
+    setLoading();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios.put(`${apiBaseUrl}/participants/${id}/`, formData, config);
+    dispatch({
+      type: UPDATE_PARTICIPANT_SUCCESS,
+    });
+  } catch (error) {
+    console.error("Error updating participant details:::" + error);
     dispatch({
       type: REGISTRATION_ERROR,
       payload: error.message,

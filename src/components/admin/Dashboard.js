@@ -10,8 +10,12 @@ const Dashboard = ({ admin: { dashboardData, error }, getDashboardData }) => {
   useEffect(() => {
     clearErrors();
     getDashboardData();
+    if (error) {
+      errorNotification();
+      clearErrors();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [error]);
 
   const errorNotification = () => {
     notification.error({
@@ -19,11 +23,6 @@ const Dashboard = ({ admin: { dashboardData, error }, getDashboardData }) => {
       description: error,
     });
   };
-
-  if (error) {
-    errorNotification();
-    clearErrors();
-  }
 
   return (
     <Fragment>
@@ -33,7 +32,7 @@ const Dashboard = ({ admin: { dashboardData, error }, getDashboardData }) => {
   );
 };
 
-Dashboard.proptTypes = {
+Dashboard.propTypes = {
   admin: PropTypes.object.isRequired,
   getDashboardData: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,

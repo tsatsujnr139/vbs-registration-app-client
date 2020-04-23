@@ -17,7 +17,12 @@ import { addAdmin, setLoading } from "../../actions/adminActions";
 import PropTypes from "prop-types";
 
 const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (success) {
+      successNotification();
+    }
+    // esline-disable-next-line
+  }, [success]);
 
   const { Content } = Layout;
 
@@ -32,18 +37,14 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
 
   const successNotification = () => {
     notification.success({
-      message: "Great!",
+      message: "Awesome!",
       description:
-        "You have successfully added a new admin. The user can proceed to login to the dashboard",
+        "You have successfully added a new admin. The user can now login to the dashboard",
     });
   };
 
   if (loading) {
     return <Spin size="large" />;
-  }
-
-  if (success) {
-    successNotification();
   }
 
   return (

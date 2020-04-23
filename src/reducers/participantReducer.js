@@ -3,6 +3,7 @@ import {
   GET_GRADES,
   GRADES_ERROR,
   REGISTRATION_SUCCESS,
+  UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
   GET_PARTICIPANTS,
   SEARCH_PARTICIPANT,
@@ -15,6 +16,7 @@ const initialState = {
   error: null,
   grades: null,
   participantData: null,
+  participantId: null,
   success: null,
 };
 
@@ -27,6 +29,12 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case REGISTRATION_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        loading: false,
+      };
+    case UPDATE_PARTICIPANT_SUCCESS:
       return {
         ...state,
         success: true,
