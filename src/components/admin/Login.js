@@ -1,12 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Card, Form, Input, Button, Row, Col, Alert, Layout } from "antd";
+import {
+  Card,
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Alert,
+  Layout,
+  Typography,
+} from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
 import { login, setLoading, clearErrors } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
+import AdminLogin from "../../static/images/login.svg";
 
 const Login = (props) => {
   const {
@@ -18,6 +29,7 @@ const Login = (props) => {
   } = props;
 
   const { Content } = Layout;
+  const { Title } = Typography;
 
   useEffect(() => {
     clearErrors();
@@ -47,7 +59,9 @@ const Login = (props) => {
         }}
       >
         <Row>
-          <Col span={9} xl={9} lg={9} md={7} sm={7} xs={2}></Col>
+          <Col span={9} xl={9} lg={9} md={7} sm={7} xs={2}>
+            {/* <img src={AdminLogin} alt="" /> */}
+          </Col>
           <Col
             span={6}
             xl={6}
@@ -61,6 +75,9 @@ const Login = (props) => {
               flexDirection: "column",
             }}
           >
+            <div className="section-title">
+              <Title level={3}>Admin Login</Title>
+            </div>
             {error && (
               <Alert
                 message="Error"

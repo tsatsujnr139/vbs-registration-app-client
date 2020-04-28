@@ -3,39 +3,48 @@
 @import url("https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Quicksand:300,400&display=swap");
 
-[data-reactroot] {
-  height: 100% !important;
+* {
+  -webkit-text-size-adjust: none;
 }
+
 /* Homepage*/
 .homepage-hero {
-  background-image: url("../src/static/images/hero-background.jpg");
+  min-height: 85vh;
+  background: url("../src/static/images/hero-background.jpg") no-repeat center
+    center fixed;
   /* background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg"); */
-  background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
-  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .hero-logo {
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  /* align-items: center; */
 }
 
 .hero-logo img {
-  width: 700px;
+  max-width: 80%;
+  max-height: 85vh;
+  object-fit: contain;
 }
 
 .register-invite {
-  margin-top: 230px;
-  display: inline-block;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-.hero-motto {
+.hero-motto h1 {
   font-family: "Luckiest Guy", sans-serif;
-  font-size-adjust: 1.2;
-  line-height: 80px;
+  font-size: 60px;
 }
 
 .hero-motto h1 {
@@ -74,7 +83,7 @@
   width: 150px;
   height: 1px;
   background-color: #129cf3;
-  margin-left: -70px;
+  margin-left: -75px;
 }
 
 .form-wrapper {

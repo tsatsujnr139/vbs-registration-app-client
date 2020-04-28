@@ -62,13 +62,13 @@ export const login = (formData) => async (dispatch) => {
       } else {
         dispatch({
           type: LOGIN_FAIL,
-          payload: "Unable to login at this time. Please try again.",
+          payload: "Unable to login at this time. Please try again later",
         });
       }
     } else {
       dispatch({
         type: LOGIN_FAIL,
-        payload: "Unable to login at this time. Please try again.",
+        payload: "Unable to login at this time. Please try again later",
       });
     }
   }

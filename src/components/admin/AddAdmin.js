@@ -11,6 +11,7 @@ import {
   Layout,
   Spin,
   notification,
+  Typography,
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { addAdmin, setLoading } from "../../actions/adminActions";
@@ -25,6 +26,7 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
   }, [success]);
 
   const { Content } = Layout;
+  const { Title } = Typography;
 
   const onFinish = (values) => {
     setLoading();
@@ -72,6 +74,9 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
               flexDirection: "column",
             }}
           >
+            <div className="section-title">
+              <Title level={3}>Add New Admin</Title>
+            </div>
             {error && (
               <Alert
                 message="Error"
