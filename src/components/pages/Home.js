@@ -43,12 +43,25 @@ const Home = () => {
                     </Title>
                   </div>
                   <Button.Group size="large">
-                    <Button type="danger" href="participants/register">
+                    <Button
+                      style={{
+                        backgroundColor: "#f44336",
+                        color: "white",
+                      }}
+                      href="participants/register"
+                    >
                       REGISTER PARTICIPANT
                     </Button>
                     <span style={{ color: "white" }}> OR </span>
 
-                    <Button type="danger" href="volunteers/register">
+                    <Button
+                      style={{
+                        backgroundColor: "white",
+                        color: "#f44336",
+                        border: "2px solid #f44336",
+                      }}
+                      href="volunteers/register"
+                    >
                       SIGN UP AS A VOLUNTEER
                     </Button>
                   </Button.Group>
