@@ -350,7 +350,7 @@ const FormVolunteerDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 950,
+  height: 1000,
   borderRadius: "2px",
 };
 

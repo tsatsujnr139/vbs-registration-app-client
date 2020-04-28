@@ -60,12 +60,12 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
         }}
       >
         <Row>
-          <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}></Col>
+          <Col span={8} xl={8} lg={8} md={8} sm={0} xs={0}></Col>
           <Col
-            span={10}
-            xl={10}
-            lg={10}
-            md={10}
+            span={8}
+            xl={8}
+            lg={8}
+            md={8}
             sm={24}
             xs={24}
             style={{
@@ -176,7 +176,7 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
               </Form>
             </Card>
           </Col>
-          <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}></Col>
+          <Col span={8} xl={8} lg={8} md={8} sm={0} xs={0}></Col>
         </Row>
       </Content>
     </Fragment>
