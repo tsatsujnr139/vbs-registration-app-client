@@ -32,7 +32,11 @@ const VolunteerTable = ({
   clearErrors,
 }) => {
   useEffect(() => {
-    getVolunteers();
+    clearErrors();
+    if (volunteerData == null) {
+      getVolunteers();
+    }
+    clearErrors();
     if (error) {
       errorNotification();
       clearErrors();

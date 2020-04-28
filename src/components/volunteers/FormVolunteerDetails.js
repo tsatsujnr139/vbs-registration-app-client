@@ -11,6 +11,7 @@ import {
   Card,
   Layout,
   Spin,
+  Result,
 } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import { setVolunteerDetails } from "../../actions/formActions";
@@ -25,7 +26,7 @@ import { getRoles } from "../../actions/volunteerActions";
 const FormVolunteerDetails = ({
   nextStep,
   formDetails: { volunteerDetails, step },
-  participant: { loading, grades },
+  participant: { loading, grades, error },
   volunteer: { roles },
   setVolunteerDetails,
   getGrades,
@@ -64,6 +65,21 @@ const FormVolunteerDetails = ({
     };
     setVolunteerDetails(values);
   };
+
+  if (error) {
+    return (
+      <Result
+        status="500"
+        title="Oops!"
+        subTitle="Something went wrong. We're trying to figure it out. Please try again later"
+        extra={
+          <Button type="primary" href="/">
+            Back Home
+          </Button>
+        }
+      />
+    );
+  }
 
   if (loading || grades == null || roles == null) {
     return (
@@ -350,7 +366,7 @@ const FormVolunteerDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 1000,
+  height: 1050,
   borderRadius: "2px",
 };
 

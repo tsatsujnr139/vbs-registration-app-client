@@ -32,6 +32,7 @@ const ParticipantTable = ({
   clearErrors,
 }) => {
   useEffect(() => {
+    clearErrors();
     if (participantData == null) {
       getParticipants();
     }

@@ -58,6 +58,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
+        success: null,
       };
     default:
       return state;

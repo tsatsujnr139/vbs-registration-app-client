@@ -90,7 +90,7 @@ const FormParticipantDetails = ({
       <Result
         status="500"
         title="500"
-        subTitle="Oops! Something went wrong. Please try again later"
+        subTitle="Something went wrong. We're trying to figure it out. Please try again later"
         extra={
           <Button type="primary" href="/">
             Back Home
@@ -100,7 +100,7 @@ const FormParticipantDetails = ({
     );
   }
 
-  if (loading || grades === null) {
+  if (loading || grades == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
