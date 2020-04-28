@@ -57,10 +57,18 @@ export const addAdmin = (formData) => async (dispatch) => {
     if (error) {
       let statusCode = error.response.status;
       if (statusCode === 400) {
-        dispatch({
-          type: ADD_ADMIN_ERROR,
-          payload: JSON.stringify(error.response.data),
-        });
+        let errorMessage = JSON.stringify(error.response.data);
+        if (errorMessage.includes("exists")) {
+          dispatch({
+            type: ADD_ADMIN_ERROR,
+            payload: "A user with this email already exists",
+          });
+        } else {
+          dispatch({
+            type: ADD_ADMIN_ERROR,
+            payload: errorMessage,
+          });
+        }
       } else {
         dispatch({
           type: ADD_ADMIN_ERROR,

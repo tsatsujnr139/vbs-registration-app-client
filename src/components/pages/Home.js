@@ -43,22 +43,15 @@ const Home = () => {
                     </Title>
                   </div>
                   <Button.Group size="large">
-                    <Button
-                      style={{
-                        backgroundColor: "#f44336",
-                        color: "white",
-                      }}
-                      href="participants/register"
-                    >
+                    <Button type="danger" href="participants/register">
                       REGISTER PARTICIPANT
                     </Button>
                     <span style={{ color: "white" }}> OR </span>
 
                     <Button
                       style={{
-                        backgroundColor: "white",
+                        // backgroundColor: "white",
                         color: "#f44336",
-                        border: "2px solid #f44336",
                       }}
                       href="volunteers/register"
                     >
