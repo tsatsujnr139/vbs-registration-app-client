@@ -198,10 +198,13 @@ AddAdmin.propTypes = {
   admin: PropTypes.object.isRequired,
   addAdmin: PropTypes.func.isRequired,
   setLoading: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   admin: state.admin,
 });
 
-export default connect(mapStateToProps, { addAdmin, setLoading })(AddAdmin);
+export default connect(mapStateToProps, { addAdmin, setLoading, clearErrors })(
+  AddAdmin
+);
