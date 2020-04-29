@@ -14,7 +14,7 @@ import {
   Typography,
 } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { addAdmin, setLoading } from "../../actions/adminActions";
+import { addAdmin, setLoading, clearErrors } from "../../actions/adminActions";
 import PropTypes from "prop-types";
 
 const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
@@ -22,8 +22,13 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
     if (success) {
       successNotification();
     }
+    if (error) {
+      setTimeout(() => {
+        clearErrors();
+      }, 5000);
+    }
     // esline-disable-next-line
-  }, [success]);
+  }, [success, error]);
 
   const { Content } = Layout;
   const { Title } = Typography;
