@@ -190,7 +190,7 @@ const EditParticipant = ({
           <Input placeholder="The church the child attends" />
         </Form.Item>
         <br />
-        <Form.Item
+        {/* <Form.Item
           label="Medical Information (Allergies etc.)"
           name="medical_info"
           style={{ display: "inline-block", width: "calc(100%)" }}
@@ -204,7 +204,7 @@ const EditParticipant = ({
             placeholder="Any relevant medical information"
             autoSize={{ minRows: 3, maxRows: 6 }}
           />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           label="Parent/Guardian Full Name"
           name="parent_name"
@@ -248,6 +248,21 @@ const EditParticipant = ({
             placeholder="Another number we can reach you on"
           />
         </Form.Item>
+        <Form.Item
+          label="Parent/Guardian WhatsApp Phone Number eg. 024XXXXXXX"
+          name="whatsApp_no"
+          style={{ display: "inline-block", width: "100%" }}
+          rules={[
+            {
+              required: false,
+            },
+          ]}
+        >
+          <Input
+            maxLength="10"
+            placeholder="Your WhatsApp Number, If any"
+          />
+        </Form.Item>
 
         <Form.Item
           label="Parent/Guardian Email"
@@ -267,7 +282,7 @@ const EditParticipant = ({
           <Input placeholder="Email Address" />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           label="Pickup Person's Name"
           name="pickup_person_name"
           style={{ display: "inline-block", width: "100%" }}
@@ -293,7 +308,7 @@ const EditParticipant = ({
           ]}
         >
           <Input maxLength="10" placeholder="Pickup Person's Contact Number" />
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </Fragment>
   );

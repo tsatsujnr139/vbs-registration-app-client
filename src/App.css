@@ -42,16 +42,28 @@
   text-align: center;
 }
 
-.hero-motto h1 {
+.hero-motto h1{
   font-family: "Luckiest Guy", sans-serif;
   font-size: 60px;
-}
-
-.hero-motto h1 {
   color: white;
 }
 
-.hero-tagline h4 {
+.hero-motto h1,h2 {
+  color: white;
+}
+
+.hero-motto h2{
+  font-family: "Luckiest Guy", sans-serif;
+  color: white;
+}
+
+.hero-motto h2 {
+  color: white;
+}
+
+
+
+.hero-tagline h4, h2 {
   color: white;
 }
 

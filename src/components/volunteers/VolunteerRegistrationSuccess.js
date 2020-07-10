@@ -23,7 +23,7 @@ const RegistrationSuccess = () => {
           </Button>,
         ]}
       >
-        <div style={{ textAlign: "center" }}>
+        {/* <div style={{ textAlign: "center" }}>
           <Paragraph>
             <Text
               strong
@@ -39,7 +39,7 @@ const RegistrationSuccess = () => {
             volunteers will take place on *Date* at LIC. Futher communication
             will be sent to you in due course.
           </Paragraph>
-        </div>
+        </div> */}
       </Result>
     </Fragment>
   );

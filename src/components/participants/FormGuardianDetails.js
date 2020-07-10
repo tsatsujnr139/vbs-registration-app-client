@@ -114,6 +114,23 @@ const FormGuardianDetails = ({
                   </Form.Item>
 
                   <Form.Item
+                    label="Parent/Guardian WhatsApp Number eg. 024XXXXXXX"
+                    name="whatsApp_no"
+                    style={{ display: "inline-block", width: "100%" }}
+                    defaultValue={guardianDetails.whatsApp_no}
+                    rules={[
+                      {
+                        required: false,
+                      },
+                    ]}
+                  >
+                    <Input
+                      maxLength="10"
+                      placeholder="Your WhatsApp Number, If any"
+                    />
+                  </Form.Item>
+
+                  <Form.Item
                     label="Parent/Guardian Email"
                     name="email"
                     style={{ display: "inline-block", width: "100%" }}
@@ -132,7 +149,7 @@ const FormGuardianDetails = ({
                     <Input placeholder="Email Address" />
                   </Form.Item>
 
-                  <Form.Item
+                  {/* <Form.Item
                     label="Pickup Person's Name"
                     name="pickup_person_name"
                     style={{ display: "inline-block", width: "100%" }}
@@ -164,7 +181,7 @@ const FormGuardianDetails = ({
                       maxLength="10"
                       placeholder="Pickup Person's Contact Number"
                     />
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item shouldUpdate>
                     {() => (
                       <ButtonGroup>

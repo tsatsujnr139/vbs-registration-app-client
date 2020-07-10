@@ -28,6 +28,7 @@ const ConfirmParticipantDetails = ({
       parent_name,
       primary_contact_no,
       alternate_contact_no,
+      whatsApp_no,
       email,
       pickup_person_name,
       pickup_person_contact_no,
@@ -142,12 +143,15 @@ const ConfirmParticipantDetails = ({
                 <Descriptions.Item label="Alternate Contact Number">
                   {alternate_contact_no}
                 </Descriptions.Item>
-                <Descriptions.Item label="Pick Up Person Name" span={2}>
+                <Descriptions.Item label="WhatsApp Number">
+                  {whatsApp_no}
+                </Descriptions.Item>
+                {/* <Descriptions.Item label="Pick Up Person Name" span={2}>
                   {pickup_person_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Pick up Person Phone">
                   {pickup_person_contact_no}
-                </Descriptions.Item>
+                </Descriptions.Item> */}
               </Descriptions>
             </Card>
           </Col>

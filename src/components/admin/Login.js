@@ -17,7 +17,6 @@ import { login, setLoading, clearErrors } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
-import AdminLogin from "../../static/images/login.svg";
 
 const Login = (props) => {
   const {

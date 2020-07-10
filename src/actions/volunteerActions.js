@@ -22,7 +22,10 @@ export const getRoles = () => async (dispatch) => {
       name: "Teaching",
     },
     {
-      name: "Non-Teaching",
+      name: "Teaching Aide",
+    },
+    {
+      name: "IT",
     },
   ];
   dispatch({

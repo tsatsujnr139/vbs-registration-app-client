@@ -24,6 +24,7 @@ const initialState = {
     parent_name: "",
     primary_contact_no: "",
     alternate_contact_no: "",
+    whatsApp_no: "",
     email: "",
     pickup_person_name: "",
     pickup_person_contact_no: "",

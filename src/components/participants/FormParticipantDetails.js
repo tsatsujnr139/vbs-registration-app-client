@@ -271,7 +271,7 @@ const FormParticipantDetails = ({
                   >
                     <Input placeholder="The church the child attends" />
                   </Form.Item>
-                  <br />
+                  {/* <br />
                   <Form.Item
                     label="Medical Information (Allergies etc.)"
                     name="medical_info"
@@ -286,7 +286,7 @@ const FormParticipantDetails = ({
                       placeholder="Any relevant medical information"
                       autoSize={{ minRows: 3, maxRows: 6 }}
                     />
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item shouldUpdate>
                     {() => (
                       <Button

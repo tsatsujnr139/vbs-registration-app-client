@@ -7,7 +7,7 @@ import Footer from "../layouts/Footer";
 
 const Home = () => {
   const { Content } = Layout;
-  const { Title } = Typography;
+  const { Title, Text } = Typography;
 
   const [loading, setLoading] = useState(true);
 
@@ -35,11 +35,17 @@ const Home = () => {
               <Col span={10} xl={10} lg={10} md={10} sm={24} xs={24}>
                 <div className="register-invite">
                   <div className="hero-motto">
+                    <Title level={2}>Vacation Bible School 2020</Title>
+                  </div>
+                  <div className="hero-tagline">
+                    <Title level={4}>Join us from the {<Text underline strong type="warning" code>24th - 28th August 2020</Text>} as we learn about</Title>
+                  </div>
+                  <div className="hero-motto">
                     <Title>BUILDING ON THE LOVE OF JESUS</Title>
                   </div>
                   <div className="hero-tagline">
                     <Title level={4}>
-                      Show kids the foundation that lasts!
+                      Lets show kids the foundation that lasts!
                     </Title>
                   </div>
                   <Button.Group size="large">
