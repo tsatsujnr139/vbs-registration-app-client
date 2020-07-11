@@ -7,7 +7,7 @@ import Bulldozer from "../../static/images/bulldozer.png";
 import Excavator from "../../static/images/excavator.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
-import { registerParticipant } from "../../actions/participantActions";
+import { registerParticipant, clearErrors } from "../../actions/participantActions";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -36,6 +36,7 @@ const ConfirmParticipantDetails = ({
     step,
   },
   registerParticipant,
+  clearErrors,
   participant: { error, loading, success },
 }) => {
   useEffect(() => {});
@@ -63,6 +64,7 @@ const ConfirmParticipantDetails = ({
 
   if (error) {
     errorAlert();
+    clearErrors();
   }
   if (success) {
     nextStep();
@@ -200,8 +202,9 @@ ConfirmParticipantDetails.propTypes = {
   nextStep: PropTypes.func.isRequired,
   prevStep: PropTypes.func.isRequired,
   registerParticipant: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { registerParticipant })(
+export default connect(mapStateToProps, { registerParticipant, clearErrors })(
   ConfirmParticipantDetails
 );
