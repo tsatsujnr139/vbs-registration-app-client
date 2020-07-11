@@ -251,7 +251,7 @@ const ParticipantTable = ({
               pagination={{
                 total: participantData.count,
                 showTotal: (total, range) =>
-                  `${range[0]}-${range[1]} of ${total} volunteers`,
+                  `${range[0]}-${range[1]} of ${total} participants`,
                 pageSize: 50,
                 defaultCurrent: 1,
               }}
