@@ -38,7 +38,7 @@ const Home = () => {
                     <Title level={2}>Vacation Bible School 2020</Title>
                   </div>
                   <div className="hero-tagline">
-                    <Title level={4}>Join us from the {<Text underline strong type="warning" code>24th - 28th August 2020</Text>} as we learn about</Title>
+                    <Title level={4}>Join us from the {<Text underline strong type="warning" code>24th - 28th August 2020</Text>} as we explore</Title>
                   </div>
                   <div className="hero-motto">
                     <Title>BUILDING ON THE LOVE OF JESUS</Title>
