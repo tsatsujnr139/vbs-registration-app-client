@@ -18,7 +18,7 @@ const RegistrationSuccess = () => {
         title="You have successfully signed up as a volunteer for VBS 2020! "
         subTitle="The VBS Planning team is looking foward to working with you."
         extra={[
-          <Button type="primary" key="participant" href="participants/register">
+          <Button type="primary" key="participant" href="/participants/register">
             Click here to register a participant
           </Button>,
         ]}
