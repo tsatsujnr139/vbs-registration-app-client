@@ -39,12 +39,15 @@ const ParticipantDescription = ({ record }) => {
         <Descriptions.Item label="Alternate Contact Number">
           {record.alternate_contact_no}
         </Descriptions.Item>
-        <Descriptions.Item label="Pick Up Person Name" span={2}>
+        <Descriptions.Item label="WhatsApp Number">
+          {record.whatsApp_no}
+        </Descriptions.Item>
+        {/* <Descriptions.Item label="Pick Up Person Name" span={2}>
           {record.pickup_person_name}
         </Descriptions.Item>
         <Descriptions.Item label="Pick up Person Phone">
           {record.pickup_person_contact_no}
-        </Descriptions.Item>
+        </Descriptions.Item> */}
       </Descriptions>
     </Fragment>
   );
