@@ -249,7 +249,7 @@ const VolunteerTable = ({
                 total: volunteerData.count,
                 showTotal: (total, range) =>
                   `${range[0]}-${range[1]} of ${total} volunteers`,
-                pageSize: 50,
+                pageSize: 20,
                 defaultCurrent: 1,
               }}
               loading={loading || volunteerData == null}

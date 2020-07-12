@@ -252,7 +252,7 @@ const ParticipantTable = ({
                 total: participantData.count,
                 showTotal: (total, range) =>
                   `${range[0]}-${range[1]} of ${total} participants`,
-                pageSize: 50,
+                pageSize: 20,
                 defaultCurrent: 1,
               }}
               loading={loading || participantData == null}
