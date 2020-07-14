@@ -47,6 +47,7 @@ const Home = () => {
                     <Title level={4}>
                       Lets show kids the foundation that lasts!
                     </Title>
+                    {/* <Text underline strong type="warning">*Participant Registration is Open to all Kids Aged 3 and above*</Text> */}
                   </div>
                   <Button.Group size="large">
                     <Button type="danger" href="participants/register">

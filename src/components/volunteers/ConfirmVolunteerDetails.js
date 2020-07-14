@@ -148,6 +148,7 @@ const ConfirmVolunteerDetails = ({
           <Button
             size="large"
             type="primary"
+            loading={loading}
             onClick={() => onConfirm(volunteerDetails)}
           >
             Confirm

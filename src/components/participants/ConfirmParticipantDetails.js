@@ -180,6 +180,7 @@ const ConfirmParticipantDetails = ({
           <Button
             size="large"
             type="primary"
+            loading={loading}
             onClick={() => onConfirm(participantDetails, guardianDetails)}
           >
             Confirm
