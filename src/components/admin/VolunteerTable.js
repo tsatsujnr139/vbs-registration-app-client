@@ -85,8 +85,8 @@ const VolunteerTable = ({
       key: "preferred_class",
       filters: [
         {
-          text: "Preschool",
-          value: "Preschool 1",
+          text: "Pre-school",
+          value: "Pre-school",
         },
         {
           text: "Class 1",
@@ -123,6 +123,14 @@ const VolunteerTable = ({
         {
           text: "JHS 3",
           value: "JHS 3",
+        },
+        {
+          text: "SHS 1",
+          value: "SHS 1",
+        },
+        {
+          text: "SHS 2",
+          value: "SHS 2",
         },
       ],
       onFilter: (value, record) => record.preferred_class.indexOf(value) === 0,

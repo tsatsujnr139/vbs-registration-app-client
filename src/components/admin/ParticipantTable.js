@@ -128,6 +128,14 @@ const ParticipantTable = ({
           text: "JHS 3",
           value: "JHS 3",
         },
+        {
+          text: "SHS 1",
+          value: "SHS 1",
+        },
+        {
+          text: "SHS 2",
+          value: "SHS 2",
+        },
       ],
       onFilter: (value, record) => record.grade.indexOf(value) === 0,
     },
