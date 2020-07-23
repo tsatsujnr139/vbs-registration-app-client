@@ -10,7 +10,7 @@ const Distributions = ({ admin: { loading }, dashboardData }) => {
     <Fragment>
       <Row
         gutter={[16, { xs: 8, sm: 16, md: 24, lg: 32 }]}
-        style={{ minHeight: "700px" }}
+        style={{ minHeight: "800px" }}
       >
         <Col span={12} xl={12} lg={24} md={24} sm={24} xs={24}>
           <Card

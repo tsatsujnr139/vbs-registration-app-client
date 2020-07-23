@@ -35,9 +35,9 @@ const VolunteerDescription = ({ record }) => {
           {record.church}
         </Descriptions.Item>
         <Descriptions.Item label="Previous Volunteer" span={1}>
-          {record.previous_volunteer === "True" ? "Yes" : "No"}
+          {record.previous_volunteer === "true" ? "Yes" : "No"}
         </Descriptions.Item>
-        {record.previous_volunteer === "True" && (
+        {record.previous_volunteer === "true" && (
           <Descriptions.Item label="Previous Volunteer Site" span={2}>
             {record.previous_site}
           </Descriptions.Item>
