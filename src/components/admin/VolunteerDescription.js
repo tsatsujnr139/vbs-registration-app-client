@@ -3,6 +3,7 @@ import { Descriptions } from "antd";
 import PropTypes from "prop-types";
 
 const VolunteerDescription = ({ record }) => {
+  console.log({...record})
   return (
     <Fragment>
       <Descriptions
@@ -35,9 +36,9 @@ const VolunteerDescription = ({ record }) => {
           {record.church}
         </Descriptions.Item>
         <Descriptions.Item label="Previous Volunteer" span={1}>
-          {record.previous_volunteer === "true" ? "Yes" : "No"}
+          {record.previous_volunteer ? "Yes" : "No"}
         </Descriptions.Item>
-        {record.previous_volunteer === "true" && (
+        {record.previous_volunteer && (
           <Descriptions.Item label="Previous Volunteer Site" span={2}>
             {record.previous_site}
           </Descriptions.Item>
