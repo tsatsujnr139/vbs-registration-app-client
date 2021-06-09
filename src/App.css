@@ -10,7 +10,7 @@
 /* Homepage*/
 .homepage-hero {
   min-height: 85vh;
-  background: url("../src/static/images/hero-background.jpg") no-repeat center
+  background: url("../src/static/images/hero-background.jpeg") no-repeat center
     center fixed;
   /* background-image: url("https://vbs.lifeway.com/wp-content/uploads/2019/08/bg-slider.jpg"); */
   background-attachment: fixed;
@@ -28,7 +28,7 @@
 
 .hero-logo img {
   max-width: 80%;
-  max-height: 85vh;
+  max-height: 90vh;
   object-fit: contain;
 }
 
@@ -48,23 +48,17 @@
   color: white;
 }
 
-.hero-motto h1,h2 {
-  color: white;
-}
 
 .hero-motto h2{
+  -webkit-text-stroke: 1px white;
   font-family: "Luckiest Guy", sans-serif;
-  color: white;
-}
+  color: cadetblue;
 
-.hero-motto h2 {
-  color: white;
 }
-
 
 
 .hero-tagline h4, h2 {
-  color: white;
+  color:bisque;
 }
 
 .hero-tagline {

@@ -35,27 +35,35 @@ const Home = () => {
               <Col span={10} xl={10} lg={10} md={10} sm={24} xs={24}>
                 <div className="register-invite">
                   <div className="hero-motto">
-                    <Title level={2}>Vacation Bible School 2020</Title>
-                  </div>
-                  <div className="hero-tagline">
-                    <Title level={4}>Join us from the {<Text underline strong type="warning" code>24th - 28th August 2020</Text>} as we explore</Title>
-                  </div>
-                  <div className="hero-motto">
-                    <Title>BUILDING ON THE LOVE OF JESUS</Title>
+                    <Title level={2}>Vacation Bible School {new Date().getFullYear()}</Title>
                   </div>
                   <div className="hero-tagline">
                     <Title level={4}>
-                      Lets show kids the foundation that lasts!
+                      Priceless Treasure Awaits!
+                      Join us on this expedition!
                     </Title>
-                    <Text underline strong type="warning">*Minimum age for participants is 3 years*</Text>
+                    <Title level={4}>
+                      This Year We're
+                    </Title>
+                  </div>
+                  <div className="hero-motto">
+                    <Title>UNEARTHING THE TRUTH ABOUT JESUS!</Title>
+                  </div>
+                  <div className="hero-tagline">
+                    <Title level={4}>
+                      Seek Truth! Find Jesus!
+                    </Title>
+                    <Text underline strong type="warning">
+                      *Minimum age for participants is 3 years*
+                    </Text>
                   </div>
                   <Button.Group size="large">
-                    <Button type="danger" href="participants/register">
+                    <Button type="primary" href="participants/register">
                       REGISTER PARTICIPANT
                     </Button>
                     <span style={{ color: "white" }}> OR </span>
 
-                    <Button danger href="volunteers/register">
+                    <Button href="volunteers/register">
                       SIGN UP AS A VOLUNTEER
                     </Button>
                   </Button.Group>

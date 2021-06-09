@@ -16,6 +16,8 @@ const initialState = {
     date_of_birth: "",
     age: "",
     grade: "",
+    session: null,
+    attendance_type: null,
     gender: "",
     church: "",
     medical_info: "",

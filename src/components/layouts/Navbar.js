@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import { Menu, Layout } from "antd";
 import { LoginOutlined } from "@ant-design/icons";
 import LogoTitle from "../../static/images/logo-title.png";
-import { connect } from "react-redux";
-import { logout } from "../../actions/authActions";
 
-const Navbar = ({ logout }) => {
+const Navbar = () => {
   const [current, setCurrent] = useState("");
 
   const { Header } = Layout;
@@ -46,7 +44,7 @@ const Navbar = ({ logout }) => {
           <img
             src={LogoTitle}
             alt="Logo"
-            height="65"
+            height="75"
             width="100"
             style={{ float: "left" }}
           />
@@ -65,4 +63,4 @@ const Navbar = ({ logout }) => {
   );
 };
 
-export default connect(null, { logout })(Navbar);
+export default Navbar;

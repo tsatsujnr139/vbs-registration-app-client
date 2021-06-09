@@ -13,9 +13,8 @@ const RegistrationSuccess = () => {
       <Confetti width={width} height={height} gravity={0.2} />
       <Result
         status="success"
-        title="Awesome! You have successfully registered your ward for VBS 2020 - Concrete &
-        Cranes."
-        subTitle="We're looking foward to seeing them there as we explore the love of Jesus!"
+        title="Awesome! You have successfully registered your ward for VBS 2021 - Destination Dig"
+        subTitle="We're looking foward to seeing them there as we seek the truth and discover more and more of Jesus!"
         extra={[
           <Button type="primary" key="volunteer" href="/volunteers/register">
             Click here to sign up as a volunteer. We'd be happy to have you

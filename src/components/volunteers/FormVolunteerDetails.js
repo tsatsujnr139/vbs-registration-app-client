@@ -16,8 +16,8 @@ import {
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import { setVolunteerDetails } from "../../actions/formActions";
 import PropTypes from "prop-types";
-import Crane from "../../static/images/crane.png";
-import JackHammer from "../../static/images/jackhammer.png";
+import CoinLogo from "../../static/images/coin-logo.png";
+import Drone from "../../static/images/drone.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import { getGrades } from "../../actions/participantActions";
@@ -99,7 +99,7 @@ const FormVolunteerDetails = ({
           <div className="form-wrapper">
             <Row>
               <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-                <img src={JackHammer} alt="jackhammer" />
+                <img src={Drone} alt="jackhammer" />
               </Col>
               <Col
                 span={10}
@@ -352,7 +352,7 @@ const FormVolunteerDetails = ({
                 sm={0}
                 xs={0}
               >
-                <img src={Crane} alt="crane" />
+                <img src={CoinLogo} alt="crane" />
               </Col>
             </Row>
           </div>

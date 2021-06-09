@@ -4,8 +4,8 @@ import { Form, Input, Button, Row, Col, Card, Layout } from "antd";
 import { setGuardianDetails } from "../../actions/formActions";
 import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import PropTypes from "prop-types";
-import FoodTruck from "../../static/images/foodtruck.png";
-import MottoSign from "../../static/images/mottosign.png";
+import Jeep from "../../static/images/jeep.png";
+import Lizard from "../../static/images/lizard.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import ButtonGroup from "antd/lib/button/button-group";
@@ -43,7 +43,7 @@ const FormGuardianDetails = ({
         <div className="form-wrapper">
           <Row>
             <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={FoodTruck} alt="food-truck" />
+              <img src={Jeep} alt="food-truck" />
             </Col>
             <Col
               span={10}
@@ -214,7 +214,7 @@ const FormGuardianDetails = ({
               </Card>
             </Col>
             <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={MottoSign} alt="sign" />
+              <img src={Lizard} alt="sign" />
             </Col>
           </Row>
         </div>

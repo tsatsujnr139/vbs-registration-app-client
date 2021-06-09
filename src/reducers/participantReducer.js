@@ -1,7 +1,9 @@
 import {
   SET_LOADING,
   GET_GRADES,
+  GET_SESSIONS,
   GRADES_ERROR,
+  SESSIONS_ERROR,
   REGISTRATION_SUCCESS,
   UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
@@ -15,6 +17,7 @@ const initialState = {
   loading: false,
   error: null,
   grades: null,
+  sessions: null,
   participantData: null,
   participantId: null,
   success: null,
@@ -26,6 +29,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         grades: action.payload,
+        loading: false,
+      };
+    case GET_SESSIONS:
+      return {
+        ...state,
+        sessions: action.payload,
         loading: false,
       };
     case REGISTRATION_SUCCESS:
@@ -52,6 +61,12 @@ export default (state = initialState, action) => {
         error: action.payload,
         loading: false,
       };
+    case SESSIONS_ERROR:
+        return {
+          ...state,
+          error: action.payload,
+          loading: false,
+        };
     case GET_PARTICIPANTS:
       return {
         ...state,

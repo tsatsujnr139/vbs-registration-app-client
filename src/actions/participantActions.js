@@ -1,7 +1,9 @@
 import {
   SET_LOADING,
   GET_GRADES,
+  GET_SESSIONS,
   GRADES_ERROR,
+  SESSIONS_ERROR,
   REGISTRATION_SUCCESS,
   UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
@@ -28,6 +30,24 @@ export const getGrades = () => async (dispatch) => {
     console.error("Error retrieving grades:::" + error);
     dispatch({
       type: GRADES_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+// Get Sessions
+export const getSessions = () => async (dispatch) => {
+  try {
+    setLoading();
+    const res = await axios.get(`${apiBaseUrl}/sessions/`);
+    dispatch({
+      type: GET_SESSIONS,
+      payload: res.data.results,
+    });
+  } catch (error) {
+    console.error("Error retrieving sessions:::" + error);
+    dispatch({
+      type: SESSIONS_ERROR,
       payload: error.message,
     });
   }

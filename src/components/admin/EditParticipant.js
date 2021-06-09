@@ -3,21 +3,21 @@ import { connect } from "react-redux";
 import { Form, Input, Select, DatePicker, Radio, Spin } from "antd";
 import moment from "moment";
 import PropTypes from "prop-types";
-import { getGrades } from "../../actions/participantActions";
+import { getGrades, getSessions } from "../../actions/participantActions";
 
 const EditParticipant = ({
   form,
   record,
   getGrades,
-  participant: { grades },
+  participant: { grades, sessions },
 }) => {
   useEffect(() => {
     form.resetFields();
     getGrades();
+    getSessions();
     //eslint-disable-next-line
   }, []);
 
-  const { TextArea } = Input;
   const { Option } = Select;
 
   const onDateOfBirthChange = (date) => {
@@ -45,7 +45,7 @@ const EditParticipant = ({
     return now.diff(date, "years");
   };
 
-  if (grades == null) {
+  if (grades == null || sessions == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "50px" }} />
     );
@@ -177,6 +177,29 @@ const EditParticipant = ({
         </Form.Item>
         <br />
         <Form.Item
+          label="Session you would like to attend"
+          name="session"
+          style={{ display: "inline-block", width: "calc(100%)" }}
+          rules={[
+            {
+              required: true,
+              message: "Please select a session",
+            },
+          ]}
+        >
+          <Select defaultValue="Which session would you like to register for?">
+            {sessions
+              .filter((session) =>
+                session.eligible_classes.contains(record.grade)
+              )
+              .map((session) => (
+                <Option key={session.name} value={session.name}>
+                  {session.name}
+                </Option>
+              ))}
+          </Select>
+        </Form.Item>
+        <Form.Item
           label="Home Church"
           name="church"
           style={{ display: "inline-block", width: "calc(100%)" }}
@@ -258,10 +281,7 @@ const EditParticipant = ({
             },
           ]}
         >
-          <Input
-            maxLength="10"
-            placeholder="Your WhatsApp Number, If any"
-          />
+          <Input maxLength="10" placeholder="Your WhatsApp Number, If any" />
         </Form.Item>
 
         <Form.Item

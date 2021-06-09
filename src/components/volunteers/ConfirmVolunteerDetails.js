@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Button, Row, Col, Descriptions, Modal, Spin, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
-import Bulldozer from "../../static/images/bulldozer.png";
-import Excavator from "../../static/images/excavator.png";
+import Motto1 from "../../static/images/motto_01.png";
+import LogoGrayscale from "../../static/images/logo_grayscale.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import { registerVolunteer, clearErrors } from "../../actions/volunteerActions";
@@ -78,7 +78,7 @@ const ConfirmVolunteerDetails = ({
       >
         <Row>
           <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
-            <img src={Bulldozer} alt="" />
+            <img src={LogoGrayscale} alt="" />
           </Col>
           <Col span={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Card hoverable="true">
@@ -124,7 +124,7 @@ const ConfirmVolunteerDetails = ({
             </Card>
           </Col>
           <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
-            <img src={Excavator} alt="" />
+            <img src={Motto1} alt="" />
           </Col>
         </Row>
         <span

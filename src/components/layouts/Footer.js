@@ -4,7 +4,7 @@ import { Layout } from "antd";
 const Footer = () => {
   const { Footer } = Layout;
 
-  return <Footer style={{ textAlign: "center" }}>©2020 LIC</Footer>;
+  return <Footer style={{ textAlign: "center" }}>©{new Date().getFullYear()} LIC</Footer>;
 };
 
 export default Footer;
