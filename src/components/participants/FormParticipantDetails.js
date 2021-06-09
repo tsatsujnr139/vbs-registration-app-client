@@ -94,8 +94,9 @@ const FormParticipantDetails = ({
   const onFinish = (fieldsValue) => {
     const dob = fieldsValue["date_of_birth"];
     let attendance_type_id = fieldsValue["attendance_type"];
+    console.log("attendance type id", attendance_type_id)
     let attendance_type = null;
-    if (attendance_type_id !== null) {
+    if (attendance_type_id !== undefined) {
       attendance_type =
         participantDetails.session.supported_attendance_types.filter(
           (supported_attendance_type) =>
@@ -358,7 +359,7 @@ const FormParticipantDetails = ({
                       .length === 1 && (
                       <Text
                         style={{
-                          marginLeft: "calc(10%)",
+                          marginLeft: "calc(8%)",
                           display: "inline-block",
                         }}
                         type="danger"

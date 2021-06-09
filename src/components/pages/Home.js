@@ -7,7 +7,7 @@ import Footer from "../layouts/Footer";
 
 const Home = () => {
   const { Content } = Layout;
-  const { Title, Text } = Typography;
+  const { Title } = Typography;
 
   const [loading, setLoading] = useState(true);
 
@@ -53,9 +53,6 @@ const Home = () => {
                     <Title level={4}>
                       Seek Truth! Find Jesus!
                     </Title>
-                    <Text underline strong type="warning">
-                      *Minimum age for participants is 3 years*
-                    </Text>
                   </div>
                   <Button.Group size="large">
                     <Button type="primary" href="participants/register">

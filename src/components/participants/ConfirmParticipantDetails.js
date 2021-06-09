@@ -116,7 +116,7 @@ const ConfirmParticipantDetails = ({
                 <Descriptions.Item label="Session">
                   {session.name}
                 </Descriptions.Item>
-                <Descriptions.Item label="Date (Needs to be Changed)">
+                <Descriptions.Item label="Dates">
                   {session.start_date} - {session.end_date}
                 </Descriptions.Item>
                 <Descriptions.Item label="Attendance Type">
