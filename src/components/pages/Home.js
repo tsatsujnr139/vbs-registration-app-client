@@ -27,32 +27,29 @@ const Home = () => {
         <Content>
           <div className="homepage-hero">
             <Row>
-              <Col span={14} xl={14} lg={14} md={14} sm={24} xs={24}>
+              <Col span={13} xl={13} lg={13} md={13} sm={24} xs={24}>
                 <div className="hero-logo">
                   <img src={Logo} alt="logo" />
                 </div>
               </Col>
-              <Col span={10} xl={10} lg={10} md={10} sm={24} xs={24}>
+              <Col span={11} xl={11} lg={11} md={11} sm={24} xs={24}>
                 <div className="register-invite">
                   <div className="hero-motto">
-                    <Title level={2}>Vacation Bible School {new Date().getFullYear()}</Title>
+                    <Title level={2}>
+                      Vacation Bible School {new Date().getFullYear()}
+                    </Title>
                   </div>
                   <div className="hero-tagline">
                     <Title level={4}>
-                      Priceless Treasure Awaits!
-                      Join us on this expedition!
+                      Priceless Treasure Awaits! Join us on this expedition!
                     </Title>
-                    <Title level={4}>
-                      This Year We're
-                    </Title>
+                    <Title level={4}>This Year We're</Title>
                   </div>
                   <div className="hero-motto">
                     <Title>UNEARTHING THE TRUTH ABOUT JESUS!</Title>
                   </div>
                   <div className="hero-tagline">
-                    <Title level={4}>
-                      Seek Truth! Find Jesus!
-                    </Title>
+                    <Title level={4}>Seek Truth! Find Jesus!</Title>
                   </div>
                   <Button.Group size="large">
                     <Button type="primary" href="participants/register">
