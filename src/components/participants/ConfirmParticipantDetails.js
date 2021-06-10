@@ -7,7 +7,10 @@ import Motto1 from "../../static/images/motto_01.png";
 import LogoGrayscale from "../../static/images/logo_grayscale.png";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
-import { registerParticipant, clearErrors } from "../../actions/participantActions";
+import {
+  registerParticipant,
+  clearErrors,
+} from "../../actions/participantActions";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -43,8 +46,8 @@ const ConfirmParticipantDetails = ({
 }) => {
   useEffect(() => {});
   const onConfirm = (participantDetails, guardianDetails) => {
-    participantDetails.session = participantDetails.session.id
-    participantDetails.attendance_type = participantDetails.attendance_type.id
+    participantDetails.session = participantDetails.session.id;
+    participantDetails.attendance_type = participantDetails.attendance_type.id;
     // register the participant
     registerParticipant({
       ...participantDetails,
@@ -105,7 +108,7 @@ const ConfirmParticipantDetails = ({
                   {first_name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Date of Birth">
-                  {date_of_birth}
+                  {new Date(date_of_birth).toDateString()}
                 </Descriptions.Item>
                 <Descriptions.Item label="Age">{age}</Descriptions.Item>
                 <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
@@ -117,7 +120,8 @@ const ConfirmParticipantDetails = ({
                   {session.name}
                 </Descriptions.Item>
                 <Descriptions.Item label="Dates">
-                  {session.start_date} - {session.end_date}
+                  {new Date(session.start_date).toDateString()} -{" "}
+                  {new Date(session.end_date).toDateString()}
                 </Descriptions.Item>
                 <Descriptions.Item label="Attendance Type">
                   {attendance_type.name}
