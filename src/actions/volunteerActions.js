@@ -16,7 +16,7 @@ let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Retrieve Available Volunteer Roles
 export const getRoles = () => async (dispatch) => {
-  setLoading();
+  dispatch({ type: SET_LOADING });
   const data = [
     {
       name: "Teaching",
@@ -40,7 +40,7 @@ export const getVolunteers = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -60,11 +60,12 @@ export const getVolunteers = () => async (dispatch) => {
   }
 };
 
+
 // Register a volunteer
 export const registerVolunteer = (formData) => async (dispatch) => {
   console.log(`Volunteer Registration Details:: ${JSON.stringify(formData)}`);
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export const registerVolunteer = (formData) => async (dispatch) => {
 export const updateVolunteer = (id, formData) => async (dispatch) => {
   console.log(`Volunteer Update Details:: ${JSON.stringify(formData)}`);
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +114,7 @@ export const searchVolunteer = (value) => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/volunteers/?last_name=${value}`);
     dispatch({
       type: SEARCH_VOLUNTEER,
@@ -127,10 +128,6 @@ export const searchVolunteer = (value) => async (dispatch) => {
   }
 };
 
-export const setLoading = () => {
-  return { type: SET_LOADING };
-};
-
-export const clearErrors = () => {
-  return { type: CLEAR_ERRORS };
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

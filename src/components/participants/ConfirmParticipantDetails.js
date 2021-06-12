@@ -45,6 +45,7 @@ const ConfirmParticipantDetails = ({
   participant: { error, loading, success },
 }) => {
   useEffect(() => {});
+
   const onConfirm = (participantDetails, guardianDetails) => {
     participantDetails.session = participantDetails.session.id;
     participantDetails.attendance_type = participantDetails.attendance_type.id;
@@ -192,8 +193,8 @@ const ConfirmParticipantDetails = ({
             }}
           ></span>
           <Button
-            size="large"
             type="primary"
+            size="large"
             loading={loading}
             onClick={() => onConfirm(participantDetails, guardianDetails)}
           >
@@ -206,10 +207,6 @@ const ConfirmParticipantDetails = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  formDetails: state.formDetails,
-  participant: state.participant,
-});
 
 ConfirmParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
@@ -219,6 +216,11 @@ ConfirmParticipantDetails.propTypes = {
   registerParticipant: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  formDetails: state.formDetails,
+  participant: state.participant,
+});
 
 export default connect(mapStateToProps, { registerParticipant, clearErrors })(
   ConfirmParticipantDetails

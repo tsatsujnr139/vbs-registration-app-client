@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions, Modal, Spin, Card } from "antd";
+import { Button, Row, Col, Descriptions, Modal, Card } from "antd";
 import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
 import Motto1 from "../../static/images/motto_01.png";
 import LogoGrayscale from "../../static/images/logo_grayscale.png";
@@ -58,12 +58,6 @@ const ConfirmVolunteerDetails = ({
         "There was an error completing your registration at this time. Please try again later",
     });
   };
-
-  if (loading) {
-    return (
-      <Spin size="large" style={{ display: "block", marginTop: "100px" }} />
-    );
-  }
 
   return (
     <Fragment>
@@ -146,8 +140,8 @@ const ConfirmVolunteerDetails = ({
             }}
           ></span>
           <Button
-            size="large"
             type="primary"
+            size="large"
             loading={loading}
             onClick={() => onConfirm(volunteerDetails)}
           >
@@ -160,10 +154,6 @@ const ConfirmVolunteerDetails = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  formDetails: state.formDetails,
-  volunteer: state.volunteer,
-});
 
 ConfirmVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
@@ -172,6 +162,11 @@ ConfirmVolunteerDetails.propTypes = {
   registerVolunteer: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  formDetails: state.formDetails,
+  volunteer: state.volunteer,
+});
 
 export default connect(mapStateToProps, { registerVolunteer, clearErrors })(
   ConfirmVolunteerDetails

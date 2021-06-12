@@ -20,7 +20,7 @@ let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 // Get Grades
 export const getGrades = () => async (dispatch) => {
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/grades/`);
     dispatch({
       type: GET_GRADES,
@@ -38,7 +38,7 @@ export const getGrades = () => async (dispatch) => {
 // Get Sessions
 export const getSessions = () => async (dispatch) => {
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/sessions/`);
     dispatch({
       type: GET_SESSIONS,
@@ -57,7 +57,7 @@ export const getSessions = () => async (dispatch) => {
 export const registerParticipant = (formData) => async (dispatch) => {
   console.log(`Participant Registration Details:: ${JSON.stringify(formData)}`);
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export const registerParticipant = (formData) => async (dispatch) => {
 export const updateParticipant = (id, formData) => async (dispatch) => {
   console.log(`Participant Update Details:: ${JSON.stringify(formData)}`);
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ export const getParticipants = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    setLoading();
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -136,8 +136,7 @@ export const searchParticipant = (value) => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
   try {
-    setLoading();
-
+    dispatch({ type: SET_LOADING });
     const res = await axios.get(
       `${apiBaseUrl}/participants/?last_name=${value}`
     );
@@ -154,10 +153,6 @@ export const searchParticipant = (value) => async (dispatch) => {
   }
 };
 
-export const setLoading = () => {
-  return { type: SET_LOADING };
-};
-
-export const clearErrors = () => {
-  return { type: CLEAR_ERRORS };
+export const clearErrors = () => (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };
