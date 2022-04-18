@@ -1,16 +1,17 @@
+import { Button, Card, Col, Descriptions, Modal, Row, Spin } from "antd";
 import React, { Fragment, useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions, Card, Modal, Spin } from "antd";
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
-import Motto1 from "../../static/images/motto_01.png";
+import {
+  clearErrors,
+  registerParticipant,
+} from "../../actions/participantActions";
+
+import Accent3 from "../../static/images/accent-3.png";
+import Footer from "../layouts/Footer";
 import LogoGrayscale from "../../static/images/logo_grayscale.png";
 import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
-import {
-  registerParticipant,
-  clearErrors,
-} from "../../actions/participantActions";
+import PropTypes from "prop-types";
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
+import { connect } from "react-redux";
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -91,7 +92,7 @@ const ConfirmParticipantDetails = ({
       >
         <Row>
           <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
-            <img src={Motto1} alt="" />
+            <img src={Accent3} alt="" />
           </Col>
           <Col span={12} xl={12} lg={12} md={12} sm={24} xs={24}>
             <Card hoverable="true">
@@ -207,7 +208,6 @@ const ConfirmParticipantDetails = ({
   );
 };
 
-
 ConfirmParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   participant: PropTypes.object.isRequired,
@@ -217,7 +217,7 @@ ConfirmParticipantDetails.propTypes = {
   clearErrors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formDetails: state.formDetails,
   participant: state.participant,
 });

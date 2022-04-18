@@ -1,21 +1,22 @@
-import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
 import {
+  Alert,
+  Button,
   Card,
+  Col,
   Form,
   Input,
-  Button,
-  Row,
-  Col,
-  Alert,
   Layout,
+  Row,
   Spin,
-  notification,
   Typography,
+  notification,
 } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { addAdmin, setLoading, clearErrors } from "../../actions/adminActions";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import React, { Fragment, useEffect } from "react";
+import { addAdmin, clearErrors } from "../../actions/adminActions";
+
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
   useEffect(() => {
@@ -33,12 +34,11 @@ const AddAdmin = ({ admin: { loading, error, success }, addAdmin }) => {
   const { Content } = Layout;
   const { Title } = Typography;
 
-  const onFinish = (values) => {
-    setLoading();
+  const onFinish = values => {
     addAdmin({ ...values });
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
@@ -201,10 +201,8 @@ AddAdmin.propTypes = {
   clearErrors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   admin: state.admin,
 });
 
-export default connect(mapStateToProps, { addAdmin, setLoading, clearErrors })(
-  AddAdmin
-);
+export default connect(mapStateToProps, { addAdmin, clearErrors })(AddAdmin);

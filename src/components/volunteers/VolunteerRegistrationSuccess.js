@@ -1,8 +1,9 @@
+import { Button, Result } from "antd";
 import React, { Fragment } from "react";
-import Navbar from "../layouts/Navbar";
-import { Result, Button } from "antd";
-import useWindowSize from "react-use/lib/useWindowSize";
+
 import Confetti from "react-confetti";
+import Navbar from "../layouts/Navbar";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 const RegistrationSuccess = () => {
   const { width, height } = useWindowSize();
@@ -13,13 +14,15 @@ const RegistrationSuccess = () => {
       <Confetti width={width} height={height} gravity={0.2} />
       <Result
         status="success"
-        title="You have successfully signed up as a volunteer for VBS 2021! "
+        title={`You have successfully signed up as a volunteer for ${new Date().getFullYear()}`}
         subTitle="The VBS Planning team is looking foward to working with you."
         extra={[
           <Button
+            size="large"
             type="primary"
             key="participant"
             href="/participants/register"
+            shape="round"
           >
             Click here to register a participant
           </Button>,

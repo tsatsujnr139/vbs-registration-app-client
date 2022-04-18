@@ -1,27 +1,28 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { connect } from "react-redux";
 import {
+  Button,
+  Card,
+  Col,
   Form,
   Input,
-  Select,
-  Button,
-  Row,
-  Col,
-  Radio,
-  Card,
   Layout,
-  Spin,
+  Radio,
   Result,
+  Row,
+  Select,
+  Spin,
 } from "antd";
-import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
-import { setVolunteerDetails } from "../../actions/formActions";
-import PropTypes from "prop-types";
-import CoinLogo from "../../static/images/coin-logo.png";
-import Drone from "../../static/images/drone.png";
-import Navbar from "../layouts/Navbar";
+import React, { Fragment, useEffect, useState } from "react";
+
+import Accent from "../../static/images/accent-1.png";
+import Accent2 from "../../static/images/accent-2.png";
 import Footer from "../layouts/Footer";
+import Navbar from "../layouts/Navbar";
+import PropTypes from "prop-types";
+import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
+import { connect } from "react-redux";
 import { getGrades } from "../../actions/participantActions";
 import { getRoles } from "../../actions/volunteerActions";
+import { setVolunteerDetails } from "../../actions/formActions";
 
 const FormVolunteerDetails = ({
   nextStep,
@@ -44,7 +45,7 @@ const FormVolunteerDetails = ({
     //eslint-disable-next-line
   }, []);
 
-  const onFinish = (fieldsValue) => {
+  const onFinish = fieldsValue => {
     const values = {
       ...fieldsValue,
       previous_volunteer:
@@ -54,12 +55,11 @@ const FormVolunteerDetails = ({
     nextStep();
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
-  const onPreviousVolunteerChange = (e) => {
-    console.log("radio checked", e.target.value);
+  const onPreviousVolunteerChange = e => {
     const values = {
       previous_volunteer: e.target.value,
     };
@@ -99,7 +99,7 @@ const FormVolunteerDetails = ({
           <div className="form-wrapper">
             <Row>
               <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-                <img src={Drone} alt="jackhammer" />
+                <img src={Accent} alt="accent" />
               </Col>
               <Col
                 span={10}
@@ -241,7 +241,7 @@ const FormVolunteerDetails = ({
                       ]}
                     >
                       <Select defaultValue="Preferred Role">
-                        {roles.map((role) => (
+                        {roles.map(role => (
                           <Option key={role.name} value={role.name}>
                             {role.name}
                           </Option>
@@ -260,7 +260,7 @@ const FormVolunteerDetails = ({
                       ]}
                     >
                       <Select defaultValue="Preferred Class">
-                        {grades.map((grade) => (
+                        {grades.map(grade => (
                           <Option key={grade.name} value={grade.name}>
                             {grade.name}
                           </Option>
@@ -352,7 +352,7 @@ const FormVolunteerDetails = ({
                 sm={0}
                 xs={0}
               >
-                <img src={CoinLogo} alt="crane" />
+                <img src={Accent2} alt="accent" />
               </Col>
             </Row>
           </div>
@@ -378,7 +378,7 @@ FormVolunteerDetails.propTypes = {
   nextStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formDetails: state.formDetails,
   participant: state.participant,
   volunteer: state.volunteer,

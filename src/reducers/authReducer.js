@@ -1,11 +1,11 @@
 import {
   AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  USER_LOADED,
-  SET_LOADING,
   CLEAR_ERRORS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  SET_LOADING,
+  USER_LOADED,
 } from "../actions/types";
 
 const initialState = {

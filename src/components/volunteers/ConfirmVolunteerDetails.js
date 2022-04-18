@@ -1,13 +1,14 @@
+import { Button, Card, Col, Descriptions, Modal, Row } from "antd";
 import React, { Fragment, useEffect } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Button, Row, Col, Descriptions, Modal, Card } from "antd";
-import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
-import Motto1 from "../../static/images/motto_01.png";
+import { clearErrors, registerVolunteer } from "../../actions/volunteerActions";
+
+import Accent3 from "../../static/images/accent-3.png";
+import Footer from "../layouts/Footer";
 import LogoGrayscale from "../../static/images/logo_grayscale.png";
 import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
-import { registerVolunteer, clearErrors } from "../../actions/volunteerActions";
+import PropTypes from "prop-types";
+import RegistrationProgressBar from "./VolunteerRegistrationProgressBar";
+import { connect } from "react-redux";
 
 const ConfirmVolunteerDetails = ({
   nextStep,
@@ -43,7 +44,7 @@ const ConfirmVolunteerDetails = ({
     }
   });
 
-  const onConfirm = (volunteerDetails) => {
+  const onConfirm = volunteerDetails => {
     // register the volunteer
     const values = {
       ...volunteerDetails,
@@ -118,7 +119,7 @@ const ConfirmVolunteerDetails = ({
             </Card>
           </Col>
           <Col span={6} xl={6} lg={6} md={6} sm={0} xs={0}>
-            <img src={Motto1} alt="" />
+            <img src={Accent3} alt="" />
           </Col>
         </Row>
         <span
@@ -154,7 +155,6 @@ const ConfirmVolunteerDetails = ({
   );
 };
 
-
 ConfirmVolunteerDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
   nextStep: PropTypes.func.isRequired,
@@ -163,7 +163,7 @@ ConfirmVolunteerDetails.propTypes = {
   clearErrors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formDetails: state.formDetails,
   volunteer: state.volunteer,
 });

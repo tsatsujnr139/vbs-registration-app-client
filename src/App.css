@@ -7,18 +7,20 @@
   -webkit-text-size-adjust: none;
 }
 
-/* Homepage*/
-.homepage-hero {
-  padding: 20px 0px 20px 0px;
-  min-height: 85vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../src/static/images/hero-background.jpeg") no-repeat center center
-      fixed;
+.landing-page {
+  min-height: 95vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+  url("../src/static/images/hero-background.jpeg") no-repeat center center fixed;
   background-attachment: fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+/* Homepage*/
+.homepage-hero {
+  padding: 20px 0px 0px 0px;
 }
 
 .hero-logo {
@@ -29,7 +31,7 @@
 
 .hero-logo img {
   max-width: 100%;
-  max-height: 85vh;
+  max-height: 95vh;
   object-fit: contain;
 }
 
@@ -41,6 +43,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .hero-motto h1 {
@@ -51,13 +55,15 @@
 
 .hero-motto h2 {
   -webkit-text-stroke: 1px white;
+  font-size: 50px;
   font-family: "Luckiest Guy", sans-serif;
-  color: cadetblue;
+  color: crimson;
 }
 
 .hero-tagline h4,
 h2 {
-  color: bisque;
+  color: whitesmoke;
+  padding-bottom: 20px;
 }
 
 .hero-tagline {

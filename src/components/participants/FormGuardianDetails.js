@@ -1,14 +1,15 @@
-import React, { useEffect, Fragment, useState } from "react";
-import { connect } from "react-redux";
-import { Form, Input, Button, Row, Col, Card, Layout } from "antd";
-import { setGuardianDetails } from "../../actions/formActions";
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
-import PropTypes from "prop-types";
-import Jeep from "../../static/images/jeep.png";
-import Lizard from "../../static/images/lizard.png";
-import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
+import { Button, Card, Col, Form, Input, Layout, Row } from "antd";
+import React, { Fragment, useEffect, useState } from "react";
+
+import Accent from "../../static/images/accent-1.png";
+import Accent2 from "../../static/images/accent-2.png";
 import ButtonGroup from "antd/lib/button/button-group";
+import Footer from "../layouts/Footer";
+import Navbar from "../layouts/Navbar";
+import PropTypes from "prop-types";
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
+import { connect } from "react-redux";
+import { setGuardianDetails } from "../../actions/formActions";
 
 const FormGuardianDetails = ({
   nextStep,
@@ -25,13 +26,12 @@ const FormGuardianDetails = ({
     //eslint-disable-next-line
   }, []);
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const onFinish = values => {
     setGuardianDetails(values);
     nextStep();
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
@@ -43,7 +43,7 @@ const FormGuardianDetails = ({
         <div className="form-wrapper">
           <Row>
             <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={Jeep} alt="food-truck" />
+              <img src={Accent} alt="..." />
             </Col>
             <Col
               span={10}
@@ -214,7 +214,7 @@ const FormGuardianDetails = ({
               </Card>
             </Col>
             <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={Lizard} alt="sign" />
+              <img src={Accent2} alt="..." />
             </Col>
           </Row>
         </div>
@@ -238,7 +238,7 @@ FormGuardianDetails.propTypes = {
   prevStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formDetails: state.formDetails,
 });
 

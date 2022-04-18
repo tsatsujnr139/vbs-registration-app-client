@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { Row, Col, Button, Typography } from "antd";
+import { Button, Col, Row, Typography } from "antd";
 import { Layout, Spin } from "antd";
-import Logo from "../../static/images/logo-main.png";
-import Navbar from "../layouts/Navbar";
+import React, { Fragment, useEffect, useState } from "react";
+
 import Footer from "../layouts/Footer";
+import Logo from "../../static/images/logo-main.png";
+import Navbar from "../layouts/HomeNavbar";
 
 const Home = () => {
   const { Content } = Layout;
@@ -23,47 +24,70 @@ const Home = () => {
   } else {
     return (
       <Fragment>
-        <Navbar />
         <Content>
-          <div className="homepage-hero">
-            <Row>
-              <Col span={13} xl={13} lg={13} md={13} sm={24} xs={24}>
-                <div className="hero-logo">
-                  <img src={Logo} alt="logo" />
-                </div>
-              </Col>
-              <Col span={11} xl={11} lg={11} md={11} sm={24} xs={24}>
-                <div className="register-invite">
-                  <div className="hero-motto">
-                    <Title level={2}>
-                      Vacation Bible School {new Date().getFullYear()}
-                    </Title>
+          <div className="landing-page">
+            <Navbar />
+            <div className="homepage-hero">
+              <Row>
+                <Col span={10} xl={10} lg={10} md={10} sm={24} xs={24}>
+                  <div className="hero-logo">
+                    <img src={Logo} alt="logo" />
                   </div>
-                  <div className="hero-tagline">
-                    <Title level={4}>
-                      Priceless Treasure Awaits! Join us on this expedition!
-                    </Title>
-                    <Title level={4}>This Year We're</Title>
-                  </div>
-                  <div className="hero-motto">
-                    <Title>UNEARTHING THE TRUTH ABOUT JESUS!</Title>
-                  </div>
-                  <div className="hero-tagline">
-                    <Title level={4}>Seek Truth! Find Jesus!</Title>
-                  </div>
-                  <Button.Group size="large">
-                    <Button type="primary" href="participants/register">
+                </Col>
+                <Col span={14} xl={14} lg={14} md={14} sm={24} xs={24}>
+                  <div className="register-invite">
+                    <div className="hero-motto">
+                      <Title level={2}>
+                        Vacation Bible School {new Date().getFullYear()}
+                      </Title>
+                    </div>
+                    <div className="hero-tagline">
+                      <Title level={4}>Show kids the beautiful truth!</Title>
+                    </div>
+                    <div className="hero-motto">
+                      <Title>
+                        Created in Christ. Designed for God&apos;s Purpose.
+                      </Title>
+                    </div>
+                    <div className="hero-tagline">
+                      <Title level={4}>
+                        Spark imagination and kick creativity into high gear at
+                        Spark Studios. In summer 2022, kids will learn that
+                        God’s creativity didn’t stop in Genesis. The Master
+                        Artist is working to redeem, reclaim, and transform
+                        us–His creation–to the design He planned for us. Kids
+                        will see the beautiful truth that they are God’s
+                        workmanship as they learn to use their talents to bring
+                        glory to Him.
+                      </Title>
+                    </div>
+                    {/* <Button type="primary" href="participants/register">
                       REGISTER PARTICIPANT
                     </Button>
-                    <span style={{ color: "white" }}> OR </span>
+                    <span style={{ color: "white" }}> OR </span> */}
 
-                    <Button href="volunteers/register">
+                    <Button
+                      size="large"
+                      shape="round"
+                      href="volunteers/register"
+                    >
                       SIGN UP AS A VOLUNTEER
                     </Button>
-                  </Button.Group>
-                </div>
-              </Col>
-            </Row>
+                    <hr />
+                    <Title
+                      level={5}
+                      style={{
+                        color: "white",
+                        fontWeight: "120",
+                        paddingTop: "20px",
+                      }}
+                    >
+                      *Participant registration coming soon*
+                    </Title>
+                  </div>
+                </Col>
+              </Row>
+            </div>
           </div>
         </Content>
         <Footer />

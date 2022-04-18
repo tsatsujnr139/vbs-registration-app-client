@@ -1,8 +1,8 @@
 import {
-  SET_LOADING,
-  SET_STEP,
-  SET_PARTICIPANT_DETAILS,
   SET_GUARDIAN_DETAILS,
+  SET_LOADING,
+  SET_PARTICIPANT_DETAILS,
+  SET_STEP,
   SET_VOLUNTEER_DETAILS,
 } from "../actions/types";
 
@@ -59,19 +59,16 @@ export default (state = initialState, action) => {
         step: action.payload,
       };
     case SET_PARTICIPANT_DETAILS:
-      console.log(`Participant Details: ${action.payload}`);
       return {
         ...state,
         participantDetails: action.payload,
       };
     case SET_GUARDIAN_DETAILS:
-      console.log(`Guardian Details: ${action.payload}`);
       return {
         ...state,
         guardianDetails: action.payload,
       };
     case SET_VOLUNTEER_DETAILS:
-      console.log(`Volunteer Details: ${action.payload}`);
       return {
         ...state,
         volunteerDetails: action.payload,

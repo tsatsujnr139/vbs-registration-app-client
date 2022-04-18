@@ -1,24 +1,25 @@
 import {
-  SET_LOADING,
+  CLEAR_ERRORS,
+  GENERAL_ERROR,
   GET_GRADES,
+  GET_PARTICIPANTS,
   GET_SESSIONS,
   GRADES_ERROR,
-  SESSIONS_ERROR,
-  REGISTRATION_SUCCESS,
-  UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
-  GET_PARTICIPANTS,
-  GENERAL_ERROR,
+  REGISTRATION_SUCCESS,
   SEARCH_PARTICIPANT,
-  CLEAR_ERRORS,
+  SESSIONS_ERROR,
+  SET_LOADING,
+  UPDATE_PARTICIPANT_SUCCESS,
 } from "./types";
+
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Get Grades
-export const getGrades = () => async (dispatch) => {
+export const getGrades = () => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/grades/`);
@@ -36,7 +37,7 @@ export const getGrades = () => async (dispatch) => {
 };
 
 // Get Sessions
-export const getSessions = () => async (dispatch) => {
+export const getSessions = () => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/sessions/`);
@@ -54,8 +55,7 @@ export const getSessions = () => async (dispatch) => {
 };
 
 // Register a participant
-export const registerParticipant = (formData) => async (dispatch) => {
-  console.log(`Participant Registration Details:: ${JSON.stringify(formData)}`);
+export const registerParticipant = formData => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const config = {
@@ -82,8 +82,7 @@ export const registerParticipant = (formData) => async (dispatch) => {
 };
 
 // Register a participant
-export const updateParticipant = (id, formData) => async (dispatch) => {
-  console.log(`Participant Update Details:: ${JSON.stringify(formData)}`);
+export const updateParticipant = (id, formData) => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const config = {
@@ -105,7 +104,7 @@ export const updateParticipant = (id, formData) => async (dispatch) => {
 };
 
 // Retrieve Most Recent Registered Participants
-export const getParticipants = () => async (dispatch) => {
+export const getParticipants = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -131,7 +130,7 @@ export const getParticipants = () => async (dispatch) => {
 };
 
 // Search for a participant by last name
-export const searchParticipant = (value) => async (dispatch) => {
+export const searchParticipant = value => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -153,6 +152,6 @@ export const searchParticipant = (value) => async (dispatch) => {
   }
 };
 
-export const clearErrors = () => (dispatch) => {
+export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
 };

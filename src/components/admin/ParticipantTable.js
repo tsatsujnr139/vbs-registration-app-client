@@ -1,27 +1,28 @@
-import React, { Fragment, useEffect } from "react";
-import { connect, Provider } from "react-redux";
 import {
-  Row,
-  Col,
-  Card,
-  Input,
-  Form,
   Button,
-  Table,
-  Spin,
-  notification,
+  Card,
+  Col,
+  Form,
+  Input,
   Modal,
+  Row,
+  Spin,
+  Table,
+  notification,
 } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Provider, connect } from "react-redux";
+import React, { Fragment, useEffect } from "react";
 import {
+  clearErrors,
   getParticipants,
   searchParticipant,
-  clearErrors,
   updateParticipant,
 } from "../../actions/participantActions";
-import PropTypes from "prop-types";
-import ParticipantDescription from "./ParticipantDescription";
+
 import EditParticipant from "./EditParticipant";
+import ParticipantDescription from "./ParticipantDescription";
+import PropTypes from "prop-types";
+import { SearchOutlined } from "@ant-design/icons";
 import storeConfig from "../../store";
 
 const ParticipantTable = ({
@@ -33,7 +34,7 @@ const ParticipantTable = ({
 }) => {
   useEffect(() => {
     clearErrors();
-    if (participantData == null) {
+    if (!participantData) {
       getParticipants();
     }
     if (error) {
@@ -147,7 +148,7 @@ const ParticipantTable = ({
     {
       title: "Action",
       key: "action",
-      render: (record) => (
+      render: record => (
         <span>
           <Button type="link" onClick={() => showViewModal(record)}>
             View
@@ -161,7 +162,7 @@ const ParticipantTable = ({
     },
   ];
 
-  const showViewModal = (record) => {
+  const showViewModal = record => {
     Modal.info({
       title: "Participant Details",
       width: 700,
@@ -169,7 +170,7 @@ const ParticipantTable = ({
     });
   };
 
-  const showEditModal = (record) => {
+  const showEditModal = record => {
     Modal.confirm({
       title: "Edit Participant Details",
       width: 700,
@@ -182,7 +183,7 @@ const ParticipantTable = ({
       onOk() {
         form
           .validateFields()
-          .then((fieldsValue) => {
+          .then(fieldsValue => {
             const dob = fieldsValue["date_of_birth"];
             const values = {
               ...fieldsValue,
@@ -190,15 +191,14 @@ const ParticipantTable = ({
             };
             updateParticipant(record.id, values);
           })
-          .catch((info) => {
+          .catch(info => {
             console.log("Validate Failed:", info);
           });
       },
     });
   };
 
-  const onSearchFinished = (value) => {
-    console.log("Searching for participant: ", value.search);
+  const onSearchFinished = value => {
     searchParticipant(value.search);
   };
 
@@ -217,7 +217,7 @@ const ParticipantTable = ({
     });
   };
 
-  if (loading || participantData == null) {
+  if (loading || !participantData) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
     );
@@ -252,7 +252,7 @@ const ParticipantTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={participantData.results.map((record) => ({
+              dataSource={participantData.results.map(record => ({
                 ...record,
                 key: record.id,
               }))}
@@ -281,7 +281,7 @@ ParticipantTable.propTypes = {
   clearErrors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   participant: state.participant,
   admin: state.admin,
 });

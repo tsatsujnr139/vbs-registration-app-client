@@ -1,28 +1,28 @@
-import React from "react";
-import { connect } from "react-redux";
 import {
+  Alert,
+  Button,
   Card,
+  Col,
   Form,
   Input,
-  Button,
-  Row,
-  Col,
-  Alert,
   Layout,
+  Row,
   Typography,
 } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Fragment, useEffect } from "react";
-import { login, setLoading, clearErrors } from "../../actions/authActions";
-import PropTypes from "prop-types";
-import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { clearErrors, login } from "../../actions/authActions";
 
-const Login = (props) => {
+import Footer from "../layouts/Footer";
+import Navbar from "../layouts/Navbar";
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+
+const Login = props => {
   const {
     auth: { loading, isAuthenticated, error },
     login,
-    setLoading,
     clearErrors,
     history,
   } = props;
@@ -38,12 +38,11 @@ const Login = (props) => {
     // eslint-disable-next-line
   }, [isAuthenticated, history]);
 
-  const onFinish = (values) => {
-    setLoading();
+  const onFinish = values => {
     login({ ...values });
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
@@ -166,10 +165,8 @@ const cardStyle = {
   borderRadius: "2px",
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { login, setLoading, clearErrors })(
-  Login
-);
+export default connect(mapStateToProps, { login, clearErrors })(Login);

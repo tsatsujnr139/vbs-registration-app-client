@@ -1,27 +1,24 @@
 import {
-  SET_LOADING,
-  GET_DASHBOARD_DATA,
   ADD_ADMIN,
-  DASHB0ARD_DATA_ERROR,
   ADD_ADMIN_ERROR,
   CLEAR_ERRORS,
+  DASHB0ARD_DATA_ERROR,
+  GET_DASHBOARD_DATA,
+  SET_LOADING,
 } from "./types";
+
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
-export const setLoading = () => {
-  return { type: SET_LOADING };
-};
-
 // Get Dashboard Data
-export const getDashboardData = () => async (dispatch) => {
+export const getDashboardData = () => async dispatch => {
+  dispatch({ type: SET_LOADING });
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-    setLoading();
     const res = await axios.get(`${apiBaseUrl}/dashboard-data/`);
     dispatch({
       type: GET_DASHBOARD_DATA,
@@ -37,12 +34,12 @@ export const getDashboardData = () => async (dispatch) => {
 };
 
 // Add New Admin
-export const addAdmin = (formData) => async (dispatch) => {
+export const addAdmin = formData => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
+  dispatch({ type: SET_LOADING });
   try {
-    setLoading();
     const config = {
       headers: {
         "Content-Type": "application/json",

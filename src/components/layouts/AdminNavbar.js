@@ -1,8 +1,9 @@
-import React, { useState, Fragment } from "react";
-import { Menu, Layout } from "antd";
+import { Layout, Menu } from "antd";
+import React, { Fragment, useState } from "react";
+
 import { LogoutOutlined } from "@ant-design/icons";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { logout } from "../../actions/authActions";
 
 const Navbar = ({ auth: { user }, logout }) => {
@@ -10,7 +11,7 @@ const Navbar = ({ auth: { user }, logout }) => {
 
   const { Header } = Layout;
 
-  const onClick = (e) => {
+  const onClick = e => {
     setCurrent(e.key);
   };
 
@@ -25,20 +26,20 @@ const Navbar = ({ auth: { user }, logout }) => {
           onClick={onClick}
           selectedKeys={current}
           mode="horizontal"
-          style={{ textAlign: "end" }}
+          style={{ float: "right" }}
         >
           <Menu
             onClick={onClick}
             selectedKeys={current}
             mode="horizontal"
-            style={{ textAlign: "end", lineHeight: "63px" }}
+            style={{ float: "right", lineHeight: "65px" }}
           >
             <Menu.Item key="greeting" disabled="true">
-              Hi {user && user.first_name}
+              Hi, {user && user.first_name}
             </Menu.Item>
             <Menu.Item key="admin-logout" onClick={onLogout}>
               <LogoutOutlined />
-              Logout
+              <span style={{ paddingLeft: "1px" }}>Logout</span>
             </Menu.Item>
           </Menu>
         </Menu>
@@ -52,7 +53,7 @@ Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
 });
 

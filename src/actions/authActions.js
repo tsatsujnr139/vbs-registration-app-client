@@ -1,14 +1,15 @@
 import {
   AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  USER_LOADED,
-  SET_LOADING,
   CLEAR_ERRORS,
+  LOGIN_FAIL,
+  LOGIN_SUCCESS,
+  LOGOUT,
+  SET_LOADING,
+  USER_LOADED,
 } from "./types";
-import setAuthToken from "../utils/setAuthToken";
+
 import axios from "axios";
+import setAuthToken from "../utils/setAuthToken";
 import storeConfig from "../store";
 
 const { persistor } = storeConfig;
@@ -16,11 +17,12 @@ const { persistor } = storeConfig;
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Load User
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
   try {
+    dispatch({ type: SET_LOADING });
     const res = await axios.get(`${apiBaseUrl}/user/self/`);
     dispatch({
       type: USER_LOADED,
@@ -36,8 +38,9 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // Login
-export const login = (formData) => async (dispatch) => {
+export const login = formData => async dispatch => {
   try {
+    dispatch({ type: SET_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -81,11 +84,7 @@ export const logout = () => {
 };
 
 // Set Loading
-export const setLoading = () => {
-  return { type: SET_LOADING };
-};
 
-// Set Loading
 export const clearErrors = () => {
   return { type: CLEAR_ERRORS };
 };

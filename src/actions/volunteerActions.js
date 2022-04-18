@@ -1,21 +1,22 @@
 import {
-  REGISTRATION_ERROR,
-  SET_LOADING,
-  SEARCH_VOLUNTEER,
-  GENERAL_ERROR,
-  GET_VOLUNTEERS,
-  GET_ROLES,
-  REGISTRATION_SUCCESS,
-  UPDATE_VOLUNTEER_SUCCESS,
   CLEAR_ERRORS,
+  GENERAL_ERROR,
+  GET_ROLES,
+  GET_VOLUNTEERS,
+  REGISTRATION_ERROR,
+  REGISTRATION_SUCCESS,
+  SEARCH_VOLUNTEER,
+  SET_LOADING,
+  UPDATE_VOLUNTEER_SUCCESS,
 } from "./types";
+
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 
 let apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
 
 // Retrieve Available Volunteer Roles
-export const getRoles = () => async (dispatch) => {
+export const getRoles = () => async dispatch => {
   dispatch({ type: SET_LOADING });
   const data = [
     {
@@ -35,7 +36,7 @@ export const getRoles = () => async (dispatch) => {
 };
 
 // Retrieve Most Recent Registered Volunteers
-export const getVolunteers = () => async (dispatch) => {
+export const getVolunteers = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -60,10 +61,8 @@ export const getVolunteers = () => async (dispatch) => {
   }
 };
 
-
 // Register a volunteer
-export const registerVolunteer = (formData) => async (dispatch) => {
-  console.log(`Volunteer Registration Details:: ${JSON.stringify(formData)}`);
+export const registerVolunteer = formData => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const config = {
@@ -86,8 +85,7 @@ export const registerVolunteer = (formData) => async (dispatch) => {
 };
 
 // Update volunteer
-export const updateVolunteer = (id, formData) => async (dispatch) => {
-  console.log(`Volunteer Update Details:: ${JSON.stringify(formData)}`);
+export const updateVolunteer = (id, formData) => async dispatch => {
   try {
     dispatch({ type: SET_LOADING });
     const config = {
@@ -109,7 +107,7 @@ export const updateVolunteer = (id, formData) => async (dispatch) => {
 };
 
 // Search for a volunteer by last name
-export const searchVolunteer = (value) => async (dispatch) => {
+export const searchVolunteer = value => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -128,6 +126,6 @@ export const searchVolunteer = (value) => async (dispatch) => {
   }
 };
 
-export const clearErrors = () => (dispatch) => {
+export const clearErrors = () => dispatch => {
   dispatch({ type: CLEAR_ERRORS });
 };

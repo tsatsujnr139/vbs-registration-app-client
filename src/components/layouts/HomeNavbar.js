@@ -19,11 +19,11 @@ const Navbar = () => {
       onClick={onClick}
       selectedKeys={current}
       mode="horizontal"
-      style={{ backgroundColor: "transparent" }}
+      style={{ color: "white", backgroundColor: "transparent" }}
     >
       <Menu.Item key="admin-login">
         <LoginOutlined />
-        <Link to="/admin/login" style={{ paddingLeft: "4px" }}>
+        <Link to="/admin/login" style={{ color: "white", paddingLeft: "4px" }}>
           Are you an admin? Login here
         </Link>
       </Menu.Item>

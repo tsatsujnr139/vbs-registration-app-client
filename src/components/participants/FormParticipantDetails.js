@@ -1,30 +1,30 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { connect } from "react-redux";
-import Navbar from "../layouts/Navbar";
-
 import {
+  Button,
+  Card,
+  Col,
+  DatePicker,
   Form,
   Input,
-  Select,
-  DatePicker,
-  Button,
-  Row,
-  Col,
-  Radio,
-  Card,
-  Spin,
   Layout,
+  Radio,
   Result,
+  Row,
+  Select,
+  Spin,
 } from "antd";
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
-import { setParticipantDetails } from "../../actions/formActions";
-import PropTypes from "prop-types";
-import CoinLogo from "../../static/images/coin-logo.png";
-import Drone from "../../static/images/drone.png";
-import Footer from "../layouts/Footer";
-import moment from "moment";
+import React, { Fragment, useEffect, useState } from "react";
 import { getGrades, getSessions } from "../../actions/participantActions";
+
+import Accent from "../../static/images/accent-1.png";
+import Accent3 from "../../static/images/accent-3.png";
+import Footer from "../layouts/Footer";
+import Navbar from "../layouts/Navbar";
+import PropTypes from "prop-types";
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
 import { Typography } from "antd";
+import { connect } from "react-redux";
+import moment from "moment";
+import { setParticipantDetails } from "../../actions/formActions";
 
 const FormParticipantDetails = ({
   nextStep,
@@ -48,7 +48,7 @@ const FormParticipantDetails = ({
     //eslint-disable-next-line
   }, []);
 
-  const calculateCurrentAge = (date) => {
+  const calculateCurrentAge = date => {
     const now = moment();
     return now.diff(date, "years");
   };
@@ -65,7 +65,7 @@ const FormParticipantDetails = ({
     return Promise.resolve();
   };
 
-  const onDateOfBirthChange = (date) => {
+  const onDateOfBirthChange = date => {
     const age = calculateCurrentAge(date);
     form.setFieldsValue({
       age: age,
@@ -73,33 +73,30 @@ const FormParticipantDetails = ({
     form.validateFields(["age"]);
   };
 
-  const onGradeChange = (value) => {
-    console.log("grade selected", value);
+  const onGradeChange = value => {
     const values = {
       grade: value,
     };
     setParticipantDetails(values);
   };
 
-  const onSessionChange = (value) => {
-    var selected_session = sessions.filter(
-      (session) => session.id === value
-    )[0];
+  const onSessionChange = value => {
+    var selected_session = sessions.filter(session => session.id === value)[0];
     const values = {
       session: selected_session,
     };
     setParticipantDetails(values);
   };
 
-  const onFinish = (fieldsValue) => {
+  const onFinish = fieldsValue => {
     const dob = fieldsValue["date_of_birth"];
     let attendance_type_id = fieldsValue["attendance_type"];
-    console.log("attendance type id", attendance_type_id)
+    console.log("attendance type id", attendance_type_id);
     let attendance_type = null;
     if (attendance_type_id !== undefined) {
       attendance_type =
         participantDetails.session.supported_attendance_types.filter(
-          (supported_attendance_type) =>
+          supported_attendance_type =>
             supported_attendance_type.id === attendance_type_id
         )[0];
     } else {
@@ -116,7 +113,7 @@ const FormParticipantDetails = ({
     nextStep();
   };
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo);
   };
 
@@ -152,7 +149,7 @@ const FormParticipantDetails = ({
         <div className="form-wrapper">
           <Row>
             <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={Drone} alt="drone... buzz buzz" />
+              <img src={Accent} alt="accent" />
             </Col>
             <Col
               span={10}
@@ -287,7 +284,7 @@ const FormParticipantDetails = ({
                       onChange={onGradeChange}
                       defaultValue="Class Completed this Past Academic Year"
                     >
-                      {grades.map((grade) => (
+                      {grades.map(grade => (
                         <Option key={grade.name} value={grade.name}>
                           {grade.name}
                         </Option>
@@ -312,13 +309,13 @@ const FormParticipantDetails = ({
                         defaultValue="Which session would you like to register for?"
                       >
                         {sessions
-                          .filter((session) =>
+                          .filter(session =>
                             session.eligible_grades.some(
-                              (eligible_grade) =>
+                              eligible_grade =>
                                 eligible_grade.name === participantDetails.grade
                             )
                           )
-                          .map((filteredSession) => (
+                          .map(filteredSession => (
                             <Option
                               key={filteredSession.id}
                               value={filteredSession.id}
@@ -345,7 +342,7 @@ const FormParticipantDetails = ({
                       >
                         <Radio.Group size="Large" buttonStyle="solid">
                           {participantDetails.session.supported_attendance_types.map(
-                            (attendance_type) => (
+                            attendance_type => (
                               <Radio.Button value={attendance_type.id}>
                                 {attendance_type.name}
                               </Radio.Button>
@@ -428,7 +425,7 @@ const FormParticipantDetails = ({
               sm={0}
               xs={0}
             >
-              <img src={CoinLogo} alt="Coinssssss" />
+              <img src={Accent3} alt="accent" />
             </Col>
           </Row>
         </div>
@@ -454,7 +451,7 @@ FormParticipantDetails.propTypes = {
   nextStep: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   formDetails: state.formDetails,
   participant: state.participant,
 });

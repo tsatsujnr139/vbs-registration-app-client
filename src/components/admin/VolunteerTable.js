@@ -1,27 +1,28 @@
-import React, { Fragment, useEffect } from "react";
-import { connect, Provider } from "react-redux";
 import {
-  Row,
-  Col,
-  Card,
-  Input,
-  Form,
   Button,
-  Table,
-  Spin,
-  notification,
+  Card,
+  Col,
+  Form,
+  Input,
   Modal,
+  Row,
+  Spin,
+  Table,
+  notification,
 } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import PropTypes from "prop-types";
+import { Provider, connect } from "react-redux";
+import React, { Fragment, useEffect } from "react";
 import {
+  clearErrors,
   getVolunteers,
   searchVolunteer,
   updateVolunteer,
-  clearErrors,
 } from "../../actions/volunteerActions";
-import VolunteerDescription from "./VolunteerDescription";
+
 import EditVolunteer from "./EditVolunteer";
+import PropTypes from "prop-types";
+import { SearchOutlined } from "@ant-design/icons";
+import VolunteerDescription from "./VolunteerDescription";
 import storeConfig from "../../store";
 
 const VolunteerTable = ({
@@ -143,7 +144,7 @@ const VolunteerTable = ({
     {
       title: "Action",
       key: "action",
-      render: (record) => (
+      render: record => (
         <span>
           <Button type="link" onClick={() => showViewModal(record)}>
             View
@@ -157,7 +158,7 @@ const VolunteerTable = ({
     },
   ];
 
-  const showViewModal = (record) => {
+  const showViewModal = record => {
     Modal.info({
       title: "Volunteer Details",
       width: 700,
@@ -165,7 +166,7 @@ const VolunteerTable = ({
     });
   };
 
-  const showEditModal = (record) => {
+  const showEditModal = record => {
     Modal.confirm({
       destroyOnClose: true,
       title: "Edit Volunteer Details",
@@ -179,7 +180,7 @@ const VolunteerTable = ({
       onOk() {
         form
           .validateFields()
-          .then((fieldsValue) => {
+          .then(fieldsValue => {
             const previous_volunteer = fieldsValue["previous_volunteer"];
             const values = {
               ...fieldsValue,
@@ -187,7 +188,7 @@ const VolunteerTable = ({
             };
             updateVolunteer(record.id, values);
           })
-          .catch((info) => {
+          .catch(info => {
             console.log("Validate Failed:", info);
           });
       },
@@ -209,8 +210,7 @@ const VolunteerTable = ({
     });
   };
 
-  const onSearchFinished = (value) => {
-    console.log("Searching for volunteer : ", value.search);
+  const onSearchFinished = value => {
     searchVolunteer(value.search);
   };
 
@@ -249,7 +249,7 @@ const VolunteerTable = ({
             </Form>
             <Table
               columns={columns}
-              dataSource={volunteerData.results.map((record) => ({
+              dataSource={volunteerData.results.map(record => ({
                 ...record,
                 key: record.id,
               }))}
@@ -277,7 +277,7 @@ VolunteerTable.propTypes = {
   clearErrors: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   volunteer: state.volunteer,
 });
 

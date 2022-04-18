@@ -1,27 +1,25 @@
-import React, { useEffect, useState, Fragment } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Layout, Menu, Spin } from "antd";
-import Dashboard from "./Dashboard";
-import LogoTitle from "../../static/images/logo-2.png";
-import VolunteerDashboard from "./VolunteerDashboard";
-import ParticipantDashboard from "./ParticipantDashboard";
-import AddAdmin from "./AddAdmin";
 import {
-  UserOutlined,
   DashboardOutlined,
-  TeamOutlined,
   SettingOutlined,
+  TeamOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import Navbar from "../layouts/AdminNavbar";
+import { Layout, Menu } from "antd";
+import React, { Fragment, useEffect, useState } from "react";
+
+import AddAdmin from "./AddAdmin";
+import Dashboard from "./Dashboard";
 import Footer from "../layouts/Footer";
+import LogoTitle from "../../static/images/logo-2.png";
+import Navbar from "../layouts/AdminNavbar";
+import ParticipantDashboard from "./ParticipantDashboard";
+import PropTypes from "prop-types";
+import VolunteerDashboard from "./VolunteerDashboard";
+import { connect } from "react-redux";
 import { loadUser } from "../../actions/authActions";
 
-const AdminPanel = (props) => {
-  const {
-    auth: { loading },
-    loadUser,
-  } = props;
+const AdminPanel = props => {
+  const { loadUser } = props;
 
   const { Sider, Content } = Layout;
   const { SubMenu } = Menu;
@@ -32,7 +30,7 @@ const AdminPanel = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  const handleMenuClick = (menu) => {
+  const handleMenuClick = menu => {
     updateRender(menu.key);
   };
 
@@ -43,11 +41,11 @@ const AdminPanel = (props) => {
     4: <AddAdmin />,
   };
 
-  if (loading) {
-    return (
-      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
+  //   );
+  // }
 
   return (
     <Fragment>
@@ -70,22 +68,22 @@ const AdminPanel = (props) => {
           >
             <Menu.Item key="1">
               <DashboardOutlined />
-              Dashboard
+              <span style={{ paddingLeft: "1px" }}>Dashboard</span>
             </Menu.Item>
             <Menu.Item key="2">
               <UserOutlined />
-              Participants
+              <span style={{ paddingLeft: "1px" }}>Participants</span>
             </Menu.Item>
             <Menu.Item key="3">
               <TeamOutlined />
-              Volunteers
+              <span style={{ paddingLeft: "1px" }}>Volunteers</span>
             </Menu.Item>
             <SubMenu
               key="sub1"
               title={
                 <span>
                   <SettingOutlined />
-                  Admins
+                  <span style={{ paddingLeft: "1px" }}>Admins</span>
                 </span>
               }
             >
@@ -119,7 +117,7 @@ AdminPanel.propTypes = {
   loadUser: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth,
 });
 
