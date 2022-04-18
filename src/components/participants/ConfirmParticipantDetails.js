@@ -102,6 +102,7 @@ const ConfirmParticipantDetails = ({
                 size="default"
                 column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
                 bordered
+                labelStyle={{ fontWeight: "800" }}
               >
                 <Descriptions.Item label="Surname" span={2}>
                   {last_name}
