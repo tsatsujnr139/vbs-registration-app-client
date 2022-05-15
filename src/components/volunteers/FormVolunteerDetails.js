@@ -193,7 +193,7 @@ const FormVolunteerDetails = ({
                         },
                       ]}
                     >
-                      <Input maxLength="10" placeholder="Phone Number" />
+                      <Input maxLength="13" placeholder="Phone Number" />
                     </Form.Item>
                     <Form.Item
                       label="WhatsApp Phone Number eg. 024XXXXXXX"
@@ -207,7 +207,7 @@ const FormVolunteerDetails = ({
                       ]}
                     >
                       <Input
-                        maxLength="10"
+                        maxLength="13"
                         placeholder="WhatsApp Number If Any"
                       />
                     </Form.Item>
