@@ -1,26 +1,27 @@
+import { DatePicker, Form, Input, Radio, Select, Spin } from "antd";
 import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
-import { Form, Input, Select, DatePicker, Radio, Spin } from "antd";
-import moment from "moment";
+
 import PropTypes from "prop-types";
-import { getGrades, getSessions } from "../../actions/participantActions";
+import { connect } from "react-redux";
+import { getGrades } from "../../actions/participantActions";
+import moment from "moment";
 
 const EditParticipant = ({
   form,
   record,
   getGrades,
-  participant: { grades, sessions },
+  participant: { grades },
 }) => {
   useEffect(() => {
     form.resetFields();
     getGrades();
-    getSessions();
     //eslint-disable-next-line
   }, []);
 
+  const { TextArea } = Input;
   const { Option } = Select;
 
-  const onDateOfBirthChange = (date) => {
+  const onDateOfBirthChange = date => {
     const age = calculateCurrentAge(date);
     form.setFieldsValue({
       age: age,
@@ -40,12 +41,12 @@ const EditParticipant = ({
     return Promise.resolve();
   };
 
-  const calculateCurrentAge = (date) => {
+  const calculateCurrentAge = date => {
     const now = moment();
     return now.diff(date, "years");
   };
 
-  if (grades == null || sessions == null) {
+  if (grades == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "50px" }} />
     );
@@ -168,7 +169,7 @@ const EditParticipant = ({
         >
           <Select>
             {grades != null &&
-              grades.map((grade) => (
+              grades.map(grade => (
                 <Option key={grade.name} value={grade.name}>
                   {grade.name}
                 </Option>
@@ -176,29 +177,6 @@ const EditParticipant = ({
           </Select>
         </Form.Item>
         <br />
-        <Form.Item
-          label="Session you would like to attend"
-          name="session"
-          style={{ display: "inline-block", width: "calc(100%)" }}
-          rules={[
-            {
-              required: true,
-              message: "Please select a session",
-            },
-          ]}
-        >
-          <Select defaultValue="Which session would you like to register for?">
-            {sessions
-              .filter((session) =>
-                session.eligible_classes.contains(record.grade)
-              )
-              .map((session) => (
-                <Option key={session.name} value={session.name}>
-                  {session.name}
-                </Option>
-              ))}
-          </Select>
-        </Form.Item>
         <Form.Item
           label="Home Church"
           name="church"
@@ -213,7 +191,7 @@ const EditParticipant = ({
           <Input placeholder="The church the child attends" />
         </Form.Item>
         <br />
-        {/* <Form.Item
+        <Form.Item
           label="Medical Information (Allergies etc.)"
           name="medical_info"
           style={{ display: "inline-block", width: "calc(100%)" }}
@@ -227,7 +205,7 @@ const EditParticipant = ({
             placeholder="Any relevant medical information"
             autoSize={{ minRows: 3, maxRows: 6 }}
           />
-        </Form.Item> */}
+        </Form.Item>
         <Form.Item
           label="Parent/Guardian Full Name"
           name="parent_name"
@@ -341,7 +319,7 @@ EditParticipant.propTypes = {
   form: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   participant: state.participant,
 });
 

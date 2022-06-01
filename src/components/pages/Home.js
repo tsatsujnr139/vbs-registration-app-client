@@ -35,7 +35,12 @@ const Home = () => {
                   </div>
                 </Col>
                 <Col span={14} xl={14} lg={14} md={14} sm={24} xs={24}>
-                  <div className="register-invite">
+                  <div
+                    className="register-invite"
+                    style={{
+                      paddingBottom: "20px",
+                    }}
+                  >
                     <div className="hero-motto">
                       <Title level={2}>
                         Vacation Bible School {new Date().getFullYear()}
@@ -61,10 +66,24 @@ const Home = () => {
                         glory to Him.
                       </Title>
                     </div>
-                    {/* <Button type="primary" href="participants/register">
+                    <Button
+                      size="large"
+                      shape="round"
+                      type="primary"
+                      href="participants/register"
+                    >
                       REGISTER PARTICIPANT
                     </Button>
-                    <span style={{ color: "white" }}> OR </span> */}
+                    <span
+                      style={{
+                        color: "white",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                      }}
+                    >
+                      {" "}
+                      OR{" "}
+                    </span>
 
                     <Button
                       size="large"
@@ -73,17 +92,6 @@ const Home = () => {
                     >
                       SIGN UP AS A VOLUNTEER
                     </Button>
-                    <hr />
-                    <Title
-                      level={5}
-                      style={{
-                        color: "white",
-                        fontWeight: "120",
-                        paddingTop: "20px",
-                      }}
-                    >
-                      *Participant registration coming soon*
-                    </Title>
                   </div>
                 </Col>
               </Row>

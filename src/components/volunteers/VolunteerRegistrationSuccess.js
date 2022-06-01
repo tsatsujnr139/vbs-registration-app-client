@@ -14,7 +14,7 @@ const RegistrationSuccess = () => {
       <Confetti width={width} height={height} gravity={0.2} />
       <Result
         status="success"
-        title={`You have successfully signed up as a volunteer for ${new Date().getFullYear()}`}
+        title={`You have successfully signed up as a volunteer for VBS ${new Date().getFullYear()}`}
         subTitle="The VBS Planning team is looking foward to working with you."
         extra={[
           <Button

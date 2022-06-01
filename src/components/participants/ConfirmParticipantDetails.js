@@ -26,8 +26,6 @@ const ConfirmParticipantDetails = ({
       grade,
       gender,
       church,
-      session,
-      attendance_type,
       medical_info,
     },
     guardianDetails: {
@@ -48,8 +46,6 @@ const ConfirmParticipantDetails = ({
   useEffect(() => {});
 
   const onConfirm = (participantDetails, guardianDetails) => {
-    participantDetails.session = participantDetails.session.id;
-    participantDetails.attendance_type = participantDetails.attendance_type.id;
     // register the participant
     registerParticipant({
       ...participantDetails,
@@ -118,16 +114,6 @@ const ConfirmParticipantDetails = ({
                 <Descriptions.Item label="Class">{grade}</Descriptions.Item>
                 <Descriptions.Item label="Church" span={3}>
                   {church}
-                </Descriptions.Item>
-                <Descriptions.Item label="Session">
-                  {session.name}
-                </Descriptions.Item>
-                <Descriptions.Item label="Dates">
-                  {new Date(session.start_date).toDateString()} -{" "}
-                  {new Date(session.end_date).toDateString()}
-                </Descriptions.Item>
-                <Descriptions.Item label="Attendance Type">
-                  {attendance_type.name}
                 </Descriptions.Item>
               </Descriptions>
             </Card>

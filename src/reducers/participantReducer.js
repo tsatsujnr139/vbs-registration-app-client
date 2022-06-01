@@ -1,16 +1,16 @@
 import {
-  SET_LOADING,
+  CLEAR_ERRORS,
+  GENERAL_ERROR,
   GET_GRADES,
+  GET_PARTICIPANTS,
   GET_SESSIONS,
   GRADES_ERROR,
-  SESSIONS_ERROR,
-  REGISTRATION_SUCCESS,
-  UPDATE_PARTICIPANT_SUCCESS,
   REGISTRATION_ERROR,
-  GET_PARTICIPANTS,
+  REGISTRATION_SUCCESS,
   SEARCH_PARTICIPANT,
-  GENERAL_ERROR,
-  CLEAR_ERRORS,
+  SESSIONS_ERROR,
+  SET_LOADING,
+  UPDATE_PARTICIPANT_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -62,11 +62,11 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case SESSIONS_ERROR:
-        return {
-          ...state,
-          error: action.payload,
-          loading: false,
-        };
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     case GET_PARTICIPANTS:
       return {
         ...state,
