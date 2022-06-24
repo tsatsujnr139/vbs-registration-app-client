@@ -11,19 +11,19 @@ import {
   Row,
   Select,
   Spin,
-} from "antd";
-import React, { Fragment, useEffect, useState } from "react";
+} from "antd"
+import React, { Fragment, useEffect, useState } from "react"
 
-import Accent from "../../static/images/accent-1.png";
-import Accent2 from "../../static/images/accent-2.png";
-import Footer from "../layouts/Footer";
-import Navbar from "../layouts/Navbar";
-import PropTypes from "prop-types";
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar";
-import { connect } from "react-redux";
-import { getGrades } from "../../actions/participantActions";
-import moment from "moment";
-import { setParticipantDetails } from "../../actions/formActions";
+import Accent from "../../static/images/accent-1.png"
+import Accent2 from "../../static/images/accent-2.png"
+import Footer from "../layouts/Footer"
+import Navbar from "../layouts/Navbar"
+import PropTypes from "prop-types"
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar"
+import { connect } from "react-redux"
+import { getGrades } from "../../actions/participantActions"
+import moment from "moment"
+import { setParticipantDetails } from "../../actions/formActions"
 
 const FormParticipantDetails = ({
   nextStep,
@@ -32,58 +32,58 @@ const FormParticipantDetails = ({
   setParticipantDetails,
   getGrades,
 }) => {
-  const { Option } = Select;
-  const { TextArea } = Input;
-  const { Content } = Layout;
+  const { Option } = Select
+  const { TextArea } = Input
+  const { Content } = Layout
 
-  const [form] = Form.useForm();
-  const [, forceUpdate] = useState();
+  const [form] = Form.useForm()
+  const [, forceUpdate] = useState()
 
   useEffect(() => {
-    getGrades();
-    forceUpdate({});
+    getGrades()
+    forceUpdate({})
     //eslint-disable-next-line
-  }, []);
+  }, [])
 
   const calculateCurrentAge = date => {
-    const now = moment();
-    return now.diff(date, "years");
-  };
+    const now = moment()
+    return now.diff(date, "years")
+  }
 
   const isEligibleAge = (rule, value) => {
     if (Math.sign(value) === -1 || (value && Math.sign(value) === 0)) {
-      return Promise.reject("Please select a birth date in the past");
+      return Promise.reject("Please select a birth date in the past")
     }
     if (value < 3) {
       return Promise.reject(
         "Only Children older that 3 years are eligible for registration"
-      );
+      )
     }
-    return Promise.resolve();
-  };
+    return Promise.resolve()
+  }
 
   const onDateOfBirthChange = date => {
-    const age = calculateCurrentAge(date);
+    const age = calculateCurrentAge(date)
     form.setFieldsValue({
       age: age,
-    });
-    form.validateFields(["age"]);
-  };
+    })
+    form.validateFields(["age"])
+  }
 
   const onFinish = fieldsValue => {
-    console.log("Success:", fieldsValue);
-    const dob = fieldsValue["date_of_birth"];
+    console.log("Success:", fieldsValue)
+    const dob = fieldsValue["date_of_birth"]
     const values = {
       ...fieldsValue,
       date_of_birth: dob.format("YYYY-MM-DD"),
-    };
-    setParticipantDetails(values);
-    nextStep();
-  };
+    }
+    setParticipantDetails(values)
+    nextStep()
+  }
 
   const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
-  };
+    console.log("Failed:", errorInfo)
+  }
 
   if (error) {
     return (
@@ -97,13 +97,13 @@ const FormParticipantDetails = ({
           </Button>
         }
       />
-    );
+    )
   }
 
   if (loading || grades == null) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
-    );
+    )
   }
 
   return (
@@ -238,7 +238,7 @@ const FormParticipantDetails = ({
                   </Form.Item>
 
                   <Form.Item
-                    label="Class Completed this Past Academic Year"
+                    label="Class/Grade"
                     name="grade"
                     style={{ display: "inline-block", width: "calc(100%)" }}
                     rules={[
@@ -248,7 +248,7 @@ const FormParticipantDetails = ({
                       },
                     ]}
                   >
-                    <Select defaultValue="Class Completed this Past Academic Year">
+                    <Select defaultValue="Please select the child's class/grade">
                       {grades.map(grade => (
                         <Option key={grade.name} value={grade.name}>
                           {grade.name}
@@ -321,15 +321,15 @@ const FormParticipantDetails = ({
       </Content>
       <Footer />
     </Fragment>
-  );
-};
+  )
+}
 
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
   height: 700,
   borderRadius: "2px",
-};
+}
 
 FormParticipantDetails.propTypes = {
   formDetails: PropTypes.object.isRequired,
@@ -337,13 +337,13 @@ FormParticipantDetails.propTypes = {
   setParticipantDetails: PropTypes.func.isRequired,
   getGrades: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
   formDetails: state.formDetails,
   participant: state.participant,
-});
+})
 
 export default connect(mapStateToProps, { setParticipantDetails, getGrades })(
   FormParticipantDetails
-);
+)
