@@ -8,16 +8,16 @@ import {
   Layout,
   Row,
   Typography,
-} from "antd";
-import { Fragment, useEffect } from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { clearErrors, login } from "../../actions/authActions";
+} from "antd"
+import { Fragment, useEffect } from "react"
+import { LockOutlined, UserOutlined } from "@ant-design/icons"
+import { clearErrors, login } from "../../actions/authActions"
 
-import Footer from "../layouts/Footer";
-import Navbar from "../layouts/Navbar";
-import PropTypes from "prop-types";
-import React from "react";
-import { connect } from "react-redux";
+import Footer from "../layouts/Footer"
+import Navbar from "../layouts/Navbar"
+import PropTypes from "prop-types"
+import React from "react"
+import { connect } from "react-redux"
 
 const Login = props => {
   const {
@@ -25,26 +25,26 @@ const Login = props => {
     login,
     clearErrors,
     history,
-  } = props;
+  } = props
 
-  const { Content } = Layout;
-  const { Title } = Typography;
+  const { Content } = Layout
+  const { Title } = Typography
 
   useEffect(() => {
-    clearErrors();
+    clearErrors()
     if (isAuthenticated) {
-      history.push("/admin/dashboard");
+      history.push("/admin/attendance")
     }
     // eslint-disable-next-line
-  }, [isAuthenticated, history]);
+  }, [isAuthenticated, history])
 
   const onFinish = async values => {
-    await login({ ...values });
-  };
+    await login({ ...values })
+  }
 
   const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
-  };
+    console.log("Failed:", errorInfo)
+  }
 
   return (
     <Fragment>
@@ -149,23 +149,23 @@ const Login = props => {
       </Content>
       <Footer />
     </Fragment>
-  );
-};
+  )
+}
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
-};
+}
 
 const cardStyle = {
   minWidth: 350,
   height: 350,
   borderRadius: "2px",
-};
+}
 
 const mapStateToProps = state => ({
   auth: state.auth,
-});
+})
 
-export default connect(mapStateToProps, { login, clearErrors })(Login);
+export default connect(mapStateToProps, { login, clearErrors })(Login)
