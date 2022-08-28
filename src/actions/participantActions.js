@@ -173,14 +173,12 @@ export const admitParticipant = id => async dispatch => {
   }
 }
 
-export const pickupParticipant = (id, pickupPerson) => async dispatch => {
+export const pickupParticipant = id => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
   try {
-    const res = await axios.post(`${apiBaseUrl}/participants/${id}/pickup/`, {
-      pickup_person: pickupPerson,
-    })
+    const res = await axios.post(`${apiBaseUrl}/participants/${id}/pickup/`)
     let statusCode = res.status
     if (statusCode === 202) {
       dispatch({

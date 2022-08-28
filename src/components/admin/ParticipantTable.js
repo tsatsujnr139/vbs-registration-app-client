@@ -191,10 +191,9 @@ const ParticipantTable = ({
     setAdmissionConfirmationLoading(false)
   }
 
-  const handlePickup = async (record, pickupPerson) => {
-    console.log(pickupPerson)
+  const handlePickup = async record => {
     setPickupConfirmationLoading(true)
-    await pickupParticipant(record.id, pickupPerson)
+    await pickupParticipant(record.id)
     setPickupConfirmationLoading(false)
   }
 
@@ -237,12 +236,12 @@ const ParticipantTable = ({
               new Date()
             )}
           </span>
-          <Input
+          {/* <Input
             style={{ marginTop: "20px" }}
             placeholder="Pickup Person Name"
             required={true}
             onChange={e => setPickupPerson(e.target.value)}
-          />
+          /> */}
         </>
       ),
       okText: "Confirm",
