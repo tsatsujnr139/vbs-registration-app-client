@@ -155,7 +155,6 @@ export const searchParticipant = (value, grade) => async dispatch => {
 }
 
 export const admitParticipant = id => async dispatch => {
-  console.log("Called!!")
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
@@ -174,12 +173,22 @@ export const admitParticipant = id => async dispatch => {
   }
 }
 
-export const pickupParticipant = id => async dispatch => {
+export const pickupParticipant = (id, pickupPerson) => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
   try {
-    const res = await axios.post(`${apiBaseUrl}/participants/${id}/pickup`)
+    const res = await axios.post(`${apiBaseUrl}/participants/${id}/pickup/`, {
+      pickup_person: pickupPerson,
+    })
+    let statusCode = res.status
+    if (statusCode === 202) {
+      dispatch({
+        type: ADMISSION_PICKUP_ERROR,
+        payload: res.data.detail,
+      })
+      return
+    }
     dispatch({
       type: PICKUP_PARTICIPANT,
       payload: res.data,

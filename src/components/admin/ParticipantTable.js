@@ -160,7 +160,6 @@ const ParticipantTable = ({
     {
       title: "Action",
       key: "action",
-      colSpan: 2,
       render: record => (
         <span>
           <Button
@@ -184,11 +183,19 @@ const ParticipantTable = ({
   const [pickupConfirmationLoading, setPickupConfirmationLoading] =
     React.useState(false)
   const [searchClass, setSearchClass] = React.useState(null)
+  const [pickupPerson, setPickupPerson] = React.useState(null)
 
   const handleAdmission = async record => {
     setAdmissionConfirmationLoading(true)
     await admitParticipant(record.id)
     setAdmissionConfirmationLoading(false)
+  }
+
+  const handlePickup = async (record, pickupPerson) => {
+    console.log(pickupPerson)
+    setPickupConfirmationLoading(true)
+    await pickupParticipant(record.id, pickupPerson)
+    setPickupConfirmationLoading(false)
   }
 
   const handleParticipantAdmission = record => {
@@ -200,7 +207,7 @@ const ParticipantTable = ({
           <strong>
             {record.first_name} {record.last_name}
           </strong>{" "}
-          for today
+          for today{" "}
           {Intl.DateTimeFormat("en-GB", { dateStyle: "full" }).format(
             new Date()
           )}
@@ -208,7 +215,7 @@ const ParticipantTable = ({
       ),
       okText: "Confirm",
       confirmLoading: admissionConfirmationLoading,
-      onOk() {
+      onOk: () => {
         handleAdmission(record)
       },
     })
@@ -216,23 +223,32 @@ const ParticipantTable = ({
 
   const handleParticipantPickup = record => {
     Modal.confirm({
-      title: "Confirm Attendance",
+      title: "Confirm Pickup",
+      destroyOnClose: true,
       content: (
-        <span>
-          Confirm pickup of{" "}
-          <strong>
-            {record.first_name} {record.last_name}
-          </strong>{" "}
-          for today
-          {Intl.DateTimeFormat("en-GB", { dateStyle: "full" }).format(
-            new Date()
-          )}
-        </span>
+        <>
+          <span>
+            Enter pickup person name to confirm pickup of{" "}
+            <strong>
+              {record.first_name} {record.last_name}
+            </strong>{" "}
+            for today{" "}
+            {Intl.DateTimeFormat("en-GB", { dateStyle: "full" }).format(
+              new Date()
+            )}
+          </span>
+          <Input
+            style={{ marginTop: "20px" }}
+            placeholder="Pickup Person Name"
+            required={true}
+            onChange={e => setPickupPerson(e.target.value)}
+          />
+        </>
       ),
       okText: "Confirm",
-      confirmLoading: admissionConfirmationLoading,
-      onOk() {
-        handleAdmission(record)
+      confirmLoading: pickupConfirmationLoading,
+      onOk: () => {
+        handlePickup(record)
       },
     })
   }
