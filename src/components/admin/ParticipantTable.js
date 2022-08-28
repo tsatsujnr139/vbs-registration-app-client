@@ -227,7 +227,7 @@ const ParticipantTable = ({
       content: (
         <>
           <span>
-            Enter pickup person name to confirm pickup of{" "}
+            Confirm pickup of{" "}
             <strong>
               {record.first_name} {record.last_name}
             </strong>{" "}
