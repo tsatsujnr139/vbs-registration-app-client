@@ -4,7 +4,7 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  SET_LOADING,
+  SET_AUTH_LOADING,
   USER_LOADED,
 } from "./types";
 
@@ -22,7 +22,7 @@ export const loadUser = () => async dispatch => {
     setAuthToken(localStorage.token);
   }
   try {
-    dispatch({ type: SET_LOADING });
+    dispatch({ type: SET_AUTH_LOADING });
     const res = await axios.get(`${apiBaseUrl}/user/self/`);
     dispatch({
       type: USER_LOADED,
@@ -40,7 +40,7 @@ export const loadUser = () => async dispatch => {
 // Login
 export const login = formData => async dispatch => {
   try {
-    dispatch({ type: SET_LOADING });
+    dispatch({ type: SET_AUTH_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json",

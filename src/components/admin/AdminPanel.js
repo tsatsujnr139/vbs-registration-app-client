@@ -3,43 +3,43 @@ import {
   SettingOutlined,
   TeamOutlined,
   UserOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu } from "antd";
-import React, { Fragment, useEffect, useState } from "react";
+} from "@ant-design/icons"
+import { Layout, Menu } from "antd"
+import React, { Fragment, useEffect, useState } from "react"
 
-import AddAdmin from "./AddAdmin";
-import Dashboard from "./Dashboard";
-import Footer from "../layouts/Footer";
-import LogoTitle from "../../static/images/logo-2.png";
-import Navbar from "../layouts/AdminNavbar";
-import ParticipantDashboard from "./ParticipantDashboard";
-import PropTypes from "prop-types";
-import VolunteerDashboard from "./VolunteerDashboard";
-import { connect } from "react-redux";
-import { loadUser } from "../../actions/authActions";
+import AddAdmin from "./AddAdmin"
+import Dashboard from "./Dashboard"
+import Footer from "../layouts/Footer"
+import LogoTitle from "../../static/images/logo-2.png"
+import Navbar from "../layouts/AdminNavbar"
+import ParticipantDashboard from "./ParticipantDashboard"
+import PropTypes from "prop-types"
+import VolunteerDashboard from "./VolunteerDashboard"
+import { connect } from "react-redux"
+import { loadUser } from "../../actions/authActions"
 
 const AdminPanel = props => {
-  const { loadUser } = props;
+  const { loadUser } = props
 
-  const { Sider, Content } = Layout;
-  const { SubMenu } = Menu;
-  const [render, updateRender] = useState(1);
+  const { Sider, Content } = Layout
+  const { SubMenu } = Menu
+  const [render, updateRender] = useState(1)
 
   useEffect(() => {
-    loadUser();
+    loadUser()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   const handleMenuClick = menu => {
-    updateRender(menu.key);
-  };
+    updateRender(menu.key)
+  }
 
   const components = {
     1: <Dashboard />,
     2: <ParticipantDashboard />,
     3: <VolunteerDashboard />,
     4: <AddAdmin />,
-  };
+  }
 
   // if (loading) {
   //   return (
@@ -109,16 +109,16 @@ const AdminPanel = props => {
         </Layout>
       </Layout>
     </Fragment>
-  );
-};
+  )
+}
 
 AdminPanel.propTypes = {
   auth: PropTypes.object.isRequired,
   loadUser: PropTypes.func.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
   auth: state.auth,
-});
+})
 
-export default connect(mapStateToProps, { loadUser })(AdminPanel);
+export default connect(mapStateToProps, { loadUser })(AdminPanel)

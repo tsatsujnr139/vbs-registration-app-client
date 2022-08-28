@@ -6,49 +6,61 @@ import {
   Input,
   Modal,
   Row,
+  Select,
   Spin,
   Table,
   notification,
-} from "antd";
-import { Provider, connect } from "react-redux";
-import React, { Fragment, useEffect } from "react";
+} from "antd"
+import { Provider, connect } from "react-redux"
+import React, { Fragment, useEffect } from "react"
 import {
+  admitParticipant,
   clearErrors,
+  getGrades,
   getParticipants,
+  pickupParticipant,
   searchParticipant,
-  updateParticipant,
-} from "../../actions/participantActions";
+} from "../../actions/participantActions"
 
-import EditParticipant from "./EditParticipant";
-import ParticipantDescription from "./ParticipantDescription";
-import PropTypes from "prop-types";
-import { SearchOutlined } from "@ant-design/icons";
-import storeConfig from "../../store";
+import EditParticipant from "./EditParticipant"
+import ParticipantDescription from "./ParticipantDescription"
+import PropTypes from "prop-types"
+import { SearchOutlined } from "@ant-design/icons"
+import storeConfig from "../../store"
 
 const ParticipantTable = ({
-  participant: { participantData, loading, error, success },
+  participant: { participantData, loading, error, success, grades },
   getParticipants,
+  getGrades,
+  admitParticipant,
+  pickupParticipant,
   searchParticipant,
-  updateParticipant,
   clearErrors,
 }) => {
+  const { Option } = Select
   useEffect(() => {
-    clearErrors();
-    if (!participantData) {
-      getParticipants();
+    clearErrors()
+    const fetchData = async () => {
+      if (!participantData) {
+        await getParticipants()
+      }
+      if (!grades) {
+        await getGrades()
+      }
     }
+    fetchData()
     if (error) {
-      errorNotification();
-      clearErrors();
+      errorNotification(error.message)
+      clearErrors()
     }
     if (success) {
-      successNotification();
+      successNotification(success.message)
     }
     // eslint-disable-next-line
-  }, [error, success]);
-  const [form] = Form.useForm();
-  const { store } = storeConfig;
-  const { Search } = Input;
+  }, [error, success])
+  const [form] = Form.useForm()
+  const { store } = storeConfig
+  const { Search } = Input
 
   const columns = [
     {
@@ -148,79 +160,107 @@ const ParticipantTable = ({
     {
       title: "Action",
       key: "action",
+      colSpan: 2,
       render: record => (
         <span>
-          <Button type="link" onClick={() => showViewModal(record)}>
-            View
+          <Button
+            type="link"
+            onClick={() => handleParticipantAdmission(record)}
+          >
+            Admit
           </Button>
-          <Button type="link" onClick={() => showEditModal(record)}>
-            Edit
+          <Button type="link" onClick={() => handleParticipantPickup(record)}>
+            Pickup
           </Button>
         </span>
       ),
       fixed: "right",
     },
-  ];
+  ]
 
-  const showViewModal = record => {
-    Modal.info({
-      title: "Participant Details",
-      width: 700,
-      content: <ParticipantDescription record={record} />,
-    });
-  };
+  const [isSearching, setIsSearching] = React.useState(false)
+  const [admissionConfirmationLoading, setAdmissionConfirmationLoading] =
+    React.useState(false)
+  const [pickupConfirmationLoading, setPickupConfirmationLoading] =
+    React.useState(false)
+  const [searchClass, setSearchClass] = React.useState(null)
 
-  const showEditModal = record => {
+  const handleAdmission = async record => {
+    setAdmissionConfirmationLoading(true)
+    await admitParticipant(record.id)
+    setAdmissionConfirmationLoading(false)
+  }
+
+  const handleParticipantAdmission = record => {
     Modal.confirm({
-      title: "Edit Participant Details",
-      width: 700,
+      title: "Confirm Attendance",
       content: (
-        <Provider store={store}>
-          <EditParticipant record={record} form={form} />
-        </Provider>
+        <span>
+          Confirm attendance of{" "}
+          <strong>
+            {record.first_name} {record.last_name}
+          </strong>{" "}
+          for today
+          {Intl.DateTimeFormat("en-GB", { dateStyle: "full" }).format(
+            new Date()
+          )}
+        </span>
       ),
-      okText: "Update",
+      okText: "Confirm",
+      confirmLoading: admissionConfirmationLoading,
       onOk() {
-        form
-          .validateFields()
-          .then(fieldsValue => {
-            const dob = fieldsValue["date_of_birth"];
-            const values = {
-              ...fieldsValue,
-              date_of_birth: dob.format("YYYY-MM-DD"),
-            };
-            updateParticipant(record.id, values);
-          })
-          .catch(info => {
-            console.log("Validate Failed:", info);
-          });
+        handleAdmission(record)
       },
-    });
-  };
+    })
+  }
 
-  const onSearchFinished = value => {
-    searchParticipant(value.search);
-  };
+  const handleParticipantPickup = record => {
+    Modal.confirm({
+      title: "Confirm Attendance",
+      content: (
+        <span>
+          Confirm pickup of{" "}
+          <strong>
+            {record.first_name} {record.last_name}
+          </strong>{" "}
+          for today
+          {Intl.DateTimeFormat("en-GB", { dateStyle: "full" }).format(
+            new Date()
+          )}
+        </span>
+      ),
+      okText: "Confirm",
+      confirmLoading: admissionConfirmationLoading,
+      onOk() {
+        handleAdmission(record)
+      },
+    })
+  }
 
-  const errorNotification = () => {
+  const onSearch = async (value, event) => {
+    setIsSearching(true)
+    await searchParticipant(value, searchClass)
+    setIsSearching(false)
+  }
+
+  const errorNotification = message => {
     notification.error({
       message: "Oops",
-      description:
-        "There was an unexpected error completing this request. Please try again later.",
-    });
-  };
+      description: message,
+    })
+  }
 
-  const successNotification = () => {
+  const successNotification = message => {
     notification.success({
       message: "Awesome!",
-      description: "Successfully updated participant details",
-    });
-  };
+      description: message,
+    })
+  }
 
-  if (loading || !participantData) {
+  if (loading || !participantData || !grades) {
     return (
       <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
-    );
+    )
   }
 
   return (
@@ -228,28 +268,34 @@ const ParticipantTable = ({
       <Row>
         <Col span={24}>
           <Card style={{ marginBottom: "200px" }}>
-            <Form onFinish={onSearchFinished}>
-              <Form.Item
-                name="search"
-                rules={[{ required: true, message: "Please enter something" }]}
-              >
-                <Search
-                  // prefix={<SearchOutlined />}
-                  placeholder="Search by participant last name..."
-                  allowClear
-                  loading={loading}
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button
-                  icon={<SearchOutlined />}
-                  type="primary"
-                  htmlType="submit"
+            <Row style={{ marginBottom: "20px" }} gutter={8}>
+              <Col span={8}>
+                <Select
+                  defaultValue="Class"
+                  style={{
+                    display: "inline-block",
+                    width: "calc(100%)",
+                  }}
+                  onChange={value => setSearchClass(value)}
                 >
-                  Search
-                </Button>
-              </Form.Item>
-            </Form>
+                  {grades.map(grade => (
+                    <Option key={grade.name} value={grade.name}>
+                      {grade.name}
+                    </Option>
+                  ))}
+                </Select>
+              </Col>
+              <Col span={16}>
+                <Search
+                  prefix={<SearchOutlined />}
+                  placeholder="Search for participant by first name or last name or pickup code."
+                  allowClear
+                  loading={isSearching}
+                  enterButton="Search"
+                  onSearch={onSearch}
+                />
+              </Col>
+            </Row>
             <Table
               columns={columns}
               dataSource={participantData.results.map(record => ({
@@ -263,32 +309,35 @@ const ParticipantTable = ({
                 pageSize: 20,
                 defaultCurrent: 1,
               }}
-              loading={loading || participantData == null}
+              loading={loading || participantData === null}
               scroll={{ x: 1000 }}
             />
           </Card>
         </Col>
       </Row>
     </Fragment>
-  );
-};
+  )
+}
 
 ParticipantTable.propTypes = {
   participant: PropTypes.object.isRequired,
   admin: PropTypes.object.isRequired,
   getParticipants: PropTypes.func.isRequired,
+  getGrades: PropTypes.func.isRequired,
   searchParticipant: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
   participant: state.participant,
   admin: state.admin,
-});
+})
 
 export default connect(mapStateToProps, {
   getParticipants,
+  getGrades,
   searchParticipant,
-  updateParticipant,
+  admitParticipant,
+  pickupParticipant,
   clearErrors,
-})(ParticipantTable);
+})(ParticipantTable)

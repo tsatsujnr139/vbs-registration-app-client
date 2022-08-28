@@ -1,20 +1,23 @@
-import React, { Fragment } from "react";
-import Home from "./components/pages/Home";
-import NotFound from "./components/pages/NotFound";
-import RegisterParticipant from "./components/participants/RegisterParticipantForm";
-import Login from "./components/admin/Login";
-import RegisterVolunteerForm from "./components/volunteers/RegisterVolunteerForm";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import storeConfig from "./store";
-import { PersistGate } from "redux-persist/integration/react";
-import "./App.css";
-import Dashboard from "./components/admin/AdminPanel";
-import PrivateRoute from "./routing/PrivateRoute";
-import { Spin } from "antd";
+import "./App.css"
+
+import React, { Fragment } from "react"
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
+
+import Dashboard from "./components/admin/AdminPanel"
+import Home from "./components/pages/Home"
+import Login from "./components/admin/Login"
+import NotFound from "./components/pages/NotFound"
+import ParticipantDashboard from "./components/admin/ParticipantDashboard"
+import { PersistGate } from "redux-persist/integration/react"
+import PrivateRoute from "./routing/PrivateRoute"
+import { Provider } from "react-redux"
+import RegisterParticipant from "./components/participants/RegisterParticipantForm"
+import RegisterVolunteerForm from "./components/volunteers/RegisterVolunteerForm"
+import { Spin } from "antd"
+import storeConfig from "./store"
 
 const App = () => {
-  const { store, persistor } = storeConfig;
+  const { store, persistor } = storeConfig
 
   return (
     <Provider store={store}>
@@ -47,13 +50,18 @@ const App = () => {
                 path="/admin/dashboard"
                 component={Dashboard}
               />
+              <PrivateRoute
+                exact
+                path="/admin/attendance"
+                component={ParticipantDashboard}
+              />
               <Route component={NotFound} />
             </Switch>
           </Fragment>
         </Router>
       </PersistGate>
     </Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

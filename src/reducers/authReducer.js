@@ -4,7 +4,7 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  SET_LOADING,
+  SET_AUTH_LOADING,
   USER_LOADED,
 } from "../actions/types";
 
@@ -18,7 +18,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_LOADING:
+    case SET_AUTH_LOADING:
       return {
         ...state,
         loading: true,

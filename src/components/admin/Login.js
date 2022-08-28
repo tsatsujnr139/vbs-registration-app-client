@@ -38,8 +38,8 @@ const Login = props => {
     // eslint-disable-next-line
   }, [isAuthenticated, history]);
 
-  const onFinish = values => {
-    login({ ...values });
+  const onFinish = async values => {
+    await login({ ...values });
   };
 
   const onFinishFailed = errorInfo => {
@@ -155,7 +155,6 @@ const Login = props => {
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
-  setLoading: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired,
 };
 
