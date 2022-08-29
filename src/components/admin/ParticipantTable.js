@@ -64,15 +64,15 @@ const ParticipantTable = ({
 
   const columns = [
     {
-      title: "Last Name",
-      dataIndex: "last_name",
-      key: "last_name",
-      fixed: "left",
-    },
-    {
       title: "First Name",
       dataIndex: "first_name",
       key: "first_name",
+      fixed: "left",
+    },
+    {
+      title: "Last Name",
+      dataIndex: "last_name",
+      key: "last_name",
       fixed: "left",
     },
     {
