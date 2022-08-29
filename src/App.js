@@ -8,6 +8,7 @@ import Home from "./components/pages/Home"
 import Login from "./components/admin/Login"
 import NotFound from "./components/pages/NotFound"
 import ParticipantDashboard from "./components/admin/ParticipantDashboard"
+import ParticipantPickupDashboard from "./components/admin/ParticipantPickupDashboard"
 import { PersistGate } from "redux-persist/integration/react"
 import PrivateRoute from "./routing/PrivateRoute"
 import { Provider } from "react-redux"
@@ -54,6 +55,11 @@ const App = () => {
                 exact
                 path="/admin/attendance"
                 component={ParticipantDashboard}
+              />
+              <PrivateRoute
+                exact
+                path="/admin/pickup"
+                component={ParticipantPickupDashboard}
               />
               <Route component={NotFound} />
             </Switch>

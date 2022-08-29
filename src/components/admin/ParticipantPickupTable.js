@@ -28,7 +28,7 @@ import PropTypes from "prop-types"
 import { SearchOutlined } from "@ant-design/icons"
 import storeConfig from "../../store"
 
-const ParticipantTable = ({
+const ParticipantPickupTable = ({
   participant: { participantData, loading, error, success, grades },
   getParticipants,
   getGrades,
@@ -162,15 +162,15 @@ const ParticipantTable = ({
       key: "action",
       render: record => (
         <span>
-          <Button
+          {/* <Button
             type="link"
             onClick={() => handleParticipantAdmission(record)}
           >
             Admit
-          </Button>
-          {/* <Button type="link" onClick={() => handleParticipantPickup(record)}>
-            Pickup
           </Button> */}
+          <Button type="link" onClick={() => handleParticipantPickup(record)}>
+            Pickup
+          </Button>
         </span>
       ),
       fixed: "right",
@@ -334,7 +334,7 @@ const ParticipantTable = ({
   )
 }
 
-ParticipantTable.propTypes = {
+ParticipantPickupTable.propTypes = {
   participant: PropTypes.object.isRequired,
   admin: PropTypes.object.isRequired,
   getParticipants: PropTypes.func.isRequired,
@@ -355,4 +355,4 @@ export default connect(mapStateToProps, {
   admitParticipant,
   pickupParticipant,
   clearErrors,
-})(ParticipantTable)
+})(ParticipantPickupTable)
