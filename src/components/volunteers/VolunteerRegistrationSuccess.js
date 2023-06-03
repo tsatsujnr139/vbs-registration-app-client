@@ -1,31 +1,36 @@
-import { Button, Result } from "antd";
-import React, { Fragment } from "react";
+import { Button, Result } from 'antd'
+import React, { Fragment } from 'react'
 
-import Confetti from "react-confetti";
-import Navbar from "../layouts/Navbar";
-import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from 'react-confetti'
+import Navbar from '../layouts/Navbar'
+import useWindowSize from 'react-use/lib/useWindowSize'
 
 const RegistrationSuccess = () => {
-  const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize()
 
   return (
     <Fragment>
       <Navbar />
-      <Confetti width={width} height={height} gravity={0.2} />
+      <Confetti
+        width={width}
+        height={height}
+        gravity={0.025}
+        numberOfPieces={50}
+      />
       <Result
-        status="success"
+        status='success'
         title={`You have successfully signed up as a volunteer for VBS ${new Date().getFullYear()}`}
-        subTitle="The VBS Planning team is looking foward to working with you."
+        subTitle='The VBS Planning team is looking foward to working with you.'
         extra={[
           <Button
-            size="large"
-            type="primary"
-            key="participant"
-            href="/participants/register"
-            shape="round"
+            size='large'
+            type='primary'
+            key='participant'
+            href='/participants/register'
+            shape='round'
           >
             Click here to register a participant
-          </Button>,
+          </Button>
         ]}
       >
         {/* <div style={{ textAlign: "center" }}>
@@ -47,7 +52,7 @@ const RegistrationSuccess = () => {
         </div> */}
       </Result>
     </Fragment>
-  );
-};
+  )
+}
 
-export default RegistrationSuccess;
+export default RegistrationSuccess

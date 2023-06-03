@@ -10,27 +10,27 @@ import {
   Result,
   Row,
   Select,
-  Spin,
-} from "antd"
-import React, { Fragment, useEffect, useState } from "react"
+  Spin
+} from 'antd'
+import React, { Fragment, useEffect, useState } from 'react'
 
-import Accent from "../../static/images/accent-1.png"
-import Accent2 from "../../static/images/accent-2.png"
-import Footer from "../layouts/Footer"
-import Navbar from "../layouts/Navbar"
-import PropTypes from "prop-types"
-import RegistrationProgressBar from "./ParticipantRegistrationProgressBar"
-import { connect } from "react-redux"
-import { getGrades } from "../../actions/participantActions"
-import moment from "moment"
-import { setParticipantDetails } from "../../actions/formActions"
+import Accent from '../../static/images/accent-1.png'
+import Accent2 from '../../static/images/accent-2.png'
+import Footer from '../layouts/Footer'
+import Navbar from '../layouts/Navbar'
+import PropTypes from 'prop-types'
+import RegistrationProgressBar from './ParticipantRegistrationProgressBar'
+import { connect } from 'react-redux'
+import { getGrades } from '../../actions/participantActions'
+import moment from 'moment'
+import { setParticipantDetails } from '../../actions/formActions'
 
 const FormParticipantDetails = ({
   nextStep,
   formDetails: { participantDetails, step },
   participant: { loading, grades, error },
   setParticipantDetails,
-  getGrades,
+  getGrades
 }) => {
   const { Option } = Select
   const { TextArea } = Input
@@ -45,54 +45,58 @@ const FormParticipantDetails = ({
     //eslint-disable-next-line
   }, [])
 
-  const calculateCurrentAge = date => {
+  const calculateCurrentAge = (date) => {
     const now = moment()
-    return now.diff(date, "years")
+    return now.diff(date, 'years')
   }
 
   const isEligibleAge = (rule, value) => {
     if (Math.sign(value) === -1 || (value && Math.sign(value) === 0)) {
-      return Promise.reject("Please select a birth date in the past")
+      return Promise.reject('Please select a birth date in the past')
     }
     if (value < 3) {
       return Promise.reject(
-        "Only Children older that 3 years are eligible for registration"
+        'Only Children older that 3 years are eligible for registration'
       )
     }
     return Promise.resolve()
   }
 
-  const onDateOfBirthChange = date => {
+  const onDateOfBirthChange = (date) => {
     const age = calculateCurrentAge(date)
     form.setFieldsValue({
-      age: age,
+      age: age
     })
-    form.validateFields(["age"])
+    form.validateFields(['age'])
   }
 
-  const onFinish = fieldsValue => {
-    console.log("Success:", fieldsValue)
-    const dob = fieldsValue["date_of_birth"]
+  const onFinish = (fieldsValue) => {
+    console.log('Success:', fieldsValue)
+    const dob = fieldsValue['date_of_birth']
     const values = {
       ...fieldsValue,
-      date_of_birth: dob.format("YYYY-MM-DD"),
+      date_of_birth: dob.format('YYYY-MM-DD')
     }
+    console.log(values)
     setParticipantDetails(values)
     nextStep()
   }
 
-  const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo)
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo)
   }
 
   if (error) {
     return (
       <Result
-        status="500"
-        title="500"
+        status='500'
+        title='500'
         subTitle="Something went wrong. We're trying to figure it out. Please try again later"
         extra={
-          <Button type="primary" href="/">
+          <Button
+            type='primary'
+            href='/'
+          >
             Back Home
           </Button>
         }
@@ -102,7 +106,10 @@ const FormParticipantDetails = ({
 
   if (loading || grades == null) {
     return (
-      <Spin size="large" style={{ display: "block", marginTop: "200px" }} />
+      <Spin
+        size='large'
+        style={{ display: 'block', marginTop: '200px' }}
+      />
     )
   }
 
@@ -111,13 +118,23 @@ const FormParticipantDetails = ({
       <Navbar />
       <RegistrationProgressBar
         step={step - 1}
-        title="Participant Registration"
+        title='Participant Registration'
       />
       <Content>
-        <div className="form-wrapper">
+        <div className='form-wrapper'>
           <Row>
-            <Col span={7} xl={7} lg={7} md={7} sm={0} xs={0}>
-              <img src={Accent2} alt="accent 2" />
+            <Col
+              span={7}
+              xl={7}
+              lg={7}
+              md={7}
+              sm={0}
+              xs={0}
+            >
+              <img
+                src={Accent2}
+                alt='accent 2'
+              />
             </Col>
             <Col
               span={10}
@@ -127,130 +144,142 @@ const FormParticipantDetails = ({
               sm={24}
               xs={24}
               style={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center'
               }}
             >
-              <Card hoverable="true" style={cardStyle}>
+              <Card
+                hoverable='true'
+                style={cardStyle}
+              >
                 <Form
                   initialValues={{
-                    remember: true,
+                    remember: true
                   }}
                   form={form}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
                 >
                   <Form.Item
-                    label="Surname"
-                    name="last_name"
+                    label='Surname'
+                    name='last_name'
                     defaultValue={participantDetails.last_name}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the child's surname",
-                      },
+                        message: "Please enter the child's surname"
+                      }
                     ]}
                     style={{
-                      display: "inline-block",
-                      width: "calc(50% - 12px)",
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
                     }}
                   >
-                    <Input placeholder="Surname" />
+                    <Input placeholder='Surname' />
                   </Form.Item>
                   <span
                     style={{
-                      display: "inline-block",
-                      width: "24px",
-                      textAlign: "center",
+                      display: 'inline-block',
+                      width: '24px',
+                      textAlign: 'center'
                     }}
                   ></span>
                   <Form.Item
-                    label="First Name"
-                    name="first_name"
+                    label='First Name'
+                    name='first_name'
                     defaultValue={participantDetails.first_name}
                     style={{
-                      display: "inline-block",
-                      width: "calc(50% - 12px)",
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
                     }}
                     rules={[
                       {
                         required: true,
-                        message: "Please enter the child's first name",
-                      },
+                        message: "Please enter the child's first name"
+                      }
                     ]}
                   >
-                    <Input placeholder="First Name" />
+                    <Input placeholder='First Name' />
                   </Form.Item>
 
                   <Form.Item
-                    label="Date of Birth"
-                    name="date_of_birth"
+                    label='Date of Birth'
+                    name='date_of_birth'
                     style={{
-                      display: "inline-block",
-                      width: "calc(50% - 12px)",
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
                     }}
                   >
                     <DatePicker
-                      placeholder="Date of Birth"
+                      placeholder='Date of Birth'
                       allowClear={false}
                       onChange={onDateOfBirthChange}
-                      style={{ width: "100%" }}
+                      style={{ width: '100%' }}
                     />
                   </Form.Item>
                   <span
                     style={{
-                      display: "inline-block",
-                      width: "24px",
-                      textAlign: "center",
+                      display: 'inline-block',
+                      width: '24px',
+                      textAlign: 'center'
                     }}
                   ></span>
                   <Form.Item
-                    label="Age"
-                    name="age"
+                    label='Age'
+                    name='age'
                     defaultValue={participantDetails.age}
                     style={{
-                      display: "inline-block",
-                      width: "calc(50% - 12px)",
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
                     }}
                     rules={[
                       {
-                        validator: isEligibleAge,
-                      },
+                        validator: isEligibleAge
+                      }
                     ]}
                   >
-                    <Input disabled={true} placeholder="Age" />
+                    <Input
+                      disabled={true}
+                      placeholder='Age'
+                    />
                   </Form.Item>
                   <Form.Item
-                    label="Gender"
-                    name="gender"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    label='Gender'
+                    name='gender'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
                     rules={[
                       {
                         required: true,
-                        message: "Please select a gender ",
-                      },
+                        message: 'Please select a gender '
+                      }
                     ]}
                   >
-                    <Radio.Group size="medium" buttonStyle="solid">
-                      <Radio.Button value="Male">Male</Radio.Button>
-                      <Radio.Button value="Female">Female</Radio.Button>
+                    <Radio.Group
+                      size='medium'
+                      buttonStyle='solid'
+                    >
+                      <Radio.Button value='Male'>Male</Radio.Button>
+                      <Radio.Button value='Female'>Female</Radio.Button>
                     </Radio.Group>
                   </Form.Item>
 
                   <Form.Item
-                    label="Class/Grade"
-                    name="grade"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    label='Class/Grade'
+                    name='grade'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
                     rules={[
                       {
                         required: true,
-                        message: "Please select a class/grade",
-                      },
+                        message: 'Please select a class/grade'
+                      }
                     ]}
                   >
                     <Select defaultValue="Please select the child's class/grade">
-                      {grades.map(grade => (
-                        <Option key={grade.name} value={grade.name}>
+                      {grades.map((grade) => (
+                        <Option
+                          key={grade.name}
+                          value={grade.name}
+                        >
                           {grade.name}
                         </Option>
                       ))}
@@ -258,40 +287,74 @@ const FormParticipantDetails = ({
                   </Form.Item>
                   <br />
                   <Form.Item
-                    label="Home Church"
-                    name="church"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    label='Session you are registering for (You can only select 1 option)'
+                    name='session'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please select a session'
+                      }
+                    ]}
+                  >
+                    <Radio.Group>
+                      <Radio value='Session 1'>
+                        Session 1 - Monday 24th July - Friday 29th July, 2023
+                      </Radio>
+                      <Radio value='Session 2'>
+                        Session 2 - Saturday, 29th July, 2023
+                      </Radio>
+                    </Radio.Group>
+                    {/* <Select defaultValue='Which session would you like to register for?'>
+                      <Option
+                        key={1}
+                        value='Session 1'
+                      >
+                        Session 1 - Monday 24th July - Friday 29th July, 2023
+                      </Option>
+                      <Option
+                        key={1}
+                        value='Session 2'
+                      >
+                        Session 2 - Saturday, 29th July, 2023
+                      </Option>
+                    </Select> */}
+                  </Form.Item>
+                  <Form.Item
+                    label='Home Church'
+                    name='church'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
                     defaultValue={participantDetails.church}
                     rules={[
                       {
                         required: true,
-                        message: "Please select/enter the child's home church",
-                      },
+                        message: "Please select/enter the child's home church"
+                      }
                     ]}
                   >
-                    <Input placeholder="The church the child attends" />
+                    <Input placeholder='The church the child attends' />
                   </Form.Item>
                   <br />
                   <Form.Item
-                    label="Medical Information (Allergies etc.)"
-                    name="medical_info"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
+                    label='Medical Information (Allergies etc.)'
+                    name='medical_info'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
                     rules={[
                       {
-                        required: false,
-                      },
+                        required: false
+                      }
                     ]}
                   >
                     <TextArea
-                      placeholder="Any relevant medical information"
+                      placeholder='Any relevant medical information'
                       autoSize={{ minRows: 3, maxRows: 6 }}
                     />
                   </Form.Item>
                   <Form.Item shouldUpdate>
                     {() => (
                       <Button
-                        type="primary"
-                        htmlType="submit"
+                        type='primary'
+                        htmlType='submit'
                         disabled={
                           form
                             .getFieldsError()
@@ -306,7 +369,7 @@ const FormParticipantDetails = ({
               </Card>
             </Col>
             <Col
-              style={{ overflow: "hidden" }}
+              style={{ overflow: 'hidden' }}
               span={7}
               xl={7}
               lg={7}
@@ -314,7 +377,10 @@ const FormParticipantDetails = ({
               sm={0}
               xs={0}
             >
-              <img src={Accent} alt="accent-1" />
+              <img
+                src={Accent}
+                alt='accent-1'
+              />
             </Col>
           </Row>
         </div>
@@ -327,8 +393,8 @@ const FormParticipantDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 700,
-  borderRadius: "2px",
+  height: 800,
+  borderRadius: '2px'
 }
 
 FormParticipantDetails.propTypes = {
@@ -336,12 +402,12 @@ FormParticipantDetails.propTypes = {
   participant: PropTypes.object.isRequired,
   setParticipantDetails: PropTypes.func.isRequired,
   getGrades: PropTypes.func.isRequired,
-  nextStep: PropTypes.func.isRequired,
+  nextStep: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   formDetails: state.formDetails,
-  participant: state.participant,
+  participant: state.participant
 })
 
 export default connect(mapStateToProps, { setParticipantDetails, getGrades })(

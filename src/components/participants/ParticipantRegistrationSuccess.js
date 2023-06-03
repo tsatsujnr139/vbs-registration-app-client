@@ -1,29 +1,38 @@
-import { Button, Result } from "antd";
-import React, { Fragment } from "react";
+import { Button, Result } from 'antd'
+import React, { Fragment } from 'react'
 
-import Confetti from "react-confetti";
-import Navbar from "../layouts/Navbar";
-import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from 'react-confetti'
+import Navbar from '../layouts/Navbar'
+import useWindowSize from 'react-use/lib/useWindowSize'
 
 const RegistrationSuccess = () => {
-  const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize()
 
   return (
     <Fragment>
       <Navbar />
-      <Confetti width={width} height={height} gravity={0.2} />
+      <Confetti
+        width={width}
+        height={height}
+        gravity={0.025}
+        numberOfPieces={50}
+      />
       <Result
-        status="success"
+        status='success'
         title={`Awesome! You have successfully registered your ward for VBS ${new Date().getFullYear()}`}
-        subTitle="We're looking foward to seeing them there as we explore our God given purpose!"
+        subTitle="We're looking foward to seeing them there as we explore how following Jesus Changes the Game"
         extra={[
-          <Button type="primary" key="volunteer" href="/volunteers/register">
+          <Button
+            type='primary'
+            key='volunteer'
+            href='/volunteers/register'
+          >
             Click here to sign up as a volunteer. We'd be happy to have you
-          </Button>,
+          </Button>
         ]}
       />
     </Fragment>
-  );
-};
+  )
+}
 
-export default RegistrationSuccess;
+export default RegistrationSuccess
