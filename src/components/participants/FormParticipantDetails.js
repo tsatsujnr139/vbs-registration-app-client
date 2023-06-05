@@ -299,7 +299,7 @@ const FormParticipantDetails = ({
                   >
                     <Radio.Group>
                       <Radio value='Session 1'>
-                        Session 1 - Monday 24th July - Friday 29th July, 2023
+                        Session 1 - Monday 24th July - Friday 28th July, 2023
                       </Radio>
                       <Radio value='Session 2'>
                         Session 2 - Saturday, 29th July, 2023
