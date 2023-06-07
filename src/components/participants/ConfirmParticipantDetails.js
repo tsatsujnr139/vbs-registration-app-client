@@ -27,7 +27,9 @@ const ConfirmParticipantDetails = ({
       gender,
       church,
       medical_info,
-      session
+      session,
+      t_shirt_request,
+      t_shirt_size
     },
     guardianDetails: {
       parent_name,
@@ -146,11 +148,27 @@ const ConfirmParticipantDetails = ({
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='Attending Session'
+                  label='Church'
                   span={3}
                 >
-                  {session}
+                  {medical_info}
                 </Descriptions.Item>
+                <Descriptions.Item
+                  label='Attending Session'
+                  span={2}
+                >
+                  {session === 'Session 1'
+                    ? 'Full Week Programme (Monday - Friday)'
+                    : 'Condensed Programme (Saturday)'}
+                </Descriptions.Item>
+                {t_shirt_request && (
+                  <Descriptions.Item
+                    label='T-Shirt Size'
+                    span={1}
+                  >
+                    {t_shirt_size}
+                  </Descriptions.Item>
+                )}
               </Descriptions>
             </Card>
           </Col>
@@ -190,6 +208,7 @@ const ConfirmParticipantDetails = ({
                 size='default'
                 column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
                 bordered
+                labelStyle={{ fontWeight: '800' }}
               >
                 <Descriptions.Item
                   label='Full Name'

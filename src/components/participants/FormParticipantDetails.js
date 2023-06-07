@@ -24,6 +24,7 @@ import { connect } from 'react-redux'
 import { getGrades } from '../../actions/participantActions'
 import moment from 'moment'
 import { setParticipantDetails } from '../../actions/formActions'
+import { participantTShirtSizes } from '../../utils/constants'
 
 const FormParticipantDetails = ({
   nextStep,
@@ -68,6 +69,13 @@ const FormParticipantDetails = ({
       age: age
     })
     form.validateFields(['age'])
+  }
+
+  const onTShirtRequestChange = (e) => {
+    const values = {
+      t_shirt_request: e.target.value
+    }
+    setParticipantDetails(values)
   }
 
   const onFinish = (fieldsValue) => {
@@ -299,11 +307,23 @@ const FormParticipantDetails = ({
                   >
                     <Radio.Group>
                       <Radio value='Session 1'>
-                        Session 1 - Monday 24th July - Friday 28th July, 2023
+                        Full Week Programme - Monday 24th July - Friday 28th
+                        July, 2023
                       </Radio>
                       <Radio value='Session 2'>
-                        Session 2 - Saturday, 29th July, 2023
+                        Condensed Programme - Saturday, 29th July, 2023
                       </Radio>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontSize: '12px',
+                          marginTop: '10px',
+                          color: '#1e90ff'
+                        }}
+                      >
+                        *The condensed session is intended for participants who
+                        cannot make it for the weekday programme*
+                      </span>
                     </Radio.Group>
                     {/* <Select defaultValue='Which session would you like to register for?'>
                       <Option
@@ -350,6 +370,57 @@ const FormParticipantDetails = ({
                       autoSize={{ minRows: 3, maxRows: 6 }}
                     />
                   </Form.Item>
+
+                  {/* VBS T-Shirt Request */}
+                  <Form.Item
+                    label='Would You like to purchase a VBS T-Shirt for your ward?'
+                    name='t_shirt_request'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
+                    rules={[
+                      {
+                        required: false,
+                        message: 'Please select an option'
+                      }
+                    ]}
+                  >
+                    <Radio.Group
+                      size='medium'
+                      onChange={onTShirtRequestChange}
+                      buttonStyle='solid'
+                    >
+                      <Radio.Button value='true'>Yes</Radio.Button>
+                      <Radio.Button value='false'>No</Radio.Button>
+                    </Radio.Group>
+                  </Form.Item>
+
+                  {participantDetails.t_shirt_request === 'true' && (
+                    <Form.Item
+                      label='Select a T-shirt size'
+                      name='t_shirt_size'
+                      defaultValue={participantDetails.t_shirt_size}
+                      style={{
+                        display: 'inline-block',
+                        width: 'calc(100%)'
+                      }}
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please select a t-shirt size'
+                        }
+                      ]}
+                    >
+                      <Select defaultValue=''>
+                        {participantTShirtSizes.map((size) => (
+                          <Option
+                            key={size.name}
+                            value={size.value}
+                          >
+                            {size.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  )}
                   <Form.Item shouldUpdate>
                     {() => (
                       <Button
@@ -393,7 +464,8 @@ const FormParticipantDetails = ({
 const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
-  height: 800,
+  minHeight: 800,
+  maxHeight: 1000,
   borderRadius: '2px'
 }
 
