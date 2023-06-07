@@ -321,8 +321,8 @@ const FormParticipantDetails = ({
                           color: '#1e90ff'
                         }}
                       >
-                        *The condensed session is intended for participants who
-                        cannot make it for the weekday programme*
+                        *The condensed programme is intended for participants
+                        who cannot make it for the weekday programme*
                       </span>
                     </Radio.Group>
                     {/* <Select defaultValue='Which session would you like to register for?'>
