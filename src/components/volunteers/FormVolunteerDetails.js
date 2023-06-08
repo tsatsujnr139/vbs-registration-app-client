@@ -366,7 +366,7 @@ const FormVolunteerDetails = ({
 
                     {/* VBS T-Shirt Request */}
                     <Form.Item
-                      label='Would You like to purchase a VBS T-Shirt for your ward?'
+                      label='Would You like to purchase a VBS T-Shirt?'
                       name='t_shirt_request'
                       style={{ display: 'inline-block', width: 'calc(100%)' }}
                       rules={[
