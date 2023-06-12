@@ -20,6 +20,7 @@ const initialState = {
     attendance_type: null,
     gender: '',
     church: '',
+    school: '',
     medical_info: '',
     t_shirt_request: '',
     t_shirt_size: ''

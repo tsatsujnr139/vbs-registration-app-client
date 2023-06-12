@@ -348,11 +348,26 @@ const FormParticipantDetails = ({
                     rules={[
                       {
                         required: true,
-                        message: "Please select/enter the child's home church"
+                        message: "Please enter the child's home church"
                       }
                     ]}
                   >
                     <Input placeholder='The church the child attends' />
+                  </Form.Item>
+                  <br />
+                  <Form.Item
+                    label='School'
+                    name='school'
+                    style={{ display: 'inline-block', width: 'calc(100%)' }}
+                    defaultValue={participantDetails.school}
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter the child's school"
+                      }
+                    ]}
+                  >
+                    <Input placeholder='The school the child attends' />
                   </Form.Item>
                   <br />
                   <Form.Item
@@ -465,7 +480,7 @@ const cardStyle = {
   minWidth: 400,
   maxWidth: 650,
   minHeight: 800,
-  maxHeight: 1000,
+  maxHeight: 1200,
   borderRadius: '2px'
 }
 

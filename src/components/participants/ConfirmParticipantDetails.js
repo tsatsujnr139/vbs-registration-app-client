@@ -26,6 +26,7 @@ const ConfirmParticipantDetails = ({
       grade,
       gender,
       church,
+      school,
       medical_info,
       session,
       t_shirt_request,
@@ -131,7 +132,7 @@ const ConfirmParticipantDetails = ({
                 </Descriptions.Item>
                 <Descriptions.Item
                   label='First Name'
-                  span={1}
+                  span={2}
                 >
                   {first_name}
                 </Descriptions.Item>
@@ -143,12 +144,18 @@ const ConfirmParticipantDetails = ({
                 <Descriptions.Item label='Class'>{grade}</Descriptions.Item>
                 <Descriptions.Item
                   label='Church'
-                  span={3}
+                  span={2}
                 >
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='Church'
+                  label='School'
+                  span={1}
+                >
+                  {school}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  label='Medical Information'
                   span={3}
                 >
                   {medical_info}
@@ -166,7 +173,7 @@ const ConfirmParticipantDetails = ({
                     label='T-Shirt Size'
                     span={1}
                   >
-                    {t_shirt_size}
+                    {t_shirt_size || 'N/A'}
                   </Descriptions.Item>
                 )}
               </Descriptions>
