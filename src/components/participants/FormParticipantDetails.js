@@ -209,6 +209,46 @@ const FormParticipantDetails = ({
                   >
                     <Input placeholder='First Name' />
                   </Form.Item>
+                  <Form.Item
+                    label='Other Names'
+                    name='other_names'
+                    defaultValue={participantDetails.other_names}
+                    style={{
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
+                    }}
+                  >
+                    <Input placeholder='Other Names' />
+                  </Form.Item>
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      width: '24px',
+                      textAlign: 'center'
+                    }}
+                  ></span>
+                  <Form.Item
+                    label='Gender'
+                    name='gender'
+                    style={{
+                      display: 'inline-block',
+                      width: 'calc(50% - 12px)'
+                    }}
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please select a gender '
+                      }
+                    ]}
+                  >
+                    <Radio.Group
+                      size='medium'
+                      buttonStyle='solid'
+                    >
+                      <Radio.Button value='Male'>Male</Radio.Button>
+                      <Radio.Button value='Female'>Female</Radio.Button>
+                    </Radio.Group>
+                  </Form.Item>
 
                   <Form.Item
                     label='Date of Birth'
@@ -250,25 +290,6 @@ const FormParticipantDetails = ({
                       disabled={true}
                       placeholder='Age'
                     />
-                  </Form.Item>
-                  <Form.Item
-                    label='Gender'
-                    name='gender'
-                    style={{ display: 'inline-block', width: 'calc(100%)' }}
-                    rules={[
-                      {
-                        required: true,
-                        message: 'Please select a gender '
-                      }
-                    ]}
-                  >
-                    <Radio.Group
-                      size='medium'
-                      buttonStyle='solid'
-                    >
-                      <Radio.Button value='Male'>Male</Radio.Button>
-                      <Radio.Button value='Female'>Female</Radio.Button>
-                    </Radio.Group>
                   </Form.Item>
 
                   <Form.Item

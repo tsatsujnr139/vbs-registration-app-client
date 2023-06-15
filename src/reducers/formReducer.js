@@ -13,6 +13,7 @@ const initialState = {
   participantDetails: {
     last_name: '',
     first_name: '',
+    other_names: '',
     date_of_birth: '',
     age: '',
     grade: '',

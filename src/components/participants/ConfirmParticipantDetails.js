@@ -21,6 +21,7 @@ const ConfirmParticipantDetails = ({
     participantDetails: {
       last_name,
       first_name,
+      other_names,
       date_of_birth,
       age,
       grade,
@@ -135,6 +136,12 @@ const ConfirmParticipantDetails = ({
                   span={2}
                 >
                   {first_name}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  label='Other Names'
+                  span={2}
+                >
+                  {other_names}
                 </Descriptions.Item>
                 <Descriptions.Item label='Date of Birth'>
                   {new Date(date_of_birth).toDateString()}
