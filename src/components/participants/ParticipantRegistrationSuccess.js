@@ -24,8 +24,8 @@ const RegistrationSuccess = () => {
         extra={[
           <div>
             <p style={{ color: "red" }}>
-              Please use either of the links below to join the VBS Parents
-              WhatsApp Group to receive important updates and announcements
+              Please use one of the links below to join the VBS Parents WhatsApp
+              Group to receive important updates and announcements
             </p>
             <p style={{ marginBottom: "10px", textDecoration: "underline" }}>
               Week long session -{" "}
