@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { setStep } from '../../actions/formActions'
-import FormParticipantDetails from './FormParticipantDetails'
-import FormGuardianDetails from './FormGuardianDetails'
-import ConfirmParticipantDetails from './ConfirmParticipantDetails'
-import RegistrationSuccess from './ParticipantRegistrationSuccess'
-import PropTypes from 'prop-types'
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+import { setStep } from "../../actions/formActions"
+import FormParticipantDetails from "./FormParticipantDetails"
+import FormGuardianDetails from "./FormGuardianDetails"
+import ConfirmParticipantDetails from "./ConfirmParticipantDetails"
+import RegistrationSuccess from "./ParticipantRegistrationSuccess"
+import PropTypes from "prop-types"
 
 const RegisterParticipantForm = ({ formDetails: { step }, setStep }) => {
   useEffect(() => {

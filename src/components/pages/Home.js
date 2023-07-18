@@ -6,6 +6,15 @@ import Footer from "../layouts/Footer"
 import Logo from "../../static/images/logo-main.png"
 import Navbar from "../layouts/HomeNavbar"
 
+const registrationStartDate = new Date(2023, 6, 19, 0, 0, 0)
+const registrationEndDate = new Date(2023, 6, 19, 23, 59, 59)
+
+export const isRegistrationWindowActive = () => {
+  // check if current date is within the start date and end date
+  const today = new Date()
+  return registrationStartDate <= today && registrationEndDate >= today
+}
+
 const Home = () => {
   const { Content } = Layout
   const { Title } = Typography
@@ -16,8 +25,6 @@ const Home = () => {
     setLoading(false)
     // eslint-disable-next-line
   }, [])
-
-  const registrationEndDate = new Date(2023, 6, 16, 23, 59, 59)
 
   if (loading) {
     return (
@@ -87,7 +94,7 @@ const Home = () => {
                       </Title>
                     </div>
                     {/* Check if date is greater than 16th July, 2023 */}
-                    {new Date() <= registrationEndDate ? (
+                    {isRegistrationWindowActive() ? (
                       <>
                         <Button
                           size="large"

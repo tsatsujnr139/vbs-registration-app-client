@@ -16,6 +16,7 @@ import RegisterParticipant from "./components/participants/RegisterParticipantFo
 import RegisterVolunteerForm from "./components/volunteers/RegisterVolunteerForm"
 import { Spin } from "antd"
 import storeConfig from "./store"
+import { isRegistrationWindowActive } from "./components/pages/Home"
 
 const App = () => {
   const { store, persistor } = storeConfig
@@ -34,18 +35,29 @@ const App = () => {
         <Router>
           <Fragment>
             <Switch>
-              <Route exact path="/" component={Home} />
               <Route
                 exact
-                path="/participants/register"
-                component={RegisterParticipant}
+                path="/"
+                component={Home}
               />
+
+              {isRegistrationWindowActive() && (
+                <Route
+                  exact
+                  path="/participants/register"
+                  component={RegisterParticipant}
+                />
+              )}
               <Route
                 exact
                 path="/volunteers/register"
                 component={RegisterVolunteerForm}
               />
-              <Route exact path="/admin/login" component={Login} />
+              <Route
+                exact
+                path="/admin/login"
+                component={Login}
+              />
               <PrivateRoute
                 exact
                 path="/admin/dashboard"
