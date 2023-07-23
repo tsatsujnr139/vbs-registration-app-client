@@ -94,28 +94,28 @@ const Home = () => {
                       </Title>
                     </div>
                     {/* Check if date is greater than 16th July, 2023 */}
-                    {isRegistrationWindowActive() ? (
-                      <>
-                        <Button
-                          size="large"
-                          shape="round"
-                          type="primary"
-                          href="participants/register"
-                        >
-                          REGISTER PARTICIPANT
-                        </Button>
-                        <span
-                          style={{
-                            color: "white",
-                            paddingTop: "10px",
-                            paddingBottom: "10px"
-                          }}
-                        >
-                          {" "}
-                          OR{" "}
-                        </span>
-                      </>
-                    ) : (
+                    {/* {isRegistrationWindowActive() ? ( */}
+                    <>
+                      <Button
+                        size="large"
+                        shape="round"
+                        type="primary"
+                        href="participants/register"
+                      >
+                        REGISTER PARTICIPANT
+                      </Button>
+                      <span
+                        style={{
+                          color: "white",
+                          paddingTop: "10px",
+                          paddingBottom: "10px"
+                        }}
+                      >
+                        {" "}
+                        OR{" "}
+                      </span>
+                    </>
+                    {/* ) : (
                       <p
                         style={{
                           color: "red",
@@ -128,7 +128,7 @@ const Home = () => {
                       >
                         PARTICIPANT REGISTRATION CLOSED
                       </p>
-                    )}
+                    )} */}
 
                     <Button
                       size="large"
