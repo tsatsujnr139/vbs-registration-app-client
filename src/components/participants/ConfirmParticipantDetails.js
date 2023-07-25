@@ -1,17 +1,17 @@
-import { Button, Card, Col, Descriptions, Modal, Row, Spin } from 'antd'
-import React, { Fragment, useEffect } from 'react'
+import { Button, Card, Col, Descriptions, Modal, Row, Spin } from "antd"
+import React, { Fragment, useEffect } from "react"
 import {
   clearErrors,
   registerParticipant
-} from '../../actions/participantActions'
+} from "../../actions/participantActions"
 
-import Accent3 from '../../static/images/accent-3.png'
-import Footer from '../layouts/Footer'
-import LogoGrayscale from '../../static/images/logo_grayscale.png'
-import Navbar from '../layouts/Navbar'
-import PropTypes from 'prop-types'
-import RegistrationProgressBar from './ParticipantRegistrationProgressBar'
-import { connect } from 'react-redux'
+import Accent3 from "../../static/images/accent-3.png"
+import Footer from "../layouts/Footer"
+import LogoGrayscale from "../../static/images/logo_grayscale.png"
+import Navbar from "../layouts/Navbar"
+import PropTypes from "prop-types"
+import RegistrationProgressBar from "./ParticipantRegistrationProgressBar"
+import { connect } from "react-redux"
 
 const ConfirmParticipantDetails = ({
   nextStep,
@@ -29,9 +29,7 @@ const ConfirmParticipantDetails = ({
       church,
       school,
       medical_info,
-      session,
-      t_shirt_request,
-      t_shirt_size
+      session
     },
     guardianDetails: {
       parent_name,
@@ -60,17 +58,17 @@ const ConfirmParticipantDetails = ({
 
   const errorAlert = () => {
     Modal.error({
-      title: 'Error Completing Registration',
+      title: "Error Completing Registration",
       content:
-        'There was an error completing your registration at this time. Please try again later'
+        "There was an error completing your registration at this time. Please try again later"
     })
   }
 
   if (loading) {
     return (
       <Spin
-        size='large'
-        style={{ display: 'block', marginTop: '100px' }}
+        size="large"
+        style={{ display: "block", marginTop: "100px" }}
       />
     )
   }
@@ -88,11 +86,11 @@ const ConfirmParticipantDetails = ({
       <Navbar />
       <RegistrationProgressBar
         step={step - 1}
-        title='Please Confirm Your Details'
+        title="Please Confirm Your Details"
       />
       <div
-        className='confirm-details-wrapper'
-        style={{ background: '#f3f5f7', padding: '30px' }}
+        className="confirm-details-wrapper"
+        style={{ background: "#f3f5f7", padding: "30px" }}
       >
         <Row>
           <Col
@@ -105,7 +103,7 @@ const ConfirmParticipantDetails = ({
           >
             <img
               src={Accent3}
-              alt=''
+              alt=""
             />
           </Col>
           <Col
@@ -116,73 +114,73 @@ const ConfirmParticipantDetails = ({
             sm={24}
             xs={24}
           >
-            <Card hoverable='true'>
+            <Card hoverable="true">
               <Descriptions
-                title='Participant Details'
-                layout='vertical'
-                size='default'
+                title="Participant Details"
+                layout="vertical"
+                size="default"
                 column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
                 bordered
-                labelStyle={{ fontWeight: '800' }}
+                labelStyle={{ fontWeight: "800" }}
               >
                 <Descriptions.Item
-                  label='Surname'
+                  label="Surname"
                   span={2}
                 >
                   {last_name}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='First Name'
+                  label="First Name"
                   span={2}
                 >
                   {first_name}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='Other Names'
+                  label="Other Names"
                   span={2}
                 >
                   {other_names}
                 </Descriptions.Item>
-                <Descriptions.Item label='Date of Birth'>
+                <Descriptions.Item label="Date of Birth">
                   {new Date(date_of_birth).toDateString()}
                 </Descriptions.Item>
-                <Descriptions.Item label='Age'>{age}</Descriptions.Item>
-                <Descriptions.Item label='Gender'>{gender}</Descriptions.Item>
-                <Descriptions.Item label='Class'>{grade}</Descriptions.Item>
+                <Descriptions.Item label="Age">{age}</Descriptions.Item>
+                <Descriptions.Item label="Gender">{gender}</Descriptions.Item>
+                <Descriptions.Item label="Class">{grade}</Descriptions.Item>
                 <Descriptions.Item
-                  label='Church'
+                  label="Church"
                   span={2}
                 >
                   {church}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='School'
+                  label="School"
                   span={1}
                 >
                   {school}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='Medical Information'
+                  label="Medical Information"
                   span={3}
                 >
                   {medical_info}
                 </Descriptions.Item>
                 <Descriptions.Item
-                  label='Attending Session'
+                  label="Attending Session"
                   span={2}
                 >
-                  {session === 'Session 1'
-                    ? 'Full Week Programme (Monday - Friday)'
-                    : 'Condensed Programme (Saturday)'}
+                  {session === "Session 1"
+                    ? "Full Week Programme (Monday - Friday)"
+                    : "Condensed Programme (Saturday)"}
                 </Descriptions.Item>
-                {t_shirt_request && (
+                {/* {t_shirt_request && (
                   <Descriptions.Item
                     label='T-Shirt Size'
                     span={1}
                   >
                     {t_shirt_size || 'N/A'}
                   </Descriptions.Item>
-                )}
+                )} */}
               </Descriptions>
             </Card>
           </Col>
@@ -196,13 +194,13 @@ const ConfirmParticipantDetails = ({
           >
             <img
               src={LogoGrayscale}
-              alt=''
+              alt=""
             />
           </Col>
         </Row>
         <span
           style={{
-            display: 'inline-block'
+            display: "inline-block"
           }}
         ></span>
         <Row>
@@ -215,32 +213,32 @@ const ConfirmParticipantDetails = ({
             sm={24}
             xs={24}
           >
-            <Card hoverable='true'>
+            <Card hoverable="true">
               <Descriptions
-                title='Guardian Details'
-                layout='vertical'
-                size='default'
+                title="Guardian Details"
+                layout="vertical"
+                size="default"
                 column={{ xxl: 3, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }}
                 bordered
-                labelStyle={{ fontWeight: '800' }}
+                labelStyle={{ fontWeight: "800" }}
               >
                 <Descriptions.Item
-                  label='Full Name'
+                  label="Full Name"
                   span={2}
                 >
                   {parent_name}
                 </Descriptions.Item>
-                <Descriptions.Item label='Email'>{email}</Descriptions.Item>
+                <Descriptions.Item label="Email">{email}</Descriptions.Item>
                 <Descriptions.Item
-                  label='Primary Contact Number'
+                  label="Primary Contact Number"
                   span={2}
                 >
                   {primary_contact_no}
                 </Descriptions.Item>
-                <Descriptions.Item label='Alternate Contact Number'>
+                <Descriptions.Item label="Alternate Contact Number">
                   {alternate_contact_no}
                 </Descriptions.Item>
-                <Descriptions.Item label='WhatsApp Number'>
+                <Descriptions.Item label="WhatsApp Number">
                   {whatsApp_no}
                 </Descriptions.Item>
                 {/* <Descriptions.Item label="Pick Up Person Name" span={2}>
@@ -263,29 +261,29 @@ const ConfirmParticipantDetails = ({
         </Row>
         <span
           style={{
-            display: 'inline-block',
-            width: '24px',
-            textAlign: 'center'
+            display: "inline-block",
+            width: "24px",
+            textAlign: "center"
           }}
         ></span>
-        <div className='confirm-buttons-wrapper'>
+        <div className="confirm-buttons-wrapper">
           <Button
-            size='large'
-            type='default'
+            size="large"
+            type="default"
             onClick={prevStep}
           >
             Back
           </Button>
           <span
             style={{
-              display: 'inline-block',
-              width: '24px',
-              textAlign: 'center'
+              display: "inline-block",
+              width: "24px",
+              textAlign: "center"
             }}
           ></span>
           <Button
-            type='primary'
-            size='large'
+            type="primary"
+            size="large"
             loading={loading}
             onClick={() => onConfirm(participantDetails, guardianDetails)}
           >
