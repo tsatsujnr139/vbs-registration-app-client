@@ -40,14 +40,13 @@ const App = () => {
                 path="/"
                 component={Home}
               />
-
-              {isRegistrationWindowActive() && (
-                <Route
-                  exact
-                  path="/participants/register"
-                  component={RegisterParticipant}
-                />
-              )}
+              {/* {isRegistrationWindowActive() && ( */}
+              <Route
+                exact
+                path="/participants/register"
+                component={RegisterParticipant}
+              />
+              {/* )} */}
               <Route
                 exact
                 path="/volunteers/register"
