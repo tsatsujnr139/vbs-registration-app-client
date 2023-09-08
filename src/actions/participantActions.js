@@ -23,12 +23,15 @@ let apiBaseUrl = process.env.REACT_APP_API_BASE_URL
 
 // Get Grades
 export const getGrades = () => async (dispatch) => {
-  return [
-    {
-      id: 1,
-      name: "JHS 3"
-    }
-  ]
+  dispatch({
+    type: GET_GRADES,
+    payload: [
+      {
+        id: 1,
+        name: "JHS 3"
+      }
+    ]
+  })
 }
 
 // Get Sessions
