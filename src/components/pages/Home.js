@@ -7,7 +7,7 @@ import Logo from "../../static/images/logo-main.png"
 import Navbar from "../layouts/HomeNavbar"
 
 const registrationStartDate = new Date(2023, 6, 19, 0, 0, 0)
-const registrationEndDate = new Date(2023, 6, 19, 23, 59, 59)
+const registrationEndDate = new Date(2023, 9, 30, 23, 59, 59)
 
 export const isRegistrationWindowActive = () => {
   // check if current date is within the start date and end date
