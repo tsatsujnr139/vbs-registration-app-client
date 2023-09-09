@@ -51,6 +51,7 @@ const ConfirmParticipantDetails = ({
   const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
     registerParticipant({
+      grade: "JHS 3",
       ...participantDetails,
       ...guardianDetails
     })

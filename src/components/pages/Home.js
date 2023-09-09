@@ -72,11 +72,12 @@ const Home = () => {
                   >
                     <div className="hero-motto">
                       <Title level={2}>
-                        Vacation Bible School {new Date().getFullYear()}
+                        Vacation Bible School {new Date().getFullYear()} - (JHS
+                        3 ONLY)
                       </Title>
                     </div>
                     <div className="hero-tagline">
-                      <Title level={4}></Title>
+                      <Title level={4}>26th & 27th September, 2023</Title>
                     </div>
                     <div className="hero-motto">
                       <Title>Following Jesus Changes the Game.</Title>

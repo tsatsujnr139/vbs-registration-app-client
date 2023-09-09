@@ -291,76 +291,7 @@ const FormParticipantDetails = ({
                       placeholder="Age"
                     />
                   </Form.Item>
-
-                  <Form.Item
-                    label="Class/Grade"
-                    name="grade"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please select a class/grade"
-                      }
-                    ]}
-                  >
-                    <Select defaultValue="Please select the child's class/grade">
-                      {grades.map((grade) => (
-                        <Option
-                          key={grade.name}
-                          value={grade.name}
-                        >
-                          {grade.name}
-                        </Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
                   <br />
-                  <Form.Item
-                    label="Session you are registering for (You can only select 1 option)"
-                    name="session"
-                    style={{ display: "inline-block", width: "calc(100%)" }}
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please select a session"
-                      }
-                    ]}
-                  >
-                    <Radio.Group>
-                      <Radio value="Session 1">
-                        Full Week Programme - Monday 24th July - Friday 28th
-                        July, 2023
-                      </Radio>
-                      <Radio value="Session 2">
-                        Condensed Programme - Saturday, 29th July, 2023
-                      </Radio>
-                      <span
-                        style={{
-                          display: "block",
-                          fontSize: "12px",
-                          marginTop: "10px",
-                          color: "#1e90ff"
-                        }}
-                      >
-                        *The condensed programme is intended for participants
-                        who cannot make it for the weekday programme*
-                      </span>
-                    </Radio.Group>
-                    {/* <Select defaultValue='Which session would you like to register for?'>
-                      <Option
-                        key={1}
-                        value='Session 1'
-                      >
-                        Session 1 - Monday 24th July - Friday 29th July, 2023
-                      </Option>
-                      <Option
-                        key={1}
-                        value='Session 2'
-                      >
-                        Session 2 - Saturday, 29th July, 2023
-                      </Option>
-                    </Select> */}
-                  </Form.Item>
                   <Form.Item
                     label="Home Church"
                     name="church"
