@@ -23,40 +23,6 @@ const RegistrationSuccess = () => {
         subTitle="We're looking foward to seeing them there as we explore how following Jesus Changes the Game"
         extra={[
           <div>
-            <p style={{ color: "red" }}>
-              Please use one of the links below to join the VBS Parents WhatsApp
-              Group to receive important updates and announcements
-            </p>
-            <p style={{ marginBottom: "10px", textDecoration: "underline" }}>
-              Week long session -{" "}
-              <a href="https://bit.ly/vbs-week-long">
-                https://bit.ly/vbs-week-long
-              </a>
-            </p>
-            <br />
-            <p style={{ marginBottom: "10px", textDecoration: "underline" }}>
-              Condensed session -{" "}
-              <a href="https://bit.ly/vbs-condensed">
-                https://bit.ly/vbs-week-long
-              </a>
-            </p>
-            <br />
-            <Button
-              type="primary"
-              key="volunteer"
-              href="/volunteers/register"
-            >
-              Click here to sign up as a volunteer. We'd be happy to have you
-            </Button>
-            <br />
-            <span
-              style={{
-                display: "inline-block",
-                padding: "20px 0px 20px 0px"
-              }}
-            >
-              OR
-            </span>
             <br />
             <Button
               type="primary"
