@@ -51,7 +51,6 @@ const ConfirmParticipantDetails = ({
   const onConfirm = (participantDetails, guardianDetails) => {
     // register the participant
     registerParticipant({
-      grade: "JHS 3",
       ...participantDetails,
       ...guardianDetails
     })
@@ -166,14 +165,14 @@ const ConfirmParticipantDetails = ({
                 >
                   {medical_info}
                 </Descriptions.Item>
-                <Descriptions.Item
+                {/* <Descriptions.Item
                   label="Attending Session"
                   span={2}
                 >
                   {session === "Session 1"
                     ? "Full Week Programme (Monday - Friday)"
                     : "Condensed Programme (Saturday)"}
-                </Descriptions.Item>
+                </Descriptions.Item> */}
                 {/* {t_shirt_request && (
                   <Descriptions.Item
                     label='T-Shirt Size'

@@ -83,6 +83,8 @@ const FormParticipantDetails = ({
     const dob = fieldsValue["date_of_birth"]
     const values = {
       ...fieldsValue,
+      grade: "JHS 3",
+      session: "Session 1",
       date_of_birth: dob.format("YYYY-MM-DD")
     }
     console.log(values)
